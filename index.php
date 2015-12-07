@@ -122,11 +122,11 @@
               <ul class="treeview-menu">
                 <li><a href="pages/tables/apuestas.php"><i class="fa fa-circle-o"></i> Apuestas</a></li>
                 <li><a href="pages/tables/ejemplares.php"><i class="fa fa-circle-o"></i> Ejemplares</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i> Entrenadores</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i> Implementos</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i> Jinetes</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i> Studs</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i> Usuarios</a></li>
+                <li><a href="pages/tables/entrenadores.php"><i class="fa fa-circle-o"></i> Entrenadores</a></li>
+                <li><a href="pages/tables/implementos.php"><i class="fa fa-circle-o"></i> Implementos</a></li>
+                <li><a href="pages/tables/jinetes.php"><i class="fa fa-circle-o"></i> Jinetes</a></li>
+                <li><a href="pages/tables/studs.php"><i class="fa fa-circle-o"></i> Studs</a></li>
+                <li><a href="pages/tables/usuarios.php"><i class="fa fa-circle-o"></i> Usuarios</a></li>
               </ul>
             </li>
             </ul>

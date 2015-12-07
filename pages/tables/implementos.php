@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>HLR | Apuestas</title>
+    <title>HLR | Implementos</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
@@ -129,12 +129,12 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            Apuestas
+            Implementos
           </h1>
           <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Tablero</a></li>
             <li><a href="#">Tablas</a></li>
-            <li class="active">Apuestas</li>
+            <li class="active">Implementos</li>
           </ol>
         </section>
 
@@ -144,14 +144,14 @@
             <div class="col-xs-12">
               <div class="box">
                 <div class="box-header">
-                  <h3 class="box-title">Apuestas por taquillas</h3>
+                  <h3 class="box-title">Promedio de Uso de los Implementos</h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
                   <table id="example1" class="table table-bordered table-striped">
                     <thead>
                       <tr>
-                        <th>Cantidad de Apuestas</th>
-                        <th>Taquilla</th>
+                        <th>Implemento</th>
+                        <th>Promedio de uso</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -165,7 +165,11 @@
                       </tr>
                       <tr>
                         <td>Trident</td>
-                        <td>Internet Explorer 4.0</td>
+                        <td>Trident</td>
+                      </tr>
+                      <tr>
+                        <td>Trident</td>
+                        <td>Trident</td>
                       </tr>
                       <tr>
                         <td>Trident</td>
@@ -177,15 +181,11 @@
                       </tr>
                       <tr>
                         <td>Trident</td>
-                        <td>Internet Explorer 4.0</td>
+                        <td>Trident</td>
                       </tr>
                       <tr>
                         <td>Trident</td>
-                        <td>Internet Explorer 4.0</td>
-                      </tr>
-                      <tr>
                         <td>Trident</td>
-                        <td>Internet Explorer 4.0</td>
                       </tr>
                       <tr>
                         <td>Trident</td>
@@ -198,8 +198,8 @@
                     </tbody>
                     <tfoot>
                       <tr>
-                        <th>Cantidad de Apuestas</th>
-                        <th>Taquilla</th>
+                        <th>Implemento</th>
+                        <th>Promedio de uso</th>
                       </tr>
                     </tfoot>
                   </table>

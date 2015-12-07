@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Hipodromo La Rinconada | Ejemplares</title>
+    <title>HLR | Ejemplares</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
@@ -32,7 +32,7 @@
 
       <header class="main-header">
         <!-- Logo -->
-        <a href="index.php" class="logo">
+        <a href="../../index.php" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
           <span class="logo-mini">H<b>LR</b></span>
           <!-- logo for regular state and mobile devices -->
@@ -100,7 +100,7 @@
           <ul class="sidebar-menu">
             <li class="header">Navegación Principal</li>
             <li class="active treeview">
-              <a href="index.php">
+              <a href="../../index.php">
                 <i class="fa fa-dashboard"></i> <span>Tablero</span>
               </a>
             </li>
@@ -112,11 +112,11 @@
               <ul class="treeview-menu">
                 <li><a href="apuestas.php"><i class="fa fa-circle-o"></i> Apuestas</a></li>
                 <li><a href="ejemplares.php"><i class="fa fa-circle-o"></i> Ejemplares</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i> Entrenadores</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i> Implementos</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i> Jinetes</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i> Studs</a></li>
-                <li><a href="#"><i class="fa fa-circle-o"></i> Usuarios</a></li>
+                <li><a href="entrenadores.php"><i class="fa fa-circle-o"></i> Entrenadores</a></li>
+                <li><a href="implementos.php"><i class="fa fa-circle-o"></i> Implementos</a></li>
+                <li><a href="jinetes.php"><i class="fa fa-circle-o"></i> Jinetes</a></li>
+                <li><a href="studs.php"><i class="fa fa-circle-o"></i> Studs</a></li>
+                <li><a href="usuarios.php"><i class="fa fa-circle-o"></i> Usuarios</a></li>
               </ul>
             </li>
             </ul>
@@ -129,12 +129,12 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            Tablas de Apuestas
+            Ejemplares
           </h1>
           <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
+            <li><a href="#"><i class="fa fa-dashboard"></i> Tablero</a></li>
             <li><a href="#">Tablas</a></li>
-            <li class="active">Tablas de Ejemplares</li>
+            <li class="active">Ejemplares</li>
           </ol>
         </section>
 
