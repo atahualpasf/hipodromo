@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Hipodromo La Rinconada | Apuestas</title>
+    <title>Hipodromo La Rinconada | Ejemplares</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
@@ -134,7 +134,7 @@
           <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
             <li><a href="#">Tablas</a></li>
-            <li class="active">Tablas de Apuestas</li>
+            <li class="active">Tablas de Ejemplares</li>
           </ol>
         </section>
 
@@ -144,62 +144,86 @@
             <div class="col-xs-12">
               <div class="box">
                 <div class="box-header">
-                  <h3 class="box-title">Apuestas por taquillas</h3>
+                  <h3 class="box-title">Ejemplares clasificados por edad</h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
                   <table id="example1" class="table table-bordered table-striped">
                     <thead>
                       <tr>
-                        <th>Cantidad de Apuestas</th>
-                        <th>Taquilla</th>
+                        <th>Ejemplar</th>
+                        <th>Sexo</th>
+                        <th>Pelaje</th>
+                        <th>Edad</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
                         <td>Trident</td>
                         <td>Internet Explorer 4.0</td>
+                        <td>Internet Explorer 4.0</td>
+                        <td>Internet Explorer 4.0</td>
                       </tr>
                       <tr>
+                        <td>Trident</td>
+                        <td>Internet Explorer 4.0</td>
+                        <td>Internet Explorer 4.0</td>
+                        <td>Internet Explorer 4.0</td>
+                      </tr>
+                      <tr>
+                        <td>Trident</td>
+                        <td>Trident</td>
+                        <td>Trident</td>
+                        <td>Internet Explorer 4.0</td>
+                      </tr>
+                      <tr>
+                        <td>Trident</td>
+                        <td>Trident</td>
                         <td>Trident</td>
                         <td>Internet Explorer 4.0</td>
                       </tr>
                       <tr>
                         <td>Trident</td>
                         <td>Internet Explorer 4.0</td>
+                        <td>Internet Explorer 4.0</td>
+                        <td>Internet Explorer 4.0</td>
                       </tr>
                       <tr>
+                        <td>Trident</td>
+                        <td>Internet Explorer 4.0</td>
+                        <td>Internet Explorer 4.0</td>
+                        <td>Internet Explorer 4.0</td>
+                      </tr>
+                      <tr>
+                        <td>Trident</td>
+                        <td>Trident</td>
+                        <td>Trident</td>
+                        <td>Internet Explorer 4.0</td>
+                      </tr>
+                      <tr>
+                        <td>Trident</td>
+                        <td>Trident</td>
                         <td>Trident</td>
                         <td>Internet Explorer 4.0</td>
                       </tr>
                       <tr>
                         <td>Trident</td>
                         <td>Internet Explorer 4.0</td>
-                      </tr>
-                      <tr>
-                        <td>Trident</td>
+                        <td>Internet Explorer 4.0</td>
                         <td>Internet Explorer 4.0</td>
                       </tr>
                       <tr>
                         <td>Trident</td>
                         <td>Internet Explorer 4.0</td>
-                      </tr>
-                      <tr>
-                        <td>Trident</td>
                         <td>Internet Explorer 4.0</td>
-                      </tr>
-                      <tr>
-                        <td>Trident</td>
-                        <td>Internet Explorer 4.0</td>
-                      </tr>
-                      <tr>
-                        <td>Trident</td>
                         <td>Internet Explorer 4.0</td>
                       </tr>
                     </tbody>
                     <tfoot>
                       <tr>
-                        <th>Cantidad de Apuestas</th>
-                        <th>Taquilla</th>
+                        <th>Ejemplar</th>
+                        <th>Sexo</th>
+                        <th>Pelaje</th>
+                        <th>Edad</th>
                       </tr>
                     </tfoot>
                   </table>
