@@ -33,15 +33,15 @@
     
     <div id="box-title" class="jumbotron vertical-center">
       <div class="container text-center">
-        <i class="flaticon-horse92"></i>
+        <i class="flaticon-horse"></i>
         <h1>Hipódromo La Rinconada</h1>
-        <i class="flaticon-horse92 flip"></i>
+        <i class="flaticon-horse flip"></i>
         <div class="row">
           <div class="col-md-offset-4 col-md-4 col-md-offset-4">
-            <button id="btn-iniciarsesion" class="btn bg-green btn-block btn-flat margin">INICIA SESIÓN</button>
+            <button id="btn-iniciarsesion" class="btn bg-green btn-block btn-flat margin">Iniciar sesión</button>
           </div>
           <div class="col-md-offset-4 col-md-4 col-md-offset-4">
-            <button id="btn-registrar" class="btn bg-green btn-block btn-flat margin">REGISTRAR</button>
+            <button id="btn-registrar" class="btn bg-green btn-block btn-flat margin">Registrar</button>
           </div>
         </div>
       </div>
@@ -51,14 +51,14 @@
       <div id="box-registrar" class="container vertical-center">
         <div class="register-box">
           <div class="register-box-body">
-            <p class="login-box-msg">Register a new membership</p>
+            <p class="login-box-msg">Registrar un nuevo miembro</p>
             <form action="../../index.html" method="post">
               <div class="form-group has-feedback">
-                <input type="text" class="form-control" placeholder="Full name">
+                <input type="text" class="form-control" placeholder="Username">
                 <span class="glyphicon glyphicon-user form-control-feedback"></span>
               </div>
               <div class="form-group has-feedback">
-                <input type="email" class="form-control" placeholder="Email">
+                <input type="email" class="form-control" placeholder="Correo">
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
               </div>
               <div class="form-group has-feedback">
@@ -69,27 +69,36 @@
                 <input type="password" class="form-control" placeholder="Retype password">
                 <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
               </div>
+              <div class="form-group has-feedback" placeholder="Rol">
+                <select class="form-control">
+                  <option>Rol 1</option>
+                  <option>Rol 2</option>
+                  <option>Rol 3</option>
+                  <option>Rol 4</option>
+                  <option>Rol 5</option>
+                </select>
+                <span class="glyphicons flaticon-business form-control-feedback"></span>
+              </div>
               <div class="row">
-                <div class="col-xs-8">
+                <div class="col-xs-7">
                   <div class="checkbox icheck">
                     <label>
-                      <input type="checkbox"> I agree to the <a href="#">terms</a>
+                      <input type="checkbox"> Acepto los <a href="#">terminos</a>.
                     </label>
                   </div>
                 </div><!-- /.col -->
-                <div class="col-xs-4">
-                  <button type="submit" class="btn btn-primary btn-block btn-flat">Register</button>
+                <div class="col-xs-5">
+                  <button type="submit" class="btn bg-blue btn-block btn-flat">Registrar</button>
                 </div><!-- /.col -->
               </div>
             </form>
 
             <div class="social-auth-links text-center">
-              <p>- OR -</p>
-              <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign up using Facebook</a>
-              <a href="#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> Sign up using Google+</a>
+              <p>-</p>
+              <!-- <a href="#" class="btn btn-block btn-social bg-navy btn-flat"><i class="fa fa-facebook"></i> Iniciar sesión</a> -->
+              <button id="btn-rg-iniciarsesion" class="btn bg-green btn-block btn-flat">Iniciar sesión</button>
+              <button id="btn-rg-regresar" class="btn bg-green btn-block btn-flat">Regresar</button>
             </div>
-
-            <a href="login.html" class="text-center">I already have a membership</a>
           </div><!-- /.form-box -->
         </div><!-- /.register-box -->
       </div>
@@ -103,12 +112,13 @@
     <script type="text/javascript">
       $(document).ready(function() {
         $('#bg-video').videoBackground('videos/racehorseslowmotion-hd.mp4');
+        
         var box_registrar = $('#box-registrar');
         var box_title = $('#box-title');
         $('#box-registrar').remove();
-        $('#btn-registrar').click(function(event) {
+        $(document).on('click', '#btn-registrar', function(event) {
+          event.preventDefault();
           $('#box-title').remove();
-          $('#box-registrar').css('display','flex');
           box_registrar.insertAfter('#bg-video');
           $('input').iCheck({
             checkboxClass: 'icheckbox_square-blue',
@@ -116,6 +126,13 @@
             increaseArea: '20%' // optional
           });
           $('#box-registrar').css('display','flex').hide().fadeIn(500);
+        });
+        
+        $(document).on('click', '#btn-rg-regresar', function(event) {
+          event.preventDefault();
+          $('#box-registrar').remove();
+          box_title.insertAfter('#bg-video');
+          $('#box-title').hide().fadeIn(500);
         });
       });
     </script>

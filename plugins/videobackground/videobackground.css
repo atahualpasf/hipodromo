@@ -24,12 +24,12 @@
 [class^="flaticon-"]:before, [class*=" flaticon-"]:before,
 [class^="flaticon-"]:after, [class*=" flaticon-"]:after {   
 	font-family: Flaticon;
-  font-size: 20px;
   font-style: normal;
-  margin-left: 20px;
-  display: inline-block;
-}.flaticon-horse92:before {
+}.flaticon-business:before {
 	content: "\e000";
+}
+.flaticon-horse:before {
+	content: "\e001";
 }
 
 #bg-video {
@@ -94,16 +94,17 @@ html, body {
   display: inline-block;
 }
 
-.container i.flaticon-horse92:before {
+.container i.flaticon-horse:before {
   color: #fff;
   font-size: 60px;
+  display: inline-block;
 }
 
-.container i.flaticon-horse92:first-child:before {
-  margin-right: .4em;
+.container i.flaticon-horse:before {
+  margin: 0em .4em 0em .4em;
 }
 
-i.flaticon-horse92.flip:before {
+i.flaticon-horse.flip:before {
   -webkit-transform: scale(-1, 1);
   -moz-transform: scale(-1, 1);
   -ms-transform: scale(-1, 1);
@@ -113,6 +114,7 @@ i.flaticon-horse92.flip:before {
 
 button {
   letter-spacing: 0.03em;
+  text-transform: uppercase;
 }
 
 .register-box {
@@ -121,4 +123,14 @@ button {
 
 #box-registrar {
   display: none;
+}
+
+#box-registrar select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+#box-registrar div.icheckbox_square-blue {
+  margin-right: .25em;
 }
