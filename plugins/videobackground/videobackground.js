@@ -7,7 +7,7 @@
         //check and see if options were passed
         var settings = {};
         settings.autoplay = typeof options.autoplay !== 'undefined' ? options.autoplay : 'autoplay';
-        settings.muted = typeof options.muted !== 'undefined' ? options.muted : false;
+        settings.muted = typeof options.muted !== 'undefined' ? options.muted : true;
         settings.loop = typeof options.loop !== 'undefined' ? options.loop : 'loop';
         settings.fit = typeof options.fit !== 'undefined' ? options.fit : 'fill';
         settings.src = typeof options.src !== 'undefined' ? options.src : video;

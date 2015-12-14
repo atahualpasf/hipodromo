@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Hipodromo La Rinconada | Tablero</title>
+    <title>AdminLTE 2 | Registration Page</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
@@ -14,24 +14,10 @@
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
-    <!-- AdminLTE Skins. Choose a skin from the css/skins
-         folder instead of downloading all of them to reduce the load. -->
-    <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
-    <!-- iCheck -->
-    <link rel="stylesheet" href="plugins/iCheck/flat/blue.css">
-    <!-- Morris chart -->
-    <link rel="stylesheet" href="plugins/morris/morris.css">
-    <!-- jvectormap -->
-    <link rel="stylesheet" href="plugins/jvectormap/jquery-jvectormap-1.2.2.css">
-    <!-- Date Picker -->
-    <link rel="stylesheet" href="plugins/datepicker/datepicker3.css">
-    <!-- Daterange picker -->
-    <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker-bs3.css">
-    <!-- bootstrap wysihtml5 - text editor -->
-    <link rel="stylesheet" href="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
     <!-- Full responsive background video with css -->
-    <!-- <link rel="stylesheet" href="css/videobackground.css"> -->
     <link rel="stylesheet" href="plugins/videobackground/videobackground.css">
+    <!-- iCheck -->
+    <link rel="stylesheet" href="plugins/iCheck/square/blue.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -40,43 +26,76 @@
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body class="hold-transition skin-blue sidebar-mini">
+  <body class="hold-transition register-page">
     <div id="overlay">
     </div>
     <div id="bg-video"></div>
-    <div class="jumbotron vertical-center">
-      
+    
+    <div id="box-title" class="jumbotron vertical-center">
       <div class="container text-center">
         <i class="flaticon-horse92"></i>
         <h1>Hipódromo La Rinconada</h1>
         <i class="flaticon-horse92 flip"></i>
         <div class="row">
           <div class="col-md-offset-4 col-md-4 col-md-offset-4">
-            <button class="btn bg-green btn-block btn-flat margin">INICIA SESIÓN</button>
+            <button id="btn-iniciarsesion" class="btn bg-green btn-block btn-flat margin">INICIA SESIÓN</button>
           </div>
           <div class="col-md-offset-4 col-md-4 col-md-offset-4">
-            <button class="btn bg-green btn-block btn-flat margin">REGISTRAR</button>
+            <button id="btn-registrar" class="btn bg-green btn-block btn-flat margin">REGISTRAR</button>
           </div>
         </div>
       </div>
       
     </div>
     
+      <div id="box-registrar" class="container vertical-center">
+        <div class="register-box">
+          <div class="register-box-body">
+            <p class="login-box-msg">Register a new membership</p>
+            <form action="../../index.html" method="post">
+              <div class="form-group has-feedback">
+                <input type="text" class="form-control" placeholder="Full name">
+                <span class="glyphicon glyphicon-user form-control-feedback"></span>
+              </div>
+              <div class="form-group has-feedback">
+                <input type="email" class="form-control" placeholder="Email">
+                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+              </div>
+              <div class="form-group has-feedback">
+                <input type="password" class="form-control" placeholder="Password">
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+              </div>
+              <div class="form-group has-feedback">
+                <input type="password" class="form-control" placeholder="Retype password">
+                <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+              </div>
+              <div class="row">
+                <div class="col-xs-8">
+                  <div class="checkbox icheck">
+                    <label>
+                      <input type="checkbox"> I agree to the <a href="#">terms</a>
+                    </label>
+                  </div>
+                </div><!-- /.col -->
+                <div class="col-xs-4">
+                  <button type="submit" class="btn btn-primary btn-block btn-flat">Register</button>
+                </div><!-- /.col -->
+              </div>
+            </form>
 
-    <!-- <div class="wrapper">
-      <footer class="main-footer">
-        <strong>Copyright &copy; 2014-2015 Hipodromo La Rinconada.</strong> Todos los derechos reservados.
-      </footer>
-    </div> -->
+            <div class="social-auth-links text-center">
+              <p>- OR -</p>
+              <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign up using Facebook</a>
+              <a href="#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> Sign up using Google+</a>
+            </div>
+
+            <a href="login.html" class="text-center">I already have a membership</a>
+          </div><!-- /.form-box -->
+        </div><!-- /.register-box -->
+      </div>
 
     <!-- jQuery 2.1.4 -->
     <script src="plugins/jQuery/jQuery-2.1.4.min.js"></script>
-    <!-- jQuery UI 1.11.4 -->
-    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
-    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-    <script>
-      $.widget.bridge('uibutton', $.ui.button);
-    </script>
     <!-- Bootstrap 3.3.5 -->
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <!-- Background video -->
@@ -84,34 +103,23 @@
     <script type="text/javascript">
       $(document).ready(function() {
         $('#bg-video').videoBackground('videos/racehorseslowmotion-hd.mp4');
+        var box_registrar = $('#box-registrar');
+        var box_title = $('#box-title');
+        $('#box-registrar').remove();
+        $('#btn-registrar').click(function(event) {
+          $('#box-title').remove();
+          $('#box-registrar').css('display','flex');
+          box_registrar.insertAfter('#bg-video');
+          $('input').iCheck({
+            checkboxClass: 'icheckbox_square-blue',
+            radioClass: 'iradio_square-blue',
+            increaseArea: '20%' // optional
+          });
+          $('#box-registrar').css('display','flex').hide().fadeIn(500);
+        });
       });
     </script>
-    <!-- Morris.js charts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-    <script src="plugins/morris/morris.min.js"></script>
-    <!-- Sparkline -->
-    <script src="plugins/sparkline/jquery.sparkline.min.js"></script>
-    <!-- jvectormap -->
-    <script src="plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
-    <script src="plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
-    <!-- jQuery Knob Chart -->
-    <script src="plugins/knob/jquery.knob.js"></script>
-    <!-- daterangepicker -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
-    <script src="plugins/daterangepicker/daterangepicker.js"></script>
-    <!-- datepicker -->
-    <script src="plugins/datepicker/bootstrap-datepicker.js"></script>
-    <!-- Bootstrap WYSIHTML5 -->
-    <script src="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
-    <!-- Slimscroll -->
-    <script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>
-    <!-- FastClick -->
-    <script src="plugins/fastclick/fastclick.min.js"></script>
-    <!-- AdminLTE App -->
-    <script src="dist/js/app.min.js"></script>
-    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    <script src="dist/js/pages/dashboard.js"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="dist/js/demo.js"></script>
+    <!-- iCheck -->
+    <script src="plugins/iCheck/icheck.min.js"></script>
   </body>
 </html>
