@@ -95,12 +95,48 @@
 
             <div class="social-auth-links text-center">
               <p>-</p>
-              <!-- <a href="#" class="btn btn-block btn-social bg-navy btn-flat"><i class="fa fa-facebook"></i> Iniciar sesión</a> -->
               <button id="btn-rg-iniciarsesion" class="btn bg-green btn-block btn-flat">Iniciar sesión</button>
               <button id="btn-rg-regresar" class="btn bg-green btn-block btn-flat">Regresar</button>
             </div>
           </div><!-- /.form-box -->
         </div><!-- /.register-box -->
+      </div>
+      
+      <div id="box-iniciarsesion" class="container vertical-center">
+        <div class="login-box">
+          <div class="login-box-body">
+            <p class="login-box-msg">Iniciar sesión con tu usuario o correo</p>
+            <form action="../../index2.html" method="post">
+              <div class="form-group has-feedback">
+                <input type="email" class="form-control" placeholder="Email">
+                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+              </div>
+              <div class="form-group has-feedback">
+                <input type="password" class="form-control" placeholder="Password">
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+              </div>
+              <div class="row">
+                <div class="col-xs-8">
+                  <div class="checkbox icheck">
+                    <label>
+                      <input type="checkbox"> Recordarme.
+                    </label>
+                  </div>
+                </div><!-- /.col -->
+                <div class="col-xs-4">
+                  <button type="submit" class="btn bg-blue btn-block btn-flat">Iniciar</button>
+                </div><!-- /.col -->
+              </div>
+            </form>
+    
+            <div class="social-auth-links text-center">
+              <p>-</p>
+              <button id="btn-is-registrar" class="btn bg-green btn-block btn-flat">Registrar</button>
+              <button id="btn-is-regresar" class="btn bg-green btn-block btn-flat">Regresar</button>
+            </div><!-- /.social-auth-links -->
+    
+          </div><!-- /.login-box-body -->
+        </div><!-- /.login-box -->
       </div>
 
     <!-- jQuery 2.1.4 -->
@@ -114,18 +150,36 @@
         $('#bg-video').videoBackground('videos/racehorseslowmotion-hd.mp4');
         
         var box_registrar = $('#box-registrar');
+        var box_iniciarsesion = $('#box-iniciarsesion');
         var box_title = $('#box-title');
         $('#box-registrar').remove();
+        $('#box-iniciarsesion').remove();
         $(document).on('click', '#btn-registrar', function(event) {
           event.preventDefault();
           $('#box-title').remove();
           box_registrar.insertAfter('#bg-video');
-          $('input').iCheck({
-            checkboxClass: 'icheckbox_square-blue',
-            radioClass: 'iradio_square-blue',
-            increaseArea: '20%' // optional
-          });
+          if ($('div.icheckbox_square-blue').length < 1) {
+            $('input').iCheck({
+              checkboxClass: 'icheckbox_square-blue',
+              radioClass: 'iradio_square-blue',
+              increaseArea: '20%' // optional
+            });
+          }
           $('#box-registrar').css('display','flex').hide().fadeIn(500);
+        });
+        
+        $(document).on('click', '#btn-iniciarsesion', function(event) {
+          event.preventDefault();
+          $('#box-title').remove();
+          box_iniciarsesion.insertAfter('#bg-video');
+          if ($('div.icheckbox_square-blue').length < 1) {
+            $('input').iCheck({
+              checkboxClass: 'icheckbox_square-blue',
+              radioClass: 'iradio_square-blue',
+              increaseArea: '20%' // optional
+            });
+          }
+          $('#box-iniciarsesion').css('display','flex').hide().fadeIn(500);
         });
         
         $(document).on('click', '#btn-rg-regresar', function(event) {
@@ -133,6 +187,41 @@
           $('#box-registrar').remove();
           box_title.insertAfter('#bg-video');
           $('#box-title').hide().fadeIn(500);
+        });
+        
+        $(document).on('click', '#btn-is-regresar', function(event) {
+          event.preventDefault();
+          $('#box-iniciarsesion').remove();
+          box_title.insertAfter('#bg-video');
+          $('#box-title').hide().fadeIn(500);
+        });
+        
+        $(document).on('click', '#btn-rg-iniciarsesion', function(event) {
+          event.preventDefault();
+          $('#box-registrar').remove();
+          box_iniciarsesion.insertAfter('#bg-video');
+          if ($('div.icheckbox_square-blue').length < 1) {
+            $('input').iCheck({
+              checkboxClass: 'icheckbox_square-blue',
+              radioClass: 'iradio_square-blue',
+              increaseArea: '20%' // optional
+            });
+          }
+          $('#box-iniciarsesion').css('display','flex').hide().fadeIn(500);
+        });
+        
+        $(document).on('click', '#btn-is-registrar', function(event) {
+          event.preventDefault();
+          $('#box-iniciarsesion').remove();
+          box_registrar.insertAfter('#bg-video');
+          if ($('div.icheckbox_square-blue').length < 1) {
+            $('input').iCheck({
+              checkboxClass: 'icheckbox_square-blue',
+              radioClass: 'iradio_square-blue',
+              increaseArea: '20%' // optional
+            });
+          }
+          $('#box-registrar').css('display','flex').hide().fadeIn(500);
         });
       });
     </script>

@@ -125,12 +125,16 @@ button {
   display: none;
 }
 
+#box-iniciarsesion {
+  display: none;
+}
+
 #box-registrar select {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
 }
 
-#box-registrar div.icheckbox_square-blue {
+div.icheckbox_square-blue {
   margin-right: .25em;
 }
