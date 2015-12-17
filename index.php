@@ -16,6 +16,8 @@
     <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
     <!-- Full responsive background video with css -->
     <link rel="stylesheet" href="plugins/videobackground/videobackground.css">
+    <!-- Index style -->
+    <link rel="stylesheet" href="css/index.css">
     <!-- iCheck -->
     <link rel="stylesheet" href="plugins/iCheck/square/blue.css">
 
@@ -50,92 +52,98 @@
     
       <div id="box-registrar" class="container vertical-center">
         <div class="register-box">
-          <div class="register-box-body">
-            <p class="login-box-msg">Registrar un nuevo miembro</p>
-            <form action="../../index.html" method="post">
-              <div class="form-group has-feedback">
-                <input type="text" class="form-control" placeholder="Username">
-                <span class="glyphicon glyphicon-user form-control-feedback"></span>
-              </div>
-              <div class="form-group has-feedback">
-                <input type="email" class="form-control" placeholder="Correo">
-                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-              </div>
-              <div class="form-group has-feedback">
-                <input type="password" class="form-control" placeholder="Password">
-                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-              </div>
-              <div class="form-group has-feedback">
-                <input type="password" class="form-control" placeholder="Retype password">
-                <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
-              </div>
-              <div class="form-group has-feedback" placeholder="Rol">
-                <select class="form-control">
-                  <option>Rol 1</option>
-                  <option>Rol 2</option>
-                  <option>Rol 3</option>
-                  <option>Rol 4</option>
-                  <option>Rol 5</option>
-                </select>
-                <span class="glyphicons flaticon-business form-control-feedback"></span>
-              </div>
-              <div class="row">
-                <div class="col-xs-7">
-                  <div class="checkbox icheck">
-                    <label>
-                      <input type="checkbox"> Acepto los <a href="#">terminos</a>.
-                    </label>
-                  </div>
-                </div><!-- /.col -->
-                <div class="col-xs-5">
-                  <button type="submit" class="btn bg-blue btn-block btn-flat">Registrar</button>
-                </div><!-- /.col -->
-              </div>
-            </form>
+          <div class="overlay">
+            <i class="fa fa-circle-o-notch fa-spin"></i>
+            <div class="register-box-body">
+              <p class="login-box-msg">Registrar un nuevo miembro</p>
+              <form method="post">
+                <div class="form-group has-feedback">
+                  <input type="text" class="form-control" placeholder="Nombre de usuario" title="Nombre de usuario sin caracteres especiales y de 3 a 12 de longitud." pattern="^[a-zA-Z0-9]{3,12}$" name="username" required>
+                  <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                </div>
+                <div class="form-group has-feedback">
+                  <input type="email" class="form-control" placeholder="Correo electrónico" title="Por favor introduce un correo válido." required>
+                  <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                </div>
+                <div class="form-group has-feedback">
+                  <input type="password" class="form-control" placeholder="Contraseña" title="Contraseña de 6 a 13 caracteres de longitud." pattern="^[a-zA-Z0-9]{6,13}$" required>
+                  <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                </div>
+                <div class="form-group has-feedback">
+                  <input type="password" class="form-control" placeholder="Verificar contraseña" title="Contraseña de 6 a 13 caracteres de longitud." pattern="^[a-zA-Z0-9]{6,13}$" required>
+                  <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+                </div>
+                <div class="form-group has-feedback" placeholder="Rol">
+                  <select class="form-control">
+                    <option>Rol 1</option>
+                    <option>Rol 2</option>
+                    <option>Rol 3</option>
+                    <option>Rol 4</option>
+                    <option>Rol 5</option>
+                  </select>
+                  <span class="glyphicons flaticon-business form-control-feedback"></span>
+                </div>
+                <div class="row">
+                  <div class="col-xs-7">
+                    <div class="checkbox icheck">
+                      <label>
+                        <input type="checkbox"> Acepto los <a href="#">terminos</a>.
+                      </label>
+                    </div>
+                  </div><!-- /.col -->
+                  <div class="col-xs-5">
+                    <button type="submit" class="btn bg-blue btn-block btn-flat">Registrar</button>
+                  </div><!-- /.col -->
+                </div>
+              </form>
 
-            <div class="social-auth-links text-center">
-              <p>-</p>
-              <button id="btn-rg-iniciarsesion" class="btn bg-green btn-block btn-flat">Iniciar sesión</button>
-              <button id="btn-rg-regresar" class="btn bg-green btn-block btn-flat">Regresar</button>
-            </div>
-          </div><!-- /.form-box -->
+              <div class="social-auth-links text-center">
+                <p>-</p>
+                <button id="btn-rg-iniciarsesion" class="btn bg-green btn-block btn-flat">Iniciar sesión</button>
+                <button id="btn-rg-regresar" class="btn bg-green btn-block btn-flat">Regresar</button>
+              </div>
+            </div><!-- /.form-box -->
+          </div>
         </div><!-- /.register-box -->
       </div>
       
       <div id="box-iniciarsesion" class="container vertical-center">
         <div class="login-box">
-          <div class="login-box-body">
-            <p class="login-box-msg">Iniciar sesión con tu usuario o correo</p>
-            <form action="../../index2.html" method="post">
-              <div class="form-group has-feedback">
-                <input type="email" class="form-control" placeholder="Email">
-                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-              </div>
-              <div class="form-group has-feedback">
-                <input type="password" class="form-control" placeholder="Password">
-                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-              </div>
-              <div class="row">
-                <div class="col-xs-8">
-                  <div class="checkbox icheck">
-                    <label>
-                      <input type="checkbox"> Recordarme.
-                    </label>
-                  </div>
-                </div><!-- /.col -->
-                <div class="col-xs-4">
-                  <button type="submit" class="btn bg-blue btn-block btn-flat">Iniciar</button>
-                </div><!-- /.col -->
-              </div>
-            </form>
-    
-            <div class="social-auth-links text-center">
-              <p>-</p>
-              <button id="btn-is-registrar" class="btn bg-green btn-block btn-flat">Registrar</button>
-              <button id="btn-is-regresar" class="btn bg-green btn-block btn-flat">Regresar</button>
-            </div><!-- /.social-auth-links -->
-    
-          </div><!-- /.login-box-body -->
+          <div class="overlay">
+            <i class="fa fa-circle-o-notch fa-spin"></i>
+            <div class="login-box-body">
+              <p class="login-box-msg">Iniciar sesión con tu usuario o correo</p>
+              <form action="../../index2.html" method="post">
+                <div class="form-group has-feedback">
+                  <input type="text" class="form-control" placeholder="Nombre de usuario o correo electrónico" name="username" required>
+                  <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                </div>
+                <div class="form-group has-feedback">
+                  <input type="password" class="form-control" placeholder="Contraseña" name="password" value="" required>
+                  <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                </div>
+                <div class="row">
+                  <div class="col-xs-8">
+                    <div class="checkbox icheck">
+                      <label>
+                        <input type="checkbox"> Recordarme.
+                      </label>
+                    </div>
+                  </div><!-- /.col -->
+                  <div class="col-xs-4">
+                    <button type="submit" class="btn bg-blue btn-block btn-flat">Iniciar</button>
+                  </div><!-- /.col -->
+                </div>
+              </form>
+      
+              <div class="social-auth-links text-center">
+                <p>-</p>
+                <button id="btn-is-registrar" class="btn bg-green btn-block btn-flat">Registrar</button>
+                <button id="btn-is-regresar" class="btn bg-green btn-block btn-flat">Regresar</button>
+              </div><!-- /.social-auth-links -->
+      
+            </div><!-- /.login-box-body -->
+          </div>
         </div><!-- /.login-box -->
       </div>
 
@@ -145,87 +153,9 @@
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <!-- Background video -->
     <script src="plugins/videobackground/videobackground.js"></script>
-    <script type="text/javascript">
-      $(document).ready(function() {
-        $('#bg-video').videoBackground('videos/racehorseslowmotion-hd.mp4');
-        
-        var box_registrar = $('#box-registrar');
-        var box_iniciarsesion = $('#box-iniciarsesion');
-        var box_title = $('#box-title');
-        $('#box-registrar').remove();
-        $('#box-iniciarsesion').remove();
-        $(document).on('click', '#btn-registrar', function(event) {
-          event.preventDefault();
-          $('#box-title').remove();
-          box_registrar.insertAfter('#bg-video');
-          if ($('div.icheckbox_square-blue').length < 1) {
-            $('input').iCheck({
-              checkboxClass: 'icheckbox_square-blue',
-              radioClass: 'iradio_square-blue',
-              increaseArea: '20%' // optional
-            });
-          }
-          $('#box-registrar').css('display','flex').hide().fadeIn(500);
-        });
-        
-        $(document).on('click', '#btn-iniciarsesion', function(event) {
-          event.preventDefault();
-          $('#box-title').remove();
-          box_iniciarsesion.insertAfter('#bg-video');
-          if ($('div.icheckbox_square-blue').length < 1) {
-            $('input').iCheck({
-              checkboxClass: 'icheckbox_square-blue',
-              radioClass: 'iradio_square-blue',
-              increaseArea: '20%' // optional
-            });
-          }
-          $('#box-iniciarsesion').css('display','flex').hide().fadeIn(500);
-        });
-        
-        $(document).on('click', '#btn-rg-regresar', function(event) {
-          event.preventDefault();
-          $('#box-registrar').remove();
-          box_title.insertAfter('#bg-video');
-          $('#box-title').hide().fadeIn(500);
-        });
-        
-        $(document).on('click', '#btn-is-regresar', function(event) {
-          event.preventDefault();
-          $('#box-iniciarsesion').remove();
-          box_title.insertAfter('#bg-video');
-          $('#box-title').hide().fadeIn(500);
-        });
-        
-        $(document).on('click', '#btn-rg-iniciarsesion', function(event) {
-          event.preventDefault();
-          $('#box-registrar').remove();
-          box_iniciarsesion.insertAfter('#bg-video');
-          if ($('div.icheckbox_square-blue').length < 1) {
-            $('input').iCheck({
-              checkboxClass: 'icheckbox_square-blue',
-              radioClass: 'iradio_square-blue',
-              increaseArea: '20%' // optional
-            });
-          }
-          $('#box-iniciarsesion').css('display','flex').hide().fadeIn(500);
-        });
-        
-        $(document).on('click', '#btn-is-registrar', function(event) {
-          event.preventDefault();
-          $('#box-iniciarsesion').remove();
-          box_registrar.insertAfter('#bg-video');
-          if ($('div.icheckbox_square-blue').length < 1) {
-            $('input').iCheck({
-              checkboxClass: 'icheckbox_square-blue',
-              radioClass: 'iradio_square-blue',
-              increaseArea: '20%' // optional
-            });
-          }
-          $('#box-registrar').css('display','flex').hide().fadeIn(500);
-        });
-      });
-    </script>
     <!-- iCheck -->
     <script src="plugins/iCheck/icheck.min.js"></script>
+    <!-- Index script -->
+    <script src="js/index.js"></script>
   </body>
 </html>
