@@ -58,19 +58,19 @@
               <p class="login-box-msg">Registrar un nuevo miembro</p>
               <form method="post">
                 <div class="form-group has-feedback">
-                  <input type="text" class="form-control" placeholder="Nombre de usuario" title="Nombre de usuario sin caracteres especiales y de 3 a 12 de longitud." pattern="^[a-zA-Z0-9]{3,12}$" name="username" required>
+                  <input type="text" class="form-control" placeholder="Nombre de usuario" oninvalid="checkInputs(this,'Nombre de usuario inválido.');" oninput="checkInputs(this,'Nombre de usuario inválido.');" title="Nombre de usuario sin caracteres especiales y de 3 a 12 de longitud. e.g example123" pattern="^[a-zA-Z0-9]{3,12}$" name="username" required>
                   <span class="glyphicon glyphicon-user form-control-feedback"></span>
                 </div>
                 <div class="form-group has-feedback">
-                  <input type="email" class="form-control" placeholder="Correo electrónico" title="Por favor introduce un correo válido." required>
+                  <input type="email" class="form-control" placeholder="Correo electrónico" oninvalid="checkInputs(this,'Correo electrónico inválido.');" oninput="checkInputs(this,'Correo electrónico inválido.');" title="Por favor introduce un correo válido. e.g example@hostexample.com" required>
                   <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                 </div>
                 <div class="form-group has-feedback">
-                  <input type="password" class="form-control" placeholder="Contraseña" title="Contraseña de 6 a 13 caracteres de longitud." pattern="^[a-zA-Z0-9]{6,13}$" required>
+                  <input type="password" class="form-control" placeholder="Contraseña" oninvalid="checkInputs(this,'Contraseña inválida.');" oninput="checkInputs(this,'Contraseña inválida.');" title="Contraseña de 6 a 13 caracteres de longitud." pattern="^[a-zA-Z0-9]{6,13}$" required>
                   <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                 </div>
                 <div class="form-group has-feedback">
-                  <input type="password" class="form-control" placeholder="Verificar contraseña" title="Contraseña de 6 a 13 caracteres de longitud." pattern="^[a-zA-Z0-9]{6,13}$" required>
+                  <input type="password" class="form-control" placeholder="Verificar contraseña" oninvalid="checkInputs(this,'Contraseña incorrecta.');" oninput="checkInputs(this,'Contraseña incorrecta.');" title="Contraseña de 6 a 13 caracteres de longitud." pattern="^[a-zA-Z0-9]{6,13}$" required>
                   <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
                 </div>
                 <div class="form-group has-feedback" placeholder="Rol">
@@ -87,7 +87,7 @@
                   <div class="col-xs-7">
                     <div class="checkbox icheck">
                       <label>
-                        <input type="checkbox"> Acepto los <a href="#">terminos</a>.
+                        <input type="checkbox" oninvalid="setCustomValidity('Por favor chequea si aceptas los términos.');" required> Acepto los <a href="#">terminos</a>.
                       </label>
                     </div>
                   </div><!-- /.col -->
