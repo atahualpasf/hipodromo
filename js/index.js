@@ -1,3 +1,4 @@
+/* FUNCIONES GENÉRICAS */
 function checkIcheckExists() {
   if ($('div.icheckbox_square-blue').length < 1) {
     var icheck = $('input').iCheck({
@@ -22,10 +23,18 @@ function checkInputs(input, errorMessage) {
   }
 }
 
+function trimInputs(search) {
+  var inputs = $(search).find(':input:not(:checkbox,:button)').not('select, input[type="hidden"]').blur(function(event) {
+    this.value = this.value.trim() == '' ? this.defaultValue : this.value.trim();
+  });
+}
+
+
 /* REGISTRO DE USUARIO */
 function handleImageFromInput(input) {
   var mimeTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/jpeg', 'image/jpg'];
   $(input).change(function(event) {
+    event.preventDefault();
     if ($.inArray($(input)[0].files[0].type, mimeTypes) != -1) {
       if (input[0].files && input[0].files[0]) {
         var reader = new FileReader();
@@ -42,10 +51,27 @@ function handleImageFromInput(input) {
   });
 }
 
-function trimInputs(search) {
-  var inputs = $(search).find(':input:not(:checkbox,:button)').not('select, input[type="hidden"]').blur(function(event) {
-    this.value = this.value.trim() == '' ? this.defaultValue : this.value.trim();
+function executeRegisterFormRequest(id) {
+  $(id).find('form').submit(function(event) {
+    event.preventDefault();
+    var formData = new FormData(this);
+    
+    $.ajax({
+        url: _INCL_ROOT + 'user_connection.inc.php',
+        type: 'POST',
+        data: formData,
+        success: function (data) {
+            console.log(data);
+        },
+        cache: false,
+        contentType: false,
+        processData: false
+    });
   });
+  // $(id).find('form')[0].submit(function(event) {
+  //   event.preventDefault();
+  //   alert('Hola');
+  // });
 }
 
 $(document).ready(function() {
@@ -63,6 +89,7 @@ $(document).ready(function() {
     checkIcheckExists();
     trimInputs(box_registrar);
     handleImageFromInput($(box_registrar).find('input[type="file"]'));
+    executeRegisterFormRequest(box_registrar);
     $(box_registrar).css('display','flex').hide().fadeIn(500);
   });
   
