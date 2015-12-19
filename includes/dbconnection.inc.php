@@ -1,19 +1,32 @@
 <?php
-	session_start();
 	class Database{
 		private $dbConnection = null;
 		private $_SITE_ROOT;
+		private $_CONF_ROOT;
+		private $_INCL_ROOT;
 		
 		function __construct(){
-			$this->_SITE_ROOT = realpath(__DIR__ . '/..');
-			include_once($this->_SITE_ROOT."/conf/config.inc.php");
+			$this->_SITE_ROOT = $_SERVER['DOCUMENT_ROOT'] . 'hipodromo/';
+			$this->_CONF_ROOT = $this->_SITE_ROOT . 'conf/';
+			$this->_INCL_ROOT = $this->_SITE_ROOT . 'includes/';
+			include_once($this->_CONF_ROOT."config.inc.php");
 			$this->dbConnection = pg_connect($strConnection);
 		}
+		
+		/************************************************************
+		*																														*
+		*						FUNCIONES GENÉRICAS DE MI CLASE 								*
+		*																														*
+		************************************************************/
+		public function getIncludesPath() {
+      return $this->_INCL_ROOT;
+	  }
+		
 		
 		
 		/************************************************************
 		*																														*
-		*			FUNCIONES GENÉRICAS DE POSTGRESQL											*
+		*						FUNCIONES GENÉRICAS DE POSTGRESQL								*
 		*																														*
 		************************************************************/	
 		function status(){
@@ -37,6 +50,47 @@
 			$result = array("action"=>$action,"response"=>array("data"=>$data));
 			$result = json_encode($result);
 			return $result;
+		}
+	
+	
+	
+		/************************************************************
+		*																														*
+		*					 FUNCIONES GENÉRICAS DE LA APLICACIÓN				  		*
+		*																														*
+		************************************************************/
+		function getRolesUsuario() {			
+			$result = pg_query($this->dbConnection,
+			"SELECT * FROM rol");
+
+			if(pg_last_error()){
+				return $this->result_construct("error",pg_last_error());
+			} else {
+				$respuesta = array();
+				while($row = pg_fetch_assoc($result)){
+					$respuesta[] = $row;
+				}
+				return $this->result_construct("success", $respuesta);
+			}
+		}
+		
+		
+		
+		/************************************************************
+		*																														*
+		*					 FUNCIONES GENÉRICAS DE USUARIOS						  		*
+		*																														*
+		************************************************************/
+		function registerUser($username,$email,$password,$rol) {			
+			$result = pg_query($this->dbConnection,
+			"INSERT INTO usuario (pkusu_id,fkusu_rol_id,usu_email,usu_username,usu_clave) 
+			VALUES(nextval('usuario_pkusu_id_seq'::regclass), '$rol', '$email', '$username', '$password')");
+
+			if(pg_last_error()){
+				return $this->result_construct("error",pg_last_error());
+			} else {
+				return $this->result_construct("success","Agregado exitosamente");
+			}
 		}
 	}
 ?>

@@ -96,6 +96,14 @@ button {
   text-transform: uppercase;
 }
 
+.center-button {
+  margin: 10px auto;
+}
+
+.center-button-s {
+  margin: 7px auto;
+}
+
 .register-box {
   margin: 0% auto;
 }
@@ -107,6 +115,11 @@ button {
 #box-iniciarsesion {
   display: none;
 }
+
+/*.register-box-body,
+.login-box-body {
+  overflow-y: scroll;
+}*/
 
 #box-registrar select {
   -webkit-appearance: none;
@@ -146,5 +159,15 @@ div.icheckbox_square-blue {
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+.register-box .overlay > .fa,
+.login-box .overlay > .fa {
   display: none;
+}
+
+.login-box input[type='file'],
+.register-box input[type='file'] {
+  visibility: hidden;
+  position: absolute;
 }
