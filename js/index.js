@@ -57,21 +57,28 @@ function executeRegisterFormRequest(id) {
     var formData = new FormData(this);
     
     $.ajax({
-        url: _INCL_ROOT + 'user_connection.inc.php',
+        url: _INCL_ROOT + 'user-connection.inc.php',
         type: 'POST',
         data: formData,
+        beforeSend: function() {
+          $(id).find('.overlay > .fa').show();
+          $(id).find('.social-auth-links p').text('').html('<br>');
+        },
         success: function (data) {
-            console.log(data);
+          $(id).find('.overlay > .fa').fadeOut(300);
+          $(id).find('.social-auth-links p').text('-');
+          console.log(data);
+        },
+        error: function(data) {
+          $(id).find('.overlay > .fa').fadeOut(300);
+          $(id).find('.social-auth-links p').text('-');
+          console.log(data.response);
         },
         cache: false,
         contentType: false,
         processData: false
     });
   });
-  // $(id).find('form')[0].submit(function(event) {
-  //   event.preventDefault();
-  //   alert('Hola');
-  // });
 }
 
 $(document).ready(function() {
