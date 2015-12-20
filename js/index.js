@@ -52,6 +52,18 @@ function handleImageFromInput(input) {
 }
 
 function executeRegisterFormRequest(id) {
+  function progress(e) {
+    if(e.lengthComputable){
+        var max = e.total;
+        var current = e.loaded;
+        var Percentage = (current * 100)/max;
+        console.log(Percentage);
+        if(Percentage >= 100) {
+           // process completed  
+           console.log('Complete YEAAAH!!');
+        }
+    }  
+  }
   $(id).find('form').submit(function(event) {
     event.preventDefault();
     var formData = new FormData(this);
@@ -60,6 +72,13 @@ function executeRegisterFormRequest(id) {
         url: _INCL_ROOT + 'user-connection.inc.php',
         type: 'POST',
         data: formData,
+        xhr: function() {
+                var myXhr = $.ajaxSettings.xhr();
+                if(myXhr.upload){
+                    myXhr.upload.addEventListener('progress',progress, false);
+                }
+                return myXhr;
+        },
         beforeSend: function() {
           $(id).find('.overlay > .fa').show();
           $(id).find('.social-auth-links p').text('').html('<br>');
@@ -67,12 +86,12 @@ function executeRegisterFormRequest(id) {
         success: function (data) {
           $(id).find('.overlay > .fa').fadeOut(300);
           $(id).find('.social-auth-links p').text('-');
-          console.log(data);
+          // console.log(data);
         },
         error: function(data) {
           $(id).find('.overlay > .fa').fadeOut(300);
           $(id).find('.social-auth-links p').text('-');
-          console.log(data.response);
+          // console.log(data.response);
         },
         cache: false,
         contentType: false,
