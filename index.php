@@ -83,7 +83,7 @@
                 <?php
                   $answer = @json_decode($db->getRolesUsuario());
                 	if ($answer->action != "error") {
-                		echo "<select name='vcbvn' class='form-control'>";
+                		echo "<select name='rol' class='form-control'>";
               	    foreach ($answer->response->data as $row) {
               	        echo "<option value='$row->pkrol_id'>$row->rol_nombre</option>";
               	    }

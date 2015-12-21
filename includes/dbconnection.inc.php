@@ -48,7 +48,7 @@
 		
 		function result_construct($action,$data){
 			$result = array("action"=>$action,"response"=>array("data"=>$data));
-			$result = json_encode($result);
+			$result = json_encode($result, JSON_UNESCAPED_UNICODE);
 			return $result;
 		}
 	
@@ -81,10 +81,16 @@
 		*					 FUNCIONES GENÉRICAS DE USUARIOS						  		*
 		*																														*
 		************************************************************/
-		function registerUser($username,$email,$password,$rol) {			
-			$result = pg_query($this->dbConnection,
-			"INSERT INTO usuario (pkusu_id,fkusu_rol_id,usu_email,usu_username,usu_clave) 
-			VALUES(nextval('usuario_pkusu_id_seq'::regclass), '$rol', '$email', '$username', '$password')");
+		function registerUser($username,$email,$password,$rol,$foto) {
+			if (!empty($foto)) {
+				$result = pg_query($this->dbConnection,
+				"INSERT INTO usuario (pkusu_id,fkusu_rol_id,usu_correo,usu_nombre,usu_clave,usu_imagen) 
+				VALUES(nextval('usuario_pkusu_id_seq'::regclass), '$rol', '$email', '$username', '$password', '$foto')");
+			} else {
+				$result = pg_query($this->dbConnection,
+				"INSERT INTO usuario (pkusu_id,fkusu_rol_id,usu_correo,usu_nombre,usu_clave,usu_imagen) 
+				VALUES(nextval('usuario_pkusu_id_seq'::regclass), '$rol', '$email', '$username', '$password', NULL)");
+			}
 
 			if(pg_last_error()){
 				return $this->result_construct("error",pg_last_error());
