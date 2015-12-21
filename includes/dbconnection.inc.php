@@ -98,5 +98,21 @@
 				return $this->result_construct("success","Agregado exitosamente");
 			}
 		}
+		
+		function getUserById($pkusu_id) {
+			$result = pg_query($this->dbConnection,
+			"SELECT usu_nombre,encode(usu_imagen, 'base64') as usu_imagen FROM usuario WHERE pkusu_id = '$pkusu_id'");
+			
+			if(pg_last_error()){
+				return $this->result_construct("error",pg_last_error());
+			}
+			else {
+				$respuesta = array();
+				while($row = pg_fetch_assoc($result)){
+					$respuesta[] = $row;
+				}
+				return json_encode($respuesta);
+			}
+		}
 	}
 ?>

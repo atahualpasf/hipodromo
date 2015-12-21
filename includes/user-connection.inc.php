@@ -78,7 +78,7 @@
               imagejpeg($new);
               break;
             case 'image/png':
-              imagepng($new, NULL, 100);
+              imagepng($new, NULL, (100*0.09));
               break;
             case 'image/gif':
               imagegif($new, NULL, 0);
