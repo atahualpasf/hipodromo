@@ -9,7 +9,7 @@
 			$this->_SITE_ROOT = $_SERVER['DOCUMENT_ROOT'] . 'hipodromo/';
 			$this->_CONF_ROOT = $this->_SITE_ROOT . 'conf/';
 			$this->_INCL_ROOT = $this->_SITE_ROOT . 'includes/';
-			include_once($this->_CONF_ROOT."config.inc.php");
+			include($this->_CONF_ROOT."config.inc.php");
 			$this->dbConnection = pg_connect($strConnection);
 		}
 		
