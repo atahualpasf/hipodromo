@@ -19,7 +19,7 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'dist/css/AdminLTE.min.css'; ?>">
 
-    <?php if (strtolower(basename($_SERVER['SCRIPT_FILENAME'], '.php')) === 'index'): ?>
+    <?php if ((strtolower(basename(dirname($_SERVER['SCRIPT_FILENAME']))) === 'hipodromo') and (strtolower(basename($_SERVER['SCRIPT_FILENAME'], '.php')) === 'index')): ?>
       <!-- Full responsive background video with css -->
       <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'plugins/videobackground/videobackground.css'; ?>">
       <!-- Index style -->

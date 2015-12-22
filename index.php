@@ -1,5 +1,5 @@
 <?php
-  include('includes/header.php');
+  include('includes/header.inc.php');
 ?>
   <body class="hold-transition register-page">
     <div id="overlay">
