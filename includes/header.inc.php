@@ -27,7 +27,7 @@
       <!-- Full responsive background video with css -->
       <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'plugins/videobackground/videobackground.css'; ?>">
       <!-- Index style -->
-      <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'css/index.css'; ?>">
+      <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'dist/css/index.css'; ?>">
       <!-- iCheck -->
       <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'plugins/iCheck/square/blue.css'; ?>">
     <?php elseif ((strtolower(basename(dirname($_SERVER['SCRIPT_FILENAME']))) === 'pages') and (strtolower(basename($_SERVER['SCRIPT_FILENAME'], '.php')) !== 'index')): ?>

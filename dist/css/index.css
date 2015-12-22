@@ -1,28 +1,28 @@
 @font-face {
     font-family: lovelo;
-    src: url(../fonts/lovelo/lovelo_black.eot);
-    src: url(../fonts/lovelo/lovelo_black.eot?#iefix) format('embedded-opentype'), url(../fonts/lovelo/lovelo_black.woff) format('woff'), url(../fonts/lovelo/lovelo_black.ttf) format('truetype'), url(../fonts/lovelo/lovelo_black.svg#loveloblack) format('svg');
+    src: url(../../fonts/lovelo/lovelo_black.eot);
+    src: url(../../fonts/lovelo/lovelo_black.eot?#iefix) format('embedded-opentype'), url(../../fonts/lovelo/lovelo_black.woff) format('woff'), url(../../fonts/lovelo/lovelo_black.ttf) format('truetype'), url(../../fonts/lovelo/lovelo_black.svg#loveloblack) format('svg');
     font-weight: 400;
     font-style: normal;
 }
 @media screen and (-webkit-min-device-pixel-ratio:0) {
     @font-face {
     font-family: lovelo;
-    src: url(../fonts/lovelo/lovelo_black.svg) format('svg');
+    src: url(../../fonts/lovelo/lovelo_black.svg) format('svg');
 }
 
 @font-face {
 	font-family: "Flaticon";
-	src: url("../fonts/flaticon/flaticon.eot");
-	src: url("../fonts/flaticon/flaticon.eot#iefix") format("embedded-opentype"),
-	url("../fonts/flaticon/flaticon.woff") format("woff"),
-	url("../fonts/flaticon/flaticon.ttf") format("truetype"),
-	url("../fonts/flaticon/flaticon.svg") format("svg");
+	src: url("../../fonts/flaticon/flaticon.eot");
+	src: url("../../fonts/flaticon/flaticon.eot#iefix") format("embedded-opentype"),
+	url("../../fonts/flaticon/flaticon.woff") format("woff"),
+	url("../../fonts/flaticon/flaticon.ttf") format("truetype"),
+	url("../../fonts/flaticon/flaticon.svg") format("svg");
 	font-weight: normal;
 	font-style: normal;
 }
 [class^="flaticon-"]:before, [class*=" flaticon-"]:before,
-[class^="flaticon-"]:after, [class*=" flaticon-"]:after {   
+[class^="flaticon-"]:after, [class*=" flaticon-"]:after {
 	font-family: Flaticon;
   font-style: normal;
 }.flaticon-business:before {
@@ -51,14 +51,14 @@ html, body {
   display: -moz-box;
   display: -ms-flexbox;
   display: -webkit-flex;
-  display: flex; 
-  
+  display: flex;
+
   -webkit-box-align : center;
   -webkit-align-items : center;
   -moz-box-align : center;
   -ms-flex-align : center;
   align-items : center;
-  
+
   width: 100%;
   -webkit-box-pack : center;
   -moz-box-pack : center;
