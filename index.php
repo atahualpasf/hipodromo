@@ -44,7 +44,7 @@
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
               </div>
               <div class="form-group has-feedback">
-                <input type="password" class="form-control" placeholder="Verificar contraseña" oninvalid="checkInputs(this,'Contraseña incorrecta.');" oninput="checkInputs(this,'Contraseña incorrecta.');" title="Contraseña de 6 a 13 caracteres de longitud." pattern="^[a-zA-Z0-9]{6,13}$" required>
+                <input type="password" class="form-control" placeholder="Verificar contraseña" oninvalid="checkInputs(this,'Contraseña incorrecta.');" oninput="checkInputs(this,'Contraseña incorrecta.');" title="Contraseña de 6 a 13 caracteres de longitud." pattern="^[a-zA-Z0-9]{6,13}$" name="passwordv" required>
                 <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
               </div>
               <input type="hidden" name="registro" value="true">
@@ -88,7 +88,10 @@
             </form>
 
             <div class="social-auth-links text-center">
-              <p>-</p>
+              <p></p>
+              <div class="form-group has-error">
+                <label class="control-label invisible"><i class="fa fa-times-circle-o"></i></label>
+              </div>
               <button id="btn-rg-iniciarsesion" class="btn bg-green btn-block btn-flat">Iniciar sesión</button>
               <button id="btn-rg-regresar" class="btn bg-green btn-block btn-flat">Regresar</button>
             </div>
@@ -103,7 +106,7 @@
           </div>
           <div class="login-box-body">
             <p class="login-box-msg">Iniciar sesión con tu usuario o correo</p>
-            <form action="../../index2.html" method="post">
+            <form method="post">
               <div class="form-group has-feedback">
                 <input type="text" class="form-control" placeholder="Nombre de usuario o correo electrónico" name="username" required>
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>

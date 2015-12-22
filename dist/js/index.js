@@ -24,7 +24,7 @@ function checkInputs(input, errorMessage) {
 }
 
 function trimInputs(search) {
-  var inputs = $(search).find(':input:not(:checkbox,:button)').not('select, input[type="hidden"]').blur(function(event) {
+  inputs = $(search).find(':input:not(:checkbox,:button,:file)').not('select, input[type="hidden"]').blur(function(event) {
     this.value = this.value.trim() == '' ? this.defaultValue : this.value.trim();
   });
 }
@@ -66,7 +66,14 @@ function executeRegisterFormRequest(id) {
   }
   $(id).find('form').submit(function(event) {
     event.preventDefault();
+    $(id).find('.overlay > .fa').show();
     var formData = new FormData(this);
+    var usu_nombre = $(inputs)[0];
+    var usu_correo = $(inputs)[1];
+    var usu_password = $(inputs)[2];
+    var usu_passwordv = $(inputs)[3];
+    var error_label = $(id).find('.social-auth-links label');
+    $(error_label).addClass('invisible');
 
     $.ajax({
         url: _INCL_ROOT + 'user-connection.inc.php',
@@ -79,18 +86,38 @@ function executeRegisterFormRequest(id) {
                 }
                 return myXhr;
         },
-        beforeSend: function() {
-          $(id).find('.overlay > .fa').show();
-          $(id).find('.social-auth-links p').text('').html('<br>');
-        },
         success: function (data) {
           $(id).find('.overlay > .fa').fadeOut(300);
-          $(id).find('.social-auth-links p').text('-');
-          // console.log(data);
+          console.log(data);
+          var dataResponse = JSON.parse(data);
+          if (dataResponse.action.action === 'error') {
+            if (dataResponse.action.type === 'usu_nombre') {
+              $(usu_nombre).parent().removeClass('has-feedback').addClass('has-error');
+              $(usu_correo).parent().removeClass('has-error').addClass('has-feedback');
+              $(usu_password).parent().removeClass('has-error').addClass('has-feedback');
+              $(usu_passwordv).parent().removeClass('has-error').addClass('has-feedback');
+            } else if (dataResponse.action.type === 'usu_correo') {
+              $(usu_nombre).parent().removeClass('has-error').addClass('has-feedback');
+              $(usu_correo).parent().removeClass('has-feedback').addClass('has-error');
+              $(usu_password).parent().removeClass('has-error').addClass('has-feedback');
+              $(usu_passwordv).parent().removeClass('has-error').addClass('has-feedback');
+            } else if (dataResponse.action.type === 'usu_password') {
+              $(usu_nombre).parent().removeClass('has-error').addClass('has-feedback');
+              $(usu_correo).parent().removeClass('has-error').addClass('has-feedback');
+              $(usu_password).parent().removeClass('has-feedback').addClass('has-error');
+              $(usu_passwordv).parent().removeClass('has-error').addClass('has-feedback');
+            } else if (dataResponse.action.type === 'usu_passwordv') {
+              $(usu_nombre).parent().removeClass('has-error').addClass('has-feedback');
+              $(usu_correo).parent().removeClass('has-error').addClass('has-feedback');
+              $(usu_password).parent().removeClass('has-error').addClass('has-feedback');
+              $(usu_passwordv).parent().removeClass('has-feedback').addClass('has-error');
+            }
+            $(error_label).text(dataResponse.response.data).removeClass('invisible');
+          }
         },
         error: function(data) {
           $(id).find('.overlay > .fa').fadeOut(300);
-          $(id).find('.social-auth-links p').text('-');
+          // $(id).find('.social-auth-links p').text('-');
           // console.log(data.response);
         },
         cache: false,
@@ -159,44 +186,4 @@ $(document).ready(function() {
     trimInputs(box_registrar);
     $(box_registrar).css('display','flex').hide().fadeIn(500);
   });
-
-  // function executeOnBackground(id) {
-  //   var form = $(id).find('form');
-  //   var inputFile = $(form).find('input[type="file"]');
-  //   var data = new FormData(form[0]);
-  //   $.each(inputFile[0].files, function(key, value) {
-  //     data.append(file.name, file);
-  //   });
-  //   console.log(data);
-  //   form.submit(function(event) {
-  //     event.preventDefault();
-  //     console.log(data);
-  //     $.ajax({
-  //       type: 'POST',
-  //       url: _INCL_ROOT + 'user_connection.inc.php',
-  //       contentType:'multipart/form-data',
-  //       cache: false,
-  //       contentType: false,
-  //       processData: false,
-  //       data: data,
-  //       beforeSend: function() {
-  //         $(id).find('.overlay > .fa').show();
-  //         $(id).find('.social-auth-links p').text('').html('<br>');
-  //       },
-  //       success: function(data) {
-  //         $(id).find('.overlay > .fa').fadeOut(300);
-  //         $(id).find('.social-auth-links p').text('-');
-  //         console.log(data.action);
-  //         if (data.action === "error") {
-  //           window.location.href = 'index-error.php'
-  //         } else {
-  //           window.location.href = 'index-admin.php'
-  //         }
-  //       },
-  //       error: function(data) {
-  //         console.log(data.response);
-  //       }
-  //      });
-  //   });
-  // }
 });

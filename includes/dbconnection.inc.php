@@ -92,6 +92,7 @@
 		*																														*
 		************************************************************/
 		function registerUser($username,$email,$password,$rol,$foto) {
+			pg_set_error_verbosity($this->dbConnection,PGSQL_ERRORS_DEFAULT);
 			if (!empty($foto)) {
 				$result = pg_query($this->dbConnection,
 				"INSERT INTO usuario (pkusu_id,fkusu_rol_id,usu_correo,usu_nombre,usu_clave,usu_imagen)

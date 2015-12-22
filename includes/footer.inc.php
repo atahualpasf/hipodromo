@@ -83,6 +83,7 @@
     <script>
       var _INCL_ROOT = window.location.origin + '/hipodromo/includes/';
       var _DIST_ROOT = window.location.origin + '/hipodromo/dist/';
+      var inputs;
     </script>
     <!-- Index script -->
     <script src="<?php echo $db->getRootUri() . 'dist/js/index.js'; ?>"></script>
