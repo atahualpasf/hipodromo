@@ -59,15 +59,15 @@ function executeRegisterFormRequest(id) {
         var Percentage = (current * 100)/max;
         console.log(Percentage);
         if(Percentage >= 100) {
-           // process completed  
+           // process completed
            console.log('Complete YEAAAH!!');
         }
-    }  
+    }
   }
   $(id).find('form').submit(function(event) {
     event.preventDefault();
     var formData = new FormData(this);
-    
+
     $.ajax({
         url: _INCL_ROOT + 'user-connection.inc.php',
         type: 'POST',
@@ -101,13 +101,13 @@ function executeRegisterFormRequest(id) {
 }
 
 $(document).ready(function() {
-  $('#bg-video').videoBackground('videos/racehorseslowmotion-hd.mp4');
+  $('#bg-video').videoBackground(_DIST_ROOT + 'videos/racehorseslowmotion-hd.mp4');
   var box_registrar = $('#box-registrar');
   var box_iniciarsesion = $('#box-iniciarsesion');
   var box_title = $('#box-title');
   $(box_registrar).remove();
   $(box_iniciarsesion).remove();
-  
+
   $(document).on('click', '#btn-registrar', function(event) {
     event.preventDefault();
     $(box_title).remove();
@@ -118,7 +118,7 @@ $(document).ready(function() {
     executeRegisterFormRequest(box_registrar);
     $(box_registrar).css('display','flex').hide().fadeIn(500);
   });
-  
+
   $(document).on('click', '#btn-iniciarsesion', function(event) {
     event.preventDefault();
     $(box_title).remove();
@@ -127,21 +127,21 @@ $(document).ready(function() {
     trimInputs(box_iniciarsesion);
     $(box_iniciarsesion).css('display','flex').hide().fadeIn(500);
   });
-  
+
   $(document).on('click', '#btn-rg-regresar', function(event) {
     event.preventDefault();
     $(box_registrar).remove();
     box_title.insertAfter('#bg-video');
     $(box_title).hide().fadeIn(500);
   });
-  
+
   $(document).on('click', '#btn-is-regresar', function(event) {
     event.preventDefault();
     $(box_iniciarsesion).remove();
     box_title.insertAfter('#bg-video');
     $(box_title).hide().fadeIn(500);
   });
-  
+
   $(document).on('click', '#btn-rg-iniciarsesion', function(event) {
     event.preventDefault();
     $(box_registrar).remove();
@@ -150,7 +150,7 @@ $(document).ready(function() {
     trimInputs(box_iniciarsesion);
     $(box_iniciarsesion).css('display','flex').hide().fadeIn(500);
   });
-  
+
   $(document).on('click', '#btn-is-registrar', function(event) {
     event.preventDefault();
     $(box_iniciarsesion).remove();
@@ -159,7 +159,7 @@ $(document).ready(function() {
     trimInputs(box_registrar);
     $(box_registrar).css('display','flex').hide().fadeIn(500);
   });
-  
+
   // function executeOnBackground(id) {
   //   var form = $(id).find('form');
   //   var inputFile = $(form).find('input[type="file"]');
@@ -188,7 +188,7 @@ $(document).ready(function() {
   //         $(id).find('.social-auth-links p').text('-');
   //         console.log(data.action);
   //         if (data.action === "error") {
-  //           window.location.href = 'index-error.php'              
+  //           window.location.href = 'index-error.php'
   //         } else {
   //           window.location.href = 'index-admin.php'
   //         }
