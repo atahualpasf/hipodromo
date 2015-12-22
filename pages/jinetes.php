@@ -196,5 +196,5 @@
         </section><!-- /.content -->
       </div><!-- /.content-wrapper -->
       <?php
-        include('../../includes/footer.php');
+        include($_SERVER['DOCUMENT_ROOT'] . 'hipodromo/includes/footer.inc.php');
       ?>

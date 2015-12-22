@@ -137,20 +137,6 @@
         </div><!-- /.login-box -->
       </div>
 
-    <!-- jQuery 2.1.4 -->
-    <script src="plugins/jQuery/jQuery-2.1.4.min.js"></script>
-    <!-- Bootstrap 3.3.5 -->
-    <script src="bootstrap/js/bootstrap.min.js"></script>
-    <!-- Background video -->
-    <script src="plugins/videobackground/videobackground.js"></script>
-    <!-- iCheck -->
-    <script src="plugins/iCheck/icheck.min.js"></script>
-    <!-- Constantes globales -->
-    <script>
-      // var _INCL_ROOT = '<?php /*echo $db->getIncludesPath();*/ ?>';
-      var _INCL_ROOT = window.location.origin + '/hipodromo/includes/';
-    </script>
-    <!-- Index script -->
-    <script src="js/index.js"></script>
-  </body>
-</html>
+<?php
+  include($db->getRootPath() . 'includes/footer.inc.php');
+?>
