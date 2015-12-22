@@ -85,7 +85,7 @@
       var _INCL_ROOT = window.location.origin + '/hipodromo/includes/';
     </script>
     <!-- Index script -->
-    <script src="<?php echo $db->getRootUri() . 'js/index.js'; ?>"></script>
+    <script src="<?php echo $db->getRootUri() . 'dist/js/index.js'; ?>"></script>
 <?php endif; ?>
   </body>
 </html>
