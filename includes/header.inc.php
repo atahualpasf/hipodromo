@@ -58,3 +58,50 @@
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
+  <?php if (strtolower(basename(dirname($_SERVER['SCRIPT_FILENAME']))) === 'pages'): ?>
+    <body class="hold-transition skin-blue sidebar-mini">
+      <div class="wrapper">
+
+        <header class="main-header">
+          <!-- Logo -->
+          <a href="index.php" class="logo">
+            <!-- mini logo for sidebar mini 50x50 pixels -->
+            <span class="logo-mini">H<b>LR</b></span>
+            <!-- logo for regular state and mobile devices -->
+            <span class="logo-lg">La <b>Rinconada</b></span>
+          </a>
+          <!-- Header Navbar: style can be found in header.less -->
+          <nav class="navbar navbar-static-top" role="navigation">
+            <!-- Sidebar toggle button-->
+            <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+              <span class="sr-only">Toggle navigation</span>
+            </a>
+            <div class="navbar-custom-menu">
+              <ul class="nav navbar-nav">
+                <!-- User Account: style can be found in dropdown.less -->
+                <li class="dropdown user user-menu">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <img src="<?php echo $db->getRootUri() . 'dist/img/user2-160x160.jpg'; ?>" class="user-image" alt="User Image">
+                    <span class="hidden-xs">Alexander Pierce</span>
+                  </a>
+                  <ul class="dropdown-menu">
+                    <!-- User image -->
+                    <li class="user-header">
+                      <img src="<?php echo $db->getRootUri() . 'dist/img/user2-160x160.jpg'; ?>" class="img-circle" alt="User Image">
+                      <p>
+                        Alexander Pierce
+                        <small>Miembro desde Nov. 2012</small>
+                      </p>
+                    </li>
+                    <li class="user-footer">
+                      <div class="pull-right">
+                        <a href="#" class="btn btn-default btn-flat">Cerrar Sesión</a>
+                      </div>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </nav>
+        </header>
+    <?php endif; ?>
