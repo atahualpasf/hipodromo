@@ -1,32 +1,6 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>HLR | Entrenadores</title>
-    <!-- Tell the browser to be responsive to screen width -->
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <!-- Bootstrap 3.3.5 -->
-    <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-    <!-- Ionicons -->
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-    <!-- DataTables -->
-    <link rel="stylesheet" href="../../plugins/datatables/dataTables.bootstrap.css">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
-    <!-- AdminLTE Skins. Choose a skin from the css/skins
-         folder instead of downloading all of them to reduce the load. -->
-    <link rel="stylesheet" href="../../dist/css/skins/_all-skins.min.css">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-  </head>
+<?php
+  include($_SERVER['DOCUMENT_ROOT'] . 'hipodromo/includes/header.php');
+?>
   <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper">
 
@@ -49,13 +23,13 @@
               <!-- User Account: style can be found in dropdown.less -->
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <img src="../../dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+                  <img src="<?php echo $db->getRootUri() . 'dist/img/user2-160x160.jpg'; ?>" class="user-image" alt="User Image">
                   <span class="hidden-xs">Alexander Pierce</span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- User image -->
                   <li class="user-header">
-                    <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                    <img src="<?php echo $db->getRootUri() . 'dist/img/user2-160x160.jpg'; ?>" class="img-circle" alt="User Image">
                     <p>
                       Alexander Pierce
                       <small>Miembro desde Nov. 2012</small>
@@ -79,7 +53,7 @@
           <!-- Sidebar user panel -->
           <div class="user-panel">
             <div class="pull-left image">
-              <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+              <img src="<?php echo $db->getRootUri() . 'dist/img/user2-160x160.jpg'; ?>" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
               <p>Alexander Pierce</p>
@@ -129,12 +103,12 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            Entrenadores
+            Usuarios
           </h1>
           <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Tablero</a></li>
             <li><a href="#">Tablas</a></li>
-            <li class="active">Entrenadores</li>
+            <li class="active">Usuarios</li>
           </ol>
         </section>
 
@@ -147,80 +121,56 @@
                   <table id="example1" class="table table-bordered table-striped">
                     <thead>
                       <tr>
-                        <th>Nombre</th>
-                        <th>...</th>
-                        <th>...</th>
-                        <th>CUadra</th>
+                        <th>Usuario</th>
+                        <th>Rol</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
                         <td>Trident</td>
                         <td>Internet Explorer 4.0</td>
-                        <td>Internet Explorer 4.0</td>
-                        <td>Internet Explorer 4.0</td>
                       </tr>
                       <tr>
-                        <td>Trident</td>
-                        <td>Internet Explorer 4.0</td>
-                        <td>Internet Explorer 4.0</td>
-                        <td>Internet Explorer 4.0</td>
-                      </tr>
-                      <tr>
-                        <td>Trident</td>
-                        <td>Trident</td>
                         <td>Trident</td>
                         <td>Internet Explorer 4.0</td>
                       </tr>
                       <tr>
                         <td>Trident</td>
                         <td>Trident</td>
+                      </tr>
+                      <tr>
+                        <td>Trident</td>
+                        <td>Trident</td>
+                      </tr>
+                      <tr>
                         <td>Trident</td>
                         <td>Internet Explorer 4.0</td>
                       </tr>
                       <tr>
                         <td>Trident</td>
                         <td>Internet Explorer 4.0</td>
-                        <td>Internet Explorer 4.0</td>
-                        <td>Internet Explorer 4.0</td>
-                      </tr>
-                      <tr>
-                        <td>Trident</td>
-                        <td>Internet Explorer 4.0</td>
-                        <td>Internet Explorer 4.0</td>
-                        <td>Internet Explorer 4.0</td>
                       </tr>
                       <tr>
                         <td>Trident</td>
                         <td>Trident</td>
-                        <td>Trident</td>
-                        <td>Internet Explorer 4.0</td>
                       </tr>
                       <tr>
                         <td>Trident</td>
                         <td>Trident</td>
+                      </tr>
+                      <tr>
                         <td>Trident</td>
                         <td>Internet Explorer 4.0</td>
                       </tr>
                       <tr>
                         <td>Trident</td>
-                        <td>Internet Explorer 4.0</td>
-                        <td>Internet Explorer 4.0</td>
-                        <td>Internet Explorer 4.0</td>
-                      </tr>
-                      <tr>
-                        <td>Trident</td>
-                        <td>Internet Explorer 4.0</td>
-                        <td>Internet Explorer 4.0</td>
                         <td>Internet Explorer 4.0</td>
                       </tr>
                     </tbody>
                     <tfoot>
                       <tr>
-                        <th>Nombre</th>
-                        <th>...</th>
-                        <th>...</th>
-                        <th>CUadra</th>
+                        <th>Usuario</th>
+                        <th>Rol</th>
                       </tr>
                     </tfoot>
                   </table>
@@ -230,39 +180,6 @@
           </div><!-- /.row -->
         </section><!-- /.content -->
       </div><!-- /.content-wrapper -->
-      <footer class="main-footer">
-        <strong>Copyright &copy; 2014-2015 Hipodromo La Rinconada.</strong> Todos los derechos reservados.
-      </footer>
-    </div><!-- ./wrapper -->
-
-    <!-- jQuery 2.1.4 -->
-    <script src="../../plugins/jQuery/jQuery-2.1.4.min.js"></script>
-    <!-- Bootstrap 3.3.5 -->
-    <script src="../../bootstrap/js/bootstrap.min.js"></script>
-    <!-- DataTables -->
-    <script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
-    <script src="../../plugins/datatables/dataTables.bootstrap.min.js"></script>
-    <!-- SlimScroll -->
-    <script src="../../plugins/slimScroll/jquery.slimscroll.min.js"></script>
-    <!-- FastClick -->
-    <script src="../../plugins/fastclick/fastclick.min.js"></script>
-    <!-- AdminLTE App -->
-    <script src="../../dist/js/app.min.js"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="../../dist/js/demo.js"></script>
-    <!-- page script -->
-    <script>
-      $(function () {
-        $("#example1").DataTable();
-        $('#example2').DataTable({
-          "paging": true,
-          "lengthChange": false,
-          "searching": false,
-          "ordering": true,
-          "info": true,
-          "autoWidth": false
-        });
-      });
-    </script>
-  </body>
-</html>
+      <?php
+        include('../../includes/footer.php');
+      ?>

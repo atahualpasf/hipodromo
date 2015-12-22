@@ -1,5 +1,5 @@
 <?php
-  include('header.php');
+  include($_SERVER['DOCUMENT_ROOT'] . 'hipodromo/includes/header.php');
 ?>
   <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper">
@@ -23,13 +23,13 @@
               <!-- User Account: style can be found in dropdown.less -->
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+                  <img src="<?php echo $db->getRootUri() . 'dist/img/user2-160x160.jpg'; ?>" class="user-image" alt="User Image">
                   <span class="hidden-xs">Alexander Pierce</span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- User image -->
                   <li class="user-header">
-                    <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                    <img src="<?php echo $db->getRootUri() . 'dist/img/user2-160x160.jpg'; ?>" class="img-circle" alt="User Image">
                     <p>
                       Alexander Pierce
                       <small>Miembro desde Nov. 2012</small>
@@ -53,7 +53,7 @@
           <!-- Sidebar user panel -->
           <div class="user-panel">
             <div class="pull-left image">
-              <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+              <img src="<?php echo $db->getRootUri() . 'dist/img/user2-160x160.jpg'; ?>" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
               <p>Alexander Pierce</p>

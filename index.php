@@ -1,11 +1,11 @@
 <?php
-  include('header.php');
+  include('includes/header.php');
 ?>
   <body class="hold-transition register-page">
     <div id="overlay">
     </div>
     <div id="bg-video"></div>
-    
+
     <div id="box-title" class="jumbotron vertical-center">
       <div class="container text-center">
         <i class="flaticon-horse"></i>
@@ -20,9 +20,9 @@
           </div>
         </div>
       </div>
-      
+
     </div>
-    
+
       <div id="box-registrar" class="container vertical-center">
         <div class="register-box">
           <div class="overlay">
@@ -95,7 +95,7 @@
           </div><!-- /.form-box -->
         </div><!-- /.register-box -->
       </div>
-      
+
       <div id="box-iniciarsesion" class="container vertical-center">
         <div class="login-box">
           <div class="overlay">
@@ -126,13 +126,13 @@
                 </div><!-- /.col -->
               </div>
             </form>
-    
+
             <div class="social-auth-links text-center">
               <p>-</p>
               <button id="btn-is-registrar" class="btn bg-green btn-block btn-flat">Registrar</button>
               <button id="btn-is-regresar" class="btn bg-green btn-block btn-flat">Regresar</button>
             </div><!-- /.social-auth-links -->
-    
+
           </div><!-- /.login-box-body -->
         </div><!-- /.login-box -->
       </div>
