@@ -1,5 +1,5 @@
 <?php
-  include($_SERVER['DOCUMENT_ROOT'] . 'hipodromo/includes/header.php');
+  include($_SERVER['DOCUMENT_ROOT'] . 'hipodromo/includes/header.inc.php');
 ?>
   <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper">
