@@ -95,7 +95,7 @@
                     </li>
                     <li class="user-footer">
                       <div class="pull-right">
-                        <a href="#" class="btn btn-default btn-flat">Cerrar Sesión</a>
+                        <button id="btn-cerrarsesion" value="true" class="btn btn-default btn-flat">Cerrar Sesión</button>
                       </div>
                     </li>
                   </ul>

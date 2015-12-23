@@ -1,8 +1,10 @@
 <?php if (strtolower(basename(dirname($_SERVER['SCRIPT_FILENAME']))) === 'pages'): ?>
-      <footer class="main-footer">
-        <strong>Copyright &copy; 2014-2015 Hipodromo La Rinconada.</strong> Todos los derechos reservados.
-      </footer>
-    </div><!-- ./wrapper -->
+    <footer class="main-footer">
+      <div class="pull-right hidden-xs">
+        <b>Version</b> 2.3.0
+      </div>
+      <strong>Copyright &copy; 2014-2015 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights reserved.
+    </footer>
 <?php endif; ?>
     <!-- jQuery 2.1.4 -->
     <script src="<?php echo $db->getRootUri() . 'plugins/jQuery/jQuery-2.1.4.min.js'; ?>"></script>
@@ -42,6 +44,8 @@
     <script src="<?php echo $db->getRootUri() . 'dist/js/pages/dashboard.js'; ?>"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="<?php echo $db->getRootUri() . 'dist/js/demo.js'; ?>"></script>
+    <!-- Hipodromo extras functionalities -->
+    <script src="<?php echo $db->getRootUri() . 'dist/js/extras.js'; ?>"></script>
 <?php endif; ?>
 <?php if ((strtolower(basename(dirname($_SERVER['SCRIPT_FILENAME']))) === 'pages') and (strtolower(basename($_SERVER['SCRIPT_FILENAME'], '.php')) !== 'index')): ?>
     <!-- Bootstrap 3.3.5 -->
@@ -57,6 +61,14 @@
     <script src="<?php echo $db->getRootUri() . 'dist/js/app.min.js'; ?>"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="<?php echo $db->getRootUri() . 'dist/js/demo.js'; ?>"></script>
+    <!-- Constantes globales -->
+    <script>
+      var _ROOT = window.location.origin + '/hipodromo/';
+      var _INCL_ROOT = _ROOT + 'includes/';
+      var _DIST_ROOT = _ROOT + 'dist/';
+    </script>
+    <!-- Hipodromo extras functionalities -->
+    <script src="<?php echo $db->getRootUri() . 'dist/js/extras.js'; ?>"></script>
     <!-- page script -->
     <script>
       $(function () {
