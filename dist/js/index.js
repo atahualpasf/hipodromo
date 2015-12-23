@@ -88,9 +88,17 @@ function executeRegisterFormRequest(id) {
         },
         success: function (data) {
           $(id).find('.overlay > .fa').fadeOut(300);
-          console.log(data);
           var dataResponse = JSON.parse(data);
-          if (dataResponse.action.action === 'error') {
+          console.log(dataResponse.response.data);
+          if (dataResponse.action.action === 'success') {
+            window.location.replace(_ROOT + 'pages/');
+          }
+        },
+        error: function(data) {
+          $(id).find('.overlay > .fa').fadeOut(300);
+          console.log(data);
+          var dataResponse = JSON.parse(data.responseText);
+          if (data.status === 409) {
             if (dataResponse.action.type === 'usu_nombre') {
               $(usu_nombre).parent().removeClass('has-feedback').addClass('has-error');
               $(usu_correo).parent().removeClass('has-error').addClass('has-feedback');
@@ -106,19 +114,25 @@ function executeRegisterFormRequest(id) {
               $(usu_correo).parent().removeClass('has-error').addClass('has-feedback');
               $(usu_password).parent().removeClass('has-feedback').addClass('has-error');
               $(usu_passwordv).parent().removeClass('has-error').addClass('has-feedback');
+              $(usu_password).val('');
+              $(usu_passwordv).val('');
             } else if (dataResponse.action.type === 'usu_passwordv') {
               $(usu_nombre).parent().removeClass('has-error').addClass('has-feedback');
               $(usu_correo).parent().removeClass('has-error').addClass('has-feedback');
               $(usu_password).parent().removeClass('has-error').addClass('has-feedback');
               $(usu_passwordv).parent().removeClass('has-feedback').addClass('has-error');
+              $(usu_password).val('');
+              $(usu_passwordv).val('');
+            } else if (dataResponse.action.type === 'both_password') {
+              $(usu_nombre).parent().removeClass('has-error').addClass('has-feedback');
+              $(usu_correo).parent().removeClass('has-error').addClass('has-feedback');
+              $(usu_password).parent().removeClass('has-feedback').addClass('has-error');
+              $(usu_passwordv).parent().removeClass('has-feedback').addClass('has-error');
+              $(usu_password).val('');
+              $(usu_passwordv).val('');
             }
-            $(error_label).text(dataResponse.response.data).removeClass('invisible');
           }
-        },
-        error: function(data) {
-          $(id).find('.overlay > .fa').fadeOut(300);
-          // $(id).find('.social-auth-links p').text('-');
-          // console.log(data.response);
+          $(error_label).text(dataResponse.response.data).removeClass('invisible');
         },
         cache: false,
         contentType: false,

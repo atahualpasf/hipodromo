@@ -81,8 +81,9 @@
     <script src="<?php echo $db->getRootUri() . 'plugins/iCheck/icheck.min.js'; ?>"></script>
     <!-- Constantes globales -->
     <script>
-      var _INCL_ROOT = window.location.origin + '/hipodromo/includes/';
-      var _DIST_ROOT = window.location.origin + '/hipodromo/dist/';
+      var _ROOT = window.location.origin + '/hipodromo/';
+      var _INCL_ROOT = _ROOT + 'includes/';
+      var _DIST_ROOT = _ROOT + 'dist/';
       var inputs;
     </script>
     <!-- Index script -->

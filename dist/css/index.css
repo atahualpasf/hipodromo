@@ -171,3 +171,7 @@ div.icheckbox_square-blue {
   visibility: hidden;
   position: absolute;
 }
+
+.has-error {
+  font-size: 12px;
+}

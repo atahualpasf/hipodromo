@@ -1,22 +1,71 @@
 <?php
+  include('dbconnection.inc.php');
   function result_construct($action,$type,$data){
     $result = array("action"=>array("action"=>$action,"type"=>$type),"response"=>array("data"=>$data));
     $result = json_encode($result, JSON_UNESCAPED_UNICODE);
     return $result;
   }
-  include('dbconnection.inc.php');
   sleep(2.5);
   
-  if (!empty($_POST['registro'])) {
-    if ((!empty($_POST['username'])) and (!empty($_POST['email'])) and (!empty($_POST['password'])) and (!empty($_POST['rol']))) {
+  function test_input($data) {
+      $data = trim($data);
+      $data = stripslashes($data);
+      $data = htmlspecialchars($data);
+      return $data;
+  }
+  
+  function checkPasswords($password, $passwordv) {
+    if (!preg_match("#^[a-zA-Z0-9]{6,13}$#", $password)) {
+      header('HTTP/1.1 409 Conflict');
+      echo result_construct('error', 'usu_password', 'La contraseña tiene que ser alfanumerica y de 6 a 13 caracteres de longitud.');
+      die();
+    } elseif (!preg_match("#^[a-zA-Z0-9]{6,13}$#", $passwordv)) {
+      header('HTTP/1.1 409 Conflict');
+      echo result_construct('error', 'usu_passwordv', 'La contraseña de verificación tiene que ser alfanumerica y de 6 a 13 caracteres de longitud.');
+      die();
+    } elseif ($password !== $passwordv) {
+      header('HTTP/1.1 409 Conflict');
+      echo result_construct('error', 'both_password', 'La contraseña dada y la contraseña de verificación no coinciden por favor verifique.');
+      die();
+    }
+  }
+  
+  function checkErrorOnDatabase($answer) {
+    if (strpos($answer->response->data,'(usu_nombre)') !== false) {
+      header('HTTP/1.1 409 Conflict');
+      echo result_construct($answer->action, 'usu_nombre', 'El nombre de usuario ya se encuentra registrado, por favor verifique.');
+      die();
+    } elseif (strpos($answer->response->data,'(usu_correo)') !== false) {
+      header('HTTP/1.1 409 Conflict');
+      echo result_construct($answer->action, 'usu_correo', 'El correo electrónico ya se encuentra registrado, por favor verifique.');
+      die();
+    }
+    header('HTTP/1.1 409 Conflict');
+    echo result_construct($answer->action, 'undefined', 'El correo electrónico ya se encuentra registrado, por favor verifique.');
+    die();
+  }
+  
+  $registro = !empty($_POST['registro']) ? test_input($_POST['registro']) : NULL;
+  $registro = $registro === 'true' ? true : NULL;
+  $logeo = !empty($_POST['logeo']) ? test_input($_POST['logeo']) : NULL;
+  $logeo = $logeo === 'true' ? true : NULL;
+  $usu_nombre = !empty($_POST['username']) ? test_input($_POST['username']) : NULL;
+  $usu_correo = !empty($_POST['email']) ? test_input($_POST['email']) : NULL;
+  $usu_password = !empty($_POST['password']) ? test_input($_POST['password']) : NULL;
+  $usu_passwordv = !empty($_POST['passwordv']) ? test_input($_POST['passwordv']) : NULL;
+  $usu_rol = !empty($_POST['rol']) ? test_input($_POST['rol']) : NULL;
+  
+  if ($registro) {
+    if ((!empty($usu_nombre)) and (!empty($usu_correo)) and (!empty($usu_password)) and (!empty($usu_passwordv)) and (!empty($usu_rol))) {
+      checkPasswords($usu_password,$usu_passwordv);
       $db = new Database;
-      if ((!empty($_FILES['picture']['name'])) and (is_uploaded_file($_FILES['picture']['tmp_name']) || $_FILES['picture']['error'] === UPLOAD_ERR_OK)) {
-        $uploadOk = true;
+      if ((!empty(test_input($_FILES['picture']['name']))) and (is_uploaded_file($_FILES['picture']['tmp_name']) || $_FILES['picture']['error'] === UPLOAD_ERR_OK)) {
     		$imageFileType = pathinfo($_FILES['picture']['name'],PATHINFO_EXTENSION);
         $target_file = $_FILES['picture']['name'];
         
         // Check file size
     		if ($_FILES["picture"]["size"] > 6000000) {
+          header('HTTP/1.1 409 Conflict');
           echo result_construct('error', 'imagen', 'Lo siento, el archivo recibido es demasiado grande.');
           die();
     		}
@@ -24,6 +73,7 @@
         // Check if image file is a actual image or fake image
   			$check = getimagesize($_FILES['picture']['tmp_name']);
   			if($check === false) {
+          header('HTTP/1.1 409 Conflict');
           echo result_construct('error', 'imagen', 'El archivo recibido no es una imagen - ' . $check["mime"] . '.');
           die();
   			}
@@ -41,6 +91,7 @@
               $image = imagecreatefromgif($_FILES['picture']['tmp_name']);
               break;
             default:
+              header('HTTP/1.1 415 Unsupported Media Type');
               echo result_construct("error", 'imagen', 'Subiste un archivo con un formato ' . $imageFileType . ' que no está soportado por la aplicación.');
               die();
         }
@@ -80,6 +131,9 @@
               imagegif($new, NULL, 0);
               break;
             default:
+              imagedestroy($image);
+              imagedestroy($new);
+              header('HTTP/1.1 409 Conflict');
               echo result_construct('error', 'imagen', 'Error creando la imagen formato ' . $imageFileType . ' modificada.');
               die();
         }
@@ -88,7 +142,7 @@
         
         // Escape the binary data
         $data = pg_escape_bytea($final_image);
-        $answer = @$db->registerUser($_POST['username'],$_POST['email'],$_POST['password'],$_POST['rol'],$data);
+        $answer = @$db->registerUser($usu_nombre,$usu_correo,$usu_password,$usu_rol,$data);
         echo $answer;
         // if (json_decode($answer)->action->action !== 'error') {
         //   $_SESSION['username']=$_POST['username'];
@@ -102,37 +156,29 @@
         imagedestroy($image);
         imagedestroy($new);
       } else {
-        $answer = json_decode(@$db->registerUser($_POST['username'], $_POST['email'],$_POST['password'],$_POST['rol'],NULL));
+        $answer = json_decode(@$db->registerUser($usu_nombre,$usu_correo,$usu_password,$usu_rol,NULL));
         if ($answer->action === 'error') {
-          if (strpos($answer->response->data,'(usu_nombre)') !== false) {
-            echo result_construct($answer->action, 'usu_nombre', 'El nombre de usuario ya se encuentra registrado, por favor verifique.');
-          } elseif (strpos($answer->response->data,'(usu_correo)') !== false) {
-            echo result_construct($answer->action, 'usu_correo', 'El correo electrónico ya se encuentra registrado, por favor verifique.');
-          }
+          checkErrorOnDatabase($answer);
         } else {
           echo result_construct($answer->action, '', $answer->response->data);
+          $_SESSION['app_name'] = 'Hipódromo La Rinconada';
+          $_SESSION['shortapp_name'] = 'HLR';
+          $_SESSION['usu_nombre'] = $usu_nombre;
+          $_SESSION['usu_rol'] = $usu_rol;
         }
-        // echo result_construct($answer->action, 'No se pudo realizar la operación. Por favor intente en unos minutos.');
-        // echo json_decode($answer)->response->data;
-        // if (json_decode($answer)->action->action !== 'error') {
-        //   $_SESSION['username']=$_POST['username'];
-        //   $_SESSION['rol']=$_POST['rol'];
-        // } else {
-        //   header('HTTP/1.1 409 Conflict');
-        //   echo result_construct("error", 'No se pudo realizar la operación. Por favor intente en unos minutos.');
-        // }
       }   
       die();
     } else {
+      header('HTTP/1.1 400 Bad Request');
+      echo result_construct("error", '', 'Lo sentimos pero la información suministrada es incorrecta o está incompleta.');
+      die();
     }
-    echo result_construct("error", 'No se pudo realizar la operación. Por favor intente en unos minutos.');
-    die();
   } elseif (!empty($_POST['logeo'])) {
     $data = array('type' => 'success', 'message' => 'Todo perfecto con LOGEO');
     echo json_encode($data);
   } else {
     header('HTTP/1.1 400 Bad Request');
-    echo result_construct("error", 'No se pudo realizar la conexión. Por favor intente en unos minutos.');
+    echo result_construct("error", '', 'No se pudo realizar la conexión. Por favor intente en unos minutos.');
     die();
   }
 ?>

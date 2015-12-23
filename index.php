@@ -88,9 +88,8 @@
             </form>
 
             <div class="social-auth-links text-center">
-              <p></p>
               <div class="form-group has-error">
-                <label class="control-label invisible"><i class="fa fa-times-circle-o"></i></label>
+                <label class="control-label invisible"></label>
               </div>
               <button id="btn-rg-iniciarsesion" class="btn bg-green btn-block btn-flat">Iniciar sesión</button>
               <button id="btn-rg-regresar" class="btn bg-green btn-block btn-flat">Regresar</button>

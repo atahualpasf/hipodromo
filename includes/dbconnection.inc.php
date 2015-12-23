@@ -1,4 +1,5 @@
 <?php
+	session_start();
 	class Database{
 		private $dbConnection = null;
 		private $_SITE_ROOT;

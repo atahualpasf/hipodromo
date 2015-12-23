@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Hipodromo La Rinconada</title>
+    <title><?php echo $_SESSION['app_name']; ?></title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
@@ -66,9 +66,9 @@
           <!-- Logo -->
           <a href="index.php" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
-            <span class="logo-mini">H<b>LR</b></span>
+            <span class="logo-mini"><?php echo $_SESSION['shortapp_name'][0]; ?><b><?php echo substr($_SESSION['shortapp_name'],1,2); ?></b></span>
             <!-- logo for regular state and mobile devices -->
-            <span class="logo-lg">La <b>Rinconada</b></span>
+            <span class="logo-lg"><?php echo substr($_SESSION['app_name'],11,2); ?> <b><?php echo substr($_SESSION['app_name'],14,9); ?></b></span>
           </a>
           <!-- Header Navbar: style can be found in header.less -->
           <nav class="navbar navbar-static-top" role="navigation">
@@ -82,15 +82,15 @@
                 <li class="dropdown user user-menu">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     <img src="<?php echo $db->getRootUri() . 'dist/img/user2-160x160.jpg'; ?>" class="user-image" alt="User Image">
-                    <span class="hidden-xs">Alexander Pierce</span>
+                    <span class="hidden-xs"><?php echo $_SESSION['usu_nombre']; ?></span>
                   </a>
                   <ul class="dropdown-menu">
                     <!-- User image -->
                     <li class="user-header">
                       <img src="<?php echo $db->getRootUri() . 'dist/img/user2-160x160.jpg'; ?>" class="img-circle" alt="User Image">
                       <p>
-                        Alexander Pierce
-                        <small>Miembro desde Nov. 2012</small>
+                        <?php echo $_SESSION['usu_nombre']; ?>
+                        <!-- <small>Miembro desde Nov. 2012</small> -->
                       </p>
                     </li>
                     <li class="user-footer">
@@ -115,7 +115,7 @@
                 <img src="<?php echo $db->getRootUri() . 'dist/img/user2-160x160.jpg'; ?>" class="img-circle" alt="User Image">
               </div>
               <div class="pull-left info">
-                <p>Alexander Pierce</p>
+                <p><?php echo $_SESSION['usu_nombre']; ?></p>
                 <a href="#"><i class="fa fa-circle text-success"></i> En línea</a>
               </div>
             </div>
