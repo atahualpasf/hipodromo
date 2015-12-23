@@ -114,7 +114,7 @@
                 <input type="password" class="form-control" placeholder="Contraseña" name="password" value="" required>
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
               </div>
-              <input type="hidden" name="logeo" value="true">
+              <input type="hidden" name="login" value="true">
               <div class="row">
                 <div class="col-xs-8">
                   <div class="checkbox icheck">

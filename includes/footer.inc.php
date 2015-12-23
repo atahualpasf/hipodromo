@@ -44,6 +44,13 @@
     <script src="<?php echo $db->getRootUri() . 'dist/js/pages/dashboard.js'; ?>"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="<?php echo $db->getRootUri() . 'dist/js/demo.js'; ?>"></script>
+    <!-- Constantes globales -->
+    <script>
+      var _ROOT = window.location.origin + '/hipodromo/';
+      var _INCL_ROOT = _ROOT + 'includes/';
+      var _DIST_ROOT = _ROOT + 'dist/';
+      var _PAGE_NAME = <?php echo "'".basename($_SERVER['PHP_SELF'], '.php')."'"; ?>
+    </script>
     <!-- Hipodromo extras functionalities -->
     <script src="<?php echo $db->getRootUri() . 'dist/js/extras.js'; ?>"></script>
 <?php endif; ?>

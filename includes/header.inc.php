@@ -1,6 +1,15 @@
 <?php
   require_once('dbconnection.inc.php');
   $db = new Database;
+  if ((strtolower(basename(dirname($_SERVER['SCRIPT_FILENAME']))) === 'hipodromo') and (strtolower(basename($_SERVER['SCRIPT_FILENAME'], '.php')) === 'index')) {
+    if ((!empty($_SESSION['usu_nombre'])) and (!empty($_SESSION['usu_rol'])) and (!empty($_SESSION['app_name'])) and (!empty($_SESSION['shortapp_name']))) {
+      header('Location:http://'. $_SERVER[HTTP_HOST] . '/hipodromo/pages/');
+    }
+  } else {
+    if ((empty($_SESSION['usu_nombre'])) and (empty($_SESSION['usu_rol'])) and (empty($_SESSION['app_name'])) and (empty($_SESSION['shortapp_name']))) {
+      header('Location:http://' . $_SERVER[HTTP_HOST] . '/hipodromo/');
+    }
+  }
 ?>
 <!DOCTYPE html>
 <html>

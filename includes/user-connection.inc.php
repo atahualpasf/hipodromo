@@ -47,18 +47,20 @@
   
   $registro = !empty($_POST['registro']) ? test_input($_POST['registro']) : NULL;
   $registro = $registro === 'true' ? true : NULL;
-  $logeo = !empty($_POST['logeo']) ? test_input($_POST['logeo']) : NULL;
-  $logeo = $logeo === 'true' ? true : NULL;
+  $login = !empty($_POST['login']) ? test_input($_POST['login']) : NULL;
+  $login = $login === 'true' ? true : NULL;
+  $logout = !empty($_POST['logout']) ? test_input($_POST['logout']) : NULL;
+  $logout = $logout === 'true' ? true : NULL;
   $usu_nombre = !empty($_POST['username']) ? test_input($_POST['username']) : NULL;
   $usu_correo = !empty($_POST['email']) ? test_input($_POST['email']) : NULL;
   $usu_password = !empty($_POST['password']) ? test_input($_POST['password']) : NULL;
   $usu_passwordv = !empty($_POST['passwordv']) ? test_input($_POST['passwordv']) : NULL;
   $usu_rol = !empty($_POST['rol']) ? test_input($_POST['rol']) : NULL;
   
+  $db = new Database;
   if ($registro) {
     if ((!empty($usu_nombre)) and (!empty($usu_correo)) and (!empty($usu_password)) and (!empty($usu_passwordv)) and (!empty($usu_rol))) {
       checkPasswords($usu_password,$usu_passwordv);
-      $db = new Database;
       if ((!empty(test_input($_FILES['picture']['name']))) and (is_uploaded_file($_FILES['picture']['tmp_name']) || $_FILES['picture']['error'] === UPLOAD_ERR_OK)) {
     		$imageFileType = pathinfo($_FILES['picture']['name'],PATHINFO_EXTENSION);
         $target_file = $_FILES['picture']['name'];
@@ -173,9 +175,24 @@
       echo result_construct("error", '', 'Lo sentimos pero la información suministrada es incorrecta o está incompleta.');
       die();
     }
-  } elseif (!empty($_POST['logeo'])) {
+  } elseif ($login) {
     $data = array('type' => 'success', 'message' => 'Todo perfecto con LOGEO');
-    echo json_encode($data);
+    echo json_encode($logout);
+  } elseif($logout) {
+    if ((!empty($_SESSION['usu_nombre'])) and (!empty($_SESSION['usu_rol'])) and (!empty($_SESSION['app_name'])) and (!empty($_SESSION['shortapp_name']))) {
+      $_SESSION['app_name'] = '';
+      $_SESSION['shortapp_name'] = '';
+      $_SESSION['usu_nombre'] = '';
+      $_SESSION['usu_rol'] = '';
+      $_SESSION['image'] = '';
+    	session_unset();
+    	session_destroy();
+    	echo result_construct("success", 'logout', 'La sesión se ha cerrado con éxito.');
+      die();
+    }
+    header('HTTP/1.1 400 Bad Request');
+    echo result_construct("error", 'logout', 'Disculpe pero no hay sesión abierta.');
+    die();
   } else {
     header('HTTP/1.1 400 Bad Request');
     echo result_construct("error", '', 'No se pudo realizar la conexión. Por favor intente en unos minutos.');
