@@ -16,7 +16,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title><?php echo $_SESSION['app_name']; ?></title>
+    <title><?php echo !empty($_SESSION['app_name']) ? $_SESSION['app_name'] : 'Hipódromo La Rinconada'; ?></title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
@@ -90,13 +90,21 @@
                 <!-- User Account: style can be found in dropdown.less -->
                 <li class="dropdown user user-menu">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <img src="<?php echo $db->getRootUri() . 'dist/img/user2-160x160.jpg'; ?>" class="user-image" alt="User Image">
+                    <?php if (empty($_SESSION['usu_imagen'])): ?>
+                      <img src="<?php echo $db->getRootUri() . 'dist/img/user2-160x160.jpg'; ?>" class="user-image" alt="User Image">
+                    <?php else: ?>
+                      <img src="data:image;base64,<?php echo $_SESSION['usu_imagen']; ?>" class="user-image" alt="User Image">
+                    <?php endif;  ?>
                     <span class="hidden-xs"><?php echo $_SESSION['usu_nombre']; ?></span>
                   </a>
                   <ul class="dropdown-menu">
                     <!-- User image -->
                     <li class="user-header">
-                      <img src="<?php echo $db->getRootUri() . 'dist/img/user2-160x160.jpg'; ?>" class="img-circle" alt="User Image">
+                      <?php if (empty($_SESSION['usu_imagen'])): ?>
+                        <img src="<?php echo $db->getRootUri() . 'dist/img/user2-160x160.jpg'; ?>" class="img-circle" alt="User Image">
+                      <?php else: ?>
+                        <img src="data:image;base64,<?php echo $_SESSION['usu_imagen']; ?>" class="img-circle" alt="User Image">
+                      <?php endif;  ?>
                       <p>
                         <?php echo $_SESSION['usu_nombre']; ?>
                         <!-- <small>Miembro desde Nov. 2012</small> -->
@@ -121,7 +129,11 @@
             <!-- Sidebar user panel -->
             <div class="user-panel">
               <div class="pull-left image">
-                <img src="<?php echo $db->getRootUri() . 'dist/img/user2-160x160.jpg'; ?>" class="img-circle" alt="User Image">
+                <?php if (empty($_SESSION['usu_imagen'])): ?>
+                  <img src="<?php echo $db->getRootUri() . 'dist/img/user2-160x160.jpg'; ?>" class="img-circle" alt="User Image">
+                <?php else: ?>
+                  <img src="data:image;base64,<?php echo $_SESSION['usu_imagen']; ?>" class="img-circle" alt="User Image">
+                <?php endif; ?>
               </div>
               <div class="pull-left info">
                 <p><?php echo $_SESSION['usu_nombre']; ?></p>

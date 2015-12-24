@@ -1,4 +1,5 @@
 <?php
+	session_set_cookie_params(0 , '/hipodromo/');
 	session_start();
 	class Database{
 		private $dbConnection = null;
@@ -113,7 +114,7 @@
 
 		function getUserById($pkusu_id) {
 			$result = pg_query($this->dbConnection,
-			"SELECT usu_nombre,encode(usu_imagen, 'base64') as usu_imagen FROM usuario WHERE pkusu_id = '$pkusu_id'");
+			"SELECT usu_nombre,encode(usu_imagen, 'base64') as usu_imagen FROM usuario WHERE usu_nombre = '$pkusu_id'");
 
 			if(pg_last_error()){
 				return $this->result_construct("error",pg_last_error());

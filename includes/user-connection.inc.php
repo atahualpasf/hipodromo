@@ -45,6 +45,16 @@
     die();
   }
   
+  function setSessionVariables($usu_nombre,$usu_rol,$db) {
+    session_regenerate_id(true);
+    $_SESSION['app_name'] = 'Hipódromo La Rinconada';
+    $_SESSION['shortapp_name'] = 'HLR';
+    $_SESSION['usu_nombre'] = $usu_nombre;
+    $_SESSION['usu_rol'] = $usu_rol;
+    $usu_imagen = json_decode($db->getUserById($usu_nombre))[0]->usu_imagen;
+    $_SESSION['usu_imagen'] = $usu_imagen;
+  }
+  
   $registro = !empty($_POST['registro']) ? test_input($_POST['registro']) : NULL;
   $registro = $registro === 'true' ? true : NULL;
   $login = !empty($_POST['login']) ? test_input($_POST['login']) : NULL;
@@ -144,29 +154,24 @@
         
         // Escape the binary data
         $data = pg_escape_bytea($final_image);
-        $answer = @$db->registerUser($usu_nombre,$usu_correo,$usu_password,$usu_rol,$data);
-        echo $answer;
-        // if (json_decode($answer)->action->action !== 'error') {
-        //   $_SESSION['username']=$_POST['username'];
-        //   $_SESSION['rol']=$_POST['rol'];
-        // } else {
-        //   header('HTTP/1.1 409 Conflict');
-        //   echo result_construct("error", 'No se pudo realizar la operación. Por favor intente en unos minutos.');
-        // }
+        $answer = @json_decode($db->registerUser($usu_nombre,$usu_correo,$usu_password,$usu_rol,$data));
+        if ($answer->action === 'error') {
+          checkErrorOnDatabase($answer);
+        } else {
+          echo result_construct($answer->action, '', $answer->response->data);
+          setSessionVariables($usu_nombre,$usu_rol,$db);
+        }
         
         // Destroy resources
         imagedestroy($image);
         imagedestroy($new);
       } else {
-        $answer = json_decode(@$db->registerUser($usu_nombre,$usu_correo,$usu_password,$usu_rol,NULL));
+        $answer = @json_decode($db->registerUser($usu_nombre,$usu_correo,$usu_password,$usu_rol,NULL));
         if ($answer->action === 'error') {
           checkErrorOnDatabase($answer);
         } else {
           echo result_construct($answer->action, '', $answer->response->data);
-          $_SESSION['app_name'] = 'Hipódromo La Rinconada';
-          $_SESSION['shortapp_name'] = 'HLR';
-          $_SESSION['usu_nombre'] = $usu_nombre;
-          $_SESSION['usu_rol'] = $usu_rol;
+          setSessionVariables($usu_nombre,$usu_rol,$db);
         }
       }   
       die();

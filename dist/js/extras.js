@@ -19,6 +19,7 @@ function cerrarSesion(btn) {
       cache: false,
   });
 }
+
 $(document).ready(function() {
   $('#btn-cerrarsesion').click(function(event) {
     event.preventDefault();
