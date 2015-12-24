@@ -2,11 +2,11 @@
   require_once('dbconnection.inc.php');
   $db = new Database;
   if ((strtolower(basename(dirname($_SERVER['SCRIPT_FILENAME']))) === 'hipodromo') and (strtolower(basename($_SERVER['SCRIPT_FILENAME'], '.php')) === 'index')) {
-    if ((!empty($_SESSION['usu_nombre'])) and (!empty($_SESSION['usu_rol'])) and (!empty($_SESSION['app_name'])) and (!empty($_SESSION['shortapp_name']))) {
+    if ((!empty($_SESSION['usuario']['pkusu_id'])) and (!empty($_SESSION['usuario']['usu_nombre'])) and (!empty($_SESSION['rol']['pkrol_id'])) and (!empty($_SESSION['rol']['rol_nombre'])) and (!empty($_SESSION['app_name'])) and (!empty($_SESSION['shortapp_name']))) {
       header('Location:http://'. $_SERVER[HTTP_HOST] . '/hipodromo/pages/');
     }
   } else {
-    if ((empty($_SESSION['usu_nombre'])) and (empty($_SESSION['usu_rol'])) and (empty($_SESSION['app_name'])) and (empty($_SESSION['shortapp_name']))) {
+    if ((empty($_SESSION['usuario']['pkusu_id'])) and (empty($_SESSION['usuario']['usu_nombre'])) and (empty($_SESSION['rol']['pkrol_id'])) and (empty($_SESSION['rol']['rol_nombre'])) and (empty($_SESSION['app_name'])) and (empty($_SESSION['shortapp_name']))) {
       header('Location:http://' . $_SERVER[HTTP_HOST] . '/hipodromo/');
     }
   }
@@ -90,24 +90,24 @@
                 <!-- User Account: style can be found in dropdown.less -->
                 <li class="dropdown user user-menu">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <?php if (empty($_SESSION['usu_imagen'])): ?>
+                    <?php if (empty($_SESSION['usuario']['usu_imagen'])): ?>
                       <img src="<?php echo $db->getRootUri() . 'dist/img/user2-160x160.jpg'; ?>" class="user-image" alt="User Image">
                     <?php else: ?>
-                      <img src="data:image;base64,<?php echo $_SESSION['usu_imagen']; ?>" class="user-image" alt="User Image">
+                      <img src="data:image;base64,<?php echo $_SESSION['usuario']['usu_imagen']; ?>" class="user-image" alt="User Image">
                     <?php endif;  ?>
-                    <span class="hidden-xs"><?php echo $_SESSION['usu_nombre']; ?></span>
+                    <span class="hidden-xs"><?php echo $_SESSION['usuario']['usu_nombre']; ?></span>
                   </a>
                   <ul class="dropdown-menu">
                     <!-- User image -->
                     <li class="user-header">
-                      <?php if (empty($_SESSION['usu_imagen'])): ?>
+                      <?php if (empty($_SESSION['usuario']['usu_imagen'])): ?>
                         <img src="<?php echo $db->getRootUri() . 'dist/img/user2-160x160.jpg'; ?>" class="img-circle" alt="User Image">
                       <?php else: ?>
-                        <img src="data:image;base64,<?php echo $_SESSION['usu_imagen']; ?>" class="img-circle" alt="User Image">
+                        <img src="data:image;base64,<?php echo $_SESSION['usuario']['usu_imagen']; ?>" class="img-circle" alt="User Image">
                       <?php endif;  ?>
                       <p>
-                        <?php echo $_SESSION['usu_nombre']; ?>
-                        <!-- <small>Miembro desde Nov. 2012</small> -->
+                        <?php echo $_SESSION['usuario']['usu_nombre']; ?>
+                        <small><?php echo $_SESSION['rol']['rol_nombre']?></small>
                       </p>
                     </li>
                     <li class="user-footer">
@@ -129,14 +129,14 @@
             <!-- Sidebar user panel -->
             <div class="user-panel">
               <div class="pull-left image">
-                <?php if (empty($_SESSION['usu_imagen'])): ?>
+                <?php if (empty($_SESSION['usuario']['usu_imagen'])): ?>
                   <img src="<?php echo $db->getRootUri() . 'dist/img/user2-160x160.jpg'; ?>" class="img-circle" alt="User Image">
                 <?php else: ?>
-                  <img src="data:image;base64,<?php echo $_SESSION['usu_imagen']; ?>" class="img-circle" alt="User Image">
+                  <img src="data:image;base64,<?php echo $_SESSION['usuario']['usu_imagen']; ?>" class="img-circle" alt="User Image">
                 <?php endif; ?>
               </div>
               <div class="pull-left info">
-                <p><?php echo $_SESSION['usu_nombre']; ?></p>
+                <p><?php echo $_SESSION['usuario']['usu_nombre']; ?></p>
                 <a href="#"><i class="fa fa-circle text-success"></i> En línea</a>
               </div>
             </div>

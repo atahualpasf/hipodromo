@@ -5,7 +5,6 @@
     $result = json_encode($result, JSON_UNESCAPED_UNICODE);
     return $result;
   }
-  sleep(2.5);
   
   function test_input($data) {
       $data = trim($data);
@@ -17,11 +16,11 @@
   function checkPasswords($password, $passwordv) {
     if (!preg_match("#^[a-zA-Z0-9]{6,13}$#", $password)) {
       header('HTTP/1.1 409 Conflict');
-      echo result_construct('error', 'usu_password', 'La contraseña tiene que ser alfanumerica y de 6 a 13 caracteres de longitud.');
+      echo result_construct('error', 'usu_clave', 'La contraseña tiene que ser alfanumerica y de 6 a 13 caracteres de longitud.');
       die();
     } elseif (!preg_match("#^[a-zA-Z0-9]{6,13}$#", $passwordv)) {
       header('HTTP/1.1 409 Conflict');
-      echo result_construct('error', 'usu_passwordv', 'La contraseña de verificación tiene que ser alfanumerica y de 6 a 13 caracteres de longitud.');
+      echo result_construct('error', 'usu_clavev', 'La contraseña de verificación tiene que ser alfanumerica y de 6 a 13 caracteres de longitud.');
       die();
     } elseif ($password !== $passwordv) {
       header('HTTP/1.1 409 Conflict');
@@ -45,14 +44,16 @@
     die();
   }
   
-  function setSessionVariables($usu_nombre,$usu_rol,$db) {
+  function setSessionVariables($id,$db) {
     session_regenerate_id(true);
+    $usuario = @json_decode($db->getUsuarioById($id));
     $_SESSION['app_name'] = 'Hipódromo La Rinconada';
     $_SESSION['shortapp_name'] = 'HLR';
-    $_SESSION['usu_nombre'] = $usu_nombre;
-    $_SESSION['usu_rol'] = $usu_rol;
-    $usu_imagen = json_decode($db->getUserById($usu_nombre))[0]->usu_imagen;
-    $_SESSION['usu_imagen'] = $usu_imagen;
+    $_SESSION['usuario']['pkusu_id'] = $usuario[0]->pkusu_id;
+    $_SESSION['usuario']['usu_nombre'] = $usuario[0]->usu_nombre;
+    $_SESSION['usuario']['usu_imagen'] = $usuario[0]->usu_imagen;
+    $_SESSION['rol']['pkrol_id'] = $usuario[0]->pkrol_id;
+    $_SESSION['rol']['rol_nombre'] = $usuario[0]->rol_nombre;
   }
   
   $registro = !empty($_POST['registro']) ? test_input($_POST['registro']) : NULL;
@@ -63,14 +64,15 @@
   $logout = $logout === 'true' ? true : NULL;
   $usu_nombre = !empty($_POST['username']) ? test_input($_POST['username']) : NULL;
   $usu_correo = !empty($_POST['email']) ? test_input($_POST['email']) : NULL;
-  $usu_password = !empty($_POST['password']) ? test_input($_POST['password']) : NULL;
-  $usu_passwordv = !empty($_POST['passwordv']) ? test_input($_POST['passwordv']) : NULL;
+  $usu_clave = !empty($_POST['password']) ? test_input($_POST['password']) : NULL;
+  $usu_clavev = !empty($_POST['passwordv']) ? test_input($_POST['passwordv']) : NULL;
   $usu_rol = !empty($_POST['rol']) ? test_input($_POST['rol']) : NULL;
   
   $db = new Database;
   if ($registro) {
-    if ((!empty($usu_nombre)) and (!empty($usu_correo)) and (!empty($usu_password)) and (!empty($usu_passwordv)) and (!empty($usu_rol))) {
-      checkPasswords($usu_password,$usu_passwordv);
+    sleep(2.5);
+    if ((!empty($usu_nombre)) and (!empty($usu_correo)) and (!empty($usu_clave)) and (!empty($usu_clavev)) and (!empty($usu_rol))) {
+      checkPasswords($usu_clave,$usu_clavev);
       if ((!empty(test_input($_FILES['picture']['name']))) and (is_uploaded_file($_FILES['picture']['tmp_name']) || $_FILES['picture']['error'] === UPLOAD_ERR_OK)) {
     		$imageFileType = pathinfo($_FILES['picture']['name'],PATHINFO_EXTENSION);
         $target_file = $_FILES['picture']['name'];
@@ -154,24 +156,24 @@
         
         // Escape the binary data
         $data = pg_escape_bytea($final_image);
-        $answer = @json_decode($db->registerUser($usu_nombre,$usu_correo,$usu_password,$usu_rol,$data));
+        $answer = @json_decode($db->registerUsuario($usu_nombre,$usu_correo,$usu_clave,$usu_rol,$data));
         if ($answer->action === 'error') {
           checkErrorOnDatabase($answer);
         } else {
           echo result_construct($answer->action, '', $answer->response->data);
-          setSessionVariables($usu_nombre,$usu_rol,$db);
+          setSessionVariables($answer->response->data,$db);
         }
         
         // Destroy resources
         imagedestroy($image);
         imagedestroy($new);
       } else {
-        $answer = @json_decode($db->registerUser($usu_nombre,$usu_correo,$usu_password,$usu_rol,NULL));
+        $answer = @json_decode($db->registerUsuario($usu_nombre,$usu_correo,$usu_clave,$usu_rol,NULL));
         if ($answer->action === 'error') {
           checkErrorOnDatabase($answer);
         } else {
           echo result_construct($answer->action, '', $answer->response->data);
-          setSessionVariables($usu_nombre,$usu_rol,$db);
+          setSessionVariables($answer->response->data,$db);
         }
       }   
       die();
@@ -181,15 +183,59 @@
       die();
     }
   } elseif ($login) {
-    $data = array('type' => 'success', 'message' => 'Todo perfecto con LOGEO');
-    echo json_encode($logout);
+    sleep(2.5);
+    if ((!empty($usu_nombre)) and (!empty($usu_clave))) {
+      // $data = array('type' => 'success', 'message' => 'Todo perfecto con LOGEO');
+      // echo json_encode($logout);
+      $answer = @json_decode($db->loginUsuario());
+      if ($answer->action !== "error" and !empty($answer->response->data)) {
+        // echo result_construct('success', 'login', $answer->response->data);
+        // echo result_construct('success', 'login', count($answer->response->data));
+        if (count($answer->response->data) > 1) {
+          // foreach ($answer->response->data as $row) {
+          //   echo $row;
+          // }
+          echo result_construct('success', 'login', 'El array es mayor que 1');
+        } else {
+          // echo result_construct('success', 'login', $answer->response->data[0]->usu_nombre);
+          $usuario = $answer->response->data[0];
+          if (($usuario->usu_nombre === $usu_nombre) || ($usuario->usu_correo === $usu_nombre)) {
+            // echo result_construct('success', 'login', 'Si es igual');
+            if ($usuario->usu_clave === $usu_clave) {
+              $recordarme = !empty($_POST['recordarme']) ? test_input($_POST['recordarme']) : NULL;
+              $recordarme = $recordarme === 'true' ? true : NULL;
+              echo result_construct('success', 'login', $usuario->usu_clave);
+              die();
+            }
+            header('HTTP/1.1 409 Conflict');
+            echo result_construct('error', 'usu_clave', 'La contraseña no coincide, por favor verifique.');
+            die();
+          }
+          header('HTTP/1.1 409 Conflict');
+          echo result_construct('error', 'usu_nombre', 'Lo sentimos pero no se encuentra en el sistema, por favor registrarse primero.');
+          die();
+        }
+      }
+      header('HTTP/1.1 409 Conflict');
+      if (!empty($answer->response->data)) {
+        echo result_construct('error', 'login', $answer->response->data);
+      } else {
+        echo result_construct('error', 'empty', 'Lo sentimos pero no se encuentra en el sistema, por favor registrarse primero.');
+      }
+      die();
+    }
+    header('HTTP/1.1 400 Bad Request');
+    echo result_construct("error", '', 'Lo sentimos pero la información suministrada es incorrecta o está incompleta.');
+    die();
   } elseif($logout) {
-    if ((!empty($_SESSION['usu_nombre'])) and (!empty($_SESSION['usu_rol'])) and (!empty($_SESSION['app_name'])) and (!empty($_SESSION['shortapp_name']))) {
+    if ((!empty($_SESSION['usuario']['pkusu_id'])) and (!empty($_SESSION['usuario']['usu_nombre'])) and (!empty($_SESSION['rol']['pkrol_id'])) and (!empty($_SESSION['rol']['rol_nombre'])) and (!empty($_SESSION['app_name'])) and (!empty($_SESSION['shortapp_name']))) {
       $_SESSION['app_name'] = '';
       $_SESSION['shortapp_name'] = '';
-      $_SESSION['usu_nombre'] = '';
-      $_SESSION['usu_rol'] = '';
-      $_SESSION['image'] = '';
+      $_SESSION['usuario']['pkusu_id'] = '';
+      $_SESSION['usuario']['usu_nombre'] = '';
+      $_SESSION['usuario']['usu_imagen'] = '';
+      $_SESSION['rol']['pkrol_id'] = '';
+      $_SESSION['rol']['rol_nombre'] = '';
     	session_unset();
     	session_destroy();
     	echo result_construct("success", 'logout', 'La sesión se ha cerrado con éxito.');
@@ -198,9 +244,8 @@
     header('HTTP/1.1 400 Bad Request');
     echo result_construct("error", 'logout', 'Disculpe pero no hay sesión abierta.');
     die();
-  } else {
-    header('HTTP/1.1 400 Bad Request');
-    echo result_construct("error", '', 'No se pudo realizar la conexión. Por favor intente en unos minutos.');
-    die();
   }
+  header('HTTP/1.1 400 Bad Request');
+  echo result_construct("error", '', 'No se pudo realizar la conexión. Por favor intente en unos minutos.');
+  die();
 ?>

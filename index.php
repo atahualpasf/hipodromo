@@ -119,18 +119,20 @@
                 <div class="col-xs-8">
                   <div class="checkbox icheck">
                     <label>
-                      <input type="checkbox"> Recordarme.
+                      <input type="checkbox" name="recordarme" value="true"> Recordarme.
                     </label>
                   </div>
                 </div><!-- /.col -->
                 <div class="col-xs-4">
-                  <button type="submit" class="btn bg-blue btn-block btn-flat">Iniciar</button>
+                  <button type="submit" class="btn bg-blue btn-block btn-flat">Entrar</button>
                 </div><!-- /.col -->
               </div>
             </form>
 
             <div class="social-auth-links text-center">
-              <p>-</p>
+              <div class="form-group has-error">
+                <label class="control-label invisible"></label>
+              </div>
               <button id="btn-is-registrar" class="btn bg-green btn-block btn-flat">Registrar</button>
               <button id="btn-is-regresar" class="btn bg-green btn-block btn-flat">Regresar</button>
             </div><!-- /.social-auth-links -->

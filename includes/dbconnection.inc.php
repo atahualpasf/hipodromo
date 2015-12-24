@@ -93,29 +93,12 @@
 		*					 FUNCIONES GENÉRICAS DE USUARIOS						  		*
 		*																														*
 		************************************************************/
-		function registerUser($username,$email,$password,$rol,$foto) {
-			pg_set_error_verbosity($this->dbConnection,PGSQL_ERRORS_DEFAULT);
-			if (!empty($foto)) {
-				$result = pg_query($this->dbConnection,
-				"INSERT INTO usuario (pkusu_id,fkusu_rol_id,usu_correo,usu_nombre,usu_clave,usu_imagen)
-				VALUES(nextval('usuario_pkusu_id_seq'::regclass), '$rol', '$email', '$username', '$password', '$foto')");
-			} else {
-				$result = pg_query($this->dbConnection,
-				"INSERT INTO usuario (pkusu_id,fkusu_rol_id,usu_correo,usu_nombre,usu_clave,usu_imagen)
-				VALUES(nextval('usuario_pkusu_id_seq'::regclass), '$rol', '$email', '$username', '$password', NULL)");
-			}
-
-			if(pg_last_error()){
-				return $this->result_construct("error",pg_last_error());
-			} else {
-				return $this->result_construct("success","Agregado exitosamente");
-			}
-		}
-
-		function getUserById($pkusu_id) {
+		function getUsuarioById($pkusu_id) {
 			$result = pg_query($this->dbConnection,
-			"SELECT usu_nombre,encode(usu_imagen, 'base64') as usu_imagen FROM usuario WHERE usu_nombre = '$pkusu_id'");
-
+			"SELECT u.pkusu_id,u.usu_nombre,encode(u.usu_imagen, 'base64') as usu_imagen,r.pkrol_id,r.rol_nombre 
+			FROM usuario u, rol r 
+			WHERE pkusu_id = '$pkusu_id' and fkusu_rol_id = pkrol_id");
+			
 			if(pg_last_error()){
 				return $this->result_construct("error",pg_last_error());
 			}
@@ -125,6 +108,43 @@
 					$respuesta[] = $row;
 				}
 				return json_encode($respuesta);
+			}
+		}
+		
+		
+		function registerUsuario($username,$email,$password,$rol,$foto) {
+			pg_set_error_verbosity($this->dbConnection,PGSQL_ERRORS_DEFAULT);
+			if (!empty($foto)) {
+				$result = pg_query($this->dbConnection,
+				"INSERT INTO usuario (pkusu_id,fkusu_rol_id,usu_correo,usu_nombre,usu_clave,usu_imagen)
+				VALUES(nextval('usuario_pkusu_id_seq'::regclass), '$rol', '$email', '$username', '$password', '$foto') RETURNING pkusu_id");
+			} else {
+				$result = pg_query($this->dbConnection,
+				"INSERT INTO usuario (pkusu_id,fkusu_rol_id,usu_correo,usu_nombre,usu_clave,usu_imagen)
+				VALUES(nextval('usuario_pkusu_id_seq'::regclass), '$rol', '$email', '$username', '$password', NULL) RETURNING pkusu_id");
+			}
+
+			if(pg_last_error()){
+				return $this->result_construct("error",pg_last_error());
+			} else {
+				$row = pg_fetch_row($result);
+				$id = $row['0'];
+				return $this->result_construct("success",$id);
+			}
+		}
+		
+		function loginUsuario() {
+			$result = pg_query($this->dbConnection,
+			"SELECT * FROM usuario");
+
+			if(pg_last_error()){
+				return $this->result_construct("error",pg_last_error());
+			} else {
+				$respuesta = array();
+				while($row = pg_fetch_assoc($result)){
+					$respuesta[] = $row;
+				}
+				return $this->result_construct("success", $respuesta);
 			}
 		}
 	}

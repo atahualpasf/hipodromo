@@ -83,8 +83,8 @@ function executeRegisterFormRequest(id) {
     var formData = new FormData(this);
     var usu_nombre = $(inputs)[0];
     var usu_correo = $(inputs)[1];
-    var usu_password = $(inputs)[2];
-    var usu_passwordv = $(inputs)[3];
+    var usu_clave = $(inputs)[2];
+    var usu_clavev = $(inputs)[3];
     var error_label = $(id).find('.social-auth-links label');
     $(error_label).addClass('invisible');
 
@@ -115,34 +115,82 @@ function executeRegisterFormRequest(id) {
             if (dataResponse.action.type === 'usu_nombre') {
               $(usu_nombre).parent().removeClass('has-feedback').addClass('has-error');
               $(usu_correo).parent().removeClass('has-error').addClass('has-feedback');
-              $(usu_password).parent().removeClass('has-error').addClass('has-feedback');
-              $(usu_passwordv).parent().removeClass('has-error').addClass('has-feedback');
+              $(usu_clave).parent().removeClass('has-error').addClass('has-feedback');
+              $(usu_clavev).parent().removeClass('has-error').addClass('has-feedback');
             } else if (dataResponse.action.type === 'usu_correo') {
               $(usu_nombre).parent().removeClass('has-error').addClass('has-feedback');
               $(usu_correo).parent().removeClass('has-feedback').addClass('has-error');
-              $(usu_password).parent().removeClass('has-error').addClass('has-feedback');
-              $(usu_passwordv).parent().removeClass('has-error').addClass('has-feedback');
-            } else if (dataResponse.action.type === 'usu_password') {
+              $(usu_clave).parent().removeClass('has-error').addClass('has-feedback');
+              $(usu_clavev).parent().removeClass('has-error').addClass('has-feedback');
+            } else if (dataResponse.action.type === 'usu_clave') {
               $(usu_nombre).parent().removeClass('has-error').addClass('has-feedback');
               $(usu_correo).parent().removeClass('has-error').addClass('has-feedback');
-              $(usu_password).parent().removeClass('has-feedback').addClass('has-error');
-              $(usu_passwordv).parent().removeClass('has-error').addClass('has-feedback');
-              $(usu_password).val('');
-              $(usu_passwordv).val('');
-            } else if (dataResponse.action.type === 'usu_passwordv') {
+              $(usu_clave).parent().removeClass('has-feedback').addClass('has-error');
+              $(usu_clavev).parent().removeClass('has-error').addClass('has-feedback');
+              $(usu_clave).val('');
+              $(usu_clavev).val('');
+            } else if (dataResponse.action.type === 'usu_clavev') {
               $(usu_nombre).parent().removeClass('has-error').addClass('has-feedback');
               $(usu_correo).parent().removeClass('has-error').addClass('has-feedback');
-              $(usu_password).parent().removeClass('has-error').addClass('has-feedback');
-              $(usu_passwordv).parent().removeClass('has-feedback').addClass('has-error');
-              $(usu_password).val('');
-              $(usu_passwordv).val('');
+              $(usu_clave).parent().removeClass('has-error').addClass('has-feedback');
+              $(usu_clavev).parent().removeClass('has-feedback').addClass('has-error');
+              $(usu_clave).val('');
+              $(usu_clavev).val('');
             } else if (dataResponse.action.type === 'both_password') {
               $(usu_nombre).parent().removeClass('has-error').addClass('has-feedback');
               $(usu_correo).parent().removeClass('has-error').addClass('has-feedback');
-              $(usu_password).parent().removeClass('has-feedback').addClass('has-error');
-              $(usu_passwordv).parent().removeClass('has-feedback').addClass('has-error');
-              $(usu_password).val('');
-              $(usu_passwordv).val('');
+              $(usu_clave).parent().removeClass('has-feedback').addClass('has-error');
+              $(usu_clavev).parent().removeClass('has-feedback').addClass('has-error');
+              $(usu_clave).val('');
+              $(usu_clavev).val('');
+            }
+          }
+          $(error_label).text(dataResponse.response.data).removeClass('invisible');
+        },
+        cache: false,
+        contentType: false,
+        processData: false
+    });
+  });
+}
+
+/* INICIAR SESIÓN DE USUARIO */
+function executeLoginFormRequest(id) {
+  $(id).find('form').submit(function(event) {
+    event.preventDefault();
+    $(id).find('.overlay > .fa').show();
+    var formData = new FormData(this);
+    var usu_nombre = $(inputs)[0];
+    var usu_clave = $(inputs)[1];
+    var error_label = $(id).find('.social-auth-links label');
+    $(error_label).addClass('invisible');
+    
+    $.ajax({
+        url: _INCL_ROOT + 'user-connection.inc.php',
+        type: 'POST',
+        data: formData,
+        success: function (data) {
+          $(id).find('.overlay > .fa').fadeOut(300);
+          var dataResponse = JSON.parse(data);
+          console.log(data);
+          // console.log(dataResponse.response.data);
+          // if (dataResponse.action.action === 'success') {
+          //   window.location.replace(_ROOT + 'pages/');
+          // }
+        },
+        error: function(data) {
+          $(id).find('.overlay > .fa').fadeOut(300);
+          console.log(data);
+          var dataResponse = JSON.parse(data.responseText);
+          if (data.status === 409) {
+            if (dataResponse.action.type === 'usu_nombre' || dataResponse.action.type === 'empty') {
+              $(usu_nombre).parent().removeClass('has-feedback').addClass('has-error');
+              $(usu_clave).parent().removeClass('has-error').addClass('has-feedback');
+              $(usu_clave).val('');
+            } else if (dataResponse.action.type === 'usu_clave') {
+              $(usu_nombre).parent().removeClass('has-error').addClass('has-feedback');
+              $(usu_clave).parent().removeClass('has-feedback').addClass('has-error');
+              $(usu_clave).val('');
             }
           }
           $(error_label).text(dataResponse.response.data).removeClass('invisible');
@@ -180,6 +228,7 @@ $(document).ready(function() {
     box_iniciarsesion.insertAfter('#bg-video');
     checkIcheckExists();
     trimInputs(box_iniciarsesion);
+    executeLoginFormRequest(box_iniciarsesion);
     $(box_iniciarsesion).css('display','flex').hide().fadeIn(500);
   });
 
@@ -203,6 +252,7 @@ $(document).ready(function() {
     box_iniciarsesion.insertAfter('#bg-video');
     checkIcheckExists();
     trimInputs(box_iniciarsesion);
+    executeLoginFormRequest(box_iniciarsesion);
     $(box_iniciarsesion).css('display','flex').hide().fadeIn(500);
   });
 
