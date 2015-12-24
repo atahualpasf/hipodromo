@@ -12,10 +12,23 @@ function checkIcheckExists() {
   }
 }
 
-function checkInputs(input, errorMessage) {
+/* FUNCIONES DE LAS <FORM> DE LA PÁGINA INDEX */
+function validateUsername(username) {
+  var check = /^[a-zA-Z0-9]{3,12}$/;
+  return check.test(username);
+}
+
+function validateEmail(email) {
+  var check = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+  return check.test(email);
+}
+
+function checkInputs(input, errorMessage, isLogin) {
   if (input.value == '' || input.value.trim() == '') {
     input.setCustomValidity('Por favor completa este campo.');
-  } else if(input.validity.patternMismatch) {
+  } else if (isLogin && !validateUsername(input.value.trim()) && !validateEmail(input.value.trim())) {
+    input.setCustomValidity(errorMessage);
+  } else if (input.validity.patternMismatch && !isLogin) {
     input.setCustomValidity(errorMessage);
   }
   else {
@@ -141,6 +154,7 @@ function executeRegisterFormRequest(id) {
   });
 }
 
+/* FUNCIONES DE LA PÁGINA INDEX */
 $(document).ready(function() {
   $('#bg-video').videoBackground(_DIST_ROOT + 'videos/racehorseslowmotion-hd.mp4');
   var box_registrar = $('#box-registrar');
