@@ -117,11 +117,11 @@
               <input type="hidden" name="login" value="true">
               <div class="row">
                 <div class="col-xs-8">
-                  <div class="checkbox icheck">
+                  <!-- <div class="checkbox icheck">
                     <label>
                       <input type="checkbox" name="recordarme" value="true"> Recordarme.
                     </label>
-                  </div>
+                  </div> -->
                 </div><!-- /.col -->
                 <div class="col-xs-4">
                   <button type="submit" class="btn bg-blue btn-block btn-flat">Entrar</button>

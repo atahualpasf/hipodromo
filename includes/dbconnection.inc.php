@@ -135,7 +135,7 @@
 		
 		function loginUsuario() {
 			$result = pg_query($this->dbConnection,
-			"SELECT * FROM usuario");
+			"SELECT pkusu_id,usu_nombre,usu_correo,usu_clave FROM usuario");
 
 			if(pg_last_error()){
 				return $this->result_construct("error",pg_last_error());

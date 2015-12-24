@@ -173,10 +173,10 @@ function executeLoginFormRequest(id) {
           $(id).find('.overlay > .fa').fadeOut(300);
           var dataResponse = JSON.parse(data);
           console.log(data);
-          // console.log(dataResponse.response.data);
-          // if (dataResponse.action.action === 'success') {
-          //   window.location.replace(_ROOT + 'pages/');
-          // }
+          console.log(dataResponse.response.data);
+          if (dataResponse.action.action === 'success') {
+            window.location.replace(_ROOT + 'pages/');
+          }
         },
         error: function(data) {
           $(id).find('.overlay > .fa').fadeOut(300);

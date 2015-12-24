@@ -44,6 +44,26 @@
     die();
   }
   
+  function checkUserOnDatabase($usuario,$usu_nombre,$usu_clave,$db,$areMany) {
+    if (($usuario->usu_nombre === $usu_nombre) || ($usuario->usu_correo === $usu_nombre)) {
+      if ($usuario->usu_clave === $usu_clave) {
+        // $recordarme = !empty($_POST['recordarme']) ? test_input($_POST['recordarme']) : NULL;
+        // $recordarme = $recordarme === 'true' ? true : NULL;
+        echo result_construct('success', 'login', $usuario->pkusu_id);
+        setSessionVariables($usuario->pkusu_id,$db);
+        die();
+      }
+      header('HTTP/1.1 409 Conflict');
+      echo result_construct('error', 'usu_clave', 'La contraseña no coincide, por favor verifique.');
+      die();
+    }
+    if (!$areMany) {
+      header('HTTP/1.1 409 Conflict');
+      echo result_construct('error', 'usu_nombre', 'Lo sentimos pero no se encuentra en el sistema, por favor registrarse primero.');
+      die();
+    }
+  }
+  
   function setSessionVariables($id,$db) {
     session_regenerate_id(true);
     $usuario = @json_decode($db->getUsuarioById($id));
@@ -70,7 +90,7 @@
   
   $db = new Database;
   if ($registro) {
-    sleep(2.5);
+    sleep(1.5);
     if ((!empty($usu_nombre)) and (!empty($usu_correo)) and (!empty($usu_clave)) and (!empty($usu_clavev)) and (!empty($usu_rol))) {
       checkPasswords($usu_clave,$usu_clavev);
       if ((!empty(test_input($_FILES['picture']['name']))) and (is_uploaded_file($_FILES['picture']['tmp_name']) || $_FILES['picture']['error'] === UPLOAD_ERR_OK)) {
@@ -183,37 +203,23 @@
       die();
     }
   } elseif ($login) {
-    sleep(2.5);
+    sleep(1.5);
     if ((!empty($usu_nombre)) and (!empty($usu_clave))) {
       // $data = array('type' => 'success', 'message' => 'Todo perfecto con LOGEO');
       // echo json_encode($logout);
       $answer = @json_decode($db->loginUsuario());
       if ($answer->action !== "error" and !empty($answer->response->data)) {
-        // echo result_construct('success', 'login', $answer->response->data);
-        // echo result_construct('success', 'login', count($answer->response->data));
-        if (count($answer->response->data) > 1) {
-          // foreach ($answer->response->data as $row) {
-          //   echo $row;
-          // }
-          echo result_construct('success', 'login', 'El array es mayor que 1');
-        } else {
-          // echo result_construct('success', 'login', $answer->response->data[0]->usu_nombre);
-          $usuario = $answer->response->data[0];
-          if (($usuario->usu_nombre === $usu_nombre) || ($usuario->usu_correo === $usu_nombre)) {
-            // echo result_construct('success', 'login', 'Si es igual');
-            if ($usuario->usu_clave === $usu_clave) {
-              $recordarme = !empty($_POST['recordarme']) ? test_input($_POST['recordarme']) : NULL;
-              $recordarme = $recordarme === 'true' ? true : NULL;
-              echo result_construct('success', 'login', $usuario->usu_clave);
-              die();
-            }
-            header('HTTP/1.1 409 Conflict');
-            echo result_construct('error', 'usu_clave', 'La contraseña no coincide, por favor verifique.');
-            die();
+        $usuarios = $answer->response->data;
+        if (count($usuarios) > 1) {
+          foreach ($usuarios as $usuario) {
+            checkUserOnDatabase($usuario,$usu_nombre,$usu_clave,$db,true);
           }
           header('HTTP/1.1 409 Conflict');
           echo result_construct('error', 'usu_nombre', 'Lo sentimos pero no se encuentra en el sistema, por favor registrarse primero.');
           die();
+        } else {
+          $usuario = $answer->response->data[0];
+          checkUserOnDatabase($usuario,$usu_nombre,$usu_clave,$db,false);
         }
       }
       header('HTTP/1.1 409 Conflict');
