@@ -74,6 +74,7 @@
     $_SESSION['usuario']['usu_imagen'] = $usuario[0]->usu_imagen;
     $_SESSION['rol']['pkrol_id'] = $usuario[0]->pkrol_id;
     $_SESSION['rol']['rol_nombre'] = $usuario[0]->rol_nombre;
+    $_SESSION['last_activity'] = time();
   }
   
   $registro = !empty($_POST['registro']) ? test_input($_POST['registro']) : NULL;
@@ -242,6 +243,7 @@
       $_SESSION['usuario']['usu_imagen'] = '';
       $_SESSION['rol']['pkrol_id'] = '';
       $_SESSION['rol']['rol_nombre'] = '';
+      $_SESSION['last_activity'] = '';
     	session_unset();
     	session_destroy();
     	echo result_construct("success", 'logout', 'La sesión se ha cerrado con éxito.');

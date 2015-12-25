@@ -2,12 +2,20 @@
   require_once('dbconnection.inc.php');
   $db = new Database;
   if ((strtolower(basename(dirname($_SERVER['SCRIPT_FILENAME']))) === 'hipodromo') and (strtolower(basename($_SERVER['SCRIPT_FILENAME'], '.php')) === 'index')) {
-    if ((!empty($_SESSION['usuario']['pkusu_id'])) and (!empty($_SESSION['usuario']['usu_nombre'])) and (!empty($_SESSION['rol']['pkrol_id'])) and (!empty($_SESSION['rol']['rol_nombre'])) and (!empty($_SESSION['app_name'])) and (!empty($_SESSION['shortapp_name']))) {
-      header('Location:http://'. $_SERVER[HTTP_HOST] . '/hipodromo/pages/');
+    if ((!empty($_SESSION['usuario']['pkusu_id'])) and (!empty($_SESSION['usuario']['usu_nombre'])) and (!empty($_SESSION['rol']['pkrol_id'])) and (!empty($_SESSION['rol']['rol_nombre'])) and (!empty($_SESSION['app_name'])) and (!empty($_SESSION['shortapp_name'])) and (!empty($_SESSION['last_activity']))) {
+      if (time() - $_SESSION['last_activity'] <= 1800) {
+        $_SESSION['last_activity'] = time();
+        header('Location:http://'. $_SERVER[HTTP_HOST] . '/hipodromo/pages/');
+      } else {
+        session_unset();
+        session_destroy();
+      }
     }
   } else {
-    if ((empty($_SESSION['usuario']['pkusu_id'])) and (empty($_SESSION['usuario']['usu_nombre'])) and (empty($_SESSION['rol']['pkrol_id'])) and (empty($_SESSION['rol']['rol_nombre'])) and (empty($_SESSION['app_name'])) and (empty($_SESSION['shortapp_name']))) {
+    if (((empty($_SESSION['usuario']['pkusu_id'])) and (empty($_SESSION['usuario']['usu_nombre'])) and (empty($_SESSION['rol']['pkrol_id'])) and (empty($_SESSION['rol']['rol_nombre'])) and (empty($_SESSION['app_name'])) and (empty($_SESSION['shortapp_name'])) and (empty($_SESSION['last_activity']))) || (time() - $_SESSION['last_activity'] > 1800)) {
       header('Location:http://' . $_SERVER[HTTP_HOST] . '/hipodromo/');
+    } else {
+      $_SESSION['last_activity'] = time();
     }
   }
 ?>
