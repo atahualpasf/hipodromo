@@ -262,6 +262,8 @@ $(document).ready(function() {
     box_registrar.insertAfter('#bg-video');
     checkIcheckExists();
     trimInputs(box_registrar);
+    handleImageFromInput($(box_registrar).find('input[type="file"]'));
+    executeRegisterFormRequest(box_registrar);
     $(box_registrar).css('display','flex').hide().fadeIn(500);
   });
 });

@@ -40,7 +40,7 @@
       die();
     }
     header('HTTP/1.1 409 Conflict');
-    echo result_construct($answer->action, 'undefined', 'El correo electrónico ya se encuentra registrado, por favor verifique.');
+    echo result_construct($answer->action, 'undefined', $answer->response->data);
     die();
   }
   
