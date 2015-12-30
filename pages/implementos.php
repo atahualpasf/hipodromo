@@ -27,56 +27,28 @@
                   <table id="example1" class="table table-bordered table-striped">
                     <thead>
                       <tr>
-                        <th>Implemento</th>
-                        <th>Promedio de uso</th>
+                        <th>ID</th>
+                        <th>IMPLEMENTO</th>
+                        <th>DESCRIPCIÓN</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>Trident</td>
-                        <td>Internet Explorer 4.0</td>
-                      </tr>
-                      <tr>
-                        <td>Trident</td>
-                        <td>Internet Explorer 4.0</td>
-                      </tr>
-                      <tr>
-                        <td>Trident</td>
-                        <td>Trident</td>
-                      </tr>
-                      <tr>
-                        <td>Trident</td>
-                        <td>Trident</td>
-                      </tr>
-                      <tr>
-                        <td>Trident</td>
-                        <td>Internet Explorer 4.0</td>
-                      </tr>
-                      <tr>
-                        <td>Trident</td>
-                        <td>Internet Explorer 4.0</td>
-                      </tr>
-                      <tr>
-                        <td>Trident</td>
-                        <td>Trident</td>
-                      </tr>
-                      <tr>
-                        <td>Trident</td>
-                        <td>Trident</td>
-                      </tr>
-                      <tr>
-                        <td>Trident</td>
-                        <td>Internet Explorer 4.0</td>
-                      </tr>
-                      <tr>
-                        <td>Trident</td>
-                        <td>Internet Explorer 4.0</td>
-                      </tr>
+                      <?php 
+                        $implementosList = @json_decode($db->getImplementos());
+                        foreach ($implementosList as $row) {
+                            echo "<tr>";
+                            echo "<td>$row->pkimp_id</td>";
+                            echo "<td>$row->imp_nombre</td>";
+                            echo "<td>$row->imp_descripcion</td>";
+                            echo "</tr>";
+                        }
+                      ?>
                     </tbody>
                     <tfoot>
                       <tr>
-                        <th>Implemento</th>
-                        <th>Promedio de uso</th>
+                        <th>ID</th>
+                        <th>IMPLEMENTO</th>
+                        <th>DESCRIPCIÓN</th>
                       </tr>
                     </tfoot>
                   </table>

@@ -85,6 +85,27 @@
 				return $this->result_construct("success", $respuesta);
 			}
 		}
+		
+		
+		/************************************************************
+		*																														*
+		*					 FUNCIONES GENÉRICAS DE IMPLEMENTOS					  		*
+		*																														*
+		************************************************************/
+		function getImplementos() {
+			$result = pg_query($this->dbConnection,
+			"SELECT *	FROM implemento");
+			
+			if(pg_last_error()){
+				return $this->result_construct("error",pg_last_error());
+			}	else {
+				$respuesta = array();
+				while($row = pg_fetch_assoc($result)){
+					$respuesta[] = $row;
+				}
+				return json_encode($respuesta);
+			}
+		}
 
 
 
@@ -101,8 +122,7 @@
 			
 			if(pg_last_error()){
 				return $this->result_construct("error",pg_last_error());
-			}
-			else {
+			}	else {
 				$respuesta = array();
 				while($row = pg_fetch_assoc($result)){
 					$respuesta[] = $row;
