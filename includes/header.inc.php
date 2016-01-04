@@ -51,6 +51,8 @@
       <!-- AdminLTE Skins. Choose a skin from the css/skins
            folder instead of downloading all of them to reduce the load. -->
       <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'dist/css/skins/_all-skins.min.css'; ?>">
+      <!-- Table Perzonalizado -->
+      <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'dist/css/table.css'; ?>">
     <?php else: ?>
       <!-- AdminLTE Skins. Choose a skin from the css/skins
            folder instead of downloading all of them to reduce the load. -->

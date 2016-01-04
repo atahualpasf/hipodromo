@@ -27,9 +27,9 @@
                   <table id="example1" class="table table-bordered table-striped">
                     <thead>
                       <tr>
-                        <th>ID</th>
-                        <th>IMPLEMENTO</th>
-                        <th>DESCRIPCIÓN</th>
+                        <th>id</th>
+                        <th>implemento</th>
+                        <th>descripción</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -46,9 +46,9 @@
                     </tbody>
                     <tfoot>
                       <tr>
-                        <th>ID</th>
-                        <th>IMPLEMENTO</th>
-                        <th>DESCRIPCIÓN</th>
+                        <th>id</th>
+                        <th>implemento</th>
+                        <th>descripción</th>
                       </tr>
                     </tfoot>
                   </table>
