@@ -21,83 +21,33 @@
             <div class="col-xs-12">
               <div class="box">
                 <div class="box-body">
-                  <table id="example1" class="table table-bordered table-striped">
+                  <table id="tableDefault" class="table table-bordered table-striped">
                     <thead>
                       <tr>
-                        <th>Nombre</th>
-                        <th>...</th>
-                        <th>...</th>
-                        <th>CUadra</th>
+                        <th>id</th>
+                        <th>ci</th>
+                        <th>nombre</th>
+                        <!-- <th>cuadra</th> -->
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>Trident</td>
-                        <td>Internet Explorer 4.0</td>
-                        <td>Internet Explorer 4.0</td>
-                        <td>Internet Explorer 4.0</td>
-                      </tr>
-                      <tr>
-                        <td>Trident</td>
-                        <td>Internet Explorer 4.0</td>
-                        <td>Internet Explorer 4.0</td>
-                        <td>Internet Explorer 4.0</td>
-                      </tr>
-                      <tr>
-                        <td>Trident</td>
-                        <td>Trident</td>
-                        <td>Trident</td>
-                        <td>Internet Explorer 4.0</td>
-                      </tr>
-                      <tr>
-                        <td>Trident</td>
-                        <td>Trident</td>
-                        <td>Trident</td>
-                        <td>Internet Explorer 4.0</td>
-                      </tr>
-                      <tr>
-                        <td>Trident</td>
-                        <td>Internet Explorer 4.0</td>
-                        <td>Internet Explorer 4.0</td>
-                        <td>Internet Explorer 4.0</td>
-                      </tr>
-                      <tr>
-                        <td>Trident</td>
-                        <td>Internet Explorer 4.0</td>
-                        <td>Internet Explorer 4.0</td>
-                        <td>Internet Explorer 4.0</td>
-                      </tr>
-                      <tr>
-                        <td>Trident</td>
-                        <td>Trident</td>
-                        <td>Trident</td>
-                        <td>Internet Explorer 4.0</td>
-                      </tr>
-                      <tr>
-                        <td>Trident</td>
-                        <td>Trident</td>
-                        <td>Trident</td>
-                        <td>Internet Explorer 4.0</td>
-                      </tr>
-                      <tr>
-                        <td>Trident</td>
-                        <td>Internet Explorer 4.0</td>
-                        <td>Internet Explorer 4.0</td>
-                        <td>Internet Explorer 4.0</td>
-                      </tr>
-                      <tr>
-                        <td>Trident</td>
-                        <td>Internet Explorer 4.0</td>
-                        <td>Internet Explorer 4.0</td>
-                        <td>Internet Explorer 4.0</td>
-                      </tr>
+                      <?php 
+                        $entrenadoresList = @json_decode($db->getEntrenadores());
+                        foreach ($entrenadoresList as $row) {
+                            echo "<tr>";
+                            echo "<td>$row->pkent_id</td>";
+                            echo "<td>$row->ent_ci</td>";
+                            echo "<td>$row->ent_primer_nombre $row->ent_segundo_nombre $row->ent_primer_apellido $row->ent_segundo_apellido</td>";
+                            echo "</tr>";
+                        }
+                      ?>
                     </tbody>
                     <tfoot>
                       <tr>
-                        <th>Nombre</th>
-                        <th>...</th>
-                        <th>...</th>
-                        <th>CUadra</th>
+                        <th>id</th>
+                        <th>ci</th>
+                        <th>nombre</th>
+                        <!-- <th>cuadra</th> -->
                       </tr>
                     </tfoot>
                   </table>

@@ -114,6 +114,28 @@
 		
 		/************************************************************
 		*																														*
+		*					 	FUNCIONES GENÉRICAS DE ENTRENADORES					  	*
+		*																														*
+		************************************************************/
+		function getEntrenadores() {
+			$result = pg_query($this->dbConnection,
+			"SELECT * FROM entrenador");
+			
+			if(pg_last_error()){
+				return $this->result_construct("error",pg_last_error());
+			}	else {
+				$respuesta = array();
+				while($row = pg_fetch_assoc($result)){
+					$respuesta[] = $row;
+				}
+				return json_encode($respuesta);
+			}
+		}
+		
+		
+		
+		/************************************************************
+		*																														*
 		*					 		  FUNCIONES GENÉRICAS DE STUDS					  		*
 		*																														*
 		************************************************************/
