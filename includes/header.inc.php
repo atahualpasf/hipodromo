@@ -27,6 +27,11 @@
     <title><?php echo !empty($_SESSION['app_name']) ? $_SESSION['app_name'] : 'Hipódromo La Rinconada'; ?></title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <?php if (strtolower(basename(dirname($_SERVER['SCRIPT_FILENAME']))) === 'pages'): ?>
+    <!-- Peace -->
+    <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'plugins/pace/pace-loading.css'; ?>">
+    <script data-pace-options='{ "ajax": false }' src="<?php echo $db->getRootUri() . 'plugins/pace/pace.js'; ?>"></script>
+    <?php endif; ?>
     <!-- Bootstrap 3.3.5 -->
     <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'bootstrap/css/bootstrap.min.css'; ?>">
     <!-- Font Awesome -->
