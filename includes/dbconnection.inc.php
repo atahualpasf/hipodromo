@@ -184,6 +184,31 @@
 		
 		/************************************************************
 		*																														*
+		*					 	FUNCIONES GENÉRICAS DE EJEMPLARES					  		*
+		*																														*
+		************************************************************/
+		function getEjemplares() {
+			$result = pg_query($this->dbConnection,
+			"SELECT e.pkeje_id, e.eje_nombre, e.eje_sexo, date_part('year', current_date) - date_part('year', e.eje_fecha_nacimiento) as edad, r.raz_nombre, p.pel_nombre, h.har_nombre, 
+			CASE  WHEN e.fkeje_mad_id IS NULL AND e.fkeje_pad_id IS NULL THEN CASE e.eje_sexo WHEN 'Y' THEN 'Madre' WHEN 'C' THEN 'Semental' END ELSE 'Hijo' END as afinidad
+			FROM ejemplar e, raza r, pelaje p, hara h
+			WHERE e.fkeje_raz_id = r.pkraz_id AND e.fkeje_pel_id = p.pkpel_id AND e.fkeje_har_id = h.pkhar_id");
+			
+			if(pg_last_error()){
+				return $this->result_construct("error",pg_last_error());
+			}	else {
+				$respuesta = array();
+				while($row = pg_fetch_assoc($result)){
+					$respuesta[] = $row;
+				}
+				return json_encode($respuesta);
+			}
+		}
+		
+		
+		
+		/************************************************************
+		*																														*
 		*					 FUNCIONES GENÉRICAS DE IMPLEMENTOS					  		*
 		*																														*
 		************************************************************/
