@@ -87,6 +87,77 @@
 		}
 		
 		
+		
+		/************************************************************
+		*																														*
+		*					 		  FUNCIONES GENÉRICAS DE STUDS					  		*
+		*																														*
+		************************************************************/
+		function getStuds() {
+			$result = pg_query($this->dbConnection,
+			"SELECT *	FROM stud");
+			
+			if(pg_last_error()){
+				return $this->result_construct("error",pg_last_error());
+			}	else {
+				$respuesta = array();
+				while($row = pg_fetch_assoc($result)){
+					$respuesta[] = $row;
+				}
+				return json_encode($respuesta);
+			}
+		}
+		
+		
+		
+		/************************************************************
+		*																														*
+		*					 		  FUNCIONES GENÉRICAS DE GORRA					  		*
+		*																														*
+		************************************************************/
+		function getGorrasDetalladoByStud($pkstu_id) {
+			$result = pg_query($this->dbConnection,
+			"SELECT c.col_nombre, cg.colgor_pieza
+			FROM stud s, gorra g, color_gorra cg, color c
+			WHERE s.pkstu_id = g.fkgor_stu_id AND g.pkgor_id = cg.fkcolgor_gor_id AND cg.fkcolgor_col_id = c.pkcol_id AND s.pkstu_id = '$pkstu_id'");
+			
+			if(pg_last_error()){
+				return $this->result_construct("error",pg_last_error());
+			}	else {
+				$respuesta = array();
+				while($row = pg_fetch_assoc($result)){
+					$respuesta[] = $row;
+				}
+				return json_encode($respuesta);
+			}
+		}
+		
+		
+		
+		/************************************************************
+		*																														*
+		*					 		FUNCIONES GENÉRICAS DE CHAQUETA					  		*
+		*																														*
+		************************************************************/
+		function getChaquetasDetalladoByStud($pkstu_id) {
+			$result = pg_query($this->dbConnection,
+			"SELECT c.col_nombre, cc.colcha_pieza
+			FROM stud s, chaqueta ch, color_chaqueta cc, color c
+			WHERE s.pkstu_id = ch.fkcha_stu_id AND ch.pkcha_id = cc.fkcolcha_cha_id AND cc.fkcolcha_col_id = c.pkcol_id AND s.pkstu_id = '$pkstu_id'");
+			
+			if(pg_last_error()){
+				return $this->result_construct("error",pg_last_error());
+			}	else {
+				$respuesta = array();
+				while($row = pg_fetch_assoc($result)){
+					$respuesta[] = $row;
+				}
+				return json_encode($respuesta);
+			}
+		}
+		
+		
+		
 		/************************************************************
 		*																														*
 		*					 FUNCIONES GENÉRICAS DE IMPLEMENTOS					  		*

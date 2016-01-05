@@ -77,19 +77,7 @@
     <!-- Hipodromo extras functionalities -->
     <script src="<?php echo $db->getRootUri() . 'dist/js/extras.js'; ?>"></script>
     <!-- page script -->
-    <script>
-      $(function () {
-        $("#example1").DataTable();
-        $('#example2').DataTable({
-          "paging": true,
-          "lengthChange": false,
-          "searching": false,
-          "ordering": true,
-          "info": true,
-          "autoWidth": false
-        });
-      });
-    </script>
+    <script src="<?php echo $db->getRootUri() . 'dist/js/tablas.js'; ?>"></script>
 <?php endif; ?>
 <?php if ((strtolower(basename(dirname($_SERVER['SCRIPT_FILENAME']))) === 'hipodromo') and (strtolower(basename($_SERVER['SCRIPT_FILENAME'], '.php')) === 'index')): ?>
     <!-- Bootstrap 3.3.5 -->

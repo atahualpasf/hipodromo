@@ -24,7 +24,7 @@
                   <h3 class="box-title">Promedio de Uso de los Implementos</h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
-                  <table id="example1" class="table table-bordered table-striped">
+                  <table id="tableDefault" class="table table-bordered table-striped">
                     <thead>
                       <tr>
                         <th>id</th>
