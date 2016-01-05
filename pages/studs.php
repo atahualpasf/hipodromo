@@ -110,6 +110,46 @@
                   </table>
                 </div><!-- /.box-body -->
               </div><!-- /.box -->
+              <div class="box">
+                <div class="box-header">
+                  <h3 class="box-title">Descripcion de propietarios</h3>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                  <table id="tableDefault-2" class="table table-bordered table-hover">
+                    <thead>
+                      <tr>
+                        <th>id</th>
+                        <th>nombre</th>
+                        <th>propietarios</th>
+                        <th>porcentaje</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <?php
+                        foreach ($studsList as $row) {
+                            $propietarioList = @json_decode($db->getPropietariosDetalladoByStud($row->pkstu_id));
+                            foreach ($propietarioList as $pro) {
+                              echo "<tr>";
+                              echo "<td>$row->pkstu_id</td>";
+                              echo "<td>$row->stu_nombre</td>";
+                              echo "<td>$pro->pro_primer_nombre $pro->pro_segundo_nombre $pro->pro_primer_apellido $pro->pro_segundo_apellido</td>";
+                              echo "<td>$pro->stupro_porcentaje%</td>";
+                              echo "</tr>";
+                            }
+                        }
+                      ?>
+                    </tbody>
+                    <tfoot>
+                      <tr>
+                        <th>id</th>
+                        <th>nombre</th>
+                        <th>propietarios</th>
+                        <th>porcentaje</th>
+                      </tr>
+                    </tfoot>
+                  </table>
+                </div><!-- /.box-body -->
+              </div><!-- /.box -->
             </div><!-- /.col -->
           </div><!-- /.row -->
         </section><!-- /.content -->

@@ -90,6 +90,30 @@
 		
 		/************************************************************
 		*																														*
+		*					 	FUNCIONES GENÉRICAS DE PROPIETARIOS					  	*
+		*																														*
+		************************************************************/
+		function getPropietariosDetalladoByStud($pkstu_id) {
+			$result = pg_query($this->dbConnection,
+			"SELECT p.pro_primer_nombre, p.pro_segundo_nombre, p.pro_primer_apellido, p.pro_segundo_apellido, sp.stupro_porcentaje
+			FROM stud s, propietario p, stud_propietario sp
+			WHERE s.pkstu_id = sp.fkstupro_stu_id AND sp.fkstupro_pro_id = p.pkpro_id  AND s.pkstu_id = '$pkstu_id'");
+			
+			if(pg_last_error()){
+				return $this->result_construct("error",pg_last_error());
+			}	else {
+				$respuesta = array();
+				while($row = pg_fetch_assoc($result)){
+					$respuesta[] = $row;
+				}
+				return json_encode($respuesta);
+			}
+		}
+		
+		
+		
+		/************************************************************
+		*																														*
 		*					 		  FUNCIONES GENÉRICAS DE STUDS					  		*
 		*																														*
 		************************************************************/
