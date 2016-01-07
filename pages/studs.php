@@ -1,5 +1,11 @@
 <?php
   include($_SERVER['DOCUMENT_ROOT'] . 'hipodromo/includes/header.inc.php');
+  
+  if ($_SERVER["REQUEST_METHOD"] == "POST") {
+      if (!empty($_POST['pkstu_id'])) {
+          $answer = json_decode($db->deleteStud($_POST['pkstu_id']));
+      }
+  }
 ?>
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
@@ -30,6 +36,8 @@
                         <th>id</th>
                         <th>nombre</th>
                         <th>creación</th>
+                        <th width="10%">editar</th>
+                        <th width="10%">eliminar</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -40,6 +48,12 @@
                             echo "<td>$row->pkstu_id</td>";
                             echo "<td>$row->stu_nombre</td>";
                             echo "<td>$row->stu_fecha_creacion</td>";
+                            echo "<form id='updateForm' role='form' method='POST' action='updates" . htmlentities($_SERVER['PHP_SELF']) . "'>";
+                            echo "<td><button name='update_id' value='$row->pkstu_id' type='submit' form='updateForm' class='btn btn-info btn-flat btn-block'><i class='fa fa-edit'></i></button></td>";
+                            echo "</form>";
+                            echo "<form id='deleteForm' role='form' method='POST' action='" . htmlentities($_SERVER['PHP_SELF']) . "'>";
+                            echo "<td><button name='pkstu_id' value='$row->pkstu_id' type='submit' form='deleteForm' class='btn btn-danger btn-flat btn-block'><i class='fa fa-trash'></i></button></td>"; 
+                            echo "</form>";
                             echo "</tr>";
                         }
                       ?>
@@ -49,6 +63,8 @@
                         <th>id</th>
                         <th>nombre</th>
                         <th>creación</th>
+                        <th width="10%">editar</th>
+                        <th width="10%">eliminar</th>
                       </tr>
                     </tfoot>
                   </table>

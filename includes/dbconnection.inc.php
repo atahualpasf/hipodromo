@@ -154,6 +154,16 @@
 			}
 		}
 		
+		function deleteStud($id) {
+			$result = pg_query($this->dbConnection,
+				"DELETE FROM stud WHERE pkstu_id='$id'");
+			if (pg_last_error()) {
+				return $this->result_construct("error",pg_last_error());
+			} else {
+				return $this->result_construct("success","Eliminado exitosamente");
+			}
+		}
+		
 		
 		
 		/************************************************************
