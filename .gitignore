@@ -13,3 +13,5 @@ test.html
 # Archivos de configuración
 /conf/
 reports/conf/
+reports/*.jasper
+reports/*.jrxml
