@@ -134,8 +134,8 @@
 		************************************************************/
 		function getEntrenadores() {
 			$result = pg_query($this->dbConnection,
-			"SELECT e.*, p.lug_nombre as parroquia, e.lug_nombre as estado
-			FROM entrenador e, lugar p, lugar m, lugar e WHERE e.fkent_lug_id = p.pklug_id AND p.fklug_lug_id = m.pklug_id AND m.fklug_lug_id = e.pklug_id");
+			"SELECT ent.*, p.lug_nombre as parroquia, e.lug_nombre as estado
+			FROM entrenador ent, lugar p, lugar m, lugar e WHERE ent.fkent_lug_id = p.pklug_id AND p.fklug_lug_id = m.pklug_id AND m.fklug_lug_id = e.pklug_id");
 
 			if(pg_last_error()){
 				return $this->result_construct("error",pg_last_error());
