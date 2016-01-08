@@ -1,29 +1,29 @@
 <?php
   include($_SERVER['DOCUMENT_ROOT'] . 'hipodromo/includes/header.inc.php');
-  
+
   $pkstu_id = $fkstu_lug_id = $stu_nombre = $stu_fecha_creacion = "";
-  
+
   function test_input($data) {
       $data = trim($data);
       $data = stripslashes($data);
       $data = htmlspecialchars($data);
       return $data;
   }
-  
+
   function setValues($studsList) {
       $GLOBALS['pkstu_id'] = $studsList[0]->pkstu_id;
       $GLOBALS['fkstu_lug_id'] = $studsList[0]->fkstu_lug_id;
       $GLOBALS['stu_nombre'] = $studsList[0]->stu_nombre;
       $GLOBALS['stu_fecha_creacion'] = $studsList[0]->stu_fecha_creacion;
   }
-  
+
   function setValuesWhenSubmitIsClicked() {
       $GLOBALS['pkstu_id'] = test_input($_POST['pkstu_id']);
       $GLOBALS['fkstu_lug_id'] = test_input($_POST['fkstu_lug_id']);
       $GLOBALS['stu_nombre'] = test_input($_POST['stu_nombre']);
       $GLOBALS['stu_fecha_creacion'] = test_input($_POST['stu_fecha_creacion']);
   }
-  
+
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
       if (!empty($_POST['update_id'])) {
           $studsList = json_decode($db->getStudById($_POST['update_id']));
@@ -63,7 +63,7 @@
             <div class="box-body">
               <div class="box-body">
                 <div class="row">
-                  <div class="col-xs-4">
+                  <div class="col-xs-6">
                     <div class="form-group">
                       <label>Dirección</label>
                       <select name="fkstu_lug_id" class="form-control select2" style="width: 100%;">
@@ -80,11 +80,11 @@
                       </select>
                     </div><!-- /.form-group -->
                   </div>
-                  <div class="col-xs-4">
+                  <div class="col-xs-3">
                      <label>Nombre del stud</label>
                     <input name="stu_nombre" type="text" class="form-control" placeholder="Nombre del stud" onblur="this.value = this.value.trim() == '' ? this.defaultValue : this.value.trim();" value="<?php echo $stu_nombre; ?>" required>
                   </div>
-                  <div class="col-xs-4">
+                  <div class="col-xs-3">
                      <div class="form-group">
                       <label>Fecha de creación:</label>
                       <div class="input-group">
