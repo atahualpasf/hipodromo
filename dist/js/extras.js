@@ -40,4 +40,26 @@ $(document).ready(function() {
        language: 'es'
      });
   }
+  
+  if ($('#create-stud').length > 0) {
+      var form = $("#create-stud");
+      form.children("div").steps({
+         headerTag: "h3",
+         bodyTag: "section",
+         transitionEffect: "slideLeft",
+         onStepChanging: function (event, currentIndex, newIndex)
+         {
+             return true;
+         },
+         onFinishing: function (event, currentIndex)
+         {
+             return true;
+         },
+         onFinished: function (event, currentIndex)
+         {
+             alert("Submitted!");
+         }
+      });
+  }
+  
 });

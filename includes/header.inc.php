@@ -117,6 +117,8 @@
       <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'plugins/select2/select2.min.css'; ?>">
       <!-- bootstrap wysihtml5 - text editor -->
       <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css'; ?>">
+      <!-- Jquery.Steps -->
+      <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'plugins/jquery.steps/jquery.steps.css'; ?>">
       <!-- Theme style -->
       <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'dist/css/AdminLTE.min.css'; ?>">
       <!-- AdminLTE Skins. Choose a skin from the css/skins
