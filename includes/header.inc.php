@@ -20,7 +20,10 @@
   }
   $basedir = strtolower(basename(dirname($_SERVER['SCRIPT_FILENAME'])));
   $basefile = strtolower(basename($_SERVER['SCRIPT_FILENAME'], '.php'));
-  $beasebackfile = basename($_SERVER['HTTP_REFERER']);
+  @$baselastfile = strtolower(basename($_SERVER['HTTP_REFERER'], '.php'));
+  if ($baselastfile !== $basefile) {
+     $_SESSION['last_page'] = $baselastfile . '.php';
+  }
 ?>
 <!DOCTYPE html>
 <html>
@@ -245,16 +248,16 @@
         <section class="content-header">
           <h1>
             <?php if ($basedir === 'updates'): ?>
-               <?php $menuFileName = 'Edición de ' . basename($_SERVER['HTTP_REFERER'], '.php'); echo $menuFileName; ?>
+               <?php $menuFileName = 'Edición de ' . basename($_SESSION['last_page'], '.php'); echo $menuFileName; ?>
             <?php else: ?>
-               <?php $menuFileName = 'Creación de ' . basename($_SERVER['HTTP_REFERER'], '.php'); echo $menuFileName; ?>
+               <?php $menuFileName = 'Creación de ' . basename($_SESSION['last_page'], '.php'); echo $menuFileName; ?>
             <?php endif; ?>
             
             <!-- <small>Preview</small> -->
           </h1>
           <ol class="breadcrumb">
             <li><a href="<?php echo $db->getRootUri() . 'pages'; ?>"><i class="fa fa-dashboard"></i> Inicio</a></li>
-            <li><a href="<?php echo $_SERVER['HTTP_REFERER']; ?>"><?php echo basename($_SERVER['HTTP_REFERER'], '.php'); ?></a></li>
+            <li><a href="<?php echo '../' . $_SESSION['last_page']; ?>"><?php echo basename($_SESSION['last_page'], '.php'); ?></a></li>
             <li class="active"><?php echo $menuFileName; ?></li>
           </ol>
         </section>

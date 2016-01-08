@@ -51,6 +51,15 @@
         <div class="box box-info">
           <!-- form start -->
           <form role="form" method="post">
+             <?php
+                 if (@$answer->action == "error") {
+                    echo "<div class='alert alert-danger alert-dismissable' role='alert'>";
+                    echo "<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>";
+                    echo "<h4><i class='icon fa fa-ban'></i> Error en la " . strtolower($menuFileName) . "</h4>";
+                    echo $answer->response->data;
+                    echo "</div>";
+                 }
+             ?>
             <div class="box-body">
               <div class="box-body">
                 <div class="row">
@@ -94,7 +103,7 @@
                     <button name="pkstu_id" value="<?php echo $pkstu_id; ?>" type="submit" class="btn btn-dropbox btn-block btn-flat uppercase">Editar</button>
                  </div>
                  <div class="col-xs-3">
-                    <a href="<?php echo '../' . $beasebackfile; ?>" class="btn btn-default btn-block btn-flat uppercase">Cancelar</a>
+                    <a href="<?php echo '../' . $_SESSION['last_page']; ?>" class="btn btn-default btn-block btn-flat uppercase">Cancelar</a>
                  </div>
                </div>
             </div><!-- /.box-body -->
