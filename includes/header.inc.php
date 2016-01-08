@@ -18,6 +18,8 @@
       $_SESSION['last_activity'] = time();
     }
   }
+  $basedir = strtolower(basename(dirname($_SERVER['SCRIPT_FILENAME'])));
+  $basefile = strtolower(basename($_SERVER['SCRIPT_FILENAME'], '.php'));
 ?>
 <!DOCTYPE html>
 <html>
@@ -27,38 +29,78 @@
     <title><?php echo !empty($_SESSION['app_name']) ? $_SESSION['app_name'] : 'Hipódromo La Rinconada'; ?></title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <?php if (strtolower(basename(dirname($_SERVER['SCRIPT_FILENAME']))) === 'pages'): ?>
-    <!-- Peace -->
-    <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'plugins/pace/pace-loading.css'; ?>">
-    <script data-pace-options='{ "ajax": false }' src="<?php echo $db->getRootUri() . 'plugins/pace/pace.js'; ?>"></script>
-    <?php endif; ?>
-    <!-- Bootstrap 3.3.5 -->
-    <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'bootstrap/css/bootstrap.min.css'; ?>">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'dist/font-awesome-4.5.0/css/font-awesome.min.css'; ?>">
-    <!-- Ionicons -->
-    <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'dist/ionicons-2.0.1/css/ionicons.min.css'; ?>">
-    <?php if ((strtolower(basename(dirname($_SERVER['SCRIPT_FILENAME']))) === 'pages') and (strtolower(basename($_SERVER['SCRIPT_FILENAME'], '.php')) !== 'index')): ?>
-      <!-- DataTables -->
-      <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'plugins/datatables/dataTables.bootstrap.css'; ?>">
-    <?php endif; ?>
-    <!-- Theme style -->
-    <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'dist/css/AdminLTE.min.css'; ?>">
-
-    <?php if ((strtolower(basename(dirname($_SERVER['SCRIPT_FILENAME']))) === 'hipodromo') and (strtolower(basename($_SERVER['SCRIPT_FILENAME'], '.php')) === 'index')): ?>
+    <?php if ($basedir === 'pages'): ?>
+      <!-- Peace -->
+      <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'plugins/pace/pace-loading.css'; ?>">
+      <script data-pace-options='{ "ajax": false }' src="<?php echo $db->getRootUri() . 'plugins/pace/pace.js'; ?>"></script>
+      <!-- Bootstrap 3.3.5 -->
+      <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'bootstrap/css/bootstrap.min.css'; ?>">
+      <!-- Font Awesome -->
+      <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'dist/font-awesome-4.5.0/css/font-awesome.min.css'; ?>">
+      <!-- Ionicons -->
+      <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'dist/ionicons-2.0.1/css/ionicons.min.css'; ?>">
+      <?php if ($basefile === 'index'): ?>
+        <!-- Theme style -->
+        <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'dist/css/AdminLTE.min.css'; ?>">
+        <!-- AdminLTE Skins. Choose a skin from the css/skins
+             folder instead of downloading all of them to reduce the load. -->
+        <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'dist/css/skins/_all-skins.min.css'; ?>">
+        <!-- iCheck -->
+        <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'plugins/iCheck/flat/blue.css'; ?>">
+        <!-- Morris chart -->
+        <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'plugins/morris/morris.css'; ?>">
+        <!-- jvectormap -->
+        <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'plugins/jvectormap/jquery-jvectormap-1.2.2.css'; ?>">
+        <!-- Date Picker -->
+        <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'plugins/datepicker/datepicker3.css'; ?>">
+        <!-- Daterange picker -->
+        <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'plugins/daterangepicker/daterangepicker-bs3.css'; ?>">
+        <!-- bootstrap wysihtml5 - text editor -->
+        <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css'; ?>">
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+            <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+      <?php else: ?>
+        <!-- DataTables -->
+        <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'plugins/datatables/dataTables.bootstrap.css'; ?>">
+        <!-- Theme style -->
+        <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'dist/css/AdminLTE.min.css'; ?>">
+        <!-- AdminLTE Skins. Choose a skin from the css/skins
+             folder instead of downloading all of them to reduce the load. -->
+        <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'dist/css/skins/_all-skins.min.css'; ?>">
+        <!-- Table Perzonalizado -->
+        <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'dist/css/table.css'; ?>">
+      <?php endif; ?>
+    <?php elseif ($basedir === 'hipodromo'): ?>
+      <!-- Bootstrap 3.3.5 -->
+      <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'bootstrap/css/bootstrap.min.css'; ?>">
+      <!-- Font Awesome -->
+      <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'dist/font-awesome-4.5.0/css/font-awesome.min.css'; ?>">
+      <!-- Ionicons -->
+      <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'dist/ionicons-2.0.1/css/ionicons.min.css'; ?>">
+      <!-- Theme style -->
+      <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'dist/css/AdminLTE.min.css'; ?>">
       <!-- Full responsive background video with css -->
       <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'plugins/videobackground/videobackground.css'; ?>">
       <!-- Index style -->
       <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'dist/css/index.css'; ?>">
       <!-- iCheck -->
       <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'plugins/iCheck/square/blue.css'; ?>">
-    <?php elseif ((strtolower(basename(dirname($_SERVER['SCRIPT_FILENAME']))) === 'pages') and (strtolower(basename($_SERVER['SCRIPT_FILENAME'], '.php')) !== 'index')): ?>
-      <!-- AdminLTE Skins. Choose a skin from the css/skins
-           folder instead of downloading all of them to reduce the load. -->
-      <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'dist/css/skins/_all-skins.min.css'; ?>">
-      <!-- Table Perzonalizado -->
-      <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'dist/css/table.css'; ?>">
-    <?php else: ?>
+    <?php elseif ($basedir === 'updates' or $basedir === 'creates'): ?>
+      <!-- Peace -->
+      <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'plugins/pace/pace-loading.css'; ?>">
+      <script data-pace-options='{ "ajax": false }' src="<?php echo $db->getRootUri() . 'plugins/pace/pace.js'; ?>"></script>
+      <!-- Bootstrap 3.3.5 -->
+      <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'bootstrap/css/bootstrap.min.css'; ?>">
+      <!-- Font Awesome -->
+      <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'dist/font-awesome-4.5.0/css/font-awesome.min.css'; ?>">
+      <!-- Ionicons -->
+      <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'dist/ionicons-2.0.1/css/ionicons.min.css'; ?>">
+      <!-- Theme style -->
+      <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'dist/css/AdminLTE.min.css'; ?>">
       <!-- AdminLTE Skins. Choose a skin from the css/skins
            folder instead of downloading all of them to reduce the load. -->
       <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'dist/css/skins/_all-skins.min.css'; ?>">
@@ -74,15 +116,15 @@
       <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'plugins/daterangepicker/daterangepicker-bs3.css'; ?>">
       <!-- bootstrap wysihtml5 - text editor -->
       <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css'; ?>">
+      <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+      <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+      <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      <![endif]-->      
     <?php endif; ?>
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
   </head>
-  <?php if (strtolower(basename(dirname($_SERVER['SCRIPT_FILENAME']))) === 'pages'): ?>
+  <?php if ($basedir === 'pages' or $basedir === 'updates' or $basedir === 'creates'): ?>
     <body class="hold-transition skin-blue sidebar-mini">
       <div class="wrapper">
 
@@ -169,7 +211,7 @@
             <ul class="sidebar-menu">
               <li class="header">Navegación Principal</li>
               <li class="active treeview">
-                <a href="index.php">
+                <a href="<?php echo $db->getRootUri() . 'pages/index.php'; ?>">
                   <i class="fa fa-dashboard"></i> <span>Tablero</span>
                 </a>
               </li>
@@ -179,13 +221,13 @@
                   <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                  <li><a href="apuestas.php"><i class="fa fa-circle-o"></i> Apuestas</a></li>
-                  <li><a href="ejemplares.php"><i class="fa fa-circle-o"></i> Ejemplares</a></li>
-                  <li><a href="entrenadores.php"><i class="fa fa-circle-o"></i> Entrenadores</a></li>
-                  <li><a href="implementos.php"><i class="fa fa-circle-o"></i> Implementos</a></li>
-                  <li><a href="jinetes.php"><i class="fa fa-circle-o"></i> Jinetes</a></li>
-                  <li><a href="studs.php"><i class="fa fa-circle-o"></i> Studs</a></li>
-                  <li><a href="usuarios.php"><i class="fa fa-circle-o"></i> Usuarios</a></li>
+                  <li><a href="<?php echo $db->getRootUri() . 'pages/apuestas.php'; ?>"><i class="fa fa-circle-o"></i> Apuestas</a></li>
+                  <li><a href="<?php echo $db->getRootUri() . 'pages/ejemplares.php'; ?>"><i class="fa fa-circle-o"></i> Ejemplares</a></li>
+                  <li><a href="<?php echo $db->getRootUri() . 'pages/entrenadores.php'; ?>p"><i class="fa fa-circle-o"></i> Entrenadores</a></li>
+                  <li><a href="<?php echo $db->getRootUri() . 'pages/implementos.php'; ?>"><i class="fa fa-circle-o"></i> Implementos</a></li>
+                  <li><a href="<?php echo $db->getRootUri() . 'pages/jinetes.php'; ?>"><i class="fa fa-circle-o"></i> Jinetes</a></li>
+                  <li><a href="<?php echo $db->getRootUri() . 'pages/studs.php'; ?>"><i class="fa fa-circle-o"></i> Studs</a></li>
+                  <li><a href="<?php echo $db->getRootUri() . 'pages/usuarios.php'; ?>"><i class="fa fa-circle-o"></i> Usuarios</a></li>
                 </ul>
               </li>
               </ul>

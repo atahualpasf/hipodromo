@@ -48,7 +48,7 @@
                             echo "<td>$row->pkstu_id</td>";
                             echo "<td>$row->stu_nombre</td>";
                             echo "<td>$row->stu_fecha_creacion</td>";
-                            echo "<form id='updateForm' role='form' method='POST' action='updates" . htmlentities($_SERVER['PHP_SELF']) . "'>";
+                            echo "<form id='updateForm' role='form' method='POST' action='updates/update-" . basename($_SERVER['PHP_SELF']) . "'>";
                             echo "<td><button name='update_id' value='$row->pkstu_id' type='submit' form='updateForm' class='btn btn-info btn-flat btn-block'><i class='fa fa-edit'></i></button></td>";
                             echo "</form>";
                             echo "<form id='deleteForm' role='form' method='POST' action='" . htmlentities($_SERVER['PHP_SELF']) . "'>";
