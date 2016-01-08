@@ -6,6 +6,7 @@
           $answer = json_decode($db->deleteStud($_POST['pkstu_id']));
       }
   }
+  $studsList = @json_decode($db->getStuds());
 ?>
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
@@ -15,15 +16,32 @@
             Studs
           </h1>
           <ol class="breadcrumb">
-            <li><a href="index.php"><i class="fa fa-dashboard"></i> Tablero</a></li>
-            <li><a href="#">Tablas</a></li>
+            <li><a href="index.php"><i class="fa fa-dashboard"></i> Inicio</a></li>
             <li class="active">Studs</li>
           </ol>
         </section>
 
         <!-- Main content -->
         <section class="content">
+          
           <div class="row">
+             
+             <div class="col-lg-12 col-xs-12">
+              <!-- small box -->
+              <div class="small-box bg-green">
+                 <div class="inner">
+                   <h3><?php echo count($studsList); ?></h3>
+                   <p>Studs Registrados</p>
+                 </div>
+                 <div class="icon">
+                   <i class="ion ion-plus"></i>
+                 </div>
+                 <?php echo "<a href='creates/create-" . $basefile . ".php' class='small-box-footer'>"; ?>
+                   Agregar stud <i class="fa fa-arrow-circle-right"></i>
+                 </a>
+              </div>
+            </div><!-- ./col -->
+             
             <div class="col-xs-12">
               <div class="box">
                 <div class="box-header">
@@ -42,8 +60,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <?php 
-                        $studsList = @json_decode($db->getStuds());
+                      <?php
                         foreach ($studsList as $row) {
                             echo "<tr>";
                             echo "<td>$row->pkstu_id</td>";
