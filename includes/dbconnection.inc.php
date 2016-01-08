@@ -85,9 +85,9 @@
 				return $this->result_construct("success", $respuesta);
 			}
 		}
-		
-		function getLugares(){	
-			$result = pg_query($this->dbConnection,"SELECT p.pklug_id,p.lug_nombre as parroquia, m.lug_nombre as municipio,e.lug_nombre as estado 
+
+		function getLugares(){
+			$result = pg_query($this->dbConnection,"SELECT p.pklug_id,p.lug_nombre as parroquia, m.lug_nombre as municipio,e.lug_nombre as estado
 			FROM lugar e, lugar m, lugar p WHERE p.fklug_lug_id = m.pklug_id and m.fklug_lug_id = e.pklug_id order by p.pklug_id");
 			if(pg_last_error()){
 				return $this->result_construct("error",pg_last_error());
@@ -98,11 +98,11 @@
 					$respuesta[] = $row;
 				}
 				return json_encode($respuesta);
-			}		
+			}
 		}
-		
-		
-		
+
+
+
 		/************************************************************
 		*																														*
 		*					 	FUNCIONES GENÉRICAS DE PROPIETARIOS					  	*
@@ -113,7 +113,7 @@
 			"SELECT p.pro_primer_nombre, p.pro_segundo_nombre, p.pro_primer_apellido, p.pro_segundo_apellido, sp.stupro_porcentaje
 			FROM stud s, propietario p, stud_propietario sp
 			WHERE s.pkstu_id = sp.fkstupro_stu_id AND sp.fkstupro_pro_id = p.pkpro_id  AND s.pkstu_id = '$pkstu_id'");
-			
+
 			if(pg_last_error()){
 				return $this->result_construct("error",pg_last_error());
 			}	else {
@@ -124,9 +124,9 @@
 				return json_encode($respuesta);
 			}
 		}
-		
-		
-		
+
+
+
 		/************************************************************
 		*																														*
 		*					 	FUNCIONES GENÉRICAS DE ENTRENADORES					  	*
@@ -135,7 +135,7 @@
 		function getEntrenadores() {
 			$result = pg_query($this->dbConnection,
 			"SELECT * FROM entrenador");
-			
+
 			if(pg_last_error()){
 				return $this->result_construct("error",pg_last_error());
 			}	else {
@@ -146,9 +146,67 @@
 				return json_encode($respuesta);
 			}
 		}
-		
-		
-		
+
+
+		/************************************************************
+		*																														*
+		*					 	FUNCIONES GENÉRICAS DE JINETES							  	*
+		*																														*
+		************************************************************/
+		function getJinetes() {
+			$result = pg_query($this->dbConnection,
+			"SELECT j.*, p.lug_nombre as parroquia, e.lug_nombre as estado
+			FROM jinete j, lugar p, lugar m, lugar e WHERE j.fkjin_lug_id = p.pklug_id AND p.fklug_lug_id = m.pklug_id AND m.fklug_lug_id = e.pklug_id");
+
+			if(pg_last_error()){
+				return $this->result_construct("error",pg_last_error());
+			}	else {
+				$respuesta = array();
+				while($row = pg_fetch_assoc($result)){
+					$respuesta[] = $row;
+				}
+				return json_encode($respuesta);
+			}
+		}
+
+		function getJineteById($pkjin_id) {
+			$result = pg_query($this->dbConnection,
+			"SELECT *	FROM jinete WHERE pkjin_id = '$pkjin_id'");
+
+			if(pg_last_error()){
+				return $this->result_construct("error",pg_last_error());
+			}	else {
+				$respuesta = array();
+				while($row = pg_fetch_assoc($result)){
+					$respuesta[] = $row;
+				}
+				return json_encode($respuesta);
+			}
+		}
+
+		function updateJinete($pkjin_id, $fkjin_lug_id, $jin_ci, $jin_primer_nombre, $jin_segundo_nombre, $jin_primer_apellido, $jin_segundo_apellido, $jin_fecha_nacimiento, $jin_altura, $jin_experiencia){
+			$result = pg_query($this->dbConnection,
+			"UPDATE jinete
+			SET fkjin_lug_id='$fkjin_lug_id', jin_ci='$jin_ci', jin_primer_nombre='$jin_primer_nombre', jin_segundo_nombre='$jin_segundo_nombre', jin_primer_apellido='$jin_primer_apellido', jin_segundo_apellido='$jin_segundo_apellido', jin_fecha_nacimiento='$jin_fecha_nacimiento', jin_altura='$jin_altura', jin_experiencia='$jin_experiencia'
+			WHERE pkjin_id='$pkjin_id'");
+			if(pg_last_error()){
+				return $this->result_construct("error",pg_last_error());
+			}else{
+				return $this->result_construct("success","Actualizado exitosamente");
+			}
+		}
+
+		function deleteJinete($id) {
+			$result = pg_query($this->dbConnection,
+				"DELETE FROM jinete WHERE pkjin_id='$id'");
+			if (pg_last_error()) {
+				return $this->result_construct("error",pg_last_error());
+			} else {
+				return $this->result_construct("success","Eliminado exitosamente");
+			}
+		}
+
+
 		/************************************************************
 		*																														*
 		*					 		  FUNCIONES GENÉRICAS DE STUDS					  		*
@@ -158,7 +216,7 @@
 			$result = pg_query($this->dbConnection,
 			"SELECT s.*, p.lug_nombre as parroquia, e.lug_nombre as estado
 			FROM stud s, lugar p, lugar m, lugar e WHERE s.fkstu_lug_id = p.pklug_id AND p.fklug_lug_id = m.pklug_id AND m.fklug_lug_id = e.pklug_id");
-			
+
 			if(pg_last_error()){
 				return $this->result_construct("error",pg_last_error());
 			}	else {
@@ -169,11 +227,11 @@
 				return json_encode($respuesta);
 			}
 		}
-		
+
 		function getStudById($pkstu_id) {
 			$result = pg_query($this->dbConnection,
 			"SELECT *	FROM stud WHERE pkstu_id = '$pkstu_id'");
-			
+
 			if(pg_last_error()){
 				return $this->result_construct("error",pg_last_error());
 			}	else {
@@ -184,7 +242,7 @@
 				return json_encode($respuesta);
 			}
 		}
-		
+
 		function updateStud($pkstu_id, $fkstu_lug_id, $stu_nombre, $stu_fecha_creacion){
 			$result = pg_query($this->dbConnection,
 			"UPDATE stud
@@ -196,7 +254,7 @@
 				return $this->result_construct("success","Actualizado exitosamente");
 			}
 		}
-		
+
 		function deleteStud($id) {
 			$result = pg_query($this->dbConnection,
 				"DELETE FROM stud WHERE pkstu_id='$id'");
@@ -206,9 +264,9 @@
 				return $this->result_construct("success","Eliminado exitosamente");
 			}
 		}
-		
-		
-		
+
+
+
 		/************************************************************
 		*																														*
 		*					 		  FUNCIONES GENÉRICAS DE GORRA					  		*
@@ -219,7 +277,7 @@
 			"SELECT c.col_nombre, cg.colgor_pieza
 			FROM stud s, gorra g, color_gorra cg, color c
 			WHERE s.pkstu_id = g.fkgor_stu_id AND g.pkgor_id = cg.fkcolgor_gor_id AND cg.fkcolgor_col_id = c.pkcol_id AND s.pkstu_id = '$pkstu_id'");
-			
+
 			if(pg_last_error()){
 				return $this->result_construct("error",pg_last_error());
 			}	else {
@@ -230,9 +288,9 @@
 				return json_encode($respuesta);
 			}
 		}
-		
-		
-		
+
+
+
 		/************************************************************
 		*																														*
 		*					 		FUNCIONES GENÉRICAS DE CHAQUETA					  		*
@@ -243,7 +301,7 @@
 			"SELECT c.col_nombre, cc.colcha_pieza
 			FROM stud s, chaqueta ch, color_chaqueta cc, color c
 			WHERE s.pkstu_id = ch.fkcha_stu_id AND ch.pkcha_id = cc.fkcolcha_cha_id AND cc.fkcolcha_col_id = c.pkcol_id AND s.pkstu_id = '$pkstu_id'");
-			
+
 			if(pg_last_error()){
 				return $this->result_construct("error",pg_last_error());
 			}	else {
@@ -254,9 +312,9 @@
 				return json_encode($respuesta);
 			}
 		}
-		
-		
-		
+
+
+
 		/************************************************************
 		*																														*
 		*					 	FUNCIONES GENÉRICAS DE EJEMPLARES					  		*
@@ -264,11 +322,11 @@
 		************************************************************/
 		function getEjemplares() {
 			$result = pg_query($this->dbConnection,
-			"SELECT e.pkeje_id, e.eje_nombre, e.eje_sexo, date_part('year', current_date) - date_part('year', e.eje_fecha_nacimiento) as edad, r.raz_nombre, p.pel_nombre, h.har_nombre, 
+			"SELECT e.pkeje_id, e.eje_nombre, e.eje_sexo, date_part('year', current_date) - date_part('year', e.eje_fecha_nacimiento) as edad, r.raz_nombre, p.pel_nombre, h.har_nombre,
 			CASE  WHEN e.fkeje_mad_id IS NULL AND e.fkeje_pad_id IS NULL THEN CASE e.eje_sexo WHEN 'Y' THEN 'Madre' WHEN 'C' THEN 'Semental' END ELSE 'Hijo' END as afinidad
 			FROM ejemplar e, raza r, pelaje p, hara h
 			WHERE e.fkeje_raz_id = r.pkraz_id AND e.fkeje_pel_id = p.pkpel_id AND e.fkeje_har_id = h.pkhar_id");
-			
+
 			if(pg_last_error()){
 				return $this->result_construct("error",pg_last_error());
 			}	else {
@@ -279,9 +337,9 @@
 				return json_encode($respuesta);
 			}
 		}
-		
-		
-		
+
+
+
 		/************************************************************
 		*																														*
 		*					 FUNCIONES GENÉRICAS DE IMPLEMENTOS					  		*
@@ -290,7 +348,7 @@
 		function getImplementos() {
 			$result = pg_query($this->dbConnection,
 			"SELECT *	FROM implemento");
-			
+
 			if(pg_last_error()){
 				return $this->result_construct("error",pg_last_error());
 			}	else {
@@ -311,10 +369,10 @@
 		************************************************************/
 		function getUsuarioById($pkusu_id) {
 			$result = pg_query($this->dbConnection,
-			"SELECT u.pkusu_id,u.usu_nombre,encode(u.usu_imagen, 'base64') as usu_imagen,r.pkrol_id,r.rol_nombre 
-			FROM usuario u, rol r 
+			"SELECT u.pkusu_id,u.usu_nombre,encode(u.usu_imagen, 'base64') as usu_imagen,r.pkrol_id,r.rol_nombre
+			FROM usuario u, rol r
 			WHERE pkusu_id = '$pkusu_id' and fkusu_rol_id = pkrol_id");
-			
+
 			if(pg_last_error()){
 				return $this->result_construct("error",pg_last_error());
 			}	else {
@@ -325,8 +383,8 @@
 				return json_encode($respuesta);
 			}
 		}
-		
-		
+
+
 		function registerUsuario($username,$email,$password,$rol,$foto) {
 			pg_set_error_verbosity($this->dbConnection,PGSQL_ERRORS_DEFAULT);
 			if (!empty($foto)) {
@@ -347,7 +405,7 @@
 				return $this->result_construct("success",$id);
 			}
 		}
-		
+
 		function loginUsuario() {
 			$result = pg_query($this->dbConnection,
 			"SELECT pkusu_id,usu_nombre,usu_correo,usu_clave FROM usuario");

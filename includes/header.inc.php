@@ -127,7 +127,7 @@
       <!--[if lt IE 9]>
           <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
           <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-      <![endif]-->      
+      <![endif]-->
     <?php endif; ?>
   </head>
   <?php if ($basedir === 'pages' or $basedir === 'updates' or $basedir === 'creates'): ?>
@@ -229,7 +229,7 @@
                 <ul class="treeview-menu">
                   <li><a href="<?php echo $db->getRootUri() . 'pages/apuestas.php'; ?>"><i class="fa fa-circle-o"></i> Apuestas</a></li>
                   <li><a href="<?php echo $db->getRootUri() . 'pages/ejemplares.php'; ?>"><i class="fa fa-circle-o"></i> Ejemplares</a></li>
-                  <li><a href="<?php echo $db->getRootUri() . 'pages/entrenadores.php'; ?>p"><i class="fa fa-circle-o"></i> Entrenadores</a></li>
+                  <li><a href="<?php echo $db->getRootUri() . 'pages/entrenadores.php'; ?>"><i class="fa fa-circle-o"></i> Entrenadores</a></li>
                   <li><a href="<?php echo $db->getRootUri() . 'pages/implementos.php'; ?>"><i class="fa fa-circle-o"></i> Implementos</a></li>
                   <li><a href="<?php echo $db->getRootUri() . 'pages/jinetes.php'; ?>"><i class="fa fa-circle-o"></i> Jinetes</a></li>
                   <li><a href="<?php echo $db->getRootUri() . 'pages/studs.php'; ?>"><i class="fa fa-circle-o"></i> Studs</a></li>
@@ -252,7 +252,7 @@
             <?php else: ?>
                <?php $menuFileName = 'Creación de ' . basename($_SESSION['last_page'], '.php'); echo $menuFileName; ?>
             <?php endif; ?>
-            
+
             <!-- <small>Preview</small> -->
           </h1>
           <ol class="breadcrumb">

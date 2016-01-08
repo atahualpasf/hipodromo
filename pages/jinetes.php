@@ -1,5 +1,11 @@
 <?php
   include($_SERVER['DOCUMENT_ROOT'] . 'hipodromo/includes/header.inc.php');
+
+  if ($_SERVER["REQUEST_METHOD"] == "POST") {
+      if (!empty($_POST['pkjin_id'])) {
+          $answer = json_decode($db->deleteJinete($_POST['pkjin_id']));
+      }
+  }
 ?>
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
@@ -21,74 +27,47 @@
             <div class="col-xs-12">
               <div class="box">
                 <div class="box-header">
-                  <h3 class="box-title">Historial de los Jinetes: Ejemplar y Carrera ganada</h3>
+                  <h3 class="box-title">Descripción General</h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
-                  <table id="example1" class="table table-bordered table-striped">
+                  <table id="tableDefault" class="table table-bordered table-striped">
                     <thead>
                       <tr>
-                        <th>Jinete</th>
-                        <th>Ejemplar</th>
-                        <th>Carrera</th>
+                        <th>id</th>
+                        <th>cedula</th>
+                        <th>nombre completo</th>
+                        <th>altura</th>
+                        <th width="10%">editar</th>
+                        <th width="10%">eliminar</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>Trident</td>
-                        <td>Internet Explorer 4.0</td>
-                        <td>Internet Explorer 4.0</td>
-                      </tr>
-                      <tr>
-                        <td>Trident</td>
-                        <td>Internet Explorer 4.0</td>
-                        <td>Internet Explorer 4.0</td>
-                      </tr>
-                      <tr>
-                        <td>Trident</td>
-                        <td>Trident</td>
-                        <td>Trident</td>
-                      </tr>
-                      <tr>
-                        <td>Trident</td>
-                        <td>Trident</td>
-                        <td>Trident</td>
-                      </tr>
-                      <tr>
-                        <td>Trident</td>
-                        <td>Internet Explorer 4.0</td>
-                        <td>Internet Explorer 4.0</td>
-                      </tr>
-                      <tr>
-                        <td>Trident</td>
-                        <td>Internet Explorer 4.0</td>
-                        <td>Internet Explorer 4.0</td>
-                      </tr>
-                      <tr>
-                        <td>Trident</td>
-                        <td>Trident</td>
-                        <td>Trident</td>
-                      </tr>
-                      <tr>
-                        <td>Trident</td>
-                        <td>Trident</td>
-                        <td>Trident</td>
-                      </tr>
-                      <tr>
-                        <td>Trident</td>
-                        <td>Internet Explorer 4.0</td>
-                        <td>Internet Explorer 4.0</td>
-                      </tr>
-                      <tr>
-                        <td>Trident</td>
-                        <td>Internet Explorer 4.0</td>
-                        <td>Internet Explorer 4.0</td>
-                      </tr>
-                    </tbody>
+                      <?php
+                        $jinetesList = @json_decode($db->getJinetes());
+                        foreach ($jinetesList as $row) {
+                            echo "<tr>";
+                            echo "<td>$row->pkjin_id</td>";
+                            echo "<td>$row->jin_ci</td>";
+                            echo "<td>$row->jin_primer_nombre $row->jin_segundo_nombre $row->jin_primer_apellido $row->jin_segundo_apellido</td>";
+                            echo "<td>$row->jin_altura</td>";
+                            echo "<form id='updateForm' role='form' method='POST' action='updates/update-" . basename($_SERVER['PHP_SELF']) . "'>";
+                            echo "<td><button name='update_id' value='$row->pkjin_id' type='submit' form='updateForm' class='btn btn-dropbox btn-flat btn-block'><i class='fa fa-edit'></i></button></td>";
+                            echo "</form>";
+                            echo "<form id='deleteForm' role='form' method='POST' action='" . htmlentities($_SERVER['PHP_SELF']) . "'>";
+                            echo "<td><button name='pkjin_id' value='$row->pkjin_id' type='submit' form='deleteForm' class='btn btn-danger btn-flat btn-block'><i class='fa fa-trash'></i></button></td>";
+                            echo "</form>";
+                            echo "</tr>";
+                        }
+                      ?>
+                      </tbody>
                     <tfoot>
                       <tr>
-                        <th>Jinete</th>
-                        <th>Ejemplar</th>
-                        <th>Carrera</th>
+                        <th>id</th>
+                        <th>cedula</th>
+                        <th>nombre completo</th>
+                        <th>altura</th>
+                        <th width="10%">editar</th>
+                        <th width="10%">eliminar</th>
                       </tr>
                     </tfoot>
                   </table>
