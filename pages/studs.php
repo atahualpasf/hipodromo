@@ -36,6 +36,7 @@
                         <th>id</th>
                         <th>nombre</th>
                         <th>creación</th>
+                        <th>dirección</th>
                         <th width="10%">editar</th>
                         <th width="10%">eliminar</th>
                       </tr>
@@ -48,6 +49,7 @@
                             echo "<td>$row->pkstu_id</td>";
                             echo "<td>$row->stu_nombre</td>";
                             echo "<td>$row->stu_fecha_creacion</td>";
+                            echo "<td>$row->parroquia, $row->estado</td>";
                             echo "<form id='updateForm' role='form' method='POST' action='updates/update-" . basename($_SERVER['PHP_SELF']) . "'>";
                             echo "<td><button name='update_id' value='$row->pkstu_id' type='submit' form='updateForm' class='btn btn-dropbox btn-flat btn-block'><i class='fa fa-edit'></i></button></td>";
                             echo "</form>";
@@ -63,6 +65,7 @@
                         <th>id</th>
                         <th>nombre</th>
                         <th>creación</th>
+                        <th>dirección</th>
                         <th width="10%">editar</th>
                         <th width="10%">eliminar</th>
                       </tr>
@@ -72,7 +75,7 @@
               </div><!-- /.box -->
               <div class="box">
                 <div class="box-header">
-                  <h3 class="box-title">Descripcion de uniforme</h3>
+                  <h3 class="box-title">Descripción de uniforme</h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
                   <table id="tableDefault-1" class="table table-bordered table-striped">
@@ -128,7 +131,7 @@
               </div><!-- /.box -->
               <div class="box">
                 <div class="box-header">
-                  <h3 class="box-title">Descripcion de propietarios</h3>
+                  <h3 class="box-title">Descripción de propietarios</h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
                   <table id="tableDefault-2" class="table table-bordered table-hover">
