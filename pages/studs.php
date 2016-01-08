@@ -49,7 +49,7 @@
                             echo "<td>$row->stu_nombre</td>";
                             echo "<td>$row->stu_fecha_creacion</td>";
                             echo "<form id='updateForm' role='form' method='POST' action='updates/update-" . basename($_SERVER['PHP_SELF']) . "'>";
-                            echo "<td><button name='update_id' value='$row->pkstu_id' type='submit' form='updateForm' class='btn btn-info btn-flat btn-block'><i class='fa fa-edit'></i></button></td>";
+                            echo "<td><button name='update_id' value='$row->pkstu_id' type='submit' form='updateForm' class='btn btn-dropbox btn-flat btn-block'><i class='fa fa-edit'></i></button></td>";
                             echo "</form>";
                             echo "<form id='deleteForm' role='form' method='POST' action='" . htmlentities($_SERVER['PHP_SELF']) . "'>";
                             echo "<td><button name='pkstu_id' value='$row->pkstu_id' type='submit' form='deleteForm' class='btn btn-danger btn-flat btn-block'><i class='fa fa-trash'></i></button></td>"; 

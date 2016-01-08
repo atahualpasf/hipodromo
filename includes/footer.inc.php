@@ -32,7 +32,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
     <script src="<?php echo $db->getRootUri() . 'plugins/daterangepicker/daterangepicker.js'; ?>"></script>
     <!-- datepicker -->
-    <script src="<?php echo $db->getRootUri() . 'plugins/datepicker/bootstrap-datepicker.js'; ?>"></script>
+    <script src="<?php echo $db->getRootUri() . 'plugins/datepicker/bootstrap-datepicker.min.js'; ?>"></script>
+    <script src="<?php echo $db->getRootUri() . 'plugins/datepicker/locales/bootstrap-datepicker.es.js'; ?>"></script>
     <!-- Bootstrap WYSIHTML5 -->
     <script src="<?php echo $db->getRootUri() . 'plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js'; ?>"></script>
     <!-- Slimscroll -->
@@ -50,7 +51,6 @@
       var _ROOT = window.location.origin + '/hipodromo/';
       var _INCL_ROOT = _ROOT + 'includes/';
       var _DIST_ROOT = _ROOT + 'dist/';
-      var _PAGE_NAME = <?php echo "'".basename($_SERVER['PHP_SELF'], '.php')."'"; ?>
     </script>
     <!-- Hipodromo extras functionalities -->
     <script src="<?php echo $db->getRootUri() . 'dist/js/extras.js'; ?>"></script>
@@ -104,6 +104,8 @@
   </script>
   <!-- Bootstrap 3.3.5 -->
   <script src="<?php echo $db->getRootUri() . 'bootstrap/js/bootstrap.min.js'; ?>"></script>
+  <!-- Select2 -->
+  <script src="<?php echo $db->getRootUri() . 'plugins/select2/select2.full.min.js'; ?>"></script>
   <!-- Morris.js charts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
   <script src="<?php echo $db->getRootUri() . 'plugins/morris/morris.min.js'; ?>"></script>
@@ -118,7 +120,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
   <script src="<?php echo $db->getRootUri() . 'plugins/daterangepicker/daterangepicker.js'; ?>"></script>
   <!-- datepicker -->
-  <script src="<?php echo $db->getRootUri() . 'plugins/datepicker/bootstrap-datepicker.js'; ?>"></script>
+  <script src="<?php echo $db->getRootUri() . 'plugins/datepicker/bootstrap-datepicker.min.js'; ?>"></script>
+  <script src="<?php echo $db->getRootUri() . 'plugins/datepicker/locales/bootstrap-datepicker.es.js'; ?>"></script>
   <!-- Bootstrap WYSIHTML5 -->
   <script src="<?php echo $db->getRootUri() . 'plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js'; ?>"></script>
   <!-- Slimscroll -->
@@ -136,7 +139,6 @@
     var _ROOT = window.location.origin + '/hipodromo/';
     var _INCL_ROOT = _ROOT + 'includes/';
     var _DIST_ROOT = _ROOT + 'dist/';
-    var _PAGE_NAME = <?php echo "'".basename($_SERVER['PHP_SELF'], '.php')."'"; ?>
   </script>
   <!-- Hipodromo extras functionalities -->
   <script src="<?php echo $db->getRootUri() . 'dist/js/extras.js'; ?>"></script>

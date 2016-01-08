@@ -25,4 +25,19 @@ $(document).ready(function() {
     event.preventDefault();
     cerrarSesion(this);
   });
+  
+  //Initialize Select2 Elements
+  if ($('.select2').length > 0) {
+    $(".select2").select2();
+  }
+  
+  if ($('#stud-date').length > 0) {
+     $('#stud-date').datepicker({
+       format: 'yyyy-mm-dd',
+       autoclose: true,
+       minDate: "1980-01-01",
+       endDate: "2015-12-31",
+       language: 'es'
+     });
+  }
 });

@@ -86,6 +86,21 @@
 			}
 		}
 		
+		function getLugares(){	
+			$result = pg_query($this->dbConnection,"SELECT p.pklug_id,p.lug_nombre as parroquia, m.lug_nombre as municipio,e.lug_nombre as estado 
+			FROM lugar e, lugar m, lugar p WHERE p.fklug_lug_id = m.pklug_id and m.fklug_lug_id = e.pklug_id order by p.pklug_id");
+			if(pg_last_error()){
+				return $this->result_construct("error",pg_last_error());
+			}
+			else {
+				$respuesta = array();
+				while($row = pg_fetch_assoc($result)){
+					$respuesta[] = $row;
+				}
+				return json_encode($respuesta);
+			}		
+		}
+		
 		
 		
 		/************************************************************
@@ -151,6 +166,33 @@
 					$respuesta[] = $row;
 				}
 				return json_encode($respuesta);
+			}
+		}
+		
+		function getStudById($pkstu_id) {
+			$result = pg_query($this->dbConnection,
+			"SELECT *	FROM stud WHERE pkstu_id = '$pkstu_id'");
+			
+			if(pg_last_error()){
+				return $this->result_construct("error",pg_last_error());
+			}	else {
+				$respuesta = array();
+				while($row = pg_fetch_assoc($result)){
+					$respuesta[] = $row;
+				}
+				return json_encode($respuesta);
+			}
+		}
+		
+		function updateStud($pkstu_id, $fkstu_lug_id, $stu_nombre, $stu_fecha_creacion){
+			$result = pg_query($this->dbConnection,
+			"UPDATE stud
+			SET fkstu_lug_id='$fkstu_lug_id', stu_nombre='$stu_nombre', stu_fecha_creacion='$stu_fecha_creacion'
+			WHERE pkstu_id='$pkstu_id'");
+			if(pg_last_error()){
+				return $this->result_construct("error",pg_last_error());
+			}else{
+				return $this->result_construct("success","Actualizado exitosamente");
 			}
 		}
 		

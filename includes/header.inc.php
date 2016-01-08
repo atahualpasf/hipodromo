@@ -20,6 +20,7 @@
   }
   $basedir = strtolower(basename(dirname($_SERVER['SCRIPT_FILENAME'])));
   $basefile = strtolower(basename($_SERVER['SCRIPT_FILENAME'], '.php'));
+  $beasebackfile = basename($_SERVER['HTTP_REFERER']);
 ?>
 <!DOCTYPE html>
 <html>
@@ -40,23 +41,23 @@
       <!-- Ionicons -->
       <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'dist/ionicons-2.0.1/css/ionicons.min.css'; ?>">
       <?php if ($basefile === 'index'): ?>
+         <!-- iCheck -->
+         <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'plugins/iCheck/flat/blue.css'; ?>">
+         <!-- Morris chart -->
+         <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'plugins/morris/morris.css'; ?>">
+         <!-- jvectormap -->
+         <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'plugins/jvectormap/jquery-jvectormap-1.2.2.css'; ?>">
+         <!-- Date Picker -->
+         <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'plugins/datepicker/bootstrap-datepicker3.min.css'; ?>">
+         <!-- Daterange picker -->
+         <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'plugins/daterangepicker/daterangepicker-bs3.css'; ?>">
+         <!-- bootstrap wysihtml5 - text editor -->
+         <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css'; ?>">
         <!-- Theme style -->
         <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'dist/css/AdminLTE.min.css'; ?>">
         <!-- AdminLTE Skins. Choose a skin from the css/skins
              folder instead of downloading all of them to reduce the load. -->
         <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'dist/css/skins/_all-skins.min.css'; ?>">
-        <!-- iCheck -->
-        <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'plugins/iCheck/flat/blue.css'; ?>">
-        <!-- Morris chart -->
-        <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'plugins/morris/morris.css'; ?>">
-        <!-- jvectormap -->
-        <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'plugins/jvectormap/jquery-jvectormap-1.2.2.css'; ?>">
-        <!-- Date Picker -->
-        <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'plugins/datepicker/datepicker3.css'; ?>">
-        <!-- Daterange picker -->
-        <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'plugins/daterangepicker/daterangepicker-bs3.css'; ?>">
-        <!-- bootstrap wysihtml5 - text editor -->
-        <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css'; ?>">
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -99,11 +100,6 @@
       <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'dist/font-awesome-4.5.0/css/font-awesome.min.css'; ?>">
       <!-- Ionicons -->
       <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'dist/ionicons-2.0.1/css/ionicons.min.css'; ?>">
-      <!-- Theme style -->
-      <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'dist/css/AdminLTE.min.css'; ?>">
-      <!-- AdminLTE Skins. Choose a skin from the css/skins
-           folder instead of downloading all of them to reduce the load. -->
-      <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'dist/css/skins/_all-skins.min.css'; ?>">
       <!-- iCheck -->
       <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'plugins/iCheck/flat/blue.css'; ?>">
       <!-- Morris chart -->
@@ -111,11 +107,18 @@
       <!-- jvectormap -->
       <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'plugins/jvectormap/jquery-jvectormap-1.2.2.css'; ?>">
       <!-- Date Picker -->
-      <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'plugins/datepicker/datepicker3.css'; ?>">
+      <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'plugins/datepicker/bootstrap-datepicker3.min.css'; ?>">
       <!-- Daterange picker -->
       <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'plugins/daterangepicker/daterangepicker-bs3.css'; ?>">
+      <!-- Select2 -->
+      <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'plugins/select2/select2.min.css'; ?>">
       <!-- bootstrap wysihtml5 - text editor -->
       <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css'; ?>">
+      <!-- Theme style -->
+      <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'dist/css/AdminLTE.min.css'; ?>">
+      <!-- AdminLTE Skins. Choose a skin from the css/skins
+           folder instead of downloading all of them to reduce the load. -->
+      <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'dist/css/skins/_all-skins.min.css'; ?>">
       <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
       <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
       <!--[if lt IE 9]>
@@ -234,4 +237,25 @@
           </section>
           <!-- /.sidebar -->
         </aside>
+    <?php endif; ?>
+    <?php if ($basedir === 'updates' or $basedir === 'creates'): ?>
+      <!-- Content Wrapper. Contains page content -->
+      <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <h1>
+            <?php if ($basedir === 'updates'): ?>
+               <?php $menuFileName = 'Edición de ' . basename($_SERVER['HTTP_REFERER'], '.php'); echo $menuFileName; ?>
+            <?php else: ?>
+               <?php $menuFileName = 'Creación de ' . basename($_SERVER['HTTP_REFERER'], '.php'); echo $menuFileName; ?>
+            <?php endif; ?>
+            
+            <!-- <small>Preview</small> -->
+          </h1>
+          <ol class="breadcrumb">
+            <li><a href="<?php echo $db->getRootUri() . 'pages'; ?>"><i class="fa fa-dashboard"></i> Inicio</a></li>
+            <li><a href="<?php echo $_SERVER['HTTP_REFERER']; ?>"><?php echo basename($_SERVER['HTTP_REFERER'], '.php'); ?></a></li>
+            <li class="active"><?php echo $menuFileName; ?></li>
+          </ol>
+        </section>
     <?php endif; ?>
