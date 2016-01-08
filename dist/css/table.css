@@ -1,3 +1,7 @@
 table thead tr th, table tfoot tr th {
   text-transform: uppercase;
 }
+
+table thead tr th, table tfoot tr th, table tbody tr td {
+   text-align: center;
+}
