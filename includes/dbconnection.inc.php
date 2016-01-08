@@ -134,7 +134,8 @@
 		************************************************************/
 		function getEntrenadores() {
 			$result = pg_query($this->dbConnection,
-			"SELECT * FROM entrenador");
+			"SELECT e.*, p.lug_nombre as parroquia, e.lug_nombre as estado
+			FROM entrenador e, lugar p, lugar m, lugar e WHERE e.fkent_lug_id = p.pklug_id AND p.fklug_lug_id = m.pklug_id AND m.fklug_lug_id = e.pklug_id");
 
 			if(pg_last_error()){
 				return $this->result_construct("error",pg_last_error());
@@ -147,6 +148,42 @@
 			}
 		}
 
+		function getEntrenadorById($pkent_id) {
+			$result = pg_query($this->dbConnection,
+			"SELECT *	FROM entrenador WHERE pkent_id = '$pkent_id'");
+
+			if(pg_last_error()){
+				return $this->result_construct("error",pg_last_error());
+			}	else {
+				$respuesta = array();
+				while($row = pg_fetch_assoc($result)){
+					$respuesta[] = $row;
+				}
+				return json_encode($respuesta);
+			}
+		}
+
+		function updateEntrenador($pkent_id, $fkent_lug_id, $ent_ci, $ent_primer_nombre, $ent_segundo_nombre, $ent_primer_apellido, $ent_segundo_apellido, $ent_fecha_nacimiento){
+			$result = pg_query($this->dbConnection,
+			"UPDATE entrenador
+			SET fkent_lug_id='$fkent_lug_id', ent_ci='$ent_ci', ent_primer_nombre='$ent_primer_nombre', ent_segundo_nombre='$ent_segundo_nombre', ent_primer_apellido='$ent_primer_apellido', ent_segundo_apellido='$ent_segundo_apellido', ent_fecha_nacimiento='$ent_fecha_nacimiento'
+			WHERE pkent_id='$pkent_id'");
+			if(pg_last_error()){
+				return $this->result_construct("error",pg_last_error());
+			}else{
+				return $this->result_construct("success","Actualizado exitosamente");
+			}
+		}
+
+		function deleteEntrenador($id) {
+			$result = pg_query($this->dbConnection,
+				"DELETE FROM entrenador WHERE pkent_id='$id'");
+			if (pg_last_error()) {
+				return $this->result_construct("error",pg_last_error());
+			} else {
+				return $this->result_construct("success","Eliminado exitosamente");
+			}
+		}
 
 		/************************************************************
 		*																														*
