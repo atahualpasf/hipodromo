@@ -101,13 +101,65 @@
 			}
 		}
 
-
-
 		/************************************************************
 		*																														*
 		*					 	FUNCIONES GENÉRICAS DE PROPIETARIOS					  	*
 		*																														*
 		************************************************************/
+		function getPropietarios() {
+			$result = pg_query($this->dbConnection,
+			"SELECT pro.*, t.tel_codigo, t.tel_numero, p.lug_nombre as parroquia, e.lug_nombre as estado
+			FROM propietario pro, lugar p, lugar m, lugar e, telefono t
+			WHERE pro.fkpro_lug_id = p.pklug_id AND p.fklug_lug_id = m.pklug_id AND m.fklug_lug_id = e.pklug_id and t.fktel_pro_id = pro.pkpro_id");
+
+			if(pg_last_error()){
+				return $this->result_construct("error",pg_last_error());
+			}	else {
+				$respuesta = array();
+				while($row = pg_fetch_assoc($result)){
+					$respuesta[] = $row;
+				}
+				return json_encode($respuesta);
+			}
+		}
+
+		function getPropietarioById($pkent_id) {
+			$result = pg_query($this->dbConnection,
+			"SELECT *	FROM propietario WHERE pkent_id = '$pkent_id'");
+
+			if(pg_last_error()){
+				return $this->result_construct("error",pg_last_error());
+			}	else {
+				$respuesta = array();
+				while($row = pg_fetch_assoc($result)){
+					$respuesta[] = $row;
+				}
+				return json_encode($respuesta);
+			}
+		}
+
+		function updatePropietario($pkpro_id, $fkpro_lug_id, $pro_ci, $pro_primer_nombre, $pro_segundo_nombre, $pro_primer_apellido, $pro_segundo_apellido, $pro_fecha_nacimiento, $pro_correo){
+			$result = pg_query($this->dbConnection,
+			"UPDATE propietario
+			SET fkpro_lug_id='$fkpro_lug_id', pro_ci='$pro_ci', pro_primer_nombre='$pro_primer_nombre', pro_segundo_nombre='$pro_segundo_nombre', pro_primer_apellido='$pro_primer_apellido', pro_segundo_apellido='$pro_segundo_apellido', pro_fecha_nacimiento='$pro_fecha_nacimiento', pro_correo='$pro_correo'
+			WHERE pkpro_id='$pkpro_id'");
+			if(pg_last_error()){
+				return $this->result_construct("error",pg_last_error());
+			}else{
+				return $this->result_construct("success","Actualizado exitosamente");
+			}
+		}
+
+		function deletePropietario($id) {
+			$result = pg_query($this->dbConnection,
+				"DELETE FROM propietario WHERE pkpro_id='$id'");
+			if (pg_last_error()) {
+				return $this->result_construct("error",pg_last_error());
+			} else {
+				return $this->result_construct("success","Eliminado exitosamente");
+			}
+		}
+
 		function getPropietariosDetalladoByStud($pkstu_id) {
 			$result = pg_query($this->dbConnection,
 			"SELECT p.pro_primer_nombre, p.pro_segundo_nombre, p.pro_primer_apellido, p.pro_segundo_apellido, sp.stupro_porcentaje
@@ -457,5 +509,11 @@
 				return $this->result_construct("success", $respuesta);
 			}
 		}
-	}
+
+		/************************************************************
+		*																														*
+		*					 		  FUNCIONES GENÉRICAS DE TELEFONO				  		*
+		*																														*
+		************************************************************/
+
 ?>
