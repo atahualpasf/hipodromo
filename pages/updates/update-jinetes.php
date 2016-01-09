@@ -77,23 +77,6 @@
             <div class="box-body">
               <div class="box-body">
                 <div class="row">
-                  <div class="col-xs-6">
-                    <div class="form-group">
-                      <label>Dirección</label>
-                      <select name="fkjin_lug_id" class="form-control select2" style="width: 100%;">
-                        <?php
-                          $lugaresList = json_decode($db->getLugares());
-                          foreach ($lugaresList as $row) {
-                              if ($row->pklug_id == $fkjin_lug_id) {
-                                  echo "<option selected value='$row->pklug_id'>$row->estado, $row->municipio, $row->parroquia</option>";
-                              } else {
-                                  echo "<option value='$row->pklug_id'>$row->estado, $row->municipio, $row->parroquia</option>";
-                              }
-                          }
-                        ?>
-                      </select>
-                    </div><!-- /.form-group -->
-                  </div>
                   <div class="col-xs-3">
                      <label>Cédula</label>
                     <input name="jin_ci" type="text" class="form-control" placeholder="Cédula" onblur="this.value = this.value.trim() == '' ? this.defaultValue : this.value.trim();" value="<?php echo $jin_ci; ?>" required>
@@ -129,11 +112,11 @@
                   </div>
                 </div>
                 <div class="row">
-                  <div class="col-xs-3">
+                  <div class="col-xs-1">
                      <label>Altura</label>
                     <input name="jin_altura" type="text" class="form-control" placeholder="Altura" onblur="this.value = this.value.trim() == '' ? this.defaultValue : this.value.trim();" value="<?php echo $jin_altura; ?>" required>
                   </div>
-                  <div class="col-xs-3">
+                  <div class="col-xs-2">
                     <div class="form-group">
                       <label>Experiencia</label>
                       <select name="jin_experiencia" class="form-control select2" style="width: 100%;">
@@ -146,6 +129,23 @@
                                     echo "<option value='$row'>$row</option>";
                                 }
                             }
+                        ?>
+                      </select>
+                    </div><!-- /.form-group -->
+                  </div>
+                  <div class="col-xs-6">
+                    <div class="form-group">
+                      <label>Dirección</label>
+                      <select name="fkjin_lug_id" class="form-control select2" style="width: 100%;">
+                        <?php
+                          $lugaresList = json_decode($db->getLugares());
+                          foreach ($lugaresList as $row) {
+                              if ($row->pklug_id == $fkjin_lug_id) {
+                                  echo "<option selected value='$row->pklug_id'>$row->estado, $row->municipio, $row->parroquia</option>";
+                              } else {
+                                  echo "<option value='$row->pklug_id'>$row->estado, $row->municipio, $row->parroquia</option>";
+                              }
+                          }
                         ?>
                       </select>
                     </div><!-- /.form-group -->

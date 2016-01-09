@@ -72,23 +72,6 @@
             <div class="box-body">
               <div class="box-body">
                 <div class="row">
-                  <div class="col-xs-6">
-                    <div class="form-group">
-                      <label>Dirección</label>
-                      <select name="fkent_lug_id" class="form-control select2" style="width: 100%;">
-                        <?php
-                          $lugaresList = json_decode($db->getLugares());
-                          foreach ($lugaresList as $row) {
-                              if ($row->pklug_id == $fkent_lug_id) {
-                                  echo "<option selected value='$row->pklug_id'>$row->estado, $row->municipio, $row->parroquia</option>";
-                              } else {
-                                  echo "<option value='$row->pklug_id'>$row->estado, $row->municipio, $row->parroquia</option>";
-                              }
-                          }
-                        ?>
-                      </select>
-                    </div><!-- /.form-group -->
-                  </div>
                   <div class="col-xs-3">
                      <label>Cédula</label>
                     <input name="ent_ci" type="text" class="form-control" placeholder="Cédula" onblur="this.value = this.value.trim() == '' ? this.defaultValue : this.value.trim();" value="<?php echo $ent_ci; ?>" required>
@@ -121,6 +104,23 @@
                   <div class="col-xs-3">
                      <label>Segundo Apellido</label>
                     <input name="ent_segundo_apellido" type="text" class="form-control" placeholder="Segundo Apellido" onblur="this.value = this.value.trim() == '' ? this.defaultValue : this.value.trim();" value="<?php echo $ent_segundo_apellido; ?>">
+                  </div>
+                  <div class="col-xs-6">
+                    <div class="form-group">
+                      <label>Dirección</label>
+                      <select name="fkent_lug_id" class="form-control select2" style="width: 100%;">
+                        <?php
+                          $lugaresList = json_decode($db->getLugares());
+                          foreach ($lugaresList as $row) {
+                              if ($row->pklug_id == $fkent_lug_id) {
+                                  echo "<option selected value='$row->pklug_id'>$row->estado, $row->municipio, $row->parroquia</option>";
+                              } else {
+                                  echo "<option value='$row->pklug_id'>$row->estado, $row->municipio, $row->parroquia</option>";
+                              }
+                          }
+                        ?>
+                      </select>
+                    </div><!-- /.form-group -->
                   </div>
                 </div>
               </div><!-- /.box-body -->
