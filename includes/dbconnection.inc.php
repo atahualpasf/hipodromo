@@ -124,9 +124,9 @@
 			}
 		}
 
-		function getPropietarioById($pkent_id) {
+		function getPropietarioById($pkpro_id) {
 			$result = pg_query($this->dbConnection,
-			"SELECT *	FROM propietario WHERE pkent_id = '$pkent_id'");
+			"SELECT *	FROM propietario WHERE pkpro_id = '$pkpro_id'");
 
 			if(pg_last_error()){
 				return $this->result_construct("error",pg_last_error());
