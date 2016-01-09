@@ -108,7 +108,7 @@
 		************************************************************/
 		function getPropietarios() {
 			$result = pg_query($this->dbConnection,
-			"SELECT pro.*, t.tel_codigo, t.tel_numero, p.lug_nombre as parroquia, e.lug_nombre as estado
+			"SELECT pro.*, t.pktel_id, t.tel_codigo, t.tel_numero, p.lug_nombre as parroquia, e.lug_nombre as estado
 			FROM lugar p, lugar m, lugar e, propietario pro LEFT JOIN telefono t ON t.fktel_pro_id = pro.pkpro_id
 			WHERE pro.fkpro_lug_id = p.pklug_id AND p.fklug_lug_id = m.pklug_id AND m.fklug_lug_id = e.pklug_id
 			ORDER BY pkpro_id");
@@ -508,6 +508,38 @@
 					$respuesta[] = $row;
 				}
 				return $this->result_construct("success", $respuesta);
+			}
+		}
+
+		/************************************************************
+		*																														*
+		*					 	FUNCIONES GENÉRICAS DE TELEFONO							  	*
+		*																														*
+		************************************************************/
+		function getTelefonoById($pktel_id) {
+			$result = pg_query($this->dbConnection,
+			"SELECT *	FROM telefono WHERE pktel_id = '$pktel_id'");
+
+			if(pg_last_error()){
+				return $this->result_construct("error",pg_last_error());
+			}	else {
+				$respuesta = array();
+				while($row = pg_fetch_assoc($result)){
+					$respuesta[] = $row;
+				}
+				return json_encode($respuesta);
+			}
+		}
+
+		function updateTelefono($pktel_id, $fktel_pro_id, $fktel_ent_id, $fktel_jin_id, $fktel_caba_id, $fktel_inv_id, $fktel_taqu_id, $fktel_vet_id, $tel_codigo, $tel_numero){
+			$result = pg_query($this->dbConnection,
+			"UPDATE telefono
+			SET pktel_id='$pktel_id', fktel_pro_id='$fktel_pro_id', fktel_ent_id='$fktel_ent_id', fktel_jin_id='$fktel_jin_id', fktel_caba_id='$fktel_caba_id', fktel_inv_id='$fktel_inv_id', fktel_taqu_id='$fktel_taqu_id', fktel_vet_id='$fktel_vet_id', tel_codigo='$tel_codigo', tel_numero='$tel_numero'
+			WHERE pktel_id='$pktel_id'");
+			if(pg_last_error()){
+				return $this->result_construct("error",pg_last_error());
+			}else{
+				return $this->result_construct("success","Actualizado exitosamente");
 			}
 		}
 	}
