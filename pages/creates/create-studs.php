@@ -33,45 +33,68 @@
       <!-- left column -->
       <div class="col-md-12">
         <!-- general form elements -->
-        <div class="box box-info">
+        <div class="box box-success">
           <!-- form start -->
-          <form id="create-stud" action="#">
-             <div>
-                 <h3>Account</h3>
-                 <section>
-                     <label for="userName">User name *</label>
-                     <input id="userName" name="userName" type="text" class="required">
-                     <label for="password">Password *</label>
-                     <input id="password" name="password" type="text" class="required">
-                     <label for="confirm">Confirm Password *</label>
-                     <input id="confirm" name="confirm" type="text" class="required">
-                     <p>(*) Mandatory</p>
-                 </section>
-                 <h3>Profile</h3>
-                 <section>
-                     <label for="name">First name *</label>
-                     <input id="name" name="name" type="text" class="required">
-                     <label for="surname">Last name *</label>
-                     <input id="surname" name="surname" type="text" class="required">
-                     <label for="email">Email *</label>
-                     <input id="email" name="email" type="text" class="required email">
-                     <label for="address">Address</label>
-                     <input id="address" name="address" type="text">
-                     <p>(*) Mandatory</p>
-                 </section>
-                 <h3>Hints</h3>
-                 <section>
-                     <ul>
-                         <li>Foo</li>
-                         <li>Bar</li>
-                         <li>Foobar</li>
-                     </ul>
-                 </section>
-                 <h3>Finish</h3>
-                 <section>
+          <form id="create-stud" role="form" method="post" action="#">
+             <mainstep>
+                 <h3>stud</h3>
+                 <fieldstep>
+                    <div class="row">
+                       <div class="col-md-6">
+                           <label>Dirección</label>
+                           <input name="fkstu_lug_id" placeholder="Dirección del stud" type="text" class="required" required>
+                       </div>
+                       <div class="col-md-3">
+                           <label>Nombre</label>
+                           <input name="stu_nombre" placeholder="Nombre de stud" type="text" class="required" required>
+                       </div>
+                       <div class="col-md-3">
+                           <div class="form-group">
+                            <label>Fecha de creación:</label>
+                            <div class="input-group">
+                              <div class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                              </div>
+                              <input name="stu_fecha_creacion" placeholder="2000-01-01" id="stud-date" type="text" class="form-control pull-right date" value="2000-01-01" readonly>
+                            </div><!-- /.input group -->
+                           </div><!-- /.form group -->
+                       </div>
+                    </div>
+                 </fieldstep>
+                 <h3>uniforme</h3>
+                 <fieldstep>
+                    <div class="row">
+                       <div class="col-md-6">
+                           <label for="userName">User name *</label>
+                           <input id="userName" name="userName" type="text" class="required">
+                       </div>
+                       <div class="col-md-3">
+                           <label for="password">Password *</label>
+                           <input id="password" name="password" type="text" class="required">
+                       </div>
+                       <div class="col-md-3">
+                           <label for="confirm">Confirm Password *</label>
+                           <input id="confirm" name="confirm" type="text" class="required">
+                       </div>
+                       <div class="col-md-6">
+                           <label for="userName">User name *</label>
+                           <input id="userName" name="userName" type="text" class="required">
+                       </div>
+                       <div class="col-md-3">
+                           <label for="password">Password *</label>
+                           <input id="password" name="password" type="text" class="required">
+                       </div>
+                       <div class="col-md-3">
+                           <label for="confirm">Confirm Password *</label>
+                           <input id="confirm" name="confirm" type="text" class="required">
+                       </div>
+                    </div>
+                 </fieldstep>
+                 <h3>propietarios</h3>
+                 <fieldstep>
                      <input id="acceptTerms" name="acceptTerms" type="checkbox" class="required"> <label for="acceptTerms">I agree with the Terms and Conditions.</label>
-                 </section>
-             </div>
+                 </fieldstep>
+             </mainstep>
          </form>
        </div><!-- /.box -->
 
