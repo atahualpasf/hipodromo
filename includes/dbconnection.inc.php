@@ -438,7 +438,7 @@
 
 		function getEjemplarById($pkeje_id) {
 			$result = pg_query($this->dbConnection,
-			"SELECT e.*, r.raz_nombre, p.pel_nombre, h.har_nombre,
+			"SELECT e.*, r.raz_nombre, p.pel_nombre, h.har_nombre
 			FROM ejemplar e, raza r, pelaje p, hara h
 			WHERE e.fkeje_raz_id = r.pkraz_id AND e.fkeje_pel_id = p.pkpel_id AND e.fkeje_har_id = h.pkhar_id AND pkeje_id = '$pkeje_id'");
 
@@ -571,6 +571,66 @@
 				return $this->result_construct("error",pg_last_error());
 			}else{
 				return $this->result_construct("success","Actualizado exitosamente");
+			}
+		}
+
+		/************************************************************
+		*																														*
+		*					 	FUNCIONES GENÉRICAS DE HARA									  	*
+		*																														*
+		************************************************************/
+		function getHaras(){
+			$result = pg_query($this->dbConnection,
+			"SELECT * FROM hara");
+			if(pg_last_error()){
+				return $this->result_construct("error",pg_last_error());
+			}
+			else {
+				$respuesta = array();
+				while($row = pg_fetch_assoc($result)){
+					$respuesta[] = $row;
+				}
+				return json_encode($respuesta);
+			}
+		}
+
+		/************************************************************
+		*																														*
+		*					 	FUNCIONES GENÉRICAS DE PELAJE								  	*
+		*																														*
+		************************************************************/
+		function getPelajes(){
+			$result = pg_query($this->dbConnection,
+			"SELECT * FROM pelaje");
+			if(pg_last_error()){
+				return $this->result_construct("error",pg_last_error());
+			}
+			else {
+				$respuesta = array();
+				while($row = pg_fetch_assoc($result)){
+					$respuesta[] = $row;
+				}
+				return json_encode($respuesta);
+			}
+		}
+
+		/************************************************************
+		*																														*
+		*					 	FUNCIONES GENÉRICAS DE RAZA									  	*
+		*																														*
+		************************************************************/
+		function getRazas(){
+			$result = pg_query($this->dbConnection,
+			"SELECT * FROM raza");
+			if(pg_last_error()){
+				return $this->result_construct("error",pg_last_error());
+			}
+			else {
+				$respuesta = array();
+				while($row = pg_fetch_assoc($result)){
+					$respuesta[] = $row;
+				}
+				return json_encode($respuesta);
 			}
 		}
 	}
