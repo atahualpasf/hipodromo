@@ -91,7 +91,7 @@
                         <div class="input-group-addon">
                           <i class="fa fa-calendar"></i>
                         </div>
-                        <input name="stu_fecha_creacion" id="stud-date" type="text" class="form-control pull-right" value="<?php echo $stu_fecha_creacion; ?>">
+                        <input id="stu_fecha_creacion" name="stu_fecha_creacion" type="text" class="form-control pull-right" value="<?php echo $stu_fecha_creacion; ?>" readonly>
                       </div><!-- /.input group -->
                     </div><!-- /.form group -->
                   </div>

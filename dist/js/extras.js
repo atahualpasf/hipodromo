@@ -31,8 +31,45 @@ $(document).ready(function() {
     $(".select2").select2();
   }
   
-  if ($('#stud-date').length > 0) {
-     $('#stud-date').datepicker({
+  //Initialize datepicker
+  if ($('#stu_fecha_creacion').length > 0) {
+     $('#stu_fecha_creacion').datepicker({
+       format: 'yyyy-mm-dd',
+       autoclose: true,
+       minDate: "1980-01-01",
+       endDate: "2015-12-31",
+       language: 'es'
+     });
+  }
+  if ($('#pro_fecha_nacimiento').length > 0) {
+     $('#pro_fecha_nacimiento').datepicker({
+       format: 'yyyy-mm-dd',
+       autoclose: true,
+       minDate: "1980-01-01",
+       endDate: "2015-12-31",
+       language: 'es'
+     });
+  }
+  if ($('#ent_fecha_nacimiento').length > 0) {
+     $('#ent_fecha_nacimiento').datepicker({
+       format: 'yyyy-mm-dd',
+       autoclose: true,
+       minDate: "1980-01-01",
+       endDate: "2015-12-31",
+       language: 'es'
+     });
+  }
+  if ($('#jin_fecha_nacimiento').length > 0) {
+     $('#jin_fecha_nacimiento').datepicker({
+       format: 'yyyy-mm-dd',
+       autoclose: true,
+       minDate: "1980-01-01",
+       endDate: "2015-12-31",
+       language: 'es'
+     });
+  }
+  if ($('#eje_fecha_nacimiento').length > 0) {
+     $('#eje_fecha_nacimiento').datepicker({
        format: 'yyyy-mm-dd',
        autoclose: true,
        minDate: "1980-01-01",

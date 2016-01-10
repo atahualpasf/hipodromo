@@ -95,7 +95,7 @@
                         <div class="input-group-addon">
                           <i class="fa fa-calendar"></i>
                         </div>
-                        <input name="jin_fecha_nacimiento" id="jinete-date" type="text" class="form-control pull-right" value="<?php echo $jin_fecha_nacimiento; ?>">
+                        <input id="jin_fecha_nacimiento" name="jin_fecha_nacimiento" type="text" class="form-control pull-right" value="<?php echo $jin_fecha_nacimiento; ?>" readonly>
                       </div><!-- /.input group -->
                     </div><!-- /.form group -->
                   </div>
