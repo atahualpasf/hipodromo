@@ -60,18 +60,16 @@
       if (!empty($_POST['update_id'])) {
           $propietariosList = json_decode($db->getPropietarioById($_POST['update_id']));
           setValues($propietariosList);
-          // $telefonosList = json_decode($db->getTelefonoById($_POST['update_id']));
-          // setValues($telefonosList);
       } elseif(!empty($_POST['pkpro_id'])) {
-          setValuesWhenSubmitIsClicked();
-          $answer = @json_decode($db->updatePropietario($pkpro_id, $fkpro_lug_id, $pro_ci, $pro_primer_nombre, $pro_segundo_nombre, $pro_primer_apellido, $pro_segundo_apellido, $pro_fecha_nacimiento, $pro_correo));
+        setValuesWhenSubmitIsClicked();
+        $answer = @json_decode($db->updatePropietario($pkpro_id, $fkpro_lug_id, $pro_ci, $pro_primer_nombre, $pro_segundo_nombre, $pro_primer_apellido, $pro_segundo_apellido, $pro_fecha_nacimiento, $pro_correo));
+        if ($answer->action != "error") {
+          $answer = @json_decode($db->updateTelefono($pkpro_id, $tel_codigo, $tel_numero));
           if ($answer->action != "error") {
-            // $answer = @json_decode($db->updateTelefono($pktel_id, $fktel_pro_id, $fktel_ent_id, $fktel_jin_id, $fktel_caba_id, $fktel_inv_id, $fktel_taqu_id, $fktel_vet_id, $tel_codigo, $tel_numero));
-            // if ($answer->action != "error") {
-              echo '<meta http-equiv="refresh" content="0;url=../propietarios.php">';
-              die();
-            // }
+            echo '<meta http-equiv="refresh" content="0;url=../propietarios.php">';
+            die();
           }
+        }
       }
   } else {
     echo '<meta http-equiv="refresh" content="0;url=../propietarios.php">';
@@ -139,7 +137,7 @@
                   </div>
                   <div class="col-xs-1">
                      <label>Cod</label>
-                    <input name="tel_cod" type="text" class="form-control" placeholder="Cod" onblur="this.value = this.value.trim() == '' ? this.defaultValue : this.value.trim();" value="<?php echo $tel_codigo; ?>">
+                    <input name="tel_codigo" type="text" class="form-control" placeholder="Cod" onblur="this.value = this.value.trim() == '' ? this.defaultValue : this.value.trim();" value="<?php echo $tel_codigo; ?>">
                   </div>
                   <div class="col-xs-2">
                      <label>Telefono</label>
@@ -164,15 +162,14 @@
                   </div>
                 </div>
               </div><!-- /.box-body -->
-
-               <div class="box-footer">
-                 <div class="col-xs-offset-3 col-xs-3">
-                    <button name="pkpro_id" value="<?php echo $pkpro_id; ?>" type="submit" class="btn btn-dropbox btn-block btn-flat uppercase">Editar</button>
-                 </div>
-                 <div class="col-xs-3">
-                    <a href="<?php echo '../' . $_SESSION['last_page']; ?>" class="btn btn-default btn-block btn-flat uppercase">Cancelar</a>
-                 </div>
+              <div class="box-footer">
+               <div class="col-xs-offset-3 col-xs-3">
+                  <button name="pkpro_id" value="<?php echo $pkpro_id; ?>" type="submit" class="btn btn-dropbox btn-block btn-flat uppercase">Editar</button>
                </div>
+               <div class="col-xs-3">
+                  <a href="<?php echo '../' . $_SESSION['last_page']; ?>" class="btn btn-default btn-block btn-flat uppercase">Cancelar</a>
+               </div>
+             </div>
             </div><!-- /.box-body -->
           </form>
        </div><!-- /.box -->

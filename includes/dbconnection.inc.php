@@ -518,26 +518,11 @@
 		*					 	FUNCIONES GENÉRICAS DE TELEFONO							  	*
 		*																														*
 		************************************************************/
-		function getTelefonoById($pktel_id) {
-			$result = pg_query($this->dbConnection,
-			"SELECT *	FROM telefono WHERE pktel_id = '$pktel_id'");
-
-			if(pg_last_error()){
-				return $this->result_construct("error",pg_last_error());
-			}	else {
-				$respuesta = array();
-				while($row = pg_fetch_assoc($result)){
-					$respuesta[] = $row;
-				}
-				return json_encode($respuesta);
-			}
-		}
-
-		function updateTelefono($pktel_id, $fktel_pro_id, $fktel_ent_id, $fktel_jin_id, $fktel_caba_id, $fktel_inv_id, $fktel_taqu_id, $fktel_vet_id, $tel_codigo, $tel_numero){
+		function updateTelefono($id, $tel_codigo, $tel_numero){
 			$result = pg_query($this->dbConnection,
 			"UPDATE telefono
-			SET pktel_id='$pktel_id', fktel_pro_id='$fktel_pro_id', fktel_ent_id='$fktel_ent_id', fktel_jin_id='$fktel_jin_id', fktel_caba_id='$fktel_caba_id', fktel_inv_id='$fktel_inv_id', fktel_taqu_id='$fktel_taqu_id', fktel_vet_id='$fktel_vet_id', tel_codigo='$tel_codigo', tel_numero='$tel_numero'
-			WHERE pktel_id='$pktel_id'");
+			SET tel_codigo='$tel_codigo', tel_numero='$tel_numero'
+			WHERE fktel_pro_id='$id' OR fktel_ent_id='$id' OR fktel_jin_id='$id' OR fktel_caba_id='$id' OR fktel_inv_id='$id' OR fktel_taqu_id='$id' OR fktel_vet_id='$id'");
 			if(pg_last_error()){
 				return $this->result_construct("error",pg_last_error());
 			}else{
