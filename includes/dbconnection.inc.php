@@ -453,10 +453,10 @@
 			}
 		}
 
-		function updateEjemplar($pkeje_id, $fkeje_har_id, $fkeje_pel_id, $fkeje_raz_id, $fkeje_mad_id, $fkeje_pad_id, $eje_fecha_nacimiento, $eje_nombre, $eje_precio, $eje_sexo, $eje_tatuaje){
+		function updateEjemplar($pkeje_id, $fkeje_har_id, $fkeje_pel_id, $fkeje_raz_id, /*$fkeje_mad_id, $fkeje_pad_id,*/ $eje_fecha_nacimiento, $eje_nombre, $eje_precio, $eje_sexo, $eje_tatuaje){
 			$result = pg_query($this->dbConnection,
 			"UPDATE ejemplar
-			SET pkeje_id='$pkeje_id', fkeje_har_id='$fkeje_har_id', fkeje_pel_id='$fkeje_pel_id', fkeje_raz_id='$fkeje_raz_id', fkeje_mad_id='$fkeje_mad_id', fkeje_pad_id='$fkeje_pad_id', eje_fecha_nacimiento='$eje_fecha_nacimiento', eje_nombre='$eje_nombre', eje_precio='$eje_precio', eje_sexo='$eje_sexo', eje_tatuaje='$eje_tatuaje'
+			SET pkeje_id='$pkeje_id', fkeje_har_id='$fkeje_har_id', fkeje_pel_id='$fkeje_pel_id', fkeje_raz_id='$fkeje_raz_id', /*fkeje_mad_id='$fkeje_mad_id', fkeje_pad_id='$fkeje_pad_id',*/ eje_fecha_nacimiento='$eje_fecha_nacimiento', eje_nombre='$eje_nombre', eje_precio='$eje_precio', eje_sexo='$eje_sexo', eje_tatuaje='$eje_tatuaje'
 			WHERE pkeje_id='$pkeje_id'");
 			if(pg_last_error()){
 				return $this->result_construct("error",pg_last_error());

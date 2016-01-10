@@ -15,8 +15,8 @@
       $GLOBALS['fkeje_har_id'] = $ejemplaresList[0]->fkeje_har_id;
       $GLOBALS['fkeje_pel_id'] = $ejemplaresList[0]->fkeje_pel_id;
       $GLOBALS['fkeje_raz_id'] = $ejemplaresList[0]->fkeje_raz_id;
-      $GLOBALS['fkeje_mad_id'] = $ejemplaresList[0]->fkeje_mad_id;
-      $GLOBALS['fkeje_pad_id'] = $ejemplaresList[0]->fkeje_pad_id;
+      // $GLOBALS['fkeje_mad_id'] = $ejemplaresList[0]->fkeje_mad_id;
+      // $GLOBALS['fkeje_pad_id'] = $ejemplaresList[0]->fkeje_pad_id;
       $GLOBALS['eje_fecha_nacimiento'] = $ejemplaresList[0]->eje_fecha_nacimiento;
       $GLOBALS['eje_nombre'] = $ejemplaresList[0]->eje_nombre;
       $GLOBALS['eje_precio'] = $ejemplaresList[0]->eje_precio;
@@ -29,8 +29,8 @@
       $GLOBALS['fkeje_har_id'] = test_input($_POST['fkeje_har_id']);
       $GLOBALS['fkeje_pel_id'] = test_input($_POST['fkeje_pel_id']);
       $GLOBALS['fkeje_raz_id'] = test_input($_POST['fkeje_raz_id']);
-      $GLOBALS['fkeje_mad_id'] = test_input($_POST['fkeje_mad_id']);
-      $GLOBALS['fkeje_pad_id'] = test_input($_POST['fkeje_pad_id']);
+      // $GLOBALS['fkeje_mad_id'] = test_input($_POST['fkeje_mad_id']);
+      // $GLOBALS['fkeje_pad_id'] = test_input($_POST['fkeje_pad_id']);
       $GLOBALS['eje_fecha_nacimiento'] = test_input($_POST['eje_fecha_nacimiento']);
       $GLOBALS['eje_nombre'] = test_input($_POST['eje_nombre']);
       $GLOBALS['eje_precio'] = test_input($_POST['eje_precio']);
@@ -44,14 +44,14 @@
           setValues($ejemplaresList);
       } elseif(!empty($_POST['pkeje_id'])) {
         setValuesWhenSubmitIsClicked();
-        $answer = @json_decode($db->updateEjemplar($pkeje_id, $fkeje_har_id, $fkeje_pel_id, $fkeje_raz_id, $fkeje_mad_id, $fkeje_pad_id, $eje_fecha_nacimiento, $eje_nombre, $eje_precio, $eje_sexo, $eje_tatuaje));
+        $answer = @json_decode($db->updateEjemplar($pkeje_id, $fkeje_har_id, $fkeje_pel_id, $fkeje_raz_id, /*$fkeje_mad_id, $fkeje_pad_id,*/ $eje_fecha_nacimiento, $eje_nombre, $eje_precio, $eje_sexo, $eje_tatuaje));
         if ($answer->action != "error") {
-          echo '<meta http-equiv="refresh" content="0;url=../entrenadores.php">';
+          echo '<meta http-equiv="refresh" content="0;url=../ejemplares.php">';
           die();
         }
       }
   } else {
-    echo '<meta http-equiv="refresh" content="0;url=../entrenadores.php">';
+    echo '<meta http-equiv="refresh" content="0;url=../ejemplares.php">';
     die();
   }
 ?>
@@ -167,23 +167,21 @@
                     <input name="eje_tatuaje" type="text" class="form-control" placeholder="Tatuaje" onblur="this.value = this.value.trim() == '' ? this.defaultValue : this.value.trim();" value="<?php echo $eje_tatuaje; ?>">
                   </div>
                 </div>
-              </div>
-              <div class="row">
-                <div class="col-xs-3">
-                   <div class="form-group">
-                    <label>Precio</label>
-                    <div class="input-group">
-                      <div class="input-group-addon">
-                        Bs.
-                      </div>
-                      <input name="eje_precio" id="ejemplar-precio" type="text" class="form-control pull-right" value="<?php echo $eje_precio; ?>">
-                    </div><!-- /.input group -->
-                  </div><!-- /.form group -->
+                <div class="row">
+                  <div class="col-xs-3">
+                     <div class="form-group">
+                      <label>Precio</label>
+                      <div class="input-group">
+                        <div class="input-group-addon">
+                          Bs.
+                        </div>
+                        <input name="eje_precio" id="ejemplar-precio" type="text" class="form-control pull-right" value="<?php echo $eje_precio; ?>">
+                      </div><!-- /.input group -->
+                    </div><!-- /.form group -->
+                  </div>
                 </div>
               </div>
-            </div><!-- /.box-body -->
-
-               <div class="box-footer">
+              <div class="box-footer">
                  <div class="col-xs-offset-3 col-xs-3">
                     <button name="pkeje_id" value="<?php echo $pkeje_id; ?>" type="submit" class="btn btn-dropbox btn-block btn-flat uppercase">Editar</button>
                  </div>
@@ -194,7 +192,6 @@
             </div><!-- /.box-body -->
           </form>
        </div><!-- /.box -->
-
      </div><!--/.col (left) -->
     </div>   <!-- /.row -->
   </section><!-- /.content -->
