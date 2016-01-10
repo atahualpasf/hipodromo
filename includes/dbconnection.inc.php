@@ -187,6 +187,16 @@
 		*					 	FUNCIONES GENÉRICAS DE ENTRENADORES			*
 		*																				*
 		************************************************************/
+		function createEntrenador($fkent_lug_id, $ent_ci, $ent_primer_nombre, $ent_segundo_nombre, $ent_primer_apellido, $ent_segundo_apellido, $ent_fecha_nacimiento){
+			$result = pg_query($this->dbConnection,
+			"INSERT INTO entrenador VALUES(nextval('entrenador_pkent_id_seq'::regclass), '$fkent_lug_id', '$ent_ci', '$ent_primer_nombre', '$ent_segundo_nombre', '$ent_primer_apellido', '$ent_segundo_apellido', '$ent_fecha_nacimiento')");
+			if(pg_last_error()){
+				return $this->result_construct("error",pg_last_error());
+			}else{
+				return $this->result_construct("success","Actualizado exitosamente");
+			}
+		}
+		
 		function getEntrenadores() {
 			$result = pg_query($this->dbConnection,
 			"SELECT ent.*, t.tel_codigo, t.tel_numero, p.lug_nombre as parroquia, e.lug_nombre as estado
