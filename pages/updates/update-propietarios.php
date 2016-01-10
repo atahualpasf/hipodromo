@@ -1,9 +1,9 @@
 <?php
   include($_SERVER['DOCUMENT_ROOT'] . 'hipodromo/includes/header.inc.php');
 
-  $pkpro_id = $fkpro_lug_id = $pro_ci = $pro_primer_nombre = "";
-  $pro_segundo_nombre = $pro_primer_apellido = $pro_segundo_apellido = $pro_fecha_nacimiento = $pro_correo = "";
-  /*$pktel_id = $fkpro_tel_id = $fktel_ent_id = $fktel_jin_id = $fktel_caba_id = $fktel_inv_id = $fktel_taqu_id = $fktel_vet_id = */$tel_codigo = $tel_numero = "";
+  $pkpro_id = $fkpro_lug_id = $pro_ci = $pro_primer_nombre = $pro_segundo_nombre = $pro_primer_apellido = "";
+  $pro_segundo_apellido = $pro_fecha_nacimiento = $pro_correo = $tel_codigo = $tel_numero = "";
+  /*$pktel_id = $fkpro_tel_id = $fktel_ent_id = $fktel_jin_id = $fktel_caba_id = $fktel_inv_id = $fktel_taqu_id = $fktel_vet_id = */
 
   function test_input($data) {
       $data = trim($data);
@@ -24,12 +24,12 @@
       $GLOBALS['pro_correo'] = $propietariosList[0]->pro_correo;
       // $GLOBALS['pktel_id'] = $propietariosList[0]->pktel_id;
       // $GLOBALS['fktel_pro_id'] = $propietariosList[0]->fktel_pro_id;
-      // // $GLOBALS['fktel_ent_id'] = $propietariosList[0]->$fktel_ent_id;
-      // // $GLOBALS['fktel_jin_id'] = $propietariosList[0]->$fktel_jin_id;
-      // // $GLOBALS['fktel_caba_id'] = $propietariosList[0]->$fktel_caba_id;
-      // // $GLOBALS['fktel_inv_id'] = $propietariosList[0]->$fktel_inv_id;
-      // // $GLOBALS['fktel_taqu_id'] = $propietariosList[0]->$fktel_taqu_id;
-      // // $GLOBALS['fktel_vet_id'] = $propietariosList[0]->$fktel_vet_id;
+      // $GLOBALS['fktel_ent_id'] = $propietariosList[0]->$fktel_ent_id;
+      // $GLOBALS['fktel_jin_id'] = $propietariosList[0]->$fktel_jin_id;
+      // $GLOBALS['fktel_caba_id'] = $propietariosList[0]->$fktel_caba_id;
+      // $GLOBALS['fktel_inv_id'] = $propietariosList[0]->$fktel_inv_id;
+      // $GLOBALS['fktel_taqu_id'] = $propietariosList[0]->$fktel_taqu_id;
+      // $GLOBALS['fktel_vet_id'] = $propietariosList[0]->$fktel_vet_id;
       $GLOBALS['tel_codigo'] = $propietariosList[0]->tel_codigo;
       $GLOBALS['tel_numero'] = $propietariosList[0]->tel_numero;
   }
