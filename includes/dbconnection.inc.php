@@ -764,5 +764,46 @@
 			}
 		}
 		
+		/************************************************************
+		*																														*
+		*					 	FUNCIONES GENÉRICAS DE CORREDORES								*
+		*																														*
+		************************************************************/
+		function getCorredoresByCarrera(){
+			$result = pg_query($this->dbConnection,
+			"SELECT e.eje_nombre, car.pkcar_id
+			FROM corredor c, carrera car, ejemplar e
+			WHERE c.fkcor_eje_id = e.pkeje_id AND c.fkcor_car_id = car.pkcar_id AND car.pkcar_id = '$id'");
+			if(pg_last_error()){
+				return $this->result_construct("error",pg_last_error());
+			}
+			else {
+				$respuesta = array();
+				while($row = pg_fetch_assoc($result)){
+					$respuesta[] = $row;
+				}
+				return json_encode($respuesta);
+			}
+		}
+		
+		/************************************************************
+		*																														*
+		*					 	FUNCIONES GENÉRICAS DE CARRERAS									*
+		*																														*
+		************************************************************/
+		function getCorredoresByCarrera(){
+			$result = pg_query($this->dbConnection,
+			"SELECT * FROM carrera");
+			if(pg_last_error()){
+				return $this->result_construct("error",pg_last_error());
+			}
+			else {
+				$respuesta = array();
+				while($row = pg_fetch_assoc($result)){
+					$respuesta[] = $row;
+				}
+				return json_encode($respuesta);
+			}
+		}
 	}
 ?>
