@@ -34,7 +34,7 @@
                    <p>Entrenadores Registrados</p>
                  </div>
                  <div class="icon">
-                   <i class="ion ion-plus"></i>
+                   <i class="ion ion-person-add"></i>
                  </div>
                  <?php echo "<a href='creates/create-" . $basefile . ".php' class='small-box-footer'>"; ?>
                    Agregar entreador <i class="fa fa-arrow-circle-right"></i>

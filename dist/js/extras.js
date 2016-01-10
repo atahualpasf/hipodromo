@@ -45,8 +45,8 @@ $(document).ready(function() {
      $('#pro_fecha_nacimiento').datepicker({
        format: 'yyyy-mm-dd',
        autoclose: true,
-       minDate: "1980-01-01",
-       endDate: "2015-12-31",
+       minDate: "1940-01-01",
+       endDate: "1997-12-31",
        language: 'es'
      });
   }
@@ -54,8 +54,8 @@ $(document).ready(function() {
      $('#ent_fecha_nacimiento').datepicker({
        format: 'yyyy-mm-dd',
        autoclose: true,
-       minDate: "1980-01-01",
-       endDate: "2015-12-31",
+       minDate: "1960-01-01",
+       endDate: "1995-12-31",
        language: 'es'
      });
   }
@@ -63,8 +63,8 @@ $(document).ready(function() {
      $('#jin_fecha_nacimiento').datepicker({
        format: 'yyyy-mm-dd',
        autoclose: true,
-       minDate: "1980-01-01",
-       endDate: "2015-12-31",
+       minDate: "1975-01-01",
+       endDate: "1997-12-31",
        language: 'es'
      });
   }
@@ -72,7 +72,7 @@ $(document).ready(function() {
      $('#eje_fecha_nacimiento').datepicker({
        format: 'yyyy-mm-dd',
        autoclose: true,
-       minDate: "1980-01-01",
+       minDate: "1950-01-01",
        endDate: "2015-12-31",
        language: 'es'
      });
