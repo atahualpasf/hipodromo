@@ -16,9 +16,9 @@
 		}
 
 		/************************************************************
-		*																				*
-		*						FUNCIONES GENÉRICAS DE MI CLASE 				*
-		*																				*
+		*																														*
+		*						FUNCIONES GENÉRICAS DE MI CLASE 								*
+		*																														*
 		************************************************************/
 		public function getIncludesPath() {
       return $this->_INCL_ROOT;
@@ -37,9 +37,9 @@
 		}
 
 		/************************************************************
-		*																				*
-		*						FUNCIONES GENÉRICAS DE POSTGRESQL			*
-		*																				*
+		*																														*
+		*						FUNCIONES GENÉRICAS DE POSTGRESQL								*
+		*																														*
 		************************************************************/
 		function status(){
 			$status = pg_connection_status($this->dbConnection);
@@ -64,12 +64,10 @@
 			return $result;
 		}
 
-
-
 		/************************************************************
-		*																				*
-		*					 FUNCIONES GENÉRICAS DE LA APLICACIÓN			*
-		*																				*
+		*																														*
+		*					 FUNCIONES GENÉRICAS DE LA APLICACIÓN							*
+		*																														*
 		************************************************************/
 		function getRolesUsuario() {
 			$result = pg_query($this->dbConnection,
@@ -102,9 +100,9 @@
 		}
 
 		/************************************************************
-		*																				*
-		*					 	FUNCIONES GENÉRICAS DE PROPIETARIOS			*
-		*																				*
+		*																														*
+		*					 	FUNCIONES GENÉRICAS DE PROPIETARIOS							*
+		*																														*
 		************************************************************/
 		function createPropietario($fkpro_lug_id, $pro_ci, $pro_primer_nombre, $pro_segundo_nombre, $pro_primer_apellido, $pro_segundo_apellido, $pro_fecha_nacimiento, $pro_correo){
 			$result = pg_query($this->dbConnection,
@@ -191,12 +189,10 @@
 			}
 		}
 
-
-
 		/************************************************************
-		*																				*
-		*					 	FUNCIONES GENÉRICAS DE ENTRENADORES			*
-		*																				*
+		*																														*
+		*					 	FUNCIONES GENÉRICAS DE ENTRENADORES							*
+		*																														*
 		************************************************************/
 		function createEntrenador($fkent_lug_id, $ent_ci, $ent_primer_nombre, $ent_segundo_nombre, $ent_primer_apellido, $ent_segundo_apellido, $ent_fecha_nacimiento){
 			$result = pg_query($this->dbConnection,
@@ -207,7 +203,7 @@
 				return $this->result_construct("success","Actualizado exitosamente");
 			}
 		}
-		
+
 		function getEntrenadores() {
 			$result = pg_query($this->dbConnection,
 			"SELECT ent.*, t.tel_codigo, t.tel_numero, p.lug_nombre as parroquia, e.lug_nombre as estado
@@ -266,9 +262,9 @@
 		}
 
 		/************************************************************
-		*																				*
-		*					 	FUNCIONES GENÉRICAS DE JINETES				*
-		*																				*
+		*																														*
+		*					 	FUNCIONES GENÉRICAS DE JINETES									*
+		*																														*
 		************************************************************/
 		function createJinete($fkjin_lug_id, $jin_ci, $jin_primer_nombre, $jin_segundo_nombre, $jin_primer_apellido, $jin_segundo_apellido, $jin_fecha_nacimiento, $jin_altura, $jin_experiencia){
 			$result = pg_query($this->dbConnection,
@@ -337,11 +333,10 @@
 			}
 		}
 
-
 		/************************************************************
-		*																				*
-		*					 		  FUNCIONES GENÉRICAS DE STUDS			*
-		*																				*
+		*																														*
+		*					 		  FUNCIONES GENÉRICAS DE STUDS								*
+		*																														*
 		************************************************************/
 		function createStud($fkstu_lug_id, $stu_nombre, $stu_fecha_creacion){
 			$result = pg_query($this->dbConnection,
@@ -352,7 +347,7 @@
 				return $this->result_construct("success","Actualizado exitosamente");
 			}
 		}
-		
+
 		function getStuds() {
 			$result = pg_query($this->dbConnection,
 			"SELECT s.*, p.lug_nombre as parroquia, e.lug_nombre as estado
@@ -407,9 +402,9 @@
 		}
 
 		/************************************************************
-		*																				*
-		*					 		  FUNCIONES GENÉRICAS DE GORRA			*
-		*																				*
+		*																														*
+		*					 		  FUNCIONES GENÉRICAS DE GORRA								*
+		*																														*
 		************************************************************/
 		function getGorrasDetalladoByStud($pkstu_id) {
 			$result = pg_query($this->dbConnection,
@@ -428,12 +423,10 @@
 			}
 		}
 
-
-
 		/************************************************************
-		*																				*
-		*					 		FUNCIONES GENÉRICAS DE CHAQUETA			*
-		*																				*
+		*																														*
+		*					 		FUNCIONES GENÉRICAS DE CHAQUETA								*
+		*																														*
 		************************************************************/
 		function getChaquetasDetalladoByStud($pkstu_id) {
 			$result = pg_query($this->dbConnection,
@@ -452,12 +445,10 @@
 			}
 		}
 
-
-
 		/************************************************************
-		*																				*
-		*					 	FUNCIONES GENÉRICAS DE EJEMPLARES			*
-		*																				*
+		*																														*
+		*					 	FUNCIONES GENÉRICAS DE EJEMPLARES								*
+		*																														*
 		************************************************************/
 		function getEjemplares() {
 			$result = pg_query($this->dbConnection,
@@ -518,9 +509,9 @@
 
 
 		/************************************************************
-		*																				*
-		*					 FUNCIONES GENÉRICAS DE IMPLEMENTOS				*
-		*																				*
+		*																														*
+		*					 FUNCIONES GENÉRICAS DE IMPLEMENTOS								*
+		*																														*
 		************************************************************/
 		function getImplementos() {
 			$result = pg_query($this->dbConnection,
@@ -540,9 +531,9 @@
 
 
 		/************************************************************
-		*																				*
-		*					 FUNCIONES GENÉRICAS DE USUARIOS					*
-		*																				*
+		*																														*
+		*					 FUNCIONES GENÉRICAS DE USUARIOS									*
+		*																														*
 		************************************************************/
 		function getUsuarioById($pkusu_id) {
 			$result = pg_query($this->dbConnection,
@@ -599,9 +590,9 @@
 		}
 
 		/************************************************************
-		*																				*
-		*					 	FUNCIONES GENÉRICAS DE TELEFONO				*
-		*																				*
+		*																														*
+		*					 	FUNCIONES GENÉRICAS DE TELEFONO									*
+		*																														*
 		************************************************************/
 		function updateTelefono($id, $tel_codigo, $tel_numero){
 			$result = pg_query($this->dbConnection,
@@ -616,9 +607,9 @@
 		}
 
 		/************************************************************
-		*																				*
-		*					 	FUNCIONES GENÉRICAS DE HARA					*
-		*																				*
+		*																														*
+		*					 	FUNCIONES GENÉRICAS DE HARA											*
+		*																														*
 		************************************************************/
 		function getHaras(){
 			$result = pg_query($this->dbConnection,
@@ -636,9 +627,9 @@
 		}
 
 		/************************************************************
-		*																				*
-		*					 	FUNCIONES GENÉRICAS DE PELAJE					*
-		*																				*
+		*																														*
+		*					 	FUNCIONES GENÉRICAS DE PELAJE										*
+		*																														*
 		************************************************************/
 		function getPelajes(){
 			$result = pg_query($this->dbConnection,
@@ -656,13 +647,164 @@
 		}
 
 		/************************************************************
-		*																				*
-		*					 	FUNCIONES GENÉRICAS DE RAZA					*
-		*																				*
+		*																														*
+		*					 	FUNCIONES GENÉRICAS DE RAZA											*
+		*																														*
 		************************************************************/
 		function getRazas(){
 			$result = pg_query($this->dbConnection,
 			"SELECT * FROM raza");
+			if(pg_last_error()){
+				return $this->result_construct("error",pg_last_error());
+			}
+			else {
+				$respuesta = array();
+				while($row = pg_fetch_assoc($result)){
+					$respuesta[] = $row;
+				}
+				return json_encode($respuesta);
+			}
+		}
+
+		/************************************************************
+		*																														*
+		*					 	FUNCIONES GENÉRICAS DE APUESTAS									*
+		*																														*
+		************************************************************/
+		function getApuestas(){
+			$result = pg_query($this->dbConnection,
+			"SELECT a.*, j.jug_nombre, e.eje_nombre, t.taq_nombre
+			FROM apuesta a, corredor c, jugada j, taquilla t, ejemplar e
+			WHERE a.fkapu_cor_id = c.pkcor_id AND a.fkapu_jug_id = j.pkjug_id AND a.fkapu_taq_id = t.pktaq_id AND c.fkcor_eje_id = e.pkeje_id
+			ORDER BY a.pkapu_id");
+			if(pg_last_error()){
+				return $this->result_construct("error",pg_last_error());
+			}
+			else {
+				$respuesta = array();
+				while($row = pg_fetch_assoc($result)){
+					$respuesta[] = $row;
+				}
+				return json_encode($respuesta);
+			}
+		}
+		
+		function getApuestaById($pkapu_id) {
+			$result = pg_query($this->dbConnection,
+			"SELECT a.*, j.jug_nombre, e.eje_nombre, t.taq_nombre
+			FROM apuesta a, corredor c, jugada j, taquilla t, ejemplar e
+			WHERE a.fkapu_cor_id = c.pkcor_id AND a.fkapu_jug_id = j.pkjug_id AND a.fkapu_taq_id = t.pktaq_id AND c.fkcor_eje_id = e.pkeje_id AND pkapu_id = '$pkapu_id'");
+
+			if(pg_last_error()){
+				return $this->result_construct("error",pg_last_error());
+			}	else {
+				$respuesta = array();
+				while($row = pg_fetch_assoc($result)){
+					$respuesta[] = $row;
+				}
+				return json_encode($respuesta);
+			}
+		}
+		
+		function updateApuesta($pkapu_id, /*$fkapu_cor_id,*/ $fkapu_jug_id, /*$fkapu_fac_id, */$fkapu_taq_id, $apu_monto, $apu_lugar_llegada){
+			if (!empty($apu_lugar_llegada)) { 
+				$result = pg_query($this->dbConnection,
+				"UPDATE apuesta
+				SET fkapu_jug_id='$fkapu_jug_id', fkapu_taq_id='$fkapu_taq_id', apu_monto='$apu_monto', apu_lugar_llegada='$apu_lugar_llegada'
+				WHERE pkapu_id='$pkapu_id'");
+			} else {
+				$result = pg_query($this->dbConnection,
+				"UPDATE apuesta
+				SET fkapu_jug_id='$fkapu_jug_id', fkapu_taq_id='$fkapu_taq_id', apu_monto='$apu_monto', apu_lugar_llegada=NULL
+				WHERE pkapu_id='$pkapu_id'");
+			}
+			if(pg_last_error()){
+				return $this->result_construct("error",pg_last_error());
+			}else{
+				return $this->result_construct("success","Actualizado exitosamente");
+			}
+		}/*fkapu_cor_id='$fkapu_cor_id',*/ /* fkapu_fac_id='$fkapu_fac_id',  */
+
+		function deleteApuesta($id) {
+			$result = pg_query($this->dbConnection,
+				"DELETE FROM apuesta WHERE pkapu_id='$id'");
+			if (pg_last_error()) {
+				return $this->result_construct("error",pg_last_error());
+			} else {
+				return $this->result_construct("success","Eliminado exitosamente");
+			}
+		}
+		
+		/************************************************************
+		*																														*
+		*					 	FUNCIONES GENÉRICAS DE JUGADAS									*
+		*																														*
+		************************************************************/
+		function getJugadas(){
+			$result = pg_query($this->dbConnection,
+			"SELECT * FROM jugada");
+			if(pg_last_error()){
+				return $this->result_construct("error",pg_last_error());
+			}
+			else {
+				$respuesta = array();
+				while($row = pg_fetch_assoc($result)){
+					$respuesta[] = $row;
+				}
+				return json_encode($respuesta);
+			}
+		}
+		
+		/************************************************************
+		*																														*
+		*					 	FUNCIONES GENÉRICAS DE TAQUILLAS								*
+		*																														*
+		************************************************************/
+		function getTaquillas(){
+			$result = pg_query($this->dbConnection,
+			"SELECT * FROM taquilla");
+			if(pg_last_error()){
+				return $this->result_construct("error",pg_last_error());
+			}
+			else {
+				$respuesta = array();
+				while($row = pg_fetch_assoc($result)){
+					$respuesta[] = $row;
+				}
+				return json_encode($respuesta);
+			}
+		}
+		
+		/************************************************************
+		*																														*
+		*					 	FUNCIONES GENÉRICAS DE CORREDORES								*
+		*																														*
+		************************************************************/
+		function getCorredoresByCarrera(){
+			$result = pg_query($this->dbConnection,
+			"SELECT e.eje_nombre, car.pkcar_id
+			FROM corredor c, carrera car, ejemplar e
+			WHERE c.fkcor_eje_id = e.pkeje_id AND c.fkcor_car_id = car.pkcar_id AND car.pkcar_id = '$id'");
+			if(pg_last_error()){
+				return $this->result_construct("error",pg_last_error());
+			}
+			else {
+				$respuesta = array();
+				while($row = pg_fetch_assoc($result)){
+					$respuesta[] = $row;
+				}
+				return json_encode($respuesta);
+			}
+		}
+		
+		/************************************************************
+		*																														*
+		*					 	FUNCIONES GENÉRICAS DE CARRERAS									*
+		*																														*
+		************************************************************/
+		function getCorredoresByCarrera(){
+			$result = pg_query($this->dbConnection,
+			"SELECT * FROM carrera");
 			if(pg_last_error()){
 				return $this->result_construct("error",pg_last_error());
 			}

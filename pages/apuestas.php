@@ -1,5 +1,11 @@
 <?php
   include($_SERVER['DOCUMENT_ROOT'] . 'hipodromo/includes/header.inc.php');
+  
+  if ($_SERVER["REQUEST_METHOD"] == "POST") {
+      if (!empty($_POST['pkapu_id'])) {
+          $answer = json_decode($db->deleteApuesta($_POST['pkapu_id']));
+      }
+  }
 ?>
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
@@ -21,62 +27,56 @@
             <div class="col-xs-12">
               <div class="box">
                 <div class="box-header">
-                  <h3 class="box-title">Apuestas por taquillas</h3>
+                  <h3 class="box-title">Apuestas</h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
-                  <table id="example1" class="table table-bordered table-striped">
+                  <table id="tableDefault" class="table table-bordered table-striped">
                     <thead>
                       <tr>
-                        <th>Cantidad de Apuestas</th>
-                        <th>Taquilla</th>
+                        <th>id</th>
+                        <th>corredor</th>
+                        <th>jugada</th>
+                        <th>factura</th>
+                        <th>taquilla</th>
+                        <th>monto</th>
+                        <th>lugar de llegada</th>
+                        <th width="10%">editar</th>
+                        <th width="10%">eliminar</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>Trident</td>
-                        <td>Internet Explorer 4.0</td>
-                      </tr>
-                      <tr>
-                        <td>Trident</td>
-                        <td>Internet Explorer 4.0</td>
-                      </tr>
-                      <tr>
-                        <td>Trident</td>
-                        <td>Internet Explorer 4.0</td>
-                      </tr>
-                      <tr>
-                        <td>Trident</td>
-                        <td>Internet Explorer 4.0</td>
-                      </tr>
-                      <tr>
-                        <td>Trident</td>
-                        <td>Internet Explorer 4.0</td>
-                      </tr>
-                      <tr>
-                        <td>Trident</td>
-                        <td>Internet Explorer 4.0</td>
-                      </tr>
-                      <tr>
-                        <td>Trident</td>
-                        <td>Internet Explorer 4.0</td>
-                      </tr>
-                      <tr>
-                        <td>Trident</td>
-                        <td>Internet Explorer 4.0</td>
-                      </tr>
-                      <tr>
-                        <td>Trident</td>
-                        <td>Internet Explorer 4.0</td>
-                      </tr>
-                      <tr>
-                        <td>Trident</td>
-                        <td>Internet Explorer 4.0</td>
-                      </tr>
+                      <?php
+                        $apuestasList = @json_decode($db->getApuestas());
+                        foreach ($apuestasList as $row) {
+                            echo "<tr>";
+                            echo "<td>$row->pkapu_id</td>";
+                            echo "<td>$row->eje_nombre</td>";
+                            echo "<td>$row->jug_nombre</td>";
+                            echo "<td>$row->fkapu_fac_id</td>";
+                            echo "<td>$row->taq_nombre</td>";
+                            echo "<td>$row->apu_monto</td>";
+                            echo "<td>$row->apu_lugar_llegada</td>";
+                            echo "<form id='updateForm' role='form' method='POST' action='updates/update-" . basename($_SERVER['PHP_SELF']) . "'>";
+                            echo "<td><button name='update_id' value='$row->pkapu_id' type='submit' form='updateForm' class='btn btn-dropbox btn-flat btn-block'><i class='fa fa-edit'></i></button></td>";
+                            echo "</form>";
+                            echo "<form id='deleteForm' role='form' method='POST' action='" . htmlentities($_SERVER['PHP_SELF']) . "'>";
+                            echo "<td><button name='pkapu_id' value='$row->pkapu_id' type='submit' form='deleteForm' class='btn btn-danger btn-flat btn-block'><i class='fa fa-trash'></i></button></td>";
+                            echo "</form>";
+                            echo "</tr>";
+                        }
+                      ?>
                     </tbody>
                     <tfoot>
                       <tr>
-                        <th>Cantidad de Apuestas</th>
-                        <th>Taquilla</th>
+                        <th>id</th>
+                        <th>corredor</th>
+                        <th>jugada</th>
+                        <th>factura</th>
+                        <th>taquilla</th>
+                        <th>monto</th>
+                        <th>lugar de llegada</th>
+                        <th width="10%">editar</th>
+                        <th width="10%">eliminar</th>
                       </tr>
                     </tfoot>
                   </table>

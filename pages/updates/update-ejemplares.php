@@ -164,7 +164,7 @@
                   </div>
                   <div class="col-xs-2">
                      <label>Tatuaje Labial</label>
-                    <input name="eje_tatuaje" type="text" class="form-control" placeholder="Tatuaje" onblur="this.value = this.value.trim() == '' ? this.defaultValue : this.value.trim();" value="<?php echo $eje_tatuaje; ?>">
+                    <input name="eje_tatuaje" type="text" class="form-control" placeholder="Tatuaje" onblur="this.value = this.value.trim() == '' ? this.defaultValue : this.value.trim();" value="<?php echo $eje_tatuaje; ?>" required>
                   </div>
                 </div>
                 <div class="row">
@@ -175,7 +175,7 @@
                         <div class="input-group-addon">
                           Bs.
                         </div>
-                        <input name="eje_precio" id="ejemplar-precio" type="text" class="form-control pull-right" value="<?php echo $eje_precio; ?>">
+                        <input name="eje_precio" id="ejemplar-precio" type="text" class="form-control pull-right" value="<?php echo $eje_precio; ?>" required>
                       </div><!-- /.input group -->
                     </div><!-- /.form group -->
                   </div>
