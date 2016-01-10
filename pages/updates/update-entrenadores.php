@@ -2,7 +2,7 @@
   include($_SERVER['DOCUMENT_ROOT'] . 'hipodromo/includes/header.inc.php');
 
   $pkent_id = $fkent_lug_id = $ent_ci = $ent_primer_nombre = "";
-  $ent_segundo_nombre = $ent_primer_apellido = $ent_segundo_apellido = $ent_fecha_nacimiento = "";
+  $ent_segundo_nombre = $ent_primer_apellido = $ent_segundo_apellido = $ent_fecha_nacimiento = $tel_codigo = $tel_numero = "";
 
   function test_input($data) {
       $data = trim($data);
@@ -20,6 +20,8 @@
       $GLOBALS['ent_primer_apellido'] = $entrenadoresList[0]->ent_primer_apellido;
       $GLOBALS['ent_segundo_apellido'] = $entrenadoresList[0]->ent_segundo_apellido;
       $GLOBALS['ent_fecha_nacimiento'] = $entrenadoresList[0]->ent_fecha_nacimiento;
+      $GLOBALS['tel_codigo'] = $entrenadoresList[0]->tel_codigo;
+      $GLOBALS['tel_numero'] = $entrenadoresList[0]->tel_numero;
   }
 
   function setValuesWhenSubmitIsClicked() {
@@ -31,6 +33,8 @@
       $GLOBALS['ent_primer_apellido'] = test_input($_POST['ent_primer_apellido']);
       $GLOBALS['ent_segundo_apellido'] = test_input($_POST['ent_segundo_apellido']);
       $GLOBALS['ent_fecha_nacimiento'] = test_input($_POST['ent_fecha_nacimiento']);
+      $GLOBALS['tel_codigo'] = test_input($_POST['tel_codigo']);
+      $GLOBALS['tel_numero'] = test_input($_POST['tel_numero']);
   }
 
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -38,12 +42,15 @@
           $entrenadoresList = json_decode($db->getEntrenadorById($_POST['update_id']));
           setValues($entrenadoresList);
       } elseif(!empty($_POST['pkent_id'])) {
-          setValuesWhenSubmitIsClicked();
-          $answer = @json_decode($db->updateEntrenador($pkent_id, $fkent_lug_id, $ent_ci, $ent_primer_nombre, $ent_segundo_nombre, $ent_primer_apellido, $ent_segundo_apellido, $ent_fecha_nacimiento));
+        setValuesWhenSubmitIsClicked();
+        $answer = @json_decode($db->updateEntrenador($pkent_id, $fkent_lug_id, $ent_ci, $ent_primer_nombre, $ent_segundo_nombre, $ent_primer_apellido, $ent_segundo_apellido, $ent_fecha_nacimiento));
+        if ($answer->action != "error") {
+          $answer = @json_decode($db->updateTelefono($pkent_id, $tel_codigo, $tel_numero));
           if ($answer->action != "error") {
             echo '<meta http-equiv="refresh" content="0;url=../entrenadores.php">';
             die();
           }
+        }
       }
   } else {
     echo '<meta http-equiv="refresh" content="0;url=../entrenadores.php">';
@@ -104,6 +111,14 @@
                   <div class="col-xs-3">
                      <label>Segundo Apellido</label>
                     <input name="ent_segundo_apellido" type="text" class="form-control" placeholder="Segundo Apellido" onblur="this.value = this.value.trim() == '' ? this.defaultValue : this.value.trim();" value="<?php echo $ent_segundo_apellido; ?>">
+                  </div>
+                  <div class="col-xs-1">
+                     <label>Cod</label>
+                    <input name="tel_codigo" type="text" class="form-control" placeholder="Cod" onblur="this.value = this.value.trim() == '' ? this.defaultValue : this.value.trim();" value="<?php echo $tel_codigo; ?>">
+                  </div>
+                  <div class="col-xs-2">
+                     <label>Telefono</label>
+                    <input name="tel_numero" type="text" class="form-control" placeholder="Numero" onblur="this.value = this.value.trim() == '' ? this.defaultValue : this.value.trim();" value="<?php echo $tel_numero; ?>">
                   </div>
                   <div class="col-xs-6">
                     <div class="form-group">

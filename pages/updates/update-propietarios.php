@@ -3,7 +3,6 @@
 
   $pkpro_id = $fkpro_lug_id = $pro_ci = $pro_primer_nombre = $pro_segundo_nombre = $pro_primer_apellido = "";
   $pro_segundo_apellido = $pro_fecha_nacimiento = $pro_correo = $tel_codigo = $tel_numero = "";
-  /*$pktel_id = $fkpro_tel_id = $fktel_ent_id = $fktel_jin_id = $fktel_caba_id = $fktel_inv_id = $fktel_taqu_id = $fktel_vet_id = */
 
   function test_input($data) {
       $data = trim($data);
@@ -22,14 +21,6 @@
       $GLOBALS['pro_segundo_apellido'] = $propietariosList[0]->pro_segundo_apellido;
       $GLOBALS['pro_fecha_nacimiento'] = $propietariosList[0]->pro_fecha_nacimiento;
       $GLOBALS['pro_correo'] = $propietariosList[0]->pro_correo;
-      // $GLOBALS['pktel_id'] = $propietariosList[0]->pktel_id;
-      // $GLOBALS['fktel_pro_id'] = $propietariosList[0]->fktel_pro_id;
-      // $GLOBALS['fktel_ent_id'] = $propietariosList[0]->$fktel_ent_id;
-      // $GLOBALS['fktel_jin_id'] = $propietariosList[0]->$fktel_jin_id;
-      // $GLOBALS['fktel_caba_id'] = $propietariosList[0]->$fktel_caba_id;
-      // $GLOBALS['fktel_inv_id'] = $propietariosList[0]->$fktel_inv_id;
-      // $GLOBALS['fktel_taqu_id'] = $propietariosList[0]->$fktel_taqu_id;
-      // $GLOBALS['fktel_vet_id'] = $propietariosList[0]->$fktel_vet_id;
       $GLOBALS['tel_codigo'] = $propietariosList[0]->tel_codigo;
       $GLOBALS['tel_numero'] = $propietariosList[0]->tel_numero;
   }
@@ -44,14 +35,6 @@
       $GLOBALS['pro_segundo_apellido'] = test_input($_POST['pro_segundo_apellido']);
       $GLOBALS['pro_fecha_nacimiento'] = test_input($_POST['pro_fecha_nacimiento']);
       $GLOBALS['pro_correo'] = test_input($_POST['pro_correo']);
-      // $GLOBALS['pktel_id'] = test_input($_POST['pktel_id']);
-      // $GLOBALS['fktel_pro_id'] = test_input($_POST['fktel_pro_id']);
-      // $GLOBALS['fktel_ent_id'] = test_input($_POST['fktel_ent_id']);
-      // $GLOBALS['fktel_jin_id'] = test_input($_POST['fktel_jin_id']);
-      // $GLOBALS['fktel_caba_id'] = test_input($_POST['fktel_caba_id']);
-      // $GLOBALS['fktel_inv_id'] = test_input($_POST['fktel_inv_id']);
-      // $GLOBALS['fktel_taqu_id'] = test_input($_POST['fktel_taqu_id']);
-      // $GLOBALS['fktel_vet_id'] = test_input($_POST['fktel_vet_id']);
       $GLOBALS['tel_codigo'] = test_input($_POST['tel_codigo']);
       $GLOBALS['tel_numero'] = test_input($_POST['tel_numero']);
   }

@@ -189,8 +189,10 @@
 		************************************************************/
 		function getEntrenadores() {
 			$result = pg_query($this->dbConnection,
-			"SELECT ent.*, p.lug_nombre as parroquia, e.lug_nombre as estado
-			FROM entrenador ent, lugar p, lugar m, lugar e WHERE ent.fkent_lug_id = p.pklug_id AND p.fklug_lug_id = m.pklug_id AND m.fklug_lug_id = e.pklug_id");
+			"SELECT ent.*, t.tel_codigo, t.tel_numero, p.lug_nombre as parroquia, e.lug_nombre as estado
+			FROM lugar p, lugar m, lugar e, entrenador ent LEFT JOIN telefono t ON t.fktel_ent_id = ent.pkent_id
+			WHERE ent.fkent_lug_id = p.pklug_id AND p.fklug_lug_id = m.pklug_id AND m.fklug_lug_id = e.pklug_id
+			ORDER BY pkent_id");
 
 			if(pg_last_error()){
 				return $this->result_construct("error",pg_last_error());
@@ -205,7 +207,9 @@
 
 		function getEntrenadorById($pkent_id) {
 			$result = pg_query($this->dbConnection,
-			"SELECT *	FROM entrenador WHERE pkent_id = '$pkent_id'");
+			"SELECT ent.*, t.*
+			FROM entrenador ent LEFT JOIN telefono t ON t.fktel_ent_id = ent.pkent_id
+			WHERE pkent_id = '$pkent_id'");
 
 			if(pg_last_error()){
 				return $this->result_construct("error",pg_last_error());
