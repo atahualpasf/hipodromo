@@ -1,5 +1,11 @@
 <?php
   include($_SERVER['DOCUMENT_ROOT'] . 'hipodromo/includes/header.inc.php');
+
+  if ($_SERVER["REQUEST_METHOD"] == "POST") {
+      if (!empty($_POST['pkeje_id'])) {
+          $answer = json_decode($db->deleteEjemplar($_POST['pkeje_id']));
+      }
+  }
 ?>
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
@@ -35,10 +41,12 @@
                         <th>raza</th>
                         <th>Pelaje</th>
                         <th>hara</th>
+                        <th width="10%">editar</th>
+                        <th width="10%">eliminar</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <?php 
+                      <?php
                         $ejemplaresList = @json_decode($db->getEjemplares());
                         foreach ($ejemplaresList as $row) {
                             echo "<tr>";
@@ -50,6 +58,12 @@
                             echo "<td>$row->raz_nombre</td>";
                             echo "<td>$row->pel_nombre</td>";
                             echo "<td>$row->har_nombre</td>";
+                            echo "<form id='updateForm' role='form' method='POST' action='updates/update-" . basename($_SERVER['PHP_SELF']) . "'>";
+                            echo "<td><button name='update_id' value='$row->pkeje_id' type='submit' form='updateForm' class='btn btn-dropbox btn-flat btn-block'><i class='fa fa-edit'></i></button></td>";
+                            echo "</form>";
+                            echo "<form id='deleteForm' role='form' method='POST' action='" . htmlentities($_SERVER['PHP_SELF']) . "'>";
+                            echo "<td><button name='pkeje_id' value='$row->pkeje_id' type='submit' form='deleteForm' class='btn btn-danger btn-flat btn-block'><i class='fa fa-trash'></i></button></td>";
+                            echo "</form>";
                             echo "</tr>";
                         }
                       ?>
@@ -64,6 +78,8 @@
                         <th>raza</th>
                         <th>Pelaje</th>
                         <th>hara</th>
+                        <th width="10%">editar</th>
+                        <th width="10%">eliminar</th>
                       </tr>
                     </tfoot>
                   </table>
