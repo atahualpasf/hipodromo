@@ -312,6 +312,16 @@
 		*					 		  FUNCIONES GENÉRICAS DE STUDS			*
 		*																				*
 		************************************************************/
+		function createStud($fkstu_lug_id, $stu_nombre, $stu_fecha_creacion){
+			$result = pg_query($this->dbConnection,
+			"INSERT INTO stud VALUES(nextval('stud_pkstu_id_seq'::regclass), '$fkstu_lug_id', '$stu_nombre', '$stu_fecha_creacion')");
+			if(pg_last_error()){
+				return $this->result_construct("error",pg_last_error());
+			}else{
+				return $this->result_construct("success","Actualizado exitosamente");
+			}
+		}
+		
 		function getStuds() {
 			$result = pg_query($this->dbConnection,
 			"SELECT s.*, p.lug_nombre as parroquia, e.lug_nombre as estado
