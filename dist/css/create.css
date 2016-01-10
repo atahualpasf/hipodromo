@@ -1,0 +1,27 @@
+input {
+   margin-bottom: 15px;
+}
+
+.btn-update {
+ color: #ffffff;
+ background-color: #19b698;
+ border-color: rgba(0, 0, 0, 0.2);
+}
+.btn-update:hover,
+.btn-update:focus,
+.btn-update.focus,
+.btn-update:active,
+.btn-update.active,
+.open > .dropdown-toggle.btn-update {
+ color: #ffffff;
+ background-color: #16A085;
+ border-color: rgba(0, 0, 0, 0.2);
+}
+.btn-update:active,
+.btn-update.active,
+.open > .dropdown-toggle.btn-update {
+ background-image: none;
+}
+.form-control:focus {
+ border-color: #19b698;
+}

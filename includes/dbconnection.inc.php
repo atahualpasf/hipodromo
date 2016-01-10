@@ -16,9 +16,9 @@
 		}
 
 		/************************************************************
-		*																														*
-		*						FUNCIONES GENÉRICAS DE MI CLASE 								*
-		*																														*
+		*																				*
+		*						FUNCIONES GENÉRICAS DE MI CLASE 				*
+		*																				*
 		************************************************************/
 		public function getIncludesPath() {
       return $this->_INCL_ROOT;
@@ -37,9 +37,9 @@
 		}
 
 		/************************************************************
-		*																														*
-		*						FUNCIONES GENÉRICAS DE POSTGRESQL								*
-		*																														*
+		*																				*
+		*						FUNCIONES GENÉRICAS DE POSTGRESQL			*
+		*																				*
 		************************************************************/
 		function status(){
 			$status = pg_connection_status($this->dbConnection);
@@ -67,9 +67,9 @@
 
 
 		/************************************************************
-		*																														*
-		*					 FUNCIONES GENÉRICAS DE LA APLICACIÓN				  		*
-		*																														*
+		*																				*
+		*					 FUNCIONES GENÉRICAS DE LA APLICACIÓN			*
+		*																				*
 		************************************************************/
 		function getRolesUsuario() {
 			$result = pg_query($this->dbConnection,
@@ -102,9 +102,9 @@
 		}
 
 		/************************************************************
-		*																														*
-		*					 	FUNCIONES GENÉRICAS DE PROPIETARIOS					  	*
-		*																														*
+		*																				*
+		*					 	FUNCIONES GENÉRICAS DE PROPIETARIOS			*
+		*																				*
 		************************************************************/
 		function getPropietarios() {
 			$result = pg_query($this->dbConnection,
@@ -183,10 +183,20 @@
 
 
 		/************************************************************
-		*																														*
-		*					 	FUNCIONES GENÉRICAS DE ENTRENADORES					  	*
-		*																														*
+		*																				*
+		*					 	FUNCIONES GENÉRICAS DE ENTRENADORES			*
+		*																				*
 		************************************************************/
+		function createEntrenador($fkent_lug_id, $ent_ci, $ent_primer_nombre, $ent_segundo_nombre, $ent_primer_apellido, $ent_segundo_apellido, $ent_fecha_nacimiento){
+			$result = pg_query($this->dbConnection,
+			"INSERT INTO entrenador VALUES(nextval('entrenador_pkent_id_seq'::regclass), '$fkent_lug_id', '$ent_ci', '$ent_primer_nombre', '$ent_segundo_nombre', '$ent_primer_apellido', '$ent_segundo_apellido', '$ent_fecha_nacimiento')");
+			if(pg_last_error()){
+				return $this->result_construct("error",pg_last_error());
+			}else{
+				return $this->result_construct("success","Actualizado exitosamente");
+			}
+		}
+		
 		function getEntrenadores() {
 			$result = pg_query($this->dbConnection,
 			"SELECT ent.*, t.tel_codigo, t.tel_numero, p.lug_nombre as parroquia, e.lug_nombre as estado
@@ -245,9 +255,9 @@
 		}
 
 		/************************************************************
-		*																														*
-		*					 	FUNCIONES GENÉRICAS DE JINETES							  	*
-		*																														*
+		*																				*
+		*					 	FUNCIONES GENÉRICAS DE JINETES				*
+		*																				*
 		************************************************************/
 		function getJinetes() {
 			$result = pg_query($this->dbConnection,
@@ -308,10 +318,20 @@
 
 
 		/************************************************************
-		*																														*
-		*					 		  FUNCIONES GENÉRICAS DE STUDS					  		*
-		*																														*
+		*																				*
+		*					 		  FUNCIONES GENÉRICAS DE STUDS			*
+		*																				*
 		************************************************************/
+		function createStud($fkstu_lug_id, $stu_nombre, $stu_fecha_creacion){
+			$result = pg_query($this->dbConnection,
+			"INSERT INTO stud VALUES(nextval('stud_pkstu_id_seq'::regclass), '$fkstu_lug_id', '$stu_nombre', '$stu_fecha_creacion')");
+			if(pg_last_error()){
+				return $this->result_construct("error",pg_last_error());
+			}else{
+				return $this->result_construct("success","Actualizado exitosamente");
+			}
+		}
+		
 		function getStuds() {
 			$result = pg_query($this->dbConnection,
 			"SELECT s.*, p.lug_nombre as parroquia, e.lug_nombre as estado
@@ -366,9 +386,9 @@
 		}
 
 		/************************************************************
-		*																														*
-		*					 		  FUNCIONES GENÉRICAS DE GORRA					  		*
-		*																														*
+		*																				*
+		*					 		  FUNCIONES GENÉRICAS DE GORRA			*
+		*																				*
 		************************************************************/
 		function getGorrasDetalladoByStud($pkstu_id) {
 			$result = pg_query($this->dbConnection,
@@ -390,9 +410,9 @@
 
 
 		/************************************************************
-		*																														*
-		*					 		FUNCIONES GENÉRICAS DE CHAQUETA					  		*
-		*																														*
+		*																				*
+		*					 		FUNCIONES GENÉRICAS DE CHAQUETA			*
+		*																				*
 		************************************************************/
 		function getChaquetasDetalladoByStud($pkstu_id) {
 			$result = pg_query($this->dbConnection,
@@ -414,9 +434,9 @@
 
 
 		/************************************************************
-		*																														*
-		*					 	FUNCIONES GENÉRICAS DE EJEMPLARES					  		*
-		*																														*
+		*																				*
+		*					 	FUNCIONES GENÉRICAS DE EJEMPLARES			*
+		*																				*
 		************************************************************/
 		function getEjemplares() {
 			$result = pg_query($this->dbConnection,
@@ -477,9 +497,9 @@
 
 
 		/************************************************************
-		*																														*
-		*					 FUNCIONES GENÉRICAS DE IMPLEMENTOS					  		*
-		*																														*
+		*																				*
+		*					 FUNCIONES GENÉRICAS DE IMPLEMENTOS				*
+		*																				*
 		************************************************************/
 		function getImplementos() {
 			$result = pg_query($this->dbConnection,
@@ -499,9 +519,9 @@
 
 
 		/************************************************************
-		*																														*
-		*					 FUNCIONES GENÉRICAS DE USUARIOS						  		*
-		*																														*
+		*																				*
+		*					 FUNCIONES GENÉRICAS DE USUARIOS					*
+		*																				*
 		************************************************************/
 		function getUsuarioById($pkusu_id) {
 			$result = pg_query($this->dbConnection,
@@ -558,9 +578,9 @@
 		}
 
 		/************************************************************
-		*																														*
-		*					 	FUNCIONES GENÉRICAS DE TELEFONO							  	*
-		*																														*
+		*																				*
+		*					 	FUNCIONES GENÉRICAS DE TELEFONO				*
+		*																				*
 		************************************************************/
 		function updateTelefono($id, $tel_codigo, $tel_numero){
 			$result = pg_query($this->dbConnection,
@@ -575,9 +595,9 @@
 		}
 
 		/************************************************************
-		*																														*
-		*					 	FUNCIONES GENÉRICAS DE HARA									  	*
-		*																														*
+		*																				*
+		*					 	FUNCIONES GENÉRICAS DE HARA					*
+		*																				*
 		************************************************************/
 		function getHaras(){
 			$result = pg_query($this->dbConnection,
@@ -595,9 +615,9 @@
 		}
 
 		/************************************************************
-		*																														*
-		*					 	FUNCIONES GENÉRICAS DE PELAJE								  	*
-		*																														*
+		*																				*
+		*					 	FUNCIONES GENÉRICAS DE PELAJE					*
+		*																				*
 		************************************************************/
 		function getPelajes(){
 			$result = pg_query($this->dbConnection,
@@ -615,9 +635,9 @@
 		}
 
 		/************************************************************
-		*																														*
-		*					 	FUNCIONES GENÉRICAS DE RAZA									  	*
-		*																														*
+		*																				*
+		*					 	FUNCIONES GENÉRICAS DE RAZA					*
+		*																				*
 		************************************************************/
 		function getRazas(){
 			$result = pg_query($this->dbConnection,

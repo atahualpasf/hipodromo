@@ -126,6 +126,8 @@
   <script src="<?php echo $db->getRootUri() . 'plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js'; ?>"></script>
   <!-- Jquery.Steps -->
   <script src="<?php echo $db->getRootUri() . 'plugins/jquery.steps/jquery.steps.min.js'; ?>"></script>
+  <!-- Jquery validation -->
+  <script src="<?php echo $db->getRootUri() . 'plugins/jquery-validation/jquery.validate.min.js'; ?>"></script>
   <!-- Slimscroll -->
   <script src="<?php echo $db->getRootUri() . 'plugins/slimScroll/jquery.slimscroll.min.js'; ?>"></script>
   <!-- FastClick -->

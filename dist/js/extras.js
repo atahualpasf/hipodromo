@@ -20,74 +20,61 @@ function cerrarSesion(btn) {
   });
 }
 
-function checkInputs(input, errorMessage) {
-  if (input.value == '' || input.value.trim() == '') {
-    input.setCustomValidity('Por favor completa este campo.');
-    return false;
-  } else {
-    input.setCustomValidity('');
-    return true;
-  }
-}
-
-function resizeJqueryStepsFrame() {
-   $('.wizard .content').animate({ height: $('.body.current').outerHeight() }, "slow");
-}
-
-function trimInputs(numberSteps) {
-   for (i = 0; i <= numberSteps; i++) {
-       var inputs = $('#steps-uid-'+i+'-p-'+i+' input').blur(function(event) {
-         this.value = this.value.trim() == '' ? this.defaultValue : this.value.trim();
-       });
-   } 
-}
-
 $(document).ready(function() {
   $('#btn-cerrarsesion').click(function(event) {
     event.preventDefault();
     cerrarSesion(this);
   });
   
-  
-  if ($('#create-stud').length > 0) {
-      var form = $("#create-stud");
-      var wizard = form.children("mainstep").steps({
-         headerTag: "h3",
-         bodyTag: "fieldstep",
-         transitionEffect: "slideLeft",
-         onInit: function (event, current) {
-            trimInputs(form.children("mainstep").steps("numberSteps"));
-         },
-         onStepChanging: function (event, currentIndex, newIndex)
-         {
-            //  console.log(currentIndex);
-            //  checkInputRequired(currentIndex);
-             return true;
-         },
-         onFinishing: function (event, currentIndex)
-         {
-             return true;
-         },
-         onFinished: function (event, currentIndex)
-         {
-             alert("Submitted!");
-         }
-      });
-  }
-  
   //Initialize Select2 Elements
   if ($('.select2').length > 0) {
-     $(".select2").select2();
+    $(".select2").select2();
   }
   
-  if ($('#stud-date').length > 0) {
-     $('#stud-date').datepicker({
-        format: 'yyyy-mm-dd',
-        autoclose: true,
-        minDate: "1980-01-01",
-        endDate: "2015-12-31",
-        language: 'es'
+  //Initialize datepicker
+  if ($('#stu_fecha_creacion').length > 0) {
+     $('#stu_fecha_creacion').datepicker({
+       format: 'yyyy-mm-dd',
+       autoclose: true,
+       minDate: "1980-01-01",
+       endDate: "2015-12-31",
+       language: 'es'
      });
   }
-  
+  if ($('#pro_fecha_nacimiento').length > 0) {
+     $('#pro_fecha_nacimiento').datepicker({
+       format: 'yyyy-mm-dd',
+       autoclose: true,
+       minDate: "1940-01-01",
+       endDate: "1997-12-31",
+       language: 'es'
+     });
+  }
+  if ($('#ent_fecha_nacimiento').length > 0) {
+     $('#ent_fecha_nacimiento').datepicker({
+       format: 'yyyy-mm-dd',
+       autoclose: true,
+       minDate: "1960-01-01",
+       endDate: "1995-12-31",
+       language: 'es'
+     });
+  }
+  if ($('#jin_fecha_nacimiento').length > 0) {
+     $('#jin_fecha_nacimiento').datepicker({
+       format: 'yyyy-mm-dd',
+       autoclose: true,
+       minDate: "1975-01-01",
+       endDate: "1997-12-31",
+       language: 'es'
+     });
+  }
+  if ($('#eje_fecha_nacimiento').length > 0) {
+     $('#eje_fecha_nacimiento').datepicker({
+       format: 'yyyy-mm-dd',
+       autoclose: true,
+       minDate: "1950-01-01",
+       endDate: "2015-12-31",
+       language: 'es'
+     });
+  }
 });

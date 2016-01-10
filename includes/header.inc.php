@@ -125,7 +125,11 @@
            folder instead of downloading all of them to reduce the load. -->
       <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'dist/css/skins/_all-skins.min.css'; ?>">
       <!-- Custom style -->
-      <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'dist/css/update.css'; ?>">
+      <?php if ($basedir === 'updates'): ?>
+         <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'dist/css/update.css'; ?>">
+      <?php else: ?>
+         <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'dist/css/create.css'; ?>">
+      <?php endif; ?>
       <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
       <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
       <!--[if lt IE 9]>

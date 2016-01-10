@@ -11,19 +11,6 @@
       return $data;
   }
 
-  function setValues($entrenadoresList) {
-      $GLOBALS['pkent_id'] = $entrenadoresList[0]->pkent_id;
-      $GLOBALS['fkent_lug_id'] = $entrenadoresList[0]->fkent_lug_id;
-      $GLOBALS['ent_ci'] = $entrenadoresList[0]->ent_ci;
-      $GLOBALS['ent_primer_nombre'] = $entrenadoresList[0]->ent_primer_nombre;
-      $GLOBALS['ent_segundo_nombre'] = $entrenadoresList[0]->ent_segundo_nombre;
-      $GLOBALS['ent_primer_apellido'] = $entrenadoresList[0]->ent_primer_apellido;
-      $GLOBALS['ent_segundo_apellido'] = $entrenadoresList[0]->ent_segundo_apellido;
-      $GLOBALS['ent_fecha_nacimiento'] = $entrenadoresList[0]->ent_fecha_nacimiento;
-      $GLOBALS['tel_codigo'] = $entrenadoresList[0]->tel_codigo;
-      $GLOBALS['tel_numero'] = $entrenadoresList[0]->tel_numero;
-  }
-
   function setValuesWhenSubmitIsClicked() {
       $GLOBALS['pkent_id'] = test_input($_POST['pkent_id']);
       $GLOBALS['fkent_lug_id'] = test_input($_POST['fkent_lug_id']);
@@ -38,23 +25,20 @@
   }
 
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
-      if (!empty($_POST['update_id'])) {
-          $entrenadoresList = json_decode($db->getEntrenadorById($_POST['update_id']));
-          setValues($entrenadoresList);
-      } elseif(!empty($_POST['pkent_id'])) {
         setValuesWhenSubmitIsClicked();
-        $answer = @json_decode($db->updateEntrenador($pkent_id, $fkent_lug_id, $ent_ci, $ent_primer_nombre, $ent_segundo_nombre, $ent_primer_apellido, $ent_segundo_apellido, $ent_fecha_nacimiento));
+        $answer = @json_decode($db->createEntrenador($fkent_lug_id, $ent_ci, $ent_primer_nombre, $ent_segundo_nombre, $ent_primer_apellido, $ent_segundo_apellido, $ent_fecha_nacimiento));
         if ($answer->action != "error") {
-          $answer = @json_decode($db->updateTelefono($pkent_id, $tel_codigo, $tel_numero));
-          if ($answer->action != "error") {
-            echo '<meta http-equiv="refresh" content="0;url=../entrenadores.php">';
-            die();
+           if (!empty($tel_codigo) && !empty($tel_numero)) {
+             $answer = @json_decode($db->updateTelefono($pkent_id, $tel_codigo, $tel_numero));
+             if ($answer->action != "error") {
+               echo '<meta http-equiv="refresh" content="0;url=../entrenadores.php">';
+               die();
+             }
+          } else {
+             echo '<meta http-equiv="refresh" content="0;url=../entrenadores.php">';
+             die();
           }
-        }
-      }
-  } else {
-    echo '<meta http-equiv="refresh" content="0;url=../entrenadores.php">';
-    die();
+       }
   }
 ?>
 
@@ -64,7 +48,7 @@
       <!-- left column -->
       <div class="col-md-12">
         <!-- general form elements -->
-        <div class="box box-info">
+        <div class="box box-success">
           <!-- form start -->
           <form role="form" method="post">
              <?php
@@ -90,7 +74,7 @@
                         <div class="input-group-addon">
                           <i class="fa fa-calendar"></i>
                         </div>
-                        <input id="ent_fecha_nacimiento" name="ent_fecha_nacimiento" type="text" class="form-control pull-right" value="<?php echo $ent_fecha_nacimiento; ?>" readonly>
+                        <input id="ent_fecha_nacimiento" name="ent_fecha_nacimiento" type="text" class="form-control pull-right" value="<?php $stu_fecha_creacion = !empty($stu_fecha_creacion) ? $stu_fecha_creacion : "1990-01-01"; echo $stu_fecha_creacion; ?>" readonly>
                       </div><!-- /.input group -->
                     </div><!-- /.form group -->
                   </div>
@@ -142,7 +126,7 @@
 
                <div class="box-footer">
                  <div class="col-xs-offset-3 col-xs-3">
-                    <button name="pkent_id" value="<?php echo $pkent_id; ?>" type="submit" class="btn btn-dropbox btn-block btn-flat uppercase">Editar</button>
+                    <button name="pkent_id" value="<?php echo $pkent_id; ?>" type="submit" class="btn btn-update btn-block btn-flat uppercase">Crear</button>
                  </div>
                  <div class="col-xs-3">
                     <a href="<?php echo '../' . $_SESSION['last_page']; ?>" class="btn btn-default btn-block btn-flat uppercase">Cancelar</a>
