@@ -6,6 +6,7 @@
           $answer = json_decode($db->deleteJinete($_POST['pkjin_id']));
       }
   }
+  $jinetesList = @json_decode($db->getJinetes());
 ?>
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
@@ -24,6 +25,23 @@
         <!-- Main content -->
         <section class="content">
           <div class="row">
+             
+             <div class="col-lg-12 col-xs-12">
+              <!-- small box -->
+              <div class="small-box bg-green">
+                 <div class="inner">
+                   <h3><?php echo count($jinetesList); ?></h3>
+                   <p>Jinetes Registrados</p>
+                 </div>
+                 <div class="icon">
+                   <i class="ion ion-person-add"></i>
+                 </div>
+                 <?php echo "<a href='creates/create-" . $basefile . ".php' class='small-box-footer'>"; ?>
+                   Agregar jinete <i class="fa fa-arrow-circle-right"></i>
+                 </a>
+              </div>
+            </div><!-- ./col -->
+             
             <div class="col-xs-12">
               <div class="box">
                 <div class="box-header">
@@ -43,7 +61,6 @@
                     </thead>
                     <tbody>
                       <?php
-                        $jinetesList = @json_decode($db->getJinetes());
                         foreach ($jinetesList as $row) {
                             echo "<tr>";
                             echo "<td>$row->pkjin_id</td>";
