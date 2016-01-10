@@ -251,8 +251,10 @@
 		************************************************************/
 		function getJinetes() {
 			$result = pg_query($this->dbConnection,
-			"SELECT j.*, p.lug_nombre as parroquia, e.lug_nombre as estado
-			FROM jinete j, lugar p, lugar m, lugar e WHERE j.fkjin_lug_id = p.pklug_id AND p.fklug_lug_id = m.pklug_id AND m.fklug_lug_id = e.pklug_id");
+			"SELECT jin.*, t.tel_codigo, t.tel_numero, p.lug_nombre as parroquia, e.lug_nombre as estado
+			FROM lugar p, lugar m, lugar e, jinete jin LEFT JOIN telefono t ON t.fktel_jin_id = jin.pkjin_id
+			WHERE jin.fkjin_lug_id = p.pklug_id AND p.fklug_lug_id = m.pklug_id AND m.fklug_lug_id = e.pklug_id
+			ORDER BY pkjin_id");
 
 			if(pg_last_error()){
 				return $this->result_construct("error",pg_last_error());
@@ -267,7 +269,9 @@
 
 		function getJineteById($pkjin_id) {
 			$result = pg_query($this->dbConnection,
-			"SELECT *	FROM jinete WHERE pkjin_id = '$pkjin_id'");
+			"SELECT jin.*, t.*
+			FROM jinete jin LEFT JOIN telefono t ON t.fktel_jin_id = jin.pkjin_id
+			WHERE pkjin_id = '$pkjin_id'");
 
 			if(pg_last_error()){
 				return $this->result_construct("error",pg_last_error());

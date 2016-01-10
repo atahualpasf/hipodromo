@@ -3,7 +3,7 @@
 
   $pkjin_id = $fkjin_lug_id = $jin_ci = $jin_primer_nombre = "";
   $jin_segundo_nombre = $jin_primer_apellido = $jin_segundo_apellido = $jin_fecha_nacimiento = "";
-  $jin_altura = $jin_experiencia = "";
+  $jin_altura = $jin_experiencia = $tel_codigo = $tel_numero = "";
 
   function test_input($data) {
       $data = trim($data);
@@ -23,6 +23,8 @@
       $GLOBALS['jin_fecha_nacimiento'] = $jinetesList[0]->jin_fecha_nacimiento;
       $GLOBALS['jin_altura'] = $jinetesList[0]->jin_altura;
       $GLOBALS['jin_experiencia'] = $jinetesList[0]->jin_experiencia;
+      $GLOBALS['tel_codigo'] = $jinetesList[0]->tel_codigo;
+      $GLOBALS['tel_numero'] = $jinetesList[0]->tel_numero;
   }
 
   function setValuesWhenSubmitIsClicked() {
@@ -36,6 +38,8 @@
       $GLOBALS['jin_fecha_nacimiento'] = test_input($_POST['jin_fecha_nacimiento']);
       $GLOBALS['jin_altura'] = test_input($_POST['jin_altura']);
       $GLOBALS['jin_experiencia'] = test_input($_POST['jin_experiencia']);
+      $GLOBALS['tel_codigo'] = test_input($_POST['tel_codigo']);
+      $GLOBALS['tel_numero'] = test_input($_POST['tel_numero']);
   }
 
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -43,12 +47,15 @@
           $jinetesList = json_decode($db->getJineteById($_POST['update_id']));
           setValues($jinetesList);
       } elseif(!empty($_POST['pkjin_id'])) {
-          setValuesWhenSubmitIsClicked();
-          $answer = @json_decode($db->updateJinete($pkjin_id, $fkjin_lug_id, $jin_ci, $jin_primer_nombre, $jin_segundo_nombre, $jin_primer_apellido, $jin_segundo_apellido, $jin_fecha_nacimiento, $jin_altura, $jin_experiencia));
+        setValuesWhenSubmitIsClicked();
+        $answer = @json_decode($db->updateJinete($pkjin_id, $fkjin_lug_id, $jin_ci, $jin_primer_nombre, $jin_segundo_nombre, $jin_primer_apellido, $jin_segundo_apellido, $jin_fecha_nacimiento, $jin_altura, $jin_experiencia));
+        if ($answer->action != "error") {
+          $answer = @json_decode($db->updateTelefono($pkjin_id, $tel_codigo, $tel_numero));
           if ($answer->action != "error") {
             echo '<meta http-equiv="refresh" content="0;url=../jinetes.php">';
             die();
           }
+        }
       }
   } else {
     echo '<meta http-equiv="refresh" content="0;url=../jinetes.php">';
@@ -112,6 +119,14 @@
                   </div>
                 </div>
                 <div class="row">
+                  <div class="col-xs-1">
+                     <label>Cod</label>
+                    <input name="tel_codigo" type="text" class="form-control" placeholder="Cod" onblur="this.value = this.value.trim() == '' ? this.defaultValue : this.value.trim();" value="<?php echo $tel_codigo; ?>">
+                  </div>
+                  <div class="col-xs-2">
+                     <label>Telefono</label>
+                    <input name="tel_numero" type="text" class="form-control" placeholder="Numero" onblur="this.value = this.value.trim() == '' ? this.defaultValue : this.value.trim();" value="<?php echo $tel_numero; ?>">
+                  </div>
                   <div class="col-xs-1">
                      <label>Altura</label>
                     <input name="jin_altura" type="text" class="form-control" placeholder="Altura" onblur="this.value = this.value.trim() == '' ? this.defaultValue : this.value.trim();" value="<?php echo $jin_altura; ?>" required>
