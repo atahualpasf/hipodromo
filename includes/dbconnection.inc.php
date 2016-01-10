@@ -114,7 +114,6 @@
 			}
 		}
 		
-		
 		function getPropietarios() {
 			$result = pg_query($this->dbConnection,
 			"SELECT pro.*, t.tel_codigo, t.tel_numero, p.lug_nombre as parroquia, e.lug_nombre as estado
@@ -450,6 +449,21 @@
 		*					 	FUNCIONES GENÉRICAS DE EJEMPLARES								*
 		*																														*
 		************************************************************/
+		function createEjemplar($pkeje_id, $fkeje_har_id, $fkeje_pel_id, $fkeje_raz_id, $fkeje_mad_id, $fkeje_pad_id, $eje_fecha_nacimiento, $eje_nombre, $eje_precio, $eje_sexo, $eje_tatuaje){
+			if (!empty($fkeje_mad_id) && !empty(fkeje_pad_id)) {
+				$result = pg_query($this->dbConnection,
+				"INSERT INTO ejemplares VALUES(nextval('ejemplares_pkeje_id_seq'::regclass), '$pkeje_id', '$fkeje_har_id', '$fkeje_pel_id', '$fkeje_raz_id', '$fkeje_mad_id', '$fkeje_pad_id', '$eje_fecha_nacimiento', '$eje_nombre', '$eje_precio', '$eje_sexo', '$eje_tatuaje')");
+			} else {
+				$result = pg_query($this->dbConnection,
+				"INSERT INTO ejemplares VALUES(nextval('ejemplares_pkeje_id_seq'::regclass), '$pkeje_id', '$fkeje_har_id', '$fkeje_pel_id', '$fkeje_raz_id', NULL, NULL, '$eje_fecha_nacimiento', '$eje_nombre', '$eje_precio', '$eje_sexo', '$eje_tatuaje')");
+			}
+			if(pg_last_error()){
+				return $this->result_construct("error",pg_last_error());
+			}else{
+				return $this->result_construct("success","Actualizado exitosamente");
+			}
+		}
+		
 		function getEjemplares() {
 			$result = pg_query($this->dbConnection,
 			"SELECT e.pkeje_id, e.eje_nombre, e.eje_sexo, date_part('year', current_date) - date_part('year', e.eje_fecha_nacimiento) as edad, r.raz_nombre, p.pel_nombre, h.har_nombre,
