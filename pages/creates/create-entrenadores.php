@@ -74,7 +74,7 @@
                         <div class="input-group-addon">
                           <i class="fa fa-calendar"></i>
                         </div>
-                        <input name="ent_fecha_nacimiento" id="entrenador-date" type="text" class="form-control pull-right" value="<?php $stu_fecha_creacion = !empty($stu_fecha_creacion) ? $stu_fecha_creacion : "1990-01-01"; echo $stu_fecha_creacion; ?>" readonly>
+                        <input id="ent_fecha_nacimiento" name="ent_fecha_nacimiento" type="text" class="form-control pull-right" value="<?php $stu_fecha_creacion = !empty($stu_fecha_creacion) ? $stu_fecha_creacion : "1990-01-01"; echo $stu_fecha_creacion; ?>" readonly>
                       </div><!-- /.input group -->
                     </div><!-- /.form group -->
                   </div>
