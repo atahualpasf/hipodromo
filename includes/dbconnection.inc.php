@@ -802,7 +802,7 @@
 		*					 	FUNCIONES GENÉRICAS DE CARRERAS									*
 		*																														*
 		************************************************************/
-		function getCorredoresByCarrera(){
+		function getCarreras(){
 			$result = pg_query($this->dbConnection,
 			"SELECT * FROM carrera");
 			if(pg_last_error()){
