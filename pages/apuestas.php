@@ -1,5 +1,11 @@
 <?php
   include($_SERVER['DOCUMENT_ROOT'] . 'hipodromo/includes/header.inc.php');
+  
+  if ($_SERVER["REQUEST_METHOD"] == "POST") {
+      if (!empty($_POST['pkapu_id'])) {
+          $answer = json_decode($db->deleteApuesta($_POST['pkapu_id']));
+      }
+  }
 ?>
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
