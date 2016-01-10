@@ -259,6 +259,16 @@
 		*					 	FUNCIONES GENÉRICAS DE JINETES				*
 		*																				*
 		************************************************************/
+		function createJinete($fkjin_lug_id, $jin_ci, $jin_primer_nombre, $jin_segundo_nombre, $jin_primer_apellido, $jin_segundo_apellido, $jin_fecha_nacimiento, $jin_altura, $jin_experiencia){
+			$result = pg_query($this->dbConnection,
+			"INSERT INTO jinete VALUES(nextval('jinete_pkjin_id_seq'::regclass), '$fkjin_lug_id', '$jin_ci', '$jin_primer_nombre', '$jin_segundo_nombre', '$jin_primer_apellido', '$jin_segundo_apellido', '$jin_fecha_nacimiento', '$jin_altura', '$jin_experiencia')");
+			if(pg_last_error()){
+				return $this->result_construct("error",pg_last_error());
+			}else{
+				return $this->result_construct("success","Actualizado exitosamente");
+			}
+		}
+		
 		function getJinetes() {
 			$result = pg_query($this->dbConnection,
 			"SELECT jin.*, t.tel_codigo, t.tel_numero, p.lug_nombre as parroquia, e.lug_nombre as estado
