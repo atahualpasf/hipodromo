@@ -365,8 +365,6 @@
 			}
 		}
 
-
-
 		/************************************************************
 		*																														*
 		*					 		  FUNCIONES GENÉRICAS DE GORRA					  		*
@@ -438,6 +436,44 @@
 			}
 		}
 
+		function getEjemplarById($pkeje_id) {
+			$result = pg_query($this->dbConnection,
+			"SELECT e.*, r.raz_nombre, p.pel_nombre, h.har_nombre,
+			FROM ejemplar e, raza r, pelaje p, hara h
+			WHERE e.fkeje_raz_id = r.pkraz_id AND e.fkeje_pel_id = p.pkpel_id AND e.fkeje_har_id = h.pkhar_id AND pkeje_id = '$pkeje_id'");
+
+			if(pg_last_error()){
+				return $this->result_construct("error",pg_last_error());
+			}	else {
+				$respuesta = array();
+				while($row = pg_fetch_assoc($result)){
+					$respuesta[] = $row;
+				}
+				return json_encode($respuesta);
+			}
+		}
+
+		function updateEjemplar($pkeje_id, $fkeje_har_id, $fkeje_pel_id, $fkeje_raz_id, $fkeje_mad_id, $fkeje_pad_id, $eje_fecha_nacimiento, $eje_nombre, $eje_precio, $eje_sexo, $eje_tatuaje){
+			$result = pg_query($this->dbConnection,
+			"UPDATE ejemplar
+			SET pkeje_id='$pkeje_id', fkeje_har_id='$fkeje_har_id', fkeje_pel_id='$fkeje_pel_id', fkeje_raz_id='$fkeje_raz_id', fkeje_mad_id='$fkeje_mad_id', fkeje_pad_id='$fkeje_pad_id', eje_fecha_nacimiento='$eje_fecha_nacimiento', eje_nombre='$eje_nombre', eje_precio='$eje_precio', eje_sexo='$eje_sexo', eje_tatuaje='$eje_tatuaje'
+			WHERE pkeje_id='$pkeje_id'");
+			if(pg_last_error()){
+				return $this->result_construct("error",pg_last_error());
+			}else{
+				return $this->result_construct("success","Actualizado exitosamente");
+			}
+		}
+
+		function deleteEjemplar($id) {
+			$result = pg_query($this->dbConnection,
+				"DELETE FROM ejemplar WHERE pkeje_id='$id'");
+			if (pg_last_error()) {
+				return $this->result_construct("error",pg_last_error());
+			} else {
+				return $this->result_construct("success","Eliminado exitosamente");
+			}
+		}
 
 
 		/************************************************************
