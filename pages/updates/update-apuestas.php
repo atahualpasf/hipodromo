@@ -15,7 +15,7 @@
       // $GLOBALS['fkapu_cor_id'] = $apuestasList[0]->fkapu_cor_id;
       $GLOBALS['fkapu_jug_id'] = $apuestasList[0]->fkapu_jug_id;
       // $GLOBALS['fkapu_fac_id'] = $apuestasList[0]->fkapu_fac_id;
-      // $GLOBALS['fkapu_taq_id'] = $apuestasList[0]->fkapu_taq_id;
+      $GLOBALS['fkapu_taq_id'] = $apuestasList[0]->fkapu_taq_id;
       $GLOBALS['apu_monto'] = $apuestasList[0]->apu_monto;
       $GLOBALS['apu_lugar_llegada'] = $apuestasList[0]->apu_lugar_llegada;
   }
@@ -25,7 +25,7 @@
       // $GLOBALS['fkapu_cor_id'] = test_input($_POST['fkapu_cor_id']);
       $GLOBALS['fkapu_jug_id'] = test_input($_POST['fkapu_jug_id']);
       // $GLOBALS['fkapu_fac_id'] = test_input($_POST['fkapu_fac_id']);
-      // $GLOBALS['fkapu_taq_id'] = test_input($_POST['fkapu_taq_id']);
+      $GLOBALS['fkapu_taq_id'] = test_input($_POST['fkapu_taq_id']);
       $GLOBALS['apu_monto'] = test_input($_POST['apu_monto']);
       $GLOBALS['apu_lugar_llegada'] = test_input($_POST['apu_lugar_llegada']);
   }
@@ -36,7 +36,7 @@
           setValues($apuestasList);
       } elseif(!empty($_POST['pkapu_id'])) {
         setValuesWhenSubmitIsClicked();
-        $answer = @json_decode($db->updateApuesta($pkapu_id, /*$fkapu_cor_id, */$fkapu_jug_id,/* $fkapu_fac_id, $fkapu_taq_id, */$apu_monto, $apu_lugar_llegada));
+        $answer = @json_decode($db->updateApuesta($pkapu_id, /*$fkapu_cor_id, */$fkapu_jug_id,/* $fkapu_fac_id, */$fkapu_taq_id, $apu_monto, $apu_lugar_llegada));
         if ($answer->action != "error") {
           echo '<meta http-equiv="refresh" content="0;url=../apuestas.php">';
           die();
@@ -69,6 +69,23 @@
             <div class="box-body">
               <div class="box-body">
                 <div class="row">
+                  <div class="col-xs-2">
+                    <div class="form-group">
+                      <label>Taquillas</label>
+                      <select name="fkapu_taq_id" class="form-control select2" style="width: 100%;">
+                        <?php
+                          $taquillasList = json_decode($db->getTaquillas());
+                          foreach ($taquillasList as $row) {
+                              if ($row->pktaq_id == $fkapu_taq_id) {
+                                  echo "<option selected value='$row->pktaq_id'>$row->taq_nombre</option>";
+                              } else {
+                                  echo "<option value='$row->pktaq_id'>$row->taq_nombre</option>";
+                              }
+                          }
+                        ?>
+                      </select>
+                    </div><!-- /.form-group -->
+                  </div>
                   <div class="col-xs-3">
                     <div class="form-group">
                       <label>Jugada</label>
@@ -90,7 +107,7 @@
                      <label>Lugar de Llegada</label>
                      <input name="apu_lugar_llegada" type="text" class="form-control" placeholder="Lugar de llegada" onblur="this.value = this.value.trim() == '' ? this.defaultValue : this.value.trim();" value="<?php echo $apu_lugar_llegada; ?>">
                   </div>
-                  <div class="col-xs-3">
+                  <div class="col-xs-2">
                      <div class="form-group">
                       <label>Monto</label>
                       <div class="input-group">

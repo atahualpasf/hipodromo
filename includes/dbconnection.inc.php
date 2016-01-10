@@ -695,16 +695,16 @@
 			}
 		}
 		
-		function updateApuesta($pkapu_id, /*$fkapu_cor_id,*/ $fkapu_jug_id, /*$fkapu_fac_id, $fkapu_taq_id,*/ $apu_monto, $apu_lugar_llegada){
+		function updateApuesta($pkapu_id, /*$fkapu_cor_id,*/ $fkapu_jug_id, /*$fkapu_fac_id, */$fkapu_taq_id, $apu_monto, $apu_lugar_llegada){
 			if (!empty($apu_lugar_llegada)) { 
 				$result = pg_query($this->dbConnection,
 				"UPDATE apuesta
-				SET fkapu_jug_id='$fkapu_jug_id',apu_monto='$apu_monto', apu_lugar_llegada='$apu_lugar_llegada'
+				SET fkapu_jug_id='$fkapu_jug_id', fkapu_taq_id='$fkapu_taq_id', apu_monto='$apu_monto', apu_lugar_llegada='$apu_lugar_llegada'
 				WHERE pkapu_id='$pkapu_id'");
 			} else {
 				$result = pg_query($this->dbConnection,
 				"UPDATE apuesta
-				SET fkapu_jug_id='$fkapu_jug_id',apu_monto='$apu_monto', apu_lugar_llegada=NULL
+				SET fkapu_jug_id='$fkapu_jug_id', fkapu_taq_id='$fkapu_taq_id', apu_monto='$apu_monto', apu_lugar_llegada=NULL
 				WHERE pkapu_id='$pkapu_id'");
 			}
 			if(pg_last_error()){
@@ -712,7 +712,7 @@
 			}else{
 				return $this->result_construct("success","Actualizado exitosamente");
 			}
-		}/*fkapu_cor_id='$fkapu_cor_id',*/ /* fkapu_fac_id='$fkapu_fac_id', fkapu_taq_id='$fkapu_taq_id', */
+		}/*fkapu_cor_id='$fkapu_cor_id',*/ /* fkapu_fac_id='$fkapu_fac_id',  */
 
 		function deleteApuesta($id) {
 			$result = pg_query($this->dbConnection,
@@ -732,6 +732,26 @@
 		function getJugadas(){
 			$result = pg_query($this->dbConnection,
 			"SELECT * FROM jugada");
+			if(pg_last_error()){
+				return $this->result_construct("error",pg_last_error());
+			}
+			else {
+				$respuesta = array();
+				while($row = pg_fetch_assoc($result)){
+					$respuesta[] = $row;
+				}
+				return json_encode($respuesta);
+			}
+		}
+		
+		/************************************************************
+		*																														*
+		*					 	FUNCIONES GENÉRICAS DE TAQUILLAS								*
+		*																														*
+		************************************************************/
+		function getTaquillas(){
+			$result = pg_query($this->dbConnection,
+			"SELECT * FROM taquilla");
 			if(pg_last_error()){
 				return $this->result_construct("error",pg_last_error());
 			}
