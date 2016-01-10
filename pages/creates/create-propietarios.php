@@ -11,20 +11,6 @@
       return $data;
   }
 
-  function setValues($propietariosList) {
-      $GLOBALS['pkpro_id'] = $propietariosList[0]->pkpro_id;
-      $GLOBALS['fkpro_lug_id'] = $propietariosList[0]->fkpro_lug_id;
-      $GLOBALS['pro_ci'] = $propietariosList[0]->pro_ci;
-      $GLOBALS['pro_primer_nombre'] = $propietariosList[0]->pro_primer_nombre;
-      $GLOBALS['pro_segundo_nombre'] = $propietariosList[0]->pro_segundo_nombre;
-      $GLOBALS['pro_primer_apellido'] = $propietariosList[0]->pro_primer_apellido;
-      $GLOBALS['pro_segundo_apellido'] = $propietariosList[0]->pro_segundo_apellido;
-      $GLOBALS['pro_fecha_nacimiento'] = $propietariosList[0]->pro_fecha_nacimiento;
-      $GLOBALS['pro_correo'] = $propietariosList[0]->pro_correo;
-      $GLOBALS['tel_codigo'] = $propietariosList[0]->tel_codigo;
-      $GLOBALS['tel_numero'] = $propietariosList[0]->tel_numero;
-  }
-
   function setValuesWhenSubmitIsClicked() {
       $GLOBALS['pkpro_id'] = test_input($_POST['pkpro_id']);
       $GLOBALS['fkpro_lug_id'] = test_input($_POST['fkpro_lug_id']);
@@ -40,23 +26,20 @@
   }
 
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
-      if (!empty($_POST['update_id'])) {
-          $propietariosList = json_decode($db->getPropietarioById($_POST['update_id']));
-          setValues($propietariosList);
-      } elseif(!empty($_POST['pkpro_id'])) {
         setValuesWhenSubmitIsClicked();
-        $answer = @json_decode($db->updatePropietario($pkpro_id, $fkpro_lug_id, $pro_ci, $pro_primer_nombre, $pro_segundo_nombre, $pro_primer_apellido, $pro_segundo_apellido, $pro_fecha_nacimiento, $pro_correo));
+        $answer = @json_decode($db->createPropietario($fkpro_lug_id, $pro_ci, $pro_primer_nombre, $pro_segundo_nombre, $pro_primer_apellido, $pro_segundo_apellido, $pro_fecha_nacimiento, $pro_correo));
         if ($answer->action != "error") {
-          $answer = @json_decode($db->updateTelefono($pkpro_id, $tel_codigo, $tel_numero));
-          if ($answer->action != "error") {
-            echo '<meta http-equiv="refresh" content="0;url=../propietarios.php">';
-            die();
+           if (!empty($tel_codigo) && !empty($tel_numero)) {
+             $answer = @json_decode($db->updateTelefono($pkpro_id, $tel_codigo, $tel_numero));
+             if ($answer->action != "error") {
+               echo '<meta http-equiv="refresh" content="0;url=../propietarios.php">';
+               die();
+             }
+          } else {
+             echo '<meta http-equiv="refresh" content="0;url=../propietarios.php">';
+             die();
           }
         }
-      }
-  } else {
-    echo '<meta http-equiv="refresh" content="0;url=../propietarios.php">';
-    die();
   }
 ?>
 
@@ -66,7 +49,7 @@
       <!-- left column -->
       <div class="col-md-12">
         <!-- general form elements -->
-        <div class="box box-info">
+        <div class="box box-success">
           <!-- form start -->
           <form role="form" method="post">
              <?php
@@ -92,7 +75,7 @@
                         <div class="input-group-addon">
                           <i class="fa fa-calendar"></i>
                         </div>
-                        <input id="pro_fecha_nacimiento" name="pro_fecha_nacimiento" id="jinete-date" type="text" class="form-control pull-right" value="<?php echo $pro_fecha_nacimiento; ?>" readonly>
+                        <input id="pro_fecha_nacimiento" name="pro_fecha_nacimiento" id="jinete-date" type="text" class="form-control pull-right" value="<?php $pro_fecha_nacimiento = !empty($pro_fecha_nacimiento) ? $pro_fecha_nacimiento : "1990-01-01"; echo $pro_fecha_nacimiento; ?>" readonly>
                       </div><!-- /.input group -->
                     </div><!-- /.form group -->
                   </div>
@@ -147,7 +130,7 @@
               </div><!-- /.box-body -->
               <div class="box-footer">
                <div class="col-xs-offset-3 col-xs-3">
-                  <button name="pkpro_id" value="<?php echo $pkpro_id; ?>" type="submit" class="btn btn-dropbox btn-block btn-flat uppercase">Editar</button>
+                  <button name="pkpro_id" value="<?php echo $pkpro_id; ?>" type="submit" class="btn btn-update btn-block btn-flat uppercase">Crear</button>
                </div>
                <div class="col-xs-3">
                   <a href="<?php echo '../' . $_SESSION['last_page']; ?>" class="btn btn-default btn-block btn-flat uppercase">Cancelar</a>

@@ -37,7 +37,7 @@
                    <i class="ion ion-person-add"></i>
                  </div>
                  <?php echo "<a href='creates/create-" . $basefile . ".php' class='small-box-footer'>"; ?>
-                   Agregar entreador <i class="fa fa-arrow-circle-right"></i>
+                   Agregar entrenador <i class="fa fa-arrow-circle-right"></i>
                  </a>
               </div>
             </div><!-- ./col -->
