@@ -1,7 +1,7 @@
 <?php
   include($_SERVER['DOCUMENT_ROOT'] . 'hipodromo/includes/header.inc.php');
 
-  $pkapu_id = $fkapu_cor_id = $fkapu_jug_id = $fkapu_fac_id = $fkapu_taq_id = $apu_monto = $apu_lugar_llegada= "";
+  $pkfac_id = $pkapu_id = $fkapu_cor_id = $fkapu_jug_id = $fkapu_fac_id = $fkapu_taq_id = $apu_monto = $apu_lugar_llegada = "";
 
   function test_input($data) {
       $data = trim($data);
@@ -10,42 +10,44 @@
       return $data;
   }
 
-  function setValues($apuestasList) {
-      $GLOBALS['pkapu_id'] = $apuestasList[0]->pkapu_id;
+  function setValues($facturasByApuestaList) {
+      $GLOBALS['pkfac_id'] = $facturasByApuestaList[0]->pkapu_id;
+      // $GLOBALS['pkapu_id'] = $apuestasList[0]->pkapu_id;
       // $GLOBALS['fkapu_cor_id'] = $apuestasList[0]->fkapu_cor_id;
-      $GLOBALS['fkapu_jug_id'] = $apuestasList[0]->fkapu_jug_id;
+      // $GLOBALS['fkapu_jug_id'] = $apuestasList[0]->fkapu_jug_id;
       // $GLOBALS['fkapu_fac_id'] = $apuestasList[0]->fkapu_fac_id;
-      $GLOBALS['fkapu_taq_id'] = $apuestasList[0]->fkapu_taq_id;
-      $GLOBALS['apu_monto'] = $apuestasList[0]->apu_monto;
-      $GLOBALS['apu_lugar_llegada'] = $apuestasList[0]->apu_lugar_llegada;
+      // $GLOBALS['fkapu_taq_id'] = $apuestasList[0]->fkapu_taq_id;
+      // $GLOBALS['apu_monto'] = $apuestasList[0]->apu_monto;
+      // $GLOBALS['apu_lugar_llegada'] = $apuestasList[0]->apu_lugar_llegada;
   }
 
   function setValuesWhenSubmitIsClicked() {
-      $GLOBALS['pkapu_id'] = test_input($_POST['pkapu_id']);
+      $GLOBALS['pkfac_id'] = test_input($_POST['pkfac_id']);
+      // $GLOBALS['pkapu_id'] = test_input($_POST['pkapu_id']);
       // $GLOBALS['fkapu_cor_id'] = test_input($_POST['fkapu_cor_id']);
-      $GLOBALS['fkapu_jug_id'] = test_input($_POST['fkapu_jug_id']);
+      // $GLOBALS['fkapu_jug_id'] = test_input($_POST['fkapu_jug_id']);
       // $GLOBALS['fkapu_fac_id'] = test_input($_POST['fkapu_fac_id']);
-      $GLOBALS['fkapu_taq_id'] = test_input($_POST['fkapu_taq_id']);
-      $GLOBALS['apu_monto'] = test_input($_POST['apu_monto']);
-      $GLOBALS['apu_lugar_llegada'] = test_input($_POST['apu_lugar_llegada']);
+      // $GLOBALS['fkapu_taq_id'] = test_input($_POST['fkapu_taq_id']);
+      // $GLOBALS['apu_monto'] = test_input($_POST['apu_monto']);
+      // $GLOBALS['apu_lugar_llegada'] = test_input($_POST['apu_lugar_llegada']);
   }
 
-  if ($_SERVER["REQUEST_METHOD"] == "POST") {
-      if (!empty($_POST['update_id'])) {
-          $apuestasList = json_decode($db->getApuestaByFactura($_POST['update_id']));
-          setValues($apuestasList);
-      } elseif(!empty($_POST['pkapu_id'])) {
-        setValuesWhenSubmitIsClicked();
-        $answer = @json_decode($db->updateApuesta($pkapu_id, /*$fkapu_cor_id, */$fkapu_jug_id,/* $fkapu_fac_id, */$fkapu_taq_id, $apu_monto, $apu_lugar_llegada));
-        if ($answer->action != "error") {
-          echo '<meta http-equiv="refresh" content="0;url=../apuestas.php">';
-          die();
-        }
-      }
-  } else {
-    echo '<meta http-equiv="refresh" content="0;url=../apuestas.php">';
-    die();
-  }
+  // if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  //     if (!empty($_POST['update_id'])) {
+  //         $apuestasList = json_decode($db->getApuestaByFactura($_POST['update_id']));
+  //         setValues($apuestasList);
+  //     } elseif(!empty($_POST['pkapu_id'])) {
+  //       setValuesWhenSubmitIsClicked();
+  //       $answer = @json_decode($db->updateApuesta($pkapu_id, /*$fkapu_cor_id, */$fkapu_jug_id,/* $fkapu_fac_id, */$fkapu_taq_id, $apu_monto, $apu_lugar_llegada));
+  //       if ($answer->action != "error") {
+  //         echo '<meta http-equiv="refresh" content="0;url=../apuestas.php">';
+  //         die();
+  //       }
+  //     }
+  // } else {
+  //   echo '<meta http-equiv="refresh" content="0;url=../apuestas.php">';
+  //   die();
+  // }
 ?>
 
   <!-- Main content -->
@@ -66,72 +68,58 @@
                     echo "</div>";
                  }
              ?>
-            <div class="box-body">
+            <div class="box">
+              <div class="box-header">
+                <h3 class="box-title">Apuestas</h3>
+              </div><!-- /.box-header -->
               <div class="box-body">
-                <div class="row">
-                  <div class="col-xs-2">
-                    <div class="form-group">
-                      <label>Taquillas</label>
-                      <select name="fkapu_taq_id" class="form-control select2" style="width: 100%;">
-                        <?php
-                          $taquillasList = json_decode($db->getTaquillas());
-                          foreach ($taquillasList as $row) {
-                              if ($row->pktaq_id == $fkapu_taq_id) {
-                                  echo "<option selected value='$row->pktaq_id'>$row->taq_nombre</option>";
-                              } else {
-                                  echo "<option value='$row->pktaq_id'>$row->taq_nombre</option>";
-                              }
-                          }
-                        ?>
-                      </select>
-                    </div><!-- /.form-group -->
-                  </div>
-                  <div class="col-xs-3">
-                    <div class="form-group">
-                      <label>Jugada</label>
-                      <select name="fkapu_jug_id" class="form-control select2" style="width: 100%;">
-                        <?php
-                          $jugadasList = json_decode($db->getJugadas());
-                          foreach ($jugadasList as $row) {
-                              if ($row->pkjug_id == $fkapu_jug_id) {
-                                  echo "<option selected value='$row->pkjug_id'>$row->jug_nombre</option>";
-                              } else {
-                                  echo "<option value='$row->pkjug_id'>$row->jug_nombre</option>";
-                              }
-                          }
-                        ?>
-                      </select>
-                    </div><!-- /.form-group -->
-                  </div>
-                  <div class="col-xs-2">
-                     <label>Lugar de Llegada</label>
-                     <input name="apu_lugar_llegada" type="text" class="form-control" placeholder="Lugar de llegada" onblur="this.value = this.value.trim() == '' ? this.defaultValue : this.value.trim();" value="<?php echo $apu_lugar_llegada; ?>">
-                  </div>
-                  <div class="col-xs-2">
-                     <div class="form-group">
-                      <label>Monto</label>
-                      <div class="input-group">
-                        <div class="input-group-addon">
-                          Bs.
-                        </div>
-                        <input name="apu_monto" id="apuesta-monto" type="text" class="form-control pull-right" value="<?php echo $apu_monto; ?>" required>
-                      </div><!-- /.input group -->
-                    </div><!-- /.form group -->
-                  </div>
-                </div>
-              </div>
+                <table id="tableDefault" class="table table-bordered table-striped">
+                  <thead>
+                    <tr>
+                      <th>id</th>
+                      <th>taquilla</th>
+                      <th>jugada</th>
+                      <th>ejemplar</th>
+                      <th>lugar de llegada</th>
+                      <th>monto</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php
+                      $apuestasList = @json_decode($db->getApuestaByFactura($pkfac_id));
+                      foreach ($apuestasList as $row) {
+                          echo "<tr>";
+                          echo "<td>$row->pkapu_id</td>";
+                          echo "<td>$row->taq_nombre</td>";
+                          echo "<td>$row->jug_nombre</td>";
+                          echo "<td>$row->eje_nombre</td>";
+                          echo "<td>$row->apu_lugar_llegada</td>";
+                          echo "<td>$row->apu_monto</td>";
+                          echo "</tr>";
+                      }
+                    ?>
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <th>id</th>
+                      <th>taquilla</th>
+                      <th>jugada</th>
+                      <th>ejemplar</th>
+                      <th>lugar de llegada</th>
+                      <th>monto</th>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div><!-- /.box-body -->
               <div class="box-footer">
-                 <div class="col-xs-offset-3 col-xs-3">
-                    <button name="pkapu_id" value="<?php echo $pkapu_id; ?>" type="submit" class="btn btn-dropbox btn-block btn-flat uppercase">Editar</button>
-                 </div>
                  <div class="col-xs-3">
                     <a href="<?php echo '../' . $_SESSION['last_page']; ?>" class="btn btn-default btn-block btn-flat uppercase">Cancelar</a>
                  </div>
                </div>
-            </div><!-- /.box-body -->
+            </div>
           </form>
-       </div><!-- /.box -->
-     </div><!--/.col (left) -->
+        </div><!-- /.box -->
+      </div><!--/.col (left) -->
     </div>   <!-- /.row -->
   </section><!-- /.content -->
 </div><!-- /.content-wrapper -->
