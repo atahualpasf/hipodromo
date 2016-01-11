@@ -14,7 +14,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            Implementos
+            Inscripciones
           </h1>
           <ol class="breadcrumb">
             <li><a href="index.php"><i class="fa fa-dashboard"></i> Tablero</a></li>
@@ -32,7 +32,7 @@
               <div class="small-box bg-green">
                 <div class="inner">
                   <h3><?php echo count($inscripcionesList); ?></h3>
-                  <p>Inscripciones Registradass</p>
+                  <p>Inscripciones Registradas</p>
                 </div>
                 <div class="icon">
                   <i class="ion ion-person-add"></i>

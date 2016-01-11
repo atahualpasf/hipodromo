@@ -243,7 +243,6 @@
                   <li><a href="<?php echo $db->getRootUri() . 'pages/jinetes.php'; ?>"><i class="fa fa-circle-o"></i> Jinetes</a></li>
                   <li><a href="<?php echo $db->getRootUri() . 'pages/propietarios.php'; ?>"><i class="fa fa-circle-o"></i> Propietarios</a></li>
                   <li><a href="<?php echo $db->getRootUri() . 'pages/studs.php'; ?>"><i class="fa fa-circle-o"></i> Studs</a></li>
-                  <li><a href="<?php echo $db->getRootUri() . 'pages/usuarios.php'; ?>"><i class="fa fa-circle-o"></i> Usuarios</a></li>
                 </ul>
               </li>
               </ul>
