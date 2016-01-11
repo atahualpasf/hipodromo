@@ -75,6 +75,35 @@ $(document).ready(function() {
        minDate: "1950-01-01",
        endDate: "2015-12-31",
        language: 'es'
-     });
+     });   
   }
+  
+  // Script para cargar el combo box de boxes según caballeriza
+  //$("select#empleado").attr("disabled","disabled");
+  $("select#inputBox").attr("disabled","disabled");
+  //$("button#btn_next").attr("disabled","disabled");
+  
+  $("select#inputCaballeriza").change(function(){
+      $("select#inputBox").attr("disabled","disabled");
+      //$("button#btn_next").attr("disabled","disabled");
+      $("select#inputBox").html("<option>Seleccione un boxe</option>");
+      var id = $("select#inputCaballeriza option:selected").attr('value');
+      $.post("../../includes/select_boxeByCaballeriza.inc.php", {id:id}, function(data){
+          $("select#inputBox").removeAttr("disabled");
+          //$("button#btn_next").removeAttr("disabled");
+          $("select#inputBox").html(data);
+      });
+  });
+  
+  // Script para cargar el combo box de boxes una vez que buscan
+  // var pkbox_id = <?php if(!empty($_POST['pkbox_id'])) echo $_POST['pkbox_id']; else echo ""; ?>;
+  //   if (pkbox_id != "") {
+  //       $("select#inputBox").html("<option>Seleccione un boxe</option>");
+  //       var id = $("select#inputCaballeriza option:selected").attr('value');
+  //       $.post("../../include/select_boxeByCaballeriza.inc.php", {id:id,pkbox_id:pkbox_id}, function(data){
+  //           $("select#inputBox").removeAttr("disabled");
+            //$("button#btn_next").removeAttr("disabled");
+    //         $("select#inputBox").html(data);
+    //     });
+    // }
 });

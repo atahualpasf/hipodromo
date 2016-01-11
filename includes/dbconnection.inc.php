@@ -897,7 +897,7 @@
 		************************************************************/
 		function getCaballerizas(){
 			$result = pg_query($this->dbConnection,
-			"SELECT c.pkcab_id, ca.caba_primer_apellido || ', ' || ca.caba_primer_nombre as caballerizo, v.vet_primer_apellido || ', ' || v.vet_primer_nombre as veterinario, cab_descripcion
+			"SELECT c.pkcab_id, c.cab_descripcion, ca.caba_primer_apellido || ', ' || ca.caba_primer_nombre as caballerizo, v.vet_primer_apellido || ', ' || v.vet_primer_nombre as veterinario, cab_descripcion
 			FROM caballeriza c, caballerizo ca, veterinario v
 			WHERE c.fkcab_vet_id = v.pkvet_id AND c.fkcab_caba_id = ca.pkcaba_id");
 			if(pg_last_error()){
@@ -1046,6 +1046,29 @@
 					$respuesta[] = $row;
 				}
 				return json_encode($respuesta);
+			}
+		}
+		
+		/************************************************************
+		*																														*
+		*					 	FUNCIONES GENÉRICAS DE BOXES										*
+		*																														*
+		************************************************************/
+		function getBoxByCaballeriza() {
+			$result = pg_query($this->dbConnection,
+			"SELECT * FROM boxe WHERE fkbox_cab_id = '$_POST[id]'");
+			if(pg_last_error()){
+				return $this->result_construct("error",pg_last_error());
+			}	else {
+				$respuesta = array();
+				while($row = pg_fetch_assoc($result)){
+					if ($row[pkbox_id]==$_POST[pkbox_id]) {
+						$respuesta .= "<option selected value='$row[pkbox_id]'>$row[box_descripcion] </option>";
+					} else {
+						$respuesta .= "<option value='$row[pkbox_id]'>$row[box_descripcion] </option>";
+					}
+				}
+				return json_encode($respuesta, JSON_UNESCAPED_UNICODE);
 			}
 		}
 	}

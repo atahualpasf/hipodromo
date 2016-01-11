@@ -220,6 +220,29 @@
                     </div><!-- /.form group -->
                   </div>
                 </div>
+                <div class="row">
+                  <div class="col-xs-3">
+                    <div class="form-group">
+                      <label>Caballeriza</label>
+                      <select name="pkcab_id" id="inputCaballeriza" class="form-control select2" style="width: 100%;">
+                        <?php
+                          $caballerizasList = json_decode($db->getCaballerizas());
+                            echo "<option selected value='$row->pkmadre'>Seleccione una madre</option>";
+                          foreach ($caballerizasList as $row) {
+                            echo "<option value='$row->pkcab_id'>$row->cab_descripcion</option>";
+                          }
+                        ?>
+                      </select>
+                    </div><!-- /.form-group -->
+                  </div>
+                  <div class="col-xs-3">
+                    <div class="form-group">
+                      <label>Boxe</label>
+                        <select name="pkbox_id" id="inputBox" class="form-control" required>
+                        </select>
+                    </div>
+                  </div>
+                </div>
               </div>
               <div class="box-footer">
                  <div class="col-xs-offset-3 col-xs-3">
