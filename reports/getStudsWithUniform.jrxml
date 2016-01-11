@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="INFORMACIÓN DE UNIFORMES DE STUD" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f1624b59-0ec3-4f02-b6a9-09d4ec963db5">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT s.stu_nombre, c.col_nombre, cg.colgor_pieza, cc.colcha_pieza
+FROM stud s, gorra g, color_gorra cg, color c, chaqueta ch, color_chaqueta cc
+WHERE s.pkstu_id = g.fkgor_stu_id AND g.pkgor_id = cg.fkcolgor_gor_id AND cg.fkcolgor_col_id = c.pkcol_id AND s.pkstu_id = ch.fkcha_stu_id AND
+ch.pkcha_id = cc.fkcolcha_cha_id AND cc.fkcolcha_col_id = c.pkcol_id
+ORDER BY pkstu_id]]>
+	</queryString>
+	<field name="stu_nombre" class="java.lang.String"/>
+	<field name="col_nombre" class="java.lang.String"/>
+	<field name="colgor_pieza" class="java.lang.String"/>
+	<field name="colcha_pieza" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="9e93aeab-2bc2-4239-8299-5734158cae08" x="221" y="21" width="130" height="38"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[INFORMACIÓN DE UNIFORMES DE STUD ]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="486e15f4-b26e-4df1-83e3-d2090ce8b990" x="460" y="0" width="60" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="48b4c50d-9ef7-4151-894c-9fefde1197b6" x="520" y="0" width="40" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="bf7d2367-acb2-492c-8dc2-2d7218f148f6" x="460" y="20" width="100" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="26" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="1fd56339-4ead-42d1-ac83-04f5623e1f81" x="0" y="2" width="100" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre Stud]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2a1b3810-4b84-481e-b102-624fe7b61f16" x="121" y="2" width="83" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Color]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7ded46b9-5bc1-4ce6-b07e-a1bd71b44230" x="221" y="2" width="100" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Gorra]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="45b60e7e-93fd-4520-b4e3-c3fcad713ad0" x="351" y="2" width="204" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Color Chaqueta]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="25" splitType="Stretch">
+			<textField>
+				<reportElement uuid="ce3a21c4-3b4a-4135-9bfc-3fe87f603ab2" x="0" y="5" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{stu_nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="4c1e1df9-3dad-4abe-bdbf-f41cf47610a4" x="121" y="5" width="83" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{col_nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="9fa3dd08-658b-4a13-ac7e-1eeb1752f484" x="221" y="5" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{colgor_pieza}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="460278ae-23c1-4263-b163-2e90a9976d86" x="351" y="5" width="204" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{colcha_pieza}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
