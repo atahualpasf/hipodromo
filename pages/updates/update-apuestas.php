@@ -32,7 +32,7 @@
 
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
       if (!empty($_POST['update_id'])) {
-          $apuestasList = json_decode($db->getApuestaById($_POST['update_id']));
+          $apuestasList = json_decode($db->getApuestaByFactura($_POST['update_id']));
           setValues($apuestasList);
       } elseif(!empty($_POST['pkapu_id'])) {
         setValuesWhenSubmitIsClicked();

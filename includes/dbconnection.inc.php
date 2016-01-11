@@ -758,6 +758,23 @@
 			}
 		}
 		
+		function getApuestaByFactura($pkapu_id) {
+			$result = pg_query($this->dbConnection,
+			"SELECT a.*, j.jug_nombre, e.eje_nombre, t.taq_nombre
+			FROM apuesta a, corredor c, jugada j, taquilla t, ejemplar e
+			WHERE a.fkapu_cor_id = c.pkcor_id AND a.fkapu_jug_id = j.pkjug_id AND a.fkapu_taq_id = t.pktaq_id AND c.fkcor_eje_id = e.pkeje_id AND pkapu_id = '$pkapu_id'");
+
+			if(pg_last_error()){
+				return $this->result_construct("error",pg_last_error());
+			}	else {
+				$respuesta = array();
+				while($row = pg_fetch_assoc($result)){
+					$respuesta[] = $row;
+				}
+				return json_encode($respuesta);
+			}
+		}
+		
 		function updateApuesta($pkapu_id, /*$fkapu_cor_id,*/ $fkapu_jug_id, /*$fkapu_fac_id, */$fkapu_taq_id, $apu_monto, $apu_lugar_llegada){
 			if (!empty($apu_lugar_llegada)) { 
 				$result = pg_query($this->dbConnection,
@@ -777,9 +794,9 @@
 			}
 		}/*fkapu_cor_id='$fkapu_cor_id',*/ /* fkapu_fac_id='$fkapu_fac_id',  */
 
-		function deleteApuesta($id) {
+		function deleteApuestaByFactura($fkapu_fac_id) {
 			$result = pg_query($this->dbConnection,
-				"DELETE FROM apuesta WHERE pkapu_id='$id'");
+				"DELETE FROM apuesta WHERE fkapu_fac_id='$fkapu_fac_id'");
 			if (pg_last_error()) {
 				return $this->result_construct("error",pg_last_error());
 			} else {
