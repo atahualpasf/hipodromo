@@ -10,16 +10,6 @@
       return $data;
   }
 
-  function setValues($inscripcionesList) {
-      $GLOBALS['pkins_id'] = $inscripcionesList[0]->pkins_id;
-      $GLOBALS['fkins_car_id'] = $inscripcionesList[0]->fkins_car_id;
-      $GLOBALS['fkins_cor_id'] = $inscripcionesList[0]->fkins_cor_id;
-      $GLOBALS['ins_valor'] = $inscripcionesList[0]->ins_valor;
-      $GLOBALS['ins_gualdrapa'] = $inscripcionesList[0]->ins_gualdrapa;
-      $GLOBALS['ins_puesto_partida'] = $inscripcionesList[0]->ins_puesto_partida;
-      $GLOBALS['ins_favorito'] = $inscripcionesList[0]->ins_favorito;
-  }
-
   function setValuesWhenSubmitIsClicked() {
       $GLOBALS['pkins_id'] = test_input($_POST['pkins_id']);
       $GLOBALS['fkins_car_id'] = test_input($_POST['fkins_car_id']);
@@ -31,20 +21,12 @@
   }
 
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
-      if (!empty($_POST['update_id'])) {
-        $inscripcionesList = json_decode($db->getInscripcionById($_POST['update_id']));
-        setValues($inscripcionesList);
-      } elseif(!empty($_POST['pkins_id'])) {
-        setValuesWhenSubmitIsClicked();
-        $answer = @json_decode($db->updateInscripcion($pkins_id, $fkins_car_id, $fkins_cor_id, $ins_valor, $ins_gualdrapa, $ins_puesto_partida, $ins_favorito));
-        if ($answer->action != "error") {
-          echo '<meta http-equiv="refresh" content="0;url=../inscripciones.php">';
-          die();
-        }
-      }
-  } else {
-    echo '<meta http-equiv="refresh" content="0;url=../inscripciones.php">';
-    die();
+    setValuesWhenSubmitIsClicked();
+    $answer = @json_decode($db->createInscripcion($fkins_car_id, $fkins_cor_id, $ins_valor, $ins_gualdrapa, $ins_puesto_partida, $ins_favorito));
+    if ($answer->action != "error") {
+      echo '<meta http-equiv="refresh" content="0;url=../inscripciones.php">';
+      die();
+    }
   }
 ?>
 
@@ -54,7 +36,7 @@
       <!-- left column -->
       <div class="col-md-12">
         <!-- general form elements -->
-        <div class="box box-info">
+        <div class="box box-success">
           <!-- form start -->
           <form role="form" method="post">
              <?php
@@ -148,7 +130,7 @@
               </div><!-- /.box-body -->
               <div class="box-footer">
                 <div class="col-xs-offset-3 col-xs-3">
-                  <button name="pkins_id" value="<?php echo $pkins_id; ?>" type="submit" class="btn btn-dropbox btn-block btn-flat uppercase">Editar</button>
+                  <button name="pkins_id" value="<?php echo $pkins_id; ?>" type="submit" class="btn btn-update btn-block btn-flat uppercase">Crear</button>
                 </div>
                 <div class="col-xs-3">
                   <a href="<?php echo '../' . $_SESSION['last_page']; ?>" class="btn btn-default btn-block btn-flat uppercase">Cancelar</a>
