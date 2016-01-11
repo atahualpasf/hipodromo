@@ -130,6 +130,9 @@
                       <select name="ins_favorito" class="form-control select2" style="width: 100%;">
                         <?php
                             $favoritosList = array(1,2,3);
+                            if (empty($ins_favorito)){
+                              echo "<option selected value='$row->ins_favorito'>Seleccione favorito</option>";
+                            }
                             foreach ($favoritosList as $row) {
                                 if ($ins_favorito == $row) {
                                     echo "<option selected value='$row'>$row</option>";

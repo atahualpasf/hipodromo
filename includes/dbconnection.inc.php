@@ -943,10 +943,17 @@
 		}
 		
 		function updateInscripcion($pkins_id, $fkins_car_id, $fkins_cor_id, $ins_valor, $ins_gualdrapa, $ins_puesto_partida, $ins_favorito){
-			$result = pg_query($this->dbConnection,
-			"UPDATE inscripcion
-			SET fkins_car_id='$fkins_car_id', fkins_cor_id='$fkins_cor_id', ins_valor='$ins_valor', ins_gualdrapa='$ins_gualdrapa', ins_puesto_partida='$ins_puesto_partida', ins_favorito='$ins_favorito'
-			WHERE pkins_id='$pkins_id'");
+			if (!empty($ins_favorito)) {
+				$result = pg_query($this->dbConnection,
+				"UPDATE inscripcion
+				SET fkins_car_id='$fkins_car_id', fkins_cor_id='$fkins_cor_id', ins_valor='$ins_valor', ins_gualdrapa='$ins_gualdrapa', ins_puesto_partida='$ins_puesto_partida', ins_favorito='$ins_favorito'
+				WHERE pkins_id='$pkins_id'");
+			} else {
+				$result = pg_query($this->dbConnection,
+				"UPDATE inscripcion
+				SET fkins_car_id='$fkins_car_id', fkins_cor_id='$fkins_cor_id', ins_valor='$ins_valor', ins_gualdrapa='$ins_gualdrapa', ins_puesto_partida='$ins_puesto_partida', ins_favorito=NULL
+				WHERE pkins_id='$pkins_id'");
+			}
 			if(pg_last_error()){
 				return $this->result_construct("error",pg_last_error());
 			}else{
