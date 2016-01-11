@@ -725,9 +725,9 @@
 			}
 		}/*fkapu_cor_id='$fkapu_cor_id',*/ /* fkapu_fac_id='$fkapu_fac_id',  */
 
-		function deleteApuesta($id) {
+		function deleteApuestaByFactura($fkapu_fac_id) {
 			$result = pg_query($this->dbConnection,
-				"DELETE FROM apuesta WHERE pkapu_id='$id'");
+				"DELETE FROM apuesta WHERE fkapu_fac_id='$fkapu_fac_id'");
 			if (pg_last_error()) {
 				return $this->result_construct("error",pg_last_error());
 			} else {

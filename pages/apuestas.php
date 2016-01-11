@@ -2,8 +2,8 @@
   include($_SERVER['DOCUMENT_ROOT'] . 'hipodromo/includes/header.inc.php');
   
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
-      if (!empty($_POST['pkapu_id'])) {
-          $answer = json_decode($db->deleteApuesta($_POST['pkapu_id']));
+      if (!empty($_POST['fkapu_fac_id'])) {
+          $answer = json_decode($db->deleteApuesta($_POST['fkapu_fac_id']));
       }
   }
 ?>
@@ -60,7 +60,7 @@
                             echo "<td><button name='update_id' value='$row->pkapu_id' type='submit' form='updateForm' class='btn btn-dropbox btn-flat btn-block'><i class='fa fa-edit'></i></button></td>";
                             echo "</form>";
                             echo "<form id='deleteForm' role='form' method='POST' action='" . htmlentities($_SERVER['PHP_SELF']) . "'>";
-                            echo "<td><button name='pkapu_id' value='$row->pkapu_id' type='submit' form='deleteForm' class='btn btn-danger btn-flat btn-block'><i class='fa fa-trash'></i></button></td>";
+                            echo "<td><button name='fkapu_fac_id' value='$row->fkapu_fac_id' type='submit' form='deleteForm' class='btn btn-danger btn-flat btn-block'><i class='fa fa-trash'></i></button></td>";
                             echo "</form>";
                             echo "</tr>";
                         }
