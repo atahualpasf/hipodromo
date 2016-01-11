@@ -98,6 +98,40 @@
 				return json_encode($respuesta);
 			}
 		}
+		
+		function getEjemplaresMadres() {
+			$result = pg_query($this->dbConnection,
+			"SELECT e.pkeje_id as pkmadre, e.eje_nombre as madre
+			FROM ejemplar e
+			WHERE e.eje_sexo = 'Y' AND e.fkeje_mad_id IS NULL AND e.fkeje_pad_id IS NULL");
+
+			if(pg_last_error()){
+				return $this->result_construct("error",pg_last_error());
+			}	else {
+				$respuesta = array();
+				while($row = pg_fetch_assoc($result)){
+					$respuesta[] = $row;
+				}
+				return json_encode($respuesta);
+			}
+		}
+		
+		function getEjemplaresPadres() {
+			$result = pg_query($this->dbConnection,
+			"SELECT e.pkeje_id as pkpadre, e.eje_nombre as padre
+			FROM ejemplar e
+			WHERE e.eje_sexo = 'C' AND e.fkeje_mad_id IS NULL AND e.fkeje_pad_id IS NULL");
+
+			if(pg_last_error()){
+				return $this->result_construct("error",pg_last_error());
+			}	else {
+				$respuesta = array();
+				while($row = pg_fetch_assoc($result)){
+					$respuesta[] = $row;
+				}
+				return json_encode($respuesta);
+			}
+		}
 
 		/************************************************************
 		*																														*
@@ -113,7 +147,6 @@
 				return $this->result_construct("success","Actualizado exitosamente");
 			}
 		}
-		
 		
 		function getPropietarios() {
 			$result = pg_query($this->dbConnection,
@@ -450,6 +483,21 @@
 		*					 	FUNCIONES GENÉRICAS DE EJEMPLARES								*
 		*																														*
 		************************************************************/
+		function createEjemplar($fkeje_har_id, $fkeje_pel_id, $fkeje_raz_id, $fkeje_mad_id, $fkeje_pad_id, $eje_fecha_nacimiento, $eje_nombre, $eje_precio, $eje_sexo, $eje_tatuaje){
+			if (!empty($fkeje_mad_id) && !empty(fkeje_pad_id)) {
+				$result = pg_query($this->dbConnection,
+				"INSERT INTO ejemplar VALUES(nextval('ejemplar_pkeje_id_seq'::regclass), '$fkeje_har_id', '$fkeje_pel_id', '$fkeje_raz_id', '$fkeje_mad_id', '$fkeje_pad_id', '$eje_fecha_nacimiento', '$eje_nombre', '$eje_precio', '$eje_sexo', '$eje_tatuaje')");
+			} else {
+				$result = pg_query($this->dbConnection,
+				"INSERT INTO ejemplar VALUES(nextval('ejemplar_pkeje_id_seq'::regclass), '$fkeje_har_id', '$fkeje_pel_id', '$fkeje_raz_id', NULL, NULL, '$eje_fecha_nacimiento', '$eje_nombre', '$eje_precio', '$eje_sexo', '$eje_tatuaje')");
+			}
+			if(pg_last_error()){
+				return $this->result_construct("error",pg_last_error());
+			}else{
+				return $this->result_construct("success","Actualizado exitosamente");
+			}
+		}
+		
 		function getEjemplares() {
 			$result = pg_query($this->dbConnection,
 			"SELECT e.pkeje_id, e.eje_nombre, e.eje_sexo, date_part('year', current_date) - date_part('year', e.eje_fecha_nacimiento) as edad, r.raz_nombre, p.pel_nombre, h.har_nombre,
@@ -485,11 +533,18 @@
 			}
 		}
 
-		function updateEjemplar($pkeje_id, $fkeje_har_id, $fkeje_pel_id, $fkeje_raz_id, /*$fkeje_mad_id, $fkeje_pad_id,*/ $eje_fecha_nacimiento, $eje_nombre, $eje_precio, $eje_sexo, $eje_tatuaje){
-			$result = pg_query($this->dbConnection,
-			"UPDATE ejemplar
-			SET pkeje_id='$pkeje_id', fkeje_har_id='$fkeje_har_id', fkeje_pel_id='$fkeje_pel_id', fkeje_raz_id='$fkeje_raz_id', /*fkeje_mad_id='$fkeje_mad_id', fkeje_pad_id='$fkeje_pad_id',*/ eje_fecha_nacimiento='$eje_fecha_nacimiento', eje_nombre='$eje_nombre', eje_precio='$eje_precio', eje_sexo='$eje_sexo', eje_tatuaje='$eje_tatuaje'
-			WHERE pkeje_id='$pkeje_id'");
+		function updateEjemplar($pkeje_id, $fkeje_har_id, $fkeje_pel_id, $fkeje_raz_id, $fkeje_mad_id, $fkeje_pad_id, $eje_fecha_nacimiento, $eje_nombre, $eje_precio, $eje_sexo, $eje_tatuaje){
+			if ((!empty($fkeje_mad_id)) && (!empty($fkeje_pad_id))) { 
+				$result = pg_query($this->dbConnection,
+				"UPDATE ejemplar
+				SET pkeje_id='$pkeje_id', fkeje_har_id='$fkeje_har_id', fkeje_pel_id='$fkeje_pel_id', fkeje_raz_id='$fkeje_raz_id', fkeje_mad_id='$fkeje_mad_id', fkeje_pad_id='$fkeje_pad_id', eje_fecha_nacimiento='$eje_fecha_nacimiento', eje_nombre='$eje_nombre', eje_precio='$eje_precio', eje_sexo='$eje_sexo', eje_tatuaje='$eje_tatuaje'
+				WHERE pkeje_id='$pkeje_id'");
+			} else {
+				$result = pg_query($this->dbConnection,
+				"UPDATE ejemplar
+				SET pkeje_id='$pkeje_id', fkeje_har_id='$fkeje_har_id', fkeje_pel_id='$fkeje_pel_id', fkeje_raz_id='$fkeje_raz_id', fkeje_mad_id=NULL, fkeje_pad_id=NULL, eje_fecha_nacimiento='$eje_fecha_nacimiento', eje_nombre='$eje_nombre', eje_precio='$eje_precio', eje_sexo='$eje_sexo', eje_tatuaje='$eje_tatuaje'
+				WHERE pkeje_id='$pkeje_id'");
+			}
 			if(pg_last_error()){
 				return $this->result_construct("error",pg_last_error());
 			}else{
@@ -506,8 +561,7 @@
 				return $this->result_construct("success","Eliminado exitosamente");
 			}
 		}
-
-
+		
 		/************************************************************
 		*																														*
 		*					 FUNCIONES GENÉRICAS DE IMPLEMENTOS								*
@@ -527,8 +581,6 @@
 				return json_encode($respuesta);
 			}
 		}
-
-
 
 		/************************************************************
 		*																														*
@@ -797,11 +849,11 @@
 		*					 	FUNCIONES GENÉRICAS DE CORREDORES								*
 		*																														*
 		************************************************************/
-		function getCorredoresByCarrera(){
+		function getCorredores(){
 			$result = pg_query($this->dbConnection,
-			"SELECT e.eje_nombre, car.pkcar_id
-			FROM corredor c, carrera car, ejemplar e
-			WHERE c.fkcor_eje_id = e.pkeje_id AND c.fkcor_car_id = car.pkcar_id AND car.pkcar_id = '$id'");
+			"SELECT c.pkcor_id, e.eje_nombre, j.jin_primer_apellido || ', ' || j.jin_primer_nombre as jinete
+			FROM corredor c, ejemplar e, jinete j
+			WHERE c.fkcor_eje_id = e.pkeje_id AND c.fkcor_jin_id = j.pkjin_id");
 			if(pg_last_error()){
 				return $this->result_construct("error",pg_last_error());
 			}
@@ -821,7 +873,8 @@
 		************************************************************/
 		function getCarreras(){
 			$result = pg_query($this->dbConnection,
-			"SELECT * FROM carrera");
+			"SELECT c.*, h.hor_inicio FROM carrera c, horario h 
+			WHERE c.fkcar_hor_id = h.pkhor_id");
 			if(pg_last_error()){
 				return $this->result_construct("error",pg_last_error());
 			}
@@ -831,6 +884,68 @@
 					$respuesta[] = $row;
 				}
 				return json_encode($respuesta);
+			}
+		}
+		
+		/************************************************************
+		*																														*
+		*					 	FUNCIONES GENÉRICAS DE INSCRIPCIÓN							*
+		*																														*
+		************************************************************/
+		function getInscripciones(){
+			$result = pg_query($this->dbConnection,
+			"SELECT i.*, c.car_fecha, h.hor_inicio, string_agg(m.mod_nombre, ',') as lote, c.car_orden, d.dis_metros, 
+			j.jin_primer_apellido || ', ' || j.jin_primer_nombre as jinete, e.eje_nombre
+			FROM carrera c, horario h, modalidad_carrera mc, modalidad m, distancia d, inscripcion i, corredor co, jinete j, ejemplar e
+			WHERE c.fkcar_hor_id = h.pkhor_id AND c.pkcar_id = mc.fkmodcar_car_id AND mc.fkmodcar_mod_id = m.pkmod_id AND c.fkcar_dis_id = d.pkdis_id AND 
+			i.fkins_car_id = c.pkcar_id AND co.pkcor_id = i.fkins_cor_id AND co.fkcor_jin_id = j.pkjin_id AND co.fkcor_eje_id = e.pkeje_id
+			GROUP BY pkins_id, pkcar_id, hor_inicio, h.hor_fin, dis_metros, co.pkcor_id, pkjin_id, pkeje_id
+			ORDER BY pkcar_id");
+			if(pg_last_error()){
+				return $this->result_construct("error",pg_last_error());
+			}
+			else {
+				$respuesta = array();
+				while($row = pg_fetch_assoc($result)){
+					$respuesta[] = $row;
+				}
+				return json_encode($respuesta);
+			}
+		}
+		
+		function getInscripcionById($pkins_id) {
+			$result = pg_query($this->dbConnection,
+			"SELECT * FROM inscripcion WHERE pkins_id = '$pkins_id'");
+			if(pg_last_error()){
+				return $this->result_construct("error",pg_last_error());
+			}	else {
+				$respuesta = array();
+				while($row = pg_fetch_assoc($result)){
+					$respuesta[] = $row;
+				}
+				return json_encode($respuesta);
+			}
+		}
+		
+		function updateInscripcion($pkins_id, $fkins_car_id, $fkins_cor_id, $ins_valor, $ins_gualdrapa, $ins_puesto_partida, $ins_favorito){
+			$result = pg_query($this->dbConnection,
+			"UPDATE inscripcion
+			SET fkins_car_id='$fkins_car_id', fkins_cor_id='$fkins_cor_id', ins_valor='$ins_valor', ins_gualdrapa='$ins_gualdrapa', ins_puesto_partida='$ins_puesto_partida', ins_favorito='$ins_favorito'
+			WHERE pkins_id='$pkins_id'");
+			if(pg_last_error()){
+				return $this->result_construct("error",pg_last_error());
+			}else{
+				return $this->result_construct("success","Actualizado exitosamente");
+			}
+		}
+		
+		function deleteInscripcion($id) {
+			$result = pg_query($this->dbConnection,
+				"DELETE FROM inscripcion WHERE pkins_id='$id'");
+			if (pg_last_error()) {
+				return $this->result_construct("error",pg_last_error());
+			} else {
+				return $this->result_construct("success","Eliminado exitosamente");
 			}
 		}
 	}

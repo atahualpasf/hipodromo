@@ -239,6 +239,7 @@
                   <li><a href="<?php echo $db->getRootUri() . 'pages/ejemplares.php'; ?>"><i class="fa fa-circle-o"></i> Ejemplares</a></li>
                   <li><a href="<?php echo $db->getRootUri() . 'pages/entrenadores.php'; ?>"><i class="fa fa-circle-o"></i> Entrenadores</a></li>
                   <li><a href="<?php echo $db->getRootUri() . 'pages/implementos.php'; ?>"><i class="fa fa-circle-o"></i> Implementos</a></li>
+                  <li><a href="<?php echo $db->getRootUri() . 'pages/inscripciones.php'; ?>"><i class="fa fa-circle-o"></i> Inscripciones</a></li>
                   <li><a href="<?php echo $db->getRootUri() . 'pages/jinetes.php'; ?>"><i class="fa fa-circle-o"></i> Jinetes</a></li>
                   <li><a href="<?php echo $db->getRootUri() . 'pages/propietarios.php'; ?>"><i class="fa fa-circle-o"></i> Propietarios</a></li>
                   <li><a href="<?php echo $db->getRootUri() . 'pages/studs.php'; ?>"><i class="fa fa-circle-o"></i> Studs</a></li>
