@@ -3,7 +3,7 @@
   $db = new Database;
   if ((strtolower(basename(dirname($_SERVER['SCRIPT_FILENAME']))) === 'hipodromo') and (strtolower(basename($_SERVER['SCRIPT_FILENAME'], '.php')) === 'index')) {
     if ((!empty($_SESSION['usuario']['pkusu_id'])) and (!empty($_SESSION['usuario']['usu_nombre'])) and (!empty($_SESSION['rol']['pkrol_id'])) and (!empty($_SESSION['rol']['rol_nombre'])) and (!empty($_SESSION['app_name'])) and (!empty($_SESSION['shortapp_name'])) and (!empty($_SESSION['last_activity']))) {
-      if (time() - $_SESSION['last_activity'] <= 1800) {
+      if (time() - $_SESSION['last_activity'] <= 86400) {
         $_SESSION['last_activity'] = time();
         header('Location:http://'. $_SERVER[HTTP_HOST] . '/hipodromo/pages/');
       } else {
@@ -12,7 +12,7 @@
       }
     }
   } else {
-    if (((empty($_SESSION['usuario']['pkusu_id'])) and (empty($_SESSION['usuario']['usu_nombre'])) and (empty($_SESSION['rol']['pkrol_id'])) and (empty($_SESSION['rol']['rol_nombre'])) and (empty($_SESSION['app_name'])) and (empty($_SESSION['shortapp_name'])) and (empty($_SESSION['last_activity']))) || (time() - $_SESSION['last_activity'] > 1800)) {
+    if (((empty($_SESSION['usuario']['pkusu_id'])) and (empty($_SESSION['usuario']['usu_nombre'])) and (empty($_SESSION['rol']['pkrol_id'])) and (empty($_SESSION['rol']['rol_nombre'])) and (empty($_SESSION['app_name'])) and (empty($_SESSION['shortapp_name'])) and (empty($_SESSION['last_activity']))) || (time() - $_SESSION['last_activity'] > 86400)) {
       header('Location:http://' . $_SERVER[HTTP_HOST] . '/hipodromo/');
     } else {
       $_SESSION['last_activity'] = time();
