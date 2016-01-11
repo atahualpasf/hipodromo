@@ -13,4 +13,4 @@ test.html
 
 # Archivos de configuración
 /conf/
-reports/*
+reports/conf/*
