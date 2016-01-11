@@ -155,7 +155,7 @@
                         <div class="input-group-addon">
                           <i class="fa fa-calendar"></i>
                         </div>
-                        <input id="eje_fecha_nacimiento" name="eje_fecha_nacimiento" type="text" class="form-control pull-right" value="<?php echo $eje_fecha_nacimiento; ?>" readonly>
+                        <input id="eje_fecha_nacimiento" name="eje_fecha_nacimiento" id="jinete-date" type="text" class="form-control pull-right" value="<?php $eje_fecha_nacimiento = !empty($eje_fecha_nacimiento) ? $eje_fecha_nacimiento : "1990-01-01"; echo $eje_fecha_nacimiento; ?>" readonly>
                       </div><!-- /.input group -->
                     </div><!-- /.form group -->
                   </div>

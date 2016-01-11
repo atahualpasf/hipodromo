@@ -832,11 +832,11 @@
 		*					 	FUNCIONES GENÉRICAS DE CORREDORES								*
 		*																														*
 		************************************************************/
-		function getCorredoresByCarrera(){
+		function getCorredores(){
 			$result = pg_query($this->dbConnection,
-			"SELECT e.eje_nombre, car.pkcar_id
-			FROM corredor c, carrera car, ejemplar e
-			WHERE c.fkcor_eje_id = e.pkeje_id AND c.fkcor_car_id = car.pkcar_id AND car.pkcar_id = '$id'");
+			"SELECT c.pkcor_id, e.eje_nombre, j.jin_primer_apellido || ', ' || j.jin_primer_nombre as jinete
+			FROM corredor c, ejemplar e, jinete j
+			WHERE c.fkcor_eje_id = e.pkeje_id AND c.fkcor_jin_id = j.pkjin_id");
 			if(pg_last_error()){
 				return $this->result_construct("error",pg_last_error());
 			}
@@ -856,7 +856,8 @@
 		************************************************************/
 		function getCarreras(){
 			$result = pg_query($this->dbConnection,
-			"SELECT * FROM carrera");
+			"SELECT c.*, h.hor_inicio FROM carrera c, horario h 
+			WHERE c.fkcar_hor_id = h.pkhor_id");
 			if(pg_last_error()){
 				return $this->result_construct("error",pg_last_error());
 			}
@@ -876,7 +877,7 @@
 		************************************************************/
 		function getInscripciones(){
 			$result = pg_query($this->dbConnection,
-			"SELECT i.pkins_id, c.car_fecha, h.hor_inicio, string_agg(m.mod_nombre, ',') as lote, c.car_orden, d.dis_metros, 
+			"SELECT i.*, c.car_fecha, h.hor_inicio, string_agg(m.mod_nombre, ',') as lote, c.car_orden, d.dis_metros, 
 			j.jin_primer_apellido || ', ' || j.jin_primer_nombre as jinete, e.eje_nombre
 			FROM carrera c, horario h, modalidad_carrera mc, modalidad m, distancia d, inscripcion i, corredor co, jinete j, ejemplar e
 			WHERE c.fkcar_hor_id = h.pkhor_id AND c.pkcar_id = mc.fkmodcar_car_id AND mc.fkmodcar_mod_id = m.pkmod_id AND c.fkcar_dis_id = d.pkdis_id AND 
@@ -892,6 +893,32 @@
 					$respuesta[] = $row;
 				}
 				return json_encode($respuesta);
+			}
+		}
+		
+		function getInscripcionById($pkins_id) {
+			$result = pg_query($this->dbConnection,
+			"SELECT * FROM inscripcion WHERE pkins_id = '$pkins_id'");
+			if(pg_last_error()){
+				return $this->result_construct("error",pg_last_error());
+			}	else {
+				$respuesta = array();
+				while($row = pg_fetch_assoc($result)){
+					$respuesta[] = $row;
+				}
+				return json_encode($respuesta);
+			}
+		}
+		
+		function updateInscripcion($pkins_id, $fkins_car_id, $fkins_cor_id, $ins_valor, $ins_gualdrapa, $ins_puesto_partida, $ins_favorito){
+			$result = pg_query($this->dbConnection,
+			"UPDATE inscripcion
+			SET fkins_car_id='$fkins_car_id', fkins_cor_id='$fkins_cor_id', ins_valor='$ins_valor', ins_gualdrapa='$ins_gualdrapa', ins_puesto_partida='$ins_puesto_partida', ins_favorito='$ins_favorito'
+			WHERE pkins_id='$pkins_id'");
+			if(pg_last_error()){
+				return $this->result_construct("error",pg_last_error());
+			}else{
+				return $this->result_construct("success","Actualizado exitosamente");
 			}
 		}
 		

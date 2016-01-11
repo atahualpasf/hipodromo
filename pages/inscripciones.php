@@ -1,12 +1,12 @@
-<?php
-  include($_SERVER['DOCUMENT_ROOT'] . 'hipodromo/includes/header.inc.php');
-  
-  if ($_SERVER["REQUEST_METHOD"] == "POST") {
-      if (!empty($_POST['pkins_id'])) {
-          $answer = json_decode($db->deleteInscripcion($_POST['pkins_id']));
-      }
-  }
-?>
+      <?php
+        include($_SERVER['DOCUMENT_ROOT'] . 'hipodromo/includes/header.inc.php');
+
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            if (!empty($_POST['pkins_id'])) {
+                $answer = json_decode($db->deleteInscripcion($_POST['pkins_id']));
+            }
+        }
+      ?>
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -35,12 +35,12 @@
                       <tr>
                         <th>id</th>
                         <th>fecha</th>
-                        <th>hora</th>
                         <th>lote</th>
-                        <th>orden</th>
                         <th>distancia</th>
                         <th>jinete</th>
-                        <th>ejemplar</th>
+                        <th>ejemplar(g)</th>
+                        <th>PP</th>
+                        <th>Fav</th>
                         <th width="10%">editar</th>
                         <th width="10%">eliminar</th>
                       </tr>
@@ -51,13 +51,13 @@
                         foreach ($inscripcionesList as $row) {
                             echo "<tr>";
                             echo "<td>$row->pkins_id</td>";
-                            echo "<td>$row->car_fecha</td>";
-                            echo "<td>$row->hor_inicio</td>";
+                            echo "<td>$row->car_fecha-$row->hor_inicio</td>";
                             echo "<td>$row->lote</td>";
-                            echo "<td>$row->car_orden</td>";
                             echo "<td>$row->dis_metros</td>";
                             echo "<td>$row->jinete</td>";
-                            echo "<td>$row->eje_nombre</td>";
+                            echo "<td>$row->eje_nombre($row->ins_gualdrapa)</td>";
+                            echo "<td>$row->ins_puesto_partida</td>";
+                            echo "<td>$row->ins_favorito</td>";
                             echo "<form id='updateForm' role='form' method='POST' action='updates/update-" . basename($_SERVER['PHP_SELF']) . "'>";
                             echo "<td><button name='update_id' value='$row->pkins_id' type='submit' form='updateForm' class='btn btn-dropbox btn-flat btn-block'><i class='fa fa-edit'></i></button></td>";
                             echo "</form>";
