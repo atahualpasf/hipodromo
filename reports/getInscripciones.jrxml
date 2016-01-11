@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="INFORMACIÓN BÁSICA DE INSCRIPCIÓN" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7037020b-50d5-476e-b7cf-580f52a9eb50">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT i.*, c.car_fecha, to_char(h.hor_inicio,'hh:mi') as hora_inicio, string_agg(m.mod_nombre, ',') as lote, c.car_orden, d.dis_metros,
+j.jin_primer_apellido || ', ' || j.jin_primer_nombre as jinete, e.eje_nombre
+FROM carrera c, horario h, modalidad_carrera mc, modalidad m, distancia d, inscripcion i, corredor co, jinete j, ejemplar e
+WHERE c.fkcar_hor_id = h.pkhor_id AND c.pkcar_id = mc.fkmodcar_car_id AND mc.fkmodcar_mod_id = m.pkmod_id AND c.fkcar_dis_id = d.pkdis_id AND
+i.fkins_car_id = c.pkcar_id AND co.pkcor_id = i.fkins_cor_id AND co.fkcor_jin_id = j.pkjin_id AND co.fkcor_eje_id = e.pkeje_id
+GROUP BY pkins_id, pkcar_id, hor_inicio, h.hor_fin, dis_metros, co.pkcor_id, pkjin_id, pkeje_id
+ORDER BY pkcar_id]]>
+	</queryString>
+	<field name="pkins_id" class="java.lang.Integer"/>
+	<field name="fkins_car_id" class="java.lang.Integer"/>
+	<field name="fkins_cor_id" class="java.lang.Integer"/>
+	<field name="ins_valor" class="java.math.BigDecimal"/>
+	<field name="ins_gualdrapa" class="java.lang.Integer"/>
+	<field name="ins_puesto_partida" class="java.lang.Integer"/>
+	<field name="ins_favorito" class="java.math.BigDecimal"/>
+	<field name="car_fecha" class="java.sql.Date"/>
+	<field name="hora_inicio" class="java.lang.String"/>
+	<field name="lote" class="java.lang.String"/>
+	<field name="car_orden" class="java.lang.Integer"/>
+	<field name="dis_metros" class="java.math.BigDecimal"/>
+	<field name="jinete" class="java.lang.String"/>
+	<field name="eje_nombre" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="a9a08128-d33a-4f6e-ad62-81475130d7f9" x="324" y="10" width="152" height="45"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[INFORMACIÓN BÁSICA DE INSCRIPCIÓN]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="ffdabaa0-f089-4812-8a00-f41886febae8" x="706" y="20" width="96" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="c052868e-9c92-4ccf-ab9e-d6c0f43436f8" x="706" y="0" width="56" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="d9eeb49d-21fe-4dc1-abfd-f1057806816c" x="762" y="0" width="40" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="1" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="31" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="25afd7ac-cbf6-403a-8c13-1a24ff632f3c" x="1" y="0" width="54" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Valor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="64a3cb09-6416-42fa-b2fe-06042ac676ec" x="55" y="0" width="54" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Gualdrapa]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ebd74c22-920b-43eb-aaea-fcf7aab2725e" x="120" y="0" width="54" height="31"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Puesto Partida]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="9827ea0f-6dfc-4313-ab11-e6c5e9fc97c9" x="186" y="0" width="54" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Favorito #]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="efc41801-f7ea-4c3a-b12d-edff55c25bd8" x="394" y="2" width="48" height="20"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Lote]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="56b09980-4e06-4f06-b757-32bf346f7471" x="455" y="2" width="60" height="29"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Orden de Carrera]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a6de1f6d-7641-402a-9ef9-fecbdf4a7016" x="254" y="0" width="54" height="31"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha Carrera]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ca803cbb-464c-449d-8096-6f3113f61677" x="515" y="2" width="80" height="29"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Distancia Metros]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b7c7b6bc-acba-4867-91d1-a921580503ba" x="606" y="2" width="100" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Jinete]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="0318ecca-8bbd-4485-93f2-bfb86c5cf5c2" x="706" y="2" width="96" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ejemplar]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a68c6b1e-9f14-4e42-bafb-3f8c40854005" x="324" y="2" width="54" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Hora Inicio]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="27" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="204cad35-376c-4f07-81ef-ecf180de5fef" x="1" y="5" width="54" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{ins_valor}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="76e90c71-a734-46fc-bbdb-0b78eeaa2504" x="55" y="5" width="54" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{ins_gualdrapa}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="3763b263-bcd8-41ef-a991-35c689f6c466" x="120" y="5" width="54" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{ins_puesto_partida}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="42bcdcd1-1c8c-42a2-b46b-31692be555c3" x="186" y="5" width="54" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{ins_favorito}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="ab977e31-ce8f-445b-91d0-6ac77a4ae9f4" x="254" y="5" width="54" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{car_fecha}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="7ee92748-a84b-41c1-b53b-ae351654b686" x="394" y="5" width="48" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{lote}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="c88aeca9-26f5-476e-a4bf-4c2b7aa01c9e" x="455" y="5" width="60" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{car_orden}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="9934bd45-9eac-4d91-9f05-437c8b109f8c" x="515" y="5" width="80" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{dis_metros}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="299e9f61-18b1-4ab0-9ec9-699e1abe706f" x="606" y="5" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{jinete}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="4edf6a56-95bc-4c7f-8b48-587ad9840f1d" x="706" y="5" width="96" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{eje_nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="4c68269a-3aa1-4e15-953d-5b04784d3f78" x="324" y="5" width="54" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{hora_inicio}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

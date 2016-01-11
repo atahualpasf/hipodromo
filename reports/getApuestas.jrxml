@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="INFORMACIÓN BÁSICA DE APUESTA" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="50338e62-c590-4096-9938-8a854c88efed">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT a.*, j.jug_nombre, e.eje_nombre, t.taq_nombre
+FROM apuesta a, corredor c, jugada j, taquilla t, ejemplar e
+WHERE a.fkapu_cor_id = c.pkcor_id AND a.fkapu_jug_id = j.pkjug_id AND a.fkapu_taq_id = t.pktaq_id AND c.fkcor_eje_id = e.pkeje_id
+ORDER BY a.pkapu_id]]>
+	</queryString>
+	<field name="pkapu_id" class="java.lang.Integer"/>
+	<field name="fkapu_cor_id" class="java.lang.Integer"/>
+	<field name="fkapu_jug_id" class="java.lang.Integer"/>
+	<field name="fkapu_fac_id" class="java.lang.Integer"/>
+	<field name="fkapu_taq_id" class="java.lang.Integer"/>
+	<field name="apu_monto" class="java.math.BigDecimal"/>
+	<field name="apu_lugar_llegada" class="java.math.BigDecimal"/>
+	<field name="jug_nombre" class="java.lang.String"/>
+	<field name="eje_nombre" class="java.lang.String"/>
+	<field name="taq_nombre" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<textField>
+				<reportElement uuid="51b5ca77-e305-4422-a49d-713b33db5f59" x="702" y="0" width="62" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="f45755f7-8f7b-400c-bb48-3df48cc9676e" x="764" y="0" width="40" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="50069bc9-a713-41fe-8174-b88793cb25e6" x="702" y="20" width="100" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="4e4f9d1d-78d9-49b8-8e42-640330749d91" x="337" y="20" width="138" height="36"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[INFORMACIÓN BÁSICA DE APUESTA]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="26" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="3cb329dd-54ef-40f3-b65b-c719ac52fd09" x="0" y="2" width="53" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[pkapu_id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c6bd5b19-bec9-4a3d-b50e-9ed9f76a94fd" x="53" y="2" width="70" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[fkapu_cor_id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="04be88f8-ea97-41d0-931d-96dbf9c0bcd8" x="123" y="2" width="71" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[fkapu_jug_id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="50024e07-b628-4383-920f-613240535260" x="194" y="2" width="67" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[fkapu_fac_id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="4504c597-a0e8-4cf6-b4ef-129f66ab43d5" x="261" y="2" width="64" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[fkapu_taq_id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="5c977913-f7f8-4d5f-aa04-af14c8e144a8" x="336" y="2" width="81" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Monto Apuesta]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="eb9ef1ca-b56d-4d7f-9920-2ff132b5b546" x="417" y="2" width="85" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Lugar Llegada]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2df6458b-6e26-44de-9d85-934767ce0bf2" x="502" y="2" width="100" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre Jugador]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="76fcb4e5-277c-4be9-a9d8-97d424600241" x="602" y="2" width="100" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre Ejemplar]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="72a3e954-90c5-43cc-9093-b136813e72ca" x="702" y="2" width="100" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre Taquilla]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="25" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="4587bdc5-15cc-4334-8037-1f898a1e7cc6" x="0" y="5" width="53" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{pkapu_id}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="64a6519c-0e11-4997-82e6-744532024bbb" x="53" y="5" width="70" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{fkapu_cor_id}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="f9db18b7-aa16-42f8-acc4-eb41152606f3" x="123" y="5" width="71" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{fkapu_jug_id}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="974874b9-1be4-4b58-9195-2eceafe38b3a" x="194" y="5" width="67" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{fkapu_fac_id}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="95d63763-a7e3-44e7-9d0a-f66e551525e4" x="261" y="5" width="64" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{fkapu_taq_id}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="cc04eaa3-16c2-45b8-ae2e-686cece2e017" x="336" y="5" width="81" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{apu_monto}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="54efab65-5341-4ec6-be80-9448f4fefe03" x="417" y="5" width="85" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{apu_lugar_llegada}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="96299990-bdb4-48ff-aaec-031d1b50737b" x="502" y="5" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{jug_nombre}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="2b1fd10c-1401-49e1-80b9-b21c52d28dfd" x="602" y="5" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{eje_nombre}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="320ba665-a6cf-479c-ab52-78c744d61204" x="702" y="5" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{taq_nombre}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -6,6 +6,7 @@
           $answer = json_decode($db->deleteApuestaByFactura($_POST['fkapu_fac_id']));
       }
   }
+  $apuestasList = @json_decode($db->getApuestas());
 ?>
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
@@ -24,6 +25,39 @@
         <!-- Main content -->
         <section class="content">
           <div class="row">
+             
+             <div class="col-lg-6 col-xs-6">
+              <!-- small box -->
+              <div class="small-box bg-green">
+                <div class="inner">
+                  <h3><?php echo count($apuestasList); ?></h3>
+                  <p>Apuestas registradas</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-person-add"></i>
+                </div>
+                <?php echo "<a href='creates/create-" . $basefile . ".php' class='small-box-footer'>"; ?>
+                  Agregar apuesta <i class="fa fa-arrow-circle-right"></i>
+                </a>
+              </div>
+            </div><!-- ./col -->
+            
+            <div class="col-lg-6 col-xs-6">
+             <!-- small box -->
+             <div class="small-box bg-aqua">
+                <div class="inner">
+                  <h3><?php echo count($apuestasList) ?></h3>
+                  <p>Apuestas Registradas</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-document-text"></i>
+                </div>
+                <a href='../reports/reports.php?report=getApuestas' class='small-box-footer'>
+                  Ver reporte de apuestas <i class="fa fa-arrow-circle-right"></i>
+                </a>
+             </div>
+           </div><!-- ./col -->
+             
             <div class="col-xs-12">
               <div class="box">
                 <div class="box-header">
@@ -46,7 +80,6 @@
                     </thead>
                     <tbody>
                       <?php
-                        $apuestasList = @json_decode($db->getApuestas());
                         foreach ($apuestasList as $row) {
                             echo "<tr>";
                             echo "<td>$row->pkapu_id</td>";
