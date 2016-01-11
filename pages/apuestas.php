@@ -2,11 +2,11 @@
   include($_SERVER['DOCUMENT_ROOT'] . 'hipodromo/includes/header.inc.php');
   
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
-      if (!empty($_POST['fkapu_fac_id'])) {
-          $answer = json_decode($db->deleteApuestaByFactura($_POST['fkapu_fac_id']));
+      if (!empty($_POST['pkfac_id'])) {
+          $answer = json_decode($db->deleteApuestaByFactura($_POST['pkfac_id']));
       }
   }
-  $apuestasList = @json_decode($db->getApuestas());
+  $apuestasList = @json_decode($db->getFacturasByApuesta());
 ?>
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
@@ -68,12 +68,8 @@
                     <thead>
                       <tr>
                         <th>id</th>
-                        <th>corredor</th>
-                        <th>jugada</th>
-                        <th>factura</th>
-                        <th>taquilla</th>
                         <th>monto</th>
-                        <th>lugar de llegada</th>
+                        <th>fecha</th>
                         <th width="10%">editar</th>
                         <th width="10%">eliminar</th>
                       </tr>
@@ -82,18 +78,14 @@
                       <?php
                         foreach ($apuestasList as $row) {
                             echo "<tr>";
-                            echo "<td>$row->pkapu_id</td>";
-                            echo "<td>$row->eje_nombre</td>";
-                            echo "<td>$row->jug_nombre</td>";
-                            echo "<td>$row->fkapu_fac_id</td>";
-                            echo "<td>$row->taq_nombre</td>";
-                            echo "<td>$row->apu_monto</td>";
-                            echo "<td>$row->apu_lugar_llegada</td>";
+                            echo "<td>$row->pkfac_id</td>";
+                            echo "<td>$row->fac_monto</td>";
+                            echo "<td>$row->fac_fecha</td>";
                             echo "<form id='updateForm' role='form' method='POST' action='updates/update-" . basename($_SERVER['PHP_SELF']) . "'>";
-                            echo "<td><button name='update_id' value='$row->fkapu_fac_id' type='submit' form='updateForm' class='btn btn-dropbox btn-flat btn-block'><i class='fa fa-edit'></i></button></td>";
+                            echo "<td><button name='update_id' value='$row->pkfac_id' type='submit' form='updateForm' class='btn btn-dropbox btn-flat btn-block'><i class='fa fa-edit'></i></button></td>";
                             echo "</form>";
                             echo "<form id='deleteForm' role='form' method='POST' action='" . htmlentities($_SERVER['PHP_SELF']) . "'>";
-                            echo "<td><button name='fkapu_fac_id' value='$row->fkapu_fac_id' type='submit' form='deleteForm' class='btn btn-danger btn-flat btn-block'><i class='fa fa-trash'></i></button></td>";
+                            echo "<td><button name='pkfac_id' value='$row->pkfac_id' type='submit' form='deleteForm' class='btn btn-danger btn-flat btn-block'><i class='fa fa-trash'></i></button></td>";
                             echo "</form>";
                             echo "</tr>";
                         }
@@ -102,12 +94,8 @@
                     <tfoot>
                       <tr>
                         <th>id</th>
-                        <th>corredor</th>
-                        <th>jugada</th>
-                        <th>factura</th>
-                        <th>taquilla</th>
                         <th>monto</th>
-                        <th>lugar de llegada</th>
+                        <th>fecha</th>
                         <th width="10%">editar</th>
                         <th width="10%">eliminar</th>
                       </tr>

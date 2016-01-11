@@ -794,9 +794,9 @@
 			}
 		}/*fkapu_cor_id='$fkapu_cor_id',*/ /* fkapu_fac_id='$fkapu_fac_id',  */
 
-		function deleteApuestaByFactura($fkapu_fac_id) {
+		function deleteApuestaByFactura($pkfac_id) {
 			$result = pg_query($this->dbConnection,
-				"DELETE FROM apuesta WHERE fkapu_fac_id='$fkapu_fac_id'");
+				"DELETE FROM apuesta WHERE fkapu_fac_id='$pkfac_id'");
 			if (pg_last_error()) {
 				return $this->result_construct("error",pg_last_error());
 			} else {
@@ -968,6 +968,30 @@
 				return $this->result_construct("error",pg_last_error());
 			} else {
 				return $this->result_construct("success","Eliminado exitosamente");
+			}
+		}
+		
+		/************************************************************
+		*																														*
+		*					 	FUNCIONES GENÉRICAS DE CARRERAS									*
+		*																														*
+		************************************************************/
+		function getFacturasByApuesta(){
+			$result = pg_query($this->dbConnection,
+			"SELECT f.*
+			FROM factura f, apuesta a
+			WHERE a.fkapu_fac_id = f.pkfac_id
+			GROUP BY f.pkfac_id
+			ORDER BY f.pkfac_id");
+			if(pg_last_error()){
+				return $this->result_construct("error",pg_last_error());
+			}
+			else {
+				$respuesta = array();
+				while($row = pg_fetch_assoc($result)){
+					$respuesta[] = $row;
+				}
+				return json_encode($respuesta);
 			}
 		}
 	}
