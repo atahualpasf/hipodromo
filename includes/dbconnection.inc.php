@@ -887,6 +887,59 @@
 			}
 		}
 		
+		
+		
+		/************************************************************
+		*																														*
+		*					 	FUNCIONES GENÉRICAS DE CABALLERIZA							*
+		*																														*
+		************************************************************/
+		function getCaballerizas(){
+			$result = pg_query($this->dbConnection,
+			"SELECT c.pkcab_id, ca.caba_primer_apellido || ', ' || ca.caba_primer_nombre as caballerizo, v.vet_primer_apellido || ', ' || v.vet_primer_nombre as veterinario, cab_descripcion
+			FROM caballeriza c, caballerizo ca, veterinario v
+			WHERE c.fkcab_vet_id = v.pkvet_id AND c.fkcab_caba_id = ca.pkcaba_id");
+			if(pg_last_error()){
+				return $this->result_construct("error",pg_last_error());
+			}
+			else {
+				$respuesta = array();
+				while($row = pg_fetch_assoc($result)){
+					$respuesta[] = $row;
+				}
+				return json_encode($respuesta);
+			}
+		}
+		
+		// function getCaballerizaById(){
+		// 	$result = pg_query($this->dbConnection,
+		// 	"SELECT c.pkcab_id, ca.caba_primer_apellido || ', ' || ca.caba_primer_nombre as caballerizo, v.vet_primer_apellido || ', ' || v.vet_primer_nombre as veterinario, cab_descripcion
+		// 	FROM caballeriza c, caballerizo ca, veterinario v
+		// 	WHERE c.fkcab_vet_id = v.pkvet_id AND c.fkcab_caba_id = ca.pkcaba_id AND ");
+		// 	if(pg_last_error()){
+		// 		return $this->result_construct("error",pg_last_error());
+		// 	}
+		// 	else {
+		// 		$respuesta = array();
+		// 		while($row = pg_fetch_assoc($result)){
+		// 			$respuesta[] = $row;
+		// 		}
+		// 		return json_encode($respuesta);
+		// 	}
+		// }
+		
+		function deleteCaballeriza($id) {
+			$result = pg_query($this->dbConnection,
+				"DELETE FROM caballeriza WHERE pkcab_id='$id'");
+			if (pg_last_error()) {
+				return $this->result_construct("error",pg_last_error());
+			} else {
+				return $this->result_construct("success","Eliminado exitosamente");
+			}
+		}
+		
+		
+		
 		/************************************************************
 		*																														*
 		*					 	FUNCIONES GENÉRICAS DE INSCRIPCIÓN							*
