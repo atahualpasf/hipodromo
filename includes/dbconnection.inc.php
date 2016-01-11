@@ -483,13 +483,13 @@
 		*					 	FUNCIONES GENÉRICAS DE EJEMPLARES								*
 		*																														*
 		************************************************************/
-		function createEjemplar($pkeje_id, $fkeje_har_id, $fkeje_pel_id, $fkeje_raz_id, $fkeje_mad_id, $fkeje_pad_id, $eje_fecha_nacimiento, $eje_nombre, $eje_precio, $eje_sexo, $eje_tatuaje){
+		function createEjemplar($fkeje_har_id, $fkeje_pel_id, $fkeje_raz_id, $fkeje_mad_id, $fkeje_pad_id, $eje_fecha_nacimiento, $eje_nombre, $eje_precio, $eje_sexo, $eje_tatuaje){
 			if (!empty($fkeje_mad_id) && !empty(fkeje_pad_id)) {
 				$result = pg_query($this->dbConnection,
-				"INSERT INTO ejemplares VALUES(nextval('ejemplares_pkeje_id_seq'::regclass), '$pkeje_id', '$fkeje_har_id', '$fkeje_pel_id', '$fkeje_raz_id', '$fkeje_mad_id', '$fkeje_pad_id', '$eje_fecha_nacimiento', '$eje_nombre', '$eje_precio', '$eje_sexo', '$eje_tatuaje')");
+				"INSERT INTO ejemplar VALUES(nextval('ejemplar_pkeje_id_seq'::regclass), '$fkeje_har_id', '$fkeje_pel_id', '$fkeje_raz_id', '$fkeje_mad_id', '$fkeje_pad_id', '$eje_fecha_nacimiento', '$eje_nombre', '$eje_precio', '$eje_sexo', '$eje_tatuaje')");
 			} else {
 				$result = pg_query($this->dbConnection,
-				"INSERT INTO ejemplares VALUES(nextval('ejemplares_pkeje_id_seq'::regclass), '$pkeje_id', '$fkeje_har_id', '$fkeje_pel_id', '$fkeje_raz_id', NULL, NULL, '$eje_fecha_nacimiento', '$eje_nombre', '$eje_precio', '$eje_sexo', '$eje_tatuaje')");
+				"INSERT INTO ejemplar VALUES(nextval('ejemplar_pkeje_id_seq'::regclass), '$fkeje_har_id', '$fkeje_pel_id', '$fkeje_raz_id', NULL, NULL, '$eje_fecha_nacimiento', '$eje_nombre', '$eje_precio', '$eje_sexo', '$eje_tatuaje')");
 			}
 			if(pg_last_error()){
 				return $this->result_construct("error",pg_last_error());
