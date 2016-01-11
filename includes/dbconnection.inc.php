@@ -868,5 +868,31 @@
 				return json_encode($respuesta);
 			}
 		}
+		
+		/************************************************************
+		*																														*
+		*					 	FUNCIONES GENÉRICAS DE INSCRIPCIÓN							*
+		*																														*
+		************************************************************/
+		function getInscripciones(){
+			$result = pg_query($this->dbConnection,
+			"SELECT i.pkins_id, c.car_fecha, h.hor_inicio, string_agg(m.mod_nombre, ',') as lote, c.car_orden, d.dis_metros, 
+			j.jin_primer_apellido || ', ' || j.jin_primer_nombre as jinete, e.eje_nombre
+			FROM carrera c, horario h, modalidad_carrera mc, modalidad m, distancia d, inscripcion i, corredor co, jinete j, ejemplar e
+			WHERE c.fkcar_hor_id = h.pkhor_id AND c.pkcar_id = mc.fkmodcar_car_id AND mc.fkmodcar_mod_id = m.pkmod_id AND c.fkcar_dis_id = d.pkdis_id AND 
+			i.fkins_car_id = c.pkcar_id AND co.pkcor_id = i.fkins_cor_id AND co.fkcor_jin_id = j.pkjin_id AND co.fkcor_eje_id = e.pkeje_id
+			GROUP BY pkins_id, pkcar_id, hor_inicio, h.hor_fin, dis_metros, co.pkcor_id, pkjin_id, pkeje_id
+			ORDER BY pkcar_id");
+			if(pg_last_error()){
+				return $this->result_construct("error",pg_last_error());
+			}
+			else {
+				$respuesta = array();
+				while($row = pg_fetch_assoc($result)){
+					$respuesta[] = $row;
+				}
+				return json_encode($respuesta);
+			}
+		}
 	}
 ?>
