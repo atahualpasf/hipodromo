@@ -2,10 +2,12 @@
         include($_SERVER['DOCUMENT_ROOT'] . 'hipodromo/includes/header.inc.php');
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            if (!empty($_POST['pkins_id'])) {
-                $answer = json_decode($db->deleteInscripcion($_POST['pkins_id']));
-            }
+          if (!empty($_POST['pkins_id'])) {
+              $answer = json_decode($db->deleteInscripcion($_POST['pkins_id']));
+          }
         }
+        
+        $inscripcionesList = @json_decode($db->getInscripciones());
       ?>
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
@@ -24,6 +26,23 @@
         <!-- Main content -->
         <section class="content">
           <div class="row">
+            
+            <div class="col-lg-12 col-xs-12">
+              <!-- small box -->
+              <div class="small-box bg-green">
+                <div class="inner">
+                  <h3><?php echo count($inscripcionesList); ?></h3>
+                  <p>Inscripciones Registradass</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-person-add"></i>
+                </div>
+                <?php echo "<a href='creates/create-" . $basefile . ".php' class='small-box-footer'>"; ?>
+                  Agregar inscripción <i class="fa fa-arrow-circle-right"></i>
+                </a>
+              </div>
+            </div><!-- ./col -->
+            
             <div class="col-xs-12">
               <div class="box">
                 <div class="box-header">
@@ -47,7 +66,6 @@
                     </thead>
                     <tbody>
                       <?php 
-                        $inscripcionesList = @json_decode($db->getInscripciones());
                         foreach ($inscripcionesList as $row) {
                             echo "<tr>";
                             echo "<td>$row->pkins_id</td>";

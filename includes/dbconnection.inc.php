@@ -875,6 +875,21 @@
 		*					 	FUNCIONES GENÉRICAS DE INSCRIPCIÓN							*
 		*																														*
 		************************************************************/
+		function createInscripcion($fkins_car_id, $fkins_cor_id, $ins_valor, $ins_gualdrapa, $ins_puesto_partida, $ins_favorito){
+			if (!empty($ins_favorito)) {
+				$result = pg_query($this->dbConnection,
+				"INSERT INTO inscripcion VALUES(nextval('inscripcion_pkins_id_seq'::regclass), '$fkins_car_id', '$fkins_cor_id', '$ins_valor', '$ins_gualdrapa', '$ins_puesto_partida', '$ins_favorito')");
+			} else {
+				$result = pg_query($this->dbConnection,
+				"INSERT INTO inscripcion VALUES(nextval('inscripcion_pkins_id_seq'::regclass), '$fkins_car_id', '$fkins_cor_id', '$ins_valor', '$ins_gualdrapa', '$ins_puesto_partida', NULL)");
+			}
+			if(pg_last_error()){
+				return $this->result_construct("error",pg_last_error());
+			}else{
+				return $this->result_construct("success","Actualizado exitosamente");
+			}
+		}
+		
 		function getInscripciones(){
 			$result = pg_query($this->dbConnection,
 			"SELECT i.*, c.car_fecha, h.hor_inicio, string_agg(m.mod_nombre, ',') as lote, c.car_orden, d.dis_metros, 
