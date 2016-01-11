@@ -758,11 +758,12 @@
 			}
 		}
 		
-		function getApuestaByFactura($pkapu_id) {
+		function getApuestaByFactura($pkfac_id) {
 			$result = pg_query($this->dbConnection,
 			"SELECT a.*, j.jug_nombre, e.eje_nombre, t.taq_nombre
 			FROM apuesta a, corredor c, jugada j, taquilla t, ejemplar e
-			WHERE a.fkapu_cor_id = c.pkcor_id AND a.fkapu_jug_id = j.pkjug_id AND a.fkapu_taq_id = t.pktaq_id AND c.fkcor_eje_id = e.pkeje_id AND pkapu_id = '$pkapu_id'");
+			WHERE a.fkapu_cor_id = c.pkcor_id AND a.fkapu_jug_id = j.pkjug_id AND a.fkapu_taq_id = t.pktaq_id AND c.fkcor_eje_id = e.pkeje_id AND a.fkapu_fac_id = '$pkfac_id'
+			ORDER BY a.pkapu_id");
 
 			if(pg_last_error()){
 				return $this->result_construct("error",pg_last_error());

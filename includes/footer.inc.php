@@ -104,6 +104,9 @@
   </script>
   <!-- Bootstrap 3.3.5 -->
   <script src="<?php echo $db->getRootUri() . 'bootstrap/js/bootstrap.min.js'; ?>"></script>
+  <!-- DataTables -->
+  <script src="<?php echo $db->getRootUri() . 'plugins/datatables/jquery.dataTables.min.js'; ?>"></script>
+  <script src="<?php echo $db->getRootUri() . 'plugins/datatables/dataTables.bootstrap.min.js'; ?>"></script>
   <!-- Select2 -->
   <script src="<?php echo $db->getRootUri() . 'plugins/select2/select2.full.min.js'; ?>"></script>
   <!-- Morris.js charts -->
@@ -144,6 +147,8 @@
     var _INCL_ROOT = _ROOT + 'includes/';
     var _DIST_ROOT = _ROOT + 'dist/';
   </script>
+  <!-- page script -->
+  <script src="<?php echo $db->getRootUri() . 'dist/js/tablas.js'; ?>"></script>
   <!-- Hipodromo extras functionalities -->
   <script src="<?php echo $db->getRootUri() . 'dist/js/extras.js'; ?>"></script>
 <?php endif; ?>

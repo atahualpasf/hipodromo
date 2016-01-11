@@ -6,7 +6,7 @@
           $answer = json_decode($db->deleteApuestaByFactura($_POST['pkfac_id']));
       }
   }
-  $apuestasList = @json_decode($db->getFacturasByApuesta());
+  $facturasByApuestaList = @json_decode($db->getFacturasByApuesta());
 ?>
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
@@ -30,7 +30,7 @@
               <!-- small box -->
               <div class="small-box bg-green">
                 <div class="inner">
-                  <h3><?php echo count($apuestasList); ?></h3>
+                  <h3><?php echo count($facturasByApuestaList); ?></h3>
                   <p>Apuestas registradas</p>
                 </div>
                 <div class="icon">
@@ -46,7 +46,7 @@
              <!-- small box -->
              <div class="small-box bg-aqua">
                 <div class="inner">
-                  <h3><?php echo count($apuestasList) ?></h3>
+                  <h3><?php echo count($facturasByApuestaList) ?></h3>
                   <p>Apuestas Registradas</p>
                 </div>
                 <div class="icon">
@@ -76,7 +76,7 @@
                     </thead>
                     <tbody>
                       <?php
-                        foreach ($apuestasList as $row) {
+                        foreach ($facturasByApuestaList as $row) {
                             echo "<tr>";
                             echo "<td>$row->pkfac_id</td>";
                             echo "<td>$row->fac_monto</td>";

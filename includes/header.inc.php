@@ -119,11 +119,15 @@
       <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css'; ?>">
       <!-- Jquery.Steps -->
       <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'plugins/jquery.steps/jquery.steps.css'; ?>">
+      <!-- DataTables -->
+      <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'plugins/datatables/dataTables.bootstrap.css'; ?>">
       <!-- Theme style -->
       <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'dist/css/AdminLTE.min.css'; ?>">
       <!-- AdminLTE Skins. Choose a skin from the css/skins
            folder instead of downloading all of them to reduce the load. -->
       <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'dist/css/skins/_all-skins.min.css'; ?>">
+      <!-- Table Perzonalizado -->
+      <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'dist/css/table.css'; ?>">
       <!-- Custom style -->
       <?php if ($basedir === 'updates'): ?>
          <link rel="stylesheet" href="<?php echo $db->getRootUri() . 'dist/css/update.css'; ?>">
