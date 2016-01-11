@@ -98,6 +98,40 @@
 				return json_encode($respuesta);
 			}
 		}
+		
+		function getEjemplaresMadres() {
+			$result = pg_query($this->dbConnection,
+			"SELECT e.pkeje_id as pkmadre, e.eje_nombre as madre
+			FROM ejemplar e
+			WHERE e.eje_sexo = 'Y' AND e.fkeje_mad_id IS NULL AND e.fkeje_pad_id IS NULL");
+
+			if(pg_last_error()){
+				return $this->result_construct("error",pg_last_error());
+			}	else {
+				$respuesta = array();
+				while($row = pg_fetch_assoc($result)){
+					$respuesta[] = $row;
+				}
+				return json_encode($respuesta);
+			}
+		}
+		
+		function getEjemplaresPadres() {
+			$result = pg_query($this->dbConnection,
+			"SELECT e.pkeje_id as pkpadre, e.eje_nombre as padre
+			FROM ejemplar e
+			WHERE e.eje_sexo = 'C' AND e.fkeje_mad_id IS NULL AND e.fkeje_pad_id IS NULL");
+
+			if(pg_last_error()){
+				return $this->result_construct("error",pg_last_error());
+			}	else {
+				$respuesta = array();
+				while($row = pg_fetch_assoc($result)){
+					$respuesta[] = $row;
+				}
+				return json_encode($respuesta);
+			}
+		}
 
 		/************************************************************
 		*																														*
@@ -499,11 +533,18 @@
 			}
 		}
 
-		function updateEjemplar($pkeje_id, $fkeje_har_id, $fkeje_pel_id, $fkeje_raz_id, /*$fkeje_mad_id, $fkeje_pad_id,*/ $eje_fecha_nacimiento, $eje_nombre, $eje_precio, $eje_sexo, $eje_tatuaje){
-			$result = pg_query($this->dbConnection,
-			"UPDATE ejemplar
-			SET pkeje_id='$pkeje_id', fkeje_har_id='$fkeje_har_id', fkeje_pel_id='$fkeje_pel_id', fkeje_raz_id='$fkeje_raz_id', /*fkeje_mad_id='$fkeje_mad_id', fkeje_pad_id='$fkeje_pad_id',*/ eje_fecha_nacimiento='$eje_fecha_nacimiento', eje_nombre='$eje_nombre', eje_precio='$eje_precio', eje_sexo='$eje_sexo', eje_tatuaje='$eje_tatuaje'
-			WHERE pkeje_id='$pkeje_id'");
+		function updateEjemplar($pkeje_id, $fkeje_har_id, $fkeje_pel_id, $fkeje_raz_id, $fkeje_mad_id, $fkeje_pad_id, $eje_fecha_nacimiento, $eje_nombre, $eje_precio, $eje_sexo, $eje_tatuaje){
+			if ((!empty($fkeje_mad_id)) && (!empty($fkeje_pad_id))) { 
+				$result = pg_query($this->dbConnection,
+				"UPDATE ejemplar
+				SET pkeje_id='$pkeje_id', fkeje_har_id='$fkeje_har_id', fkeje_pel_id='$fkeje_pel_id', fkeje_raz_id='$fkeje_raz_id', fkeje_mad_id='$fkeje_mad_id', fkeje_pad_id='$fkeje_pad_id', eje_fecha_nacimiento='$eje_fecha_nacimiento', eje_nombre='$eje_nombre', eje_precio='$eje_precio', eje_sexo='$eje_sexo', eje_tatuaje='$eje_tatuaje'
+				WHERE pkeje_id='$pkeje_id'");
+			} else {
+				$result = pg_query($this->dbConnection,
+				"UPDATE ejemplar
+				SET pkeje_id='$pkeje_id', fkeje_har_id='$fkeje_har_id', fkeje_pel_id='$fkeje_pel_id', fkeje_raz_id='$fkeje_raz_id', fkeje_mad_id=NULL, fkeje_pad_id=NULL, eje_fecha_nacimiento='$eje_fecha_nacimiento', eje_nombre='$eje_nombre', eje_precio='$eje_precio', eje_sexo='$eje_sexo', eje_tatuaje='$eje_tatuaje'
+				WHERE pkeje_id='$pkeje_id'");
+			}
 			if(pg_last_error()){
 				return $this->result_construct("error",pg_last_error());
 			}else{
@@ -520,8 +561,7 @@
 				return $this->result_construct("success","Eliminado exitosamente");
 			}
 		}
-
-
+		
 		/************************************************************
 		*																														*
 		*					 FUNCIONES GENÉRICAS DE IMPLEMENTOS								*
@@ -541,8 +581,6 @@
 				return json_encode($respuesta);
 			}
 		}
-
-
 
 		/************************************************************
 		*																														*

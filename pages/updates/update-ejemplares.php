@@ -15,8 +15,8 @@
       $GLOBALS['fkeje_har_id'] = $ejemplaresList[0]->fkeje_har_id;
       $GLOBALS['fkeje_pel_id'] = $ejemplaresList[0]->fkeje_pel_id;
       $GLOBALS['fkeje_raz_id'] = $ejemplaresList[0]->fkeje_raz_id;
-      // $GLOBALS['fkeje_mad_id'] = $ejemplaresList[0]->fkeje_mad_id;
-      // $GLOBALS['fkeje_pad_id'] = $ejemplaresList[0]->fkeje_pad_id;
+      $GLOBALS['fkeje_mad_id'] = $ejemplaresList[0]->fkeje_mad_id;
+      $GLOBALS['fkeje_pad_id'] = $ejemplaresList[0]->fkeje_pad_id;
       $GLOBALS['eje_fecha_nacimiento'] = $ejemplaresList[0]->eje_fecha_nacimiento;
       $GLOBALS['eje_nombre'] = $ejemplaresList[0]->eje_nombre;
       $GLOBALS['eje_precio'] = $ejemplaresList[0]->eje_precio;
@@ -29,8 +29,8 @@
       $GLOBALS['fkeje_har_id'] = test_input($_POST['fkeje_har_id']);
       $GLOBALS['fkeje_pel_id'] = test_input($_POST['fkeje_pel_id']);
       $GLOBALS['fkeje_raz_id'] = test_input($_POST['fkeje_raz_id']);
-      // $GLOBALS['fkeje_mad_id'] = test_input($_POST['fkeje_mad_id']);
-      // $GLOBALS['fkeje_pad_id'] = test_input($_POST['fkeje_pad_id']);
+      $GLOBALS['fkeje_mad_id'] = test_input($_POST['fkeje_mad_id']);
+      $GLOBALS['fkeje_pad_id'] = test_input($_POST['fkeje_pad_id']);
       $GLOBALS['eje_fecha_nacimiento'] = test_input($_POST['eje_fecha_nacimiento']);
       $GLOBALS['eje_nombre'] = test_input($_POST['eje_nombre']);
       $GLOBALS['eje_precio'] = test_input($_POST['eje_precio']);
@@ -44,7 +44,7 @@
           setValues($ejemplaresList);
       } elseif(!empty($_POST['pkeje_id'])) {
         setValuesWhenSubmitIsClicked();
-        $answer = @json_decode($db->updateEjemplar($pkeje_id, $fkeje_har_id, $fkeje_pel_id, $fkeje_raz_id, /*$fkeje_mad_id, $fkeje_pad_id,*/ $eje_fecha_nacimiento, $eje_nombre, $eje_precio, $eje_sexo, $eje_tatuaje));
+        $answer = @json_decode($db->updateEjemplar($pkeje_id, $fkeje_har_id, $fkeje_pel_id, $fkeje_raz_id, $fkeje_mad_id, $fkeje_pad_id, $eje_fecha_nacimiento, $eje_nombre, $eje_precio, $eje_sexo, $eje_tatuaje));
         if ($answer->action != "error") {
           echo '<meta http-equiv="refresh" content="0;url=../ejemplares.php">';
           die();
@@ -131,6 +131,46 @@
                 </div>
                 <div class="row">
                   <div class="col-xs-3">
+                    <div class="form-group">
+                      <label>Madres</label>
+                      <select name="fkeje_mad_id" class="form-control select2" style="width: 100%;">
+                        <?php
+                          $madresList = json_decode($db->getEjemplaresMadres());
+                          if (empty($fkeje_mad_id)){
+                            echo "<option selected value='$row->pkmadre'>Seleccione una madre</option>";
+                          }
+                          foreach ($madresList as $row) {
+                            if ($row->pkmadre == $fkeje_mad_id) {
+                                echo "<option selected value='$row->pkmadre'>$row->madre</option>";
+                            } else {
+                                echo "<option value='$row->pkmadre'>$row->madre</option>";
+                            }
+                          }
+                        ?>
+                      </select>
+                    </div><!-- /.form-group -->
+                  </div>
+                  <div class="col-xs-3">
+                    <div class="form-group">
+                      <label>Padres</label>
+                      <select name="fkeje_pad_id" class="form-control select2" style="width: 100%;">
+                        <?php
+                          $padresList = json_decode($db->getEjemplaresPadres());
+                          if (empty($fkeje_pad_id)){
+                            echo "<option selected value='$row->pkpadre'>Seleccione un padre</option>";
+                          }
+                          foreach ($padresList as $row) {
+                            if ($row->pkpadre == $fkeje_pad_id) {
+                                echo "<option selected value='$row->pkpadre'>$row->padre</option>";
+                            } else {
+                                echo "<option value='$row->pkpadre'>$row->padre</option>";
+                            }
+                          }
+                        ?>
+                      </select>
+                    </div><!-- /.form-group -->
+                  </div>
+                  <div class="col-xs-3">
                      <div class="form-group">
                       <label>Fecha de Nacimiento</label>
                       <div class="input-group">
@@ -141,10 +181,8 @@
                       </div><!-- /.input group -->
                     </div><!-- /.form group -->
                   </div>
-                  <div class="col-xs-3">
-                     <label>Nombre del Ejemplar</label>
-                    <input name="eje_nombre" type="text" class="form-control" placeholder="Nombre" onblur="this.value = this.value.trim() == '' ? this.defaultValue : this.value.trim();" value="<?php echo $eje_nombre; ?>" required>
-                  </div>
+                </div>
+                <div class="row">
                   <div class="col-xs-1">
                     <div class="form-group">
                       <label>Sexo</label>
@@ -162,12 +200,14 @@
                       </select>
                     </div><!-- /.form-group -->
                   </div>
+                  <div class="col-xs-3">
+                     <label>Nombre del Ejemplar</label>
+                    <input name="eje_nombre" type="text" class="form-control" placeholder="Nombre" onblur="this.value = this.value.trim() == '' ? this.defaultValue : this.value.trim();" value="<?php echo $eje_nombre; ?>" required>
+                  </div>
                   <div class="col-xs-2">
                      <label>Tatuaje Labial</label>
                     <input name="eje_tatuaje" type="text" class="form-control" placeholder="Tatuaje" onblur="this.value = this.value.trim() == '' ? this.defaultValue : this.value.trim();" value="<?php echo $eje_tatuaje; ?>" required>
                   </div>
-                </div>
-                <div class="row">
                   <div class="col-xs-3">
                      <div class="form-group">
                       <label>Precio</label>
