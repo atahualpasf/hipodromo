@@ -3,7 +3,7 @@
   $db = new Database;
   if ((strtolower(basename(dirname($_SERVER['SCRIPT_FILENAME']))) === 'hipodromo') and (strtolower(basename($_SERVER['SCRIPT_FILENAME'], '.php')) === 'index')) {
     if ((!empty($_SESSION['usuario']['pkusu_id'])) and (!empty($_SESSION['usuario']['usu_nombre'])) and (!empty($_SESSION['rol']['pkrol_id'])) and (!empty($_SESSION['rol']['rol_nombre'])) and (!empty($_SESSION['app_name'])) and (!empty($_SESSION['shortapp_name'])) and (!empty($_SESSION['last_activity']))) {
-      if (time() - $_SESSION['last_activity'] <= 1800) {
+      if (time() - $_SESSION['last_activity'] <= 86400) {
         $_SESSION['last_activity'] = time();
         header('Location:http://'. $_SERVER[HTTP_HOST] . '/hipodromo/pages/');
       } else {
@@ -12,7 +12,7 @@
       }
     }
   } else {
-    if (((empty($_SESSION['usuario']['pkusu_id'])) and (empty($_SESSION['usuario']['usu_nombre'])) and (empty($_SESSION['rol']['pkrol_id'])) and (empty($_SESSION['rol']['rol_nombre'])) and (empty($_SESSION['app_name'])) and (empty($_SESSION['shortapp_name'])) and (empty($_SESSION['last_activity']))) || (time() - $_SESSION['last_activity'] > 1800)) {
+    if (((empty($_SESSION['usuario']['pkusu_id'])) and (empty($_SESSION['usuario']['usu_nombre'])) and (empty($_SESSION['rol']['pkrol_id'])) and (empty($_SESSION['rol']['rol_nombre'])) and (empty($_SESSION['app_name'])) and (empty($_SESSION['shortapp_name'])) and (empty($_SESSION['last_activity']))) || (time() - $_SESSION['last_activity'] > 86400)) {
       header('Location:http://' . $_SERVER[HTTP_HOST] . '/hipodromo/');
     } else {
       $_SESSION['last_activity'] = time();
@@ -242,11 +242,11 @@
                   <li><a href="<?php echo $db->getRootUri() . 'pages/apuestas.php'; ?>"><i class="fa fa-circle-o"></i> Apuestas</a></li>
                   <li><a href="<?php echo $db->getRootUri() . 'pages/ejemplares.php'; ?>"><i class="fa fa-circle-o"></i> Ejemplares</a></li>
                   <li><a href="<?php echo $db->getRootUri() . 'pages/entrenadores.php'; ?>"><i class="fa fa-circle-o"></i> Entrenadores</a></li>
-                  <li><a href="<?php echo $db->getRootUri() . 'pages/implementos.php'; ?>"><i class="fa fa-circle-o"></i> Implementos</a></li>
                   <li><a href="<?php echo $db->getRootUri() . 'pages/inscripciones.php'; ?>"><i class="fa fa-circle-o"></i> Inscripciones</a></li>
                   <li><a href="<?php echo $db->getRootUri() . 'pages/jinetes.php'; ?>"><i class="fa fa-circle-o"></i> Jinetes</a></li>
                   <li><a href="<?php echo $db->getRootUri() . 'pages/propietarios.php'; ?>"><i class="fa fa-circle-o"></i> Propietarios</a></li>
                   <li><a href="<?php echo $db->getRootUri() . 'pages/studs.php'; ?>"><i class="fa fa-circle-o"></i> Studs</a></li>
+                  <li><a href="<?php echo $db->getRootUri() . 'pages/caballerizas.php'; ?>"><i class="fa fa-circle-o"></i> Caballerizas</a></li>
                 </ul>
               </li>
               </ul>
