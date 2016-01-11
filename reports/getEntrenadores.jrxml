@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="INFORMACIÓN BÁSICA DE ENTRENADORES" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="533d1214-ad20-4973-9420-16f598aacf22">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="3"/>
+	<queryString>
+		<![CDATA[SELECT ent.*, t.tel_codigo, t.tel_numero, p.lug_nombre as parroquia, e.lug_nombre as estado
+FROM lugar p, lugar m, lugar e, entrenador ent LEFT JOIN telefono t ON t.fktel_ent_id = ent.pkent_id
+WHERE ent.fkent_lug_id = p.pklug_id AND p.fklug_lug_id = m.pklug_id AND m.fklug_lug_id = e.pklug_id
+ORDER BY pkent_id]]>
+	</queryString>
+	<field name="pkent_id" class="java.lang.Integer"/>
+	<field name="fkent_lug_id" class="java.lang.Integer"/>
+	<field name="ent_ci" class="java.lang.Integer"/>
+	<field name="ent_primer_nombre" class="java.lang.String"/>
+	<field name="ent_segundo_nombre" class="java.lang.String"/>
+	<field name="ent_primer_apellido" class="java.lang.String"/>
+	<field name="ent_segundo_apellido" class="java.lang.String"/>
+	<field name="ent_fecha_nacimiento" class="java.sql.Date"/>
+	<field name="tel_codigo" class="java.lang.String"/>
+	<field name="tel_numero" class="java.lang.String"/>
+	<field name="parroquia" class="java.lang.String"/>
+	<field name="estado" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="5489b2e9-c43b-467a-8f11-a127121e94d4" x="297" y="13" width="147" height="40"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[INFORMACIÓN BÁSICA DE ENTRENADORES]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="e0be004f-f5a7-46cd-9c88-2bcce8a594c9" x="682" y="0" width="80" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="0b6592fb-d99c-4960-a6e5-82f70506f892" x="762" y="0" width="40" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="a4cc1985-dbcc-4599-8dec-5ebc0526c32c" x="702" y="20" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="20" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="26" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="9c082f81-612c-4796-8907-77d9221f0a74" x="0" y="0" width="79" height="20"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cedula de Identidad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f48aaf23-d8ae-417f-a5b3-088b96548986" x="85" y="0" width="82" height="20"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Primer Nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="703ae143-fe57-45b3-8d3f-3c179ce3ad78" x="167" y="0" width="82" height="20"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Segundo Nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="976b5234-221a-4817-8b35-ff66732db9a4" x="346" y="0" width="82" height="20"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Segundo Apellido]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="322e0fce-55a4-4b92-a4e5-1561ed4b9a62" x="264" y="0" width="82" height="20"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Primer Apellido]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b9f2626f-f1b0-4db5-923c-cbc4263f30ac" x="428" y="0" width="82" height="20"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha de Nacimiento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="75b02409-4154-4472-95ea-f8168cf47c25" x="528" y="0" width="75" height="26"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Numero de Telefono]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1db05ff2-f5a1-4fe3-b534-11e3bf66bb0a" x="614" y="0" width="88" height="20"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Parroquia]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d6cda5a9-1143-4aa1-9ec2-2a163cb019c6" x="714" y="0" width="88" height="20"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Estado]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="23" splitType="Stretch">
+			<textField>
+				<reportElement uuid="d93b3894-5424-401e-ba2a-00b994a9e556" x="0" y="0" width="79" height="20"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ent_ci}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="1f5a5b1f-1acd-4962-8db6-bb2ea40d27ef" x="85" y="0" width="82" height="20"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ent_primer_nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="01aba936-d691-4a3d-a7ad-245349778ab1" x="167" y="0" width="82" height="20"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ent_segundo_nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="0ab08515-f8cc-44f0-a3eb-fe0eced21c43" x="264" y="0" width="82" height="20"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ent_primer_apellido}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="111afe88-b547-4cfd-a6d5-93900b1ac025" x="428" y="0" width="82" height="20"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ent_fecha_nacimiento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="b8c33d98-90f0-4bcd-97f9-f3f258a6fb96" x="528" y="0" width="75" height="20"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tel_numero}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="9bcdcd47-e925-43a3-b7fb-d901d2bcb617" x="346" y="0" width="82" height="20"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ent_segundo_apellido}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="652f1bc8-f65e-4d31-9673-5774fd14b57d" x="614" y="3" width="88" height="20"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{parroquia}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="6e526e9e-003c-4a67-b68f-54cf6162bd77" x="714" y="0" width="100" height="20"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{estado}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
