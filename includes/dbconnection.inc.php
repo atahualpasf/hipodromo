@@ -640,6 +640,27 @@
 				return $this->result_construct("success", $respuesta);
 			}
 		}
+		
+		function getPrivilegiosByRol($id,$privilegio) {			
+			$result = pg_query($this->dbConnection,
+			"SELECT rp.*
+			FROM	rol_privilegio rp
+			WHERE 	rp.fkrolpri_rol_id = $id and rp.fkrolpri_pri_id = $privilegio");
+			
+			if(pg_last_error()){
+				return $this->result_construct("error",pg_last_error());
+			}
+			else {
+				$respuesta = array();
+				while($row = pg_fetch_assoc($result)){
+					$respuesta[] = $row;
+				}
+				if (empty($respuesta)) {
+					return $this->result_construct("error","No tiene asignado ningún privilegio");
+				}
+				return $this->result_construct("success", $respuesta);
+			}
+		}
 
 		/************************************************************
 		*																														*

@@ -1,17 +1,20 @@
 <?php
   include($_SERVER['DOCUMENT_ROOT'] . 'hipodromo/includes/header.inc.php');
+  if (json_decode($db->getPrivilegiosByRol($_SESSION['rol']['pkrol_id'],1))->action != "success") {
+      echo '<meta http-equiv="refresh" content="0;url=' . $_SESSION["last_uri"] . '">';
+      die();
+  }
 ?>
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            Dashboard
-            <small>Control panel</small>
+            Reportes
           </h1>
           <ol class="breadcrumb">
             <li><a href="index.php"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active">Dashboard</li>
+            <li class="active">Reportes</li>
           </ol>
         </section>
 
