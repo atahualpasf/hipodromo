@@ -1,6 +1,11 @@
 <?php
   include($_SERVER['DOCUMENT_ROOT'] . 'hipodromo/includes/header.inc.php');
 
+  if ((json_decode($db->getPrivilegiosByRol($_SESSION['rol']['pkrol_id'],7))->action != "success") AND (json_decode($db->getPrivilegiosByRol($_SESSION['rol']['pkrol_id'],10))->action != "success")) {
+      echo '<meta http-equiv="refresh" content="0;url=' . $_SESSION["last_uri"] . '">';
+      die();
+  }
+
   $pkeje_id = $fkeje_har_id = $fkeje_pel_id = $fkeje_raz_id = $fkeje_mad_id = $fkeje_pad_id = $eje_fecha_nacimiento = $eje_nombre = $eje_precio = $eje_sexo = $eje_tatuaje = "";
 
   function test_input($data) {
