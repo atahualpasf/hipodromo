@@ -93,7 +93,7 @@
                             echo "</form>";
                             echo "<form id='deleteForm' role='form' method='POST' action='" . htmlentities($_SERVER['PHP_SELF']) . "'>";
                             if ((json_decode($db->getPrivilegiosByRol($_SESSION['rol']['pkrol_id'],15))->action != "success") AND (json_decode($db->getPrivilegiosByRol($_SESSION['rol']['pkrol_id'],18))->action != "success")) {
-                               echo "<td><button name='pkjin_id' value='$row->pkjin_id' type='submit' form='deleteForm' class='btn btn-danger btn-flat btn-block'><i class='fa fa-trash'></i></button></td>";
+                               echo "<td><button name='pkjin_id' value='$row->pkjin_id' type='submit' form='deleteForm' class='btn btn-danger btn-flat btn-block' disabled><i class='fa fa-trash'></i></button></td>";
                             } else {
                                echo "<td><button name='pkjin_id' value='$row->pkjin_id' type='submit' form='deleteForm' class='btn btn-danger btn-flat btn-block'><i class='fa fa-trash'></i></button></td>";
                             }
