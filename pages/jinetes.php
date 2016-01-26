@@ -92,7 +92,11 @@
                             echo "<td><button name='update_id' value='$row->pkjin_id' type='submit' form='updateForm' class='btn btn-dropbox btn-flat btn-block'><i class='fa fa-edit'></i></button></td>";
                             echo "</form>";
                             echo "<form id='deleteForm' role='form' method='POST' action='" . htmlentities($_SERVER['PHP_SELF']) . "'>";
-                            echo "<td><button name='pkjin_id' value='$row->pkjin_id' type='submit' form='deleteForm' class='btn btn-danger btn-flat btn-block'><i class='fa fa-trash'></i></button></td>";
+                            if ((json_decode($db->getPrivilegiosByRol($_SESSION['rol']['pkrol_id'],15))->action != "success") AND (json_decode($db->getPrivilegiosByRol($_SESSION['rol']['pkrol_id'],18))->action != "success")) {
+                               echo "<td><button name='pkjin_id' value='$row->pkjin_id' type='submit' form='deleteForm' class='btn btn-danger btn-flat btn-block'><i class='fa fa-trash'></i></button></td>";
+                            } else {
+                               echo "<td><button name='pkjin_id' value='$row->pkjin_id' type='submit' form='deleteForm' class='btn btn-danger btn-flat btn-block'><i class='fa fa-trash'></i></button></td>";
+                            }
                             echo "</form>";
                             echo "</tr>";
                         }
