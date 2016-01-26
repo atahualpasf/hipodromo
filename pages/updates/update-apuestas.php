@@ -1,6 +1,11 @@
 <?php
   include($_SERVER['DOCUMENT_ROOT'] . 'hipodromo/includes/header.inc.php');
 
+  if ((json_decode($db->getPrivilegiosByRol($_SESSION['rol']['pkrol_id'],11))->action != "success") AND (json_decode($db->getPrivilegiosByRol($_SESSION['rol']['pkrol_id'],13))->action != "success")) {
+      echo '<meta http-equiv="refresh" content="0;url=' . $_SESSION["last_uri"] . '">';
+      die();
+  }
+
   $pkfac_id = $pkapu_id = $fkapu_cor_id = $fkapu_jug_id = $fkapu_fac_id = $fkapu_taq_id = $apu_monto = $apu_lugar_llegada = "";
 
   function test_input($data) {
