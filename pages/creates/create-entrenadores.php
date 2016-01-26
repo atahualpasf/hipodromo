@@ -1,6 +1,11 @@
 <?php
   include($_SERVER['DOCUMENT_ROOT'] . 'hipodromo/includes/header.inc.php');
 
+  if ((json_decode($db->getPrivilegiosByRol($_SESSION['rol']['pkrol_id'],7))->action != "success") AND (json_decode($db->getPrivilegiosByRol($_SESSION['rol']['pkrol_id'],10))->action != "success")) {
+      echo '<meta http-equiv="refresh" content="0;url=' . $_SESSION["last_uri"] . '">';
+      die();
+  }
+
   $pkent_id = $fkent_lug_id = $ent_ci = $ent_primer_nombre = "";
   $ent_segundo_nombre = $ent_primer_apellido = $ent_segundo_apellido = $ent_fecha_nacimiento = $tel_codigo = $tel_numero = "";
 
