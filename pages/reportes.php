@@ -421,6 +421,20 @@
               </div>
             </div><!-- ./col -->
             
+            <div class="col-lg-12 col-xs-12">
+              <!-- small box -->
+              <div class="small-box bg-aqua">
+                <div class="inner">
+                  <h3>#30</h3>
+                  <p>Se quiere conocer cuales son las mejores hembras y machos en base a la cantidad de hijos ganadores.</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-document-text"></i>
+                </div>
+                <a href="../reports/reports.php?report=R30MejoresHembrasMachosEnBaseCantidadDeHijosGanadores" class="small-box-footer">Ver reporte <i class="fa fa-arrow-circle-right"></i></a>
+              </div>
+            </div><!-- ./col -->
+            
           </div><!-- /.row -->
 
         </section><!-- /.content -->
