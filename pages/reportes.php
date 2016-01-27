@@ -177,9 +177,22 @@
               </div>
             </div><!-- ./col -->
             
+            <div class="col-lg-12 col-xs-12">
+              <!-- small box -->
+              <div class="small-box bg-aqua">
+                <div class="inner">
+                  <h3>#12</h3>
+                  <p>Estadística de Jinete basado en la cantidad de carreras corridas.</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-document-text"></i>
+                </div>
+                <a href="../reports/reports.php?report=R12EstadisticaJineteCarrerasCorridas" class="small-box-footer">Ver reporte <i class="fa fa-arrow-circle-right"></i></a>
+              </div>
+            </div><!-- ./col -->
             
             <!--
-            REPORTES DE 12 AL 14
+            REPORTES DE 13 AL 14
             -->
             
             
