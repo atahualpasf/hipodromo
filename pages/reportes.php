@@ -107,6 +107,48 @@
               </div>
             </div><!-- ./col -->
             
+            <div class="col-lg-12 col-xs-12">
+              <!-- small box -->
+              <div class="small-box bg-aqua">
+                <div class="inner">
+                  <h3>#7</h3>
+                  <p>Listado de ejemplares ganadores de las últimas 15 carreras del programa, agrupadas por tipo de carrera.</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-document-text"></i>
+                </div>
+                <a href="../reports/reports.php?report=R7ListadoDeEjemplaresGanadoresDeLasUltimas15" class="small-box-footer">Ver reporte <i class="fa fa-arrow-circle-right"></i></a>
+              </div>
+            </div><!-- ./col -->
+            
+            <div class="col-lg-12 col-xs-12">
+              <!-- small box -->
+              <div class="small-box bg-aqua">
+                <div class="inner">
+                  <h3>#8</h3>
+                  <p>Listado de implementos.</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-document-text"></i>
+                </div>
+                <a href="../reports/reports.php?report=R8ListadoDeImplementos" class="small-box-footer">Ver reporte <i class="fa fa-arrow-circle-right"></i></a>
+              </div>
+            </div><!-- ./col -->
+            
+            <div class="col-lg-12 col-xs-12">
+              <!-- small box -->
+              <div class="small-box bg-aqua">
+                <div class="inner">
+                  <h3>#9</h3>
+                  <p>Listado de entrenadores indicando su cuadra.</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-document-text"></i>
+                </div>
+                <a href="../reports/reports.php?report=R9ListadoDeEntrenadoresIndicandoSuCuadra" class="small-box-footer">Ver reporte <i class="fa fa-arrow-circle-right"></i></a>
+              </div>
+            </div><!-- ./col -->
+            
           </div><!-- /.row -->
 
         </section><!-- /.content -->
