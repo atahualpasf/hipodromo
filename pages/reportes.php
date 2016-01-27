@@ -22,12 +22,13 @@
         <section class="content">
           <!-- Small boxes (Stat box) -->
           <div class="row">
+             
             <div class="col-lg-12 col-xs-12">
               <!-- small box -->
               <div class="small-box bg-aqua">
                 <div class="inner">
                   <h3>#1</h3>
-                  <p>Listado de Usuarios con sus roles</p>
+                  <p>Listado de usuarios con sus roles.</p>
                 </div>
                 <div class="icon">
                   <i class="ion ion-document-text"></i>
@@ -35,6 +36,63 @@
                 <a href="../reports/reports.php?report=R1ListadoDeUsuarios" class="small-box-footer">Ver reporte <i class="fa fa-arrow-circle-right"></i></a>
               </div>
             </div><!-- ./col -->
+            
+            <div class="col-lg-12 col-xs-12">
+              <!-- small box -->
+              <div class="small-box bg-aqua">
+                <div class="inner">
+                  <h3>#2</h3>
+                  <p>Listado de studs con la descripción de su camisa y gorra.</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-document-text"></i>
+                </div>
+                <a href="../reports/reports.php?report=R2ListadoDeStudsConLaDescripcion" class="small-box-footer">Ver reporte <i class="fa fa-arrow-circle-right"></i></a>
+              </div>
+            </div><!-- ./col -->
+            
+            <div class="col-lg-12 col-xs-12">
+              <!-- small box -->
+              <div class="small-box bg-aqua">
+                <div class="inner">
+                  <h3>#3</h3>
+                  <p>Listado de studs con sus propietarios y porcentajes.</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-document-text"></i>
+                </div>
+                <a href="../reports/reports.php?report=R3ListadoDeStudsConSusPropietarios" class="small-box-footer">Ver reporte <i class="fa fa-arrow-circle-right"></i></a>
+              </div>
+            </div><!-- ./col -->
+            
+            <div class="col-lg-12 col-xs-12">
+              <!-- small box -->
+              <div class="small-box bg-aqua">
+                <div class="inner">
+                  <h3>#4</h3>
+                  <p>Listado de studs con sus ejemplares y propietarios.</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-document-text"></i>
+                </div>
+                <a href="../reports/reports.php?report=R4ListadoDeStudsConSusEjemplares" class="small-box-footer">Ver reporte <i class="fa fa-arrow-circle-right"></i></a>
+              </div>
+            </div><!-- ./col -->
+            
+            <div class="col-lg-12 col-xs-12">
+              <!-- small box -->
+              <div class="small-box bg-aqua">
+                <div class="inner">
+                  <h3>#5</h3>
+                  <p>Listado de ejemplares, con sexo y tipo de pelaje; clasificados por edad.</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-document-text"></i>
+                </div>
+                <a href="../reports/reports.php?report=R5ListadoDeEjemplaresConSexoTipoDePelaje" class="small-box-footer">Ver reporte <i class="fa fa-arrow-circle-right"></i></a>
+              </div>
+            </div><!-- ./col -->
+            
           </div><!-- /.row -->
 
         </section><!-- /.content -->
