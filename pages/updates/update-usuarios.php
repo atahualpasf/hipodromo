@@ -39,6 +39,7 @@
         setValues($usuariosList);
     } elseif(!empty($_POST['pkusu_id'])) {
       setValuesWhenSubmitIsClicked();
+      var_dump($_POST['usu_clave']);
       $answer = @json_decode($db->updateUsuario($pkusu_id, $fkusu_rol_id, $usu_nombre, $usu_correo, $usu_clave, $usu_imagen));
       if ($answer->action != "error") {
         echo '<meta http-equiv="refresh" content="0;url=../usuarios.php">';
@@ -69,7 +70,7 @@
             <div class="box-body">
               <div class="box-body">
                 <div class="row">
-                  <div class="col-xs-3">
+                  <div class="col-xs-4">
                      <label>Nombre</label>
                     <input name="usu_nombre" type="text" class="form-control" placeholder="Nombre" onblur="this.value = this.value.trim() == '' ? this.defaultValue : this.value.trim();" value="<?php echo $usu_nombre; ?>" required>
                   </div>
@@ -77,14 +78,16 @@
                      <label>Correo</label>
                     <input name="usu_correo" type="email" class="form-control" placeholder="Correo" onblur="this.value = this.value.trim() == '' ? this.defaultValue : this.value.trim();" value="<?php echo $usu_correo; ?>" required>
                   </div>
+                  <div class="col-xs-4">
+                     <label>Clave</label>
+                    <input name="usu_clave" type="text" class="form-control" placeholder="Clave" onblur="this.value = this.value.trim() == '' ? this.defaultValue : this.value.trim();" value="<?php echo $usu_clave; ?>" required>
+                  </div>
                   <div class="col-xs-6">
                     <div class="form-group">
                       <label>Roles</label>
                       <select name="fkusu_rol_id" class="form-control select2" style="width: 100%;">
                         <?php
                           $rolesList = json_decode($db->getRoles());
-                          var_dump($rolesList);
-                          var_dump($fkusu_rol_id);
                           foreach ($rolesList as $row) {
                               if ($row->pkrol_id == $fkusu_rol_id) {
                                   echo "<option selected value='$row->pkrol_id'>$row->rol_nombre</option>";
