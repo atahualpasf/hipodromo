@@ -19,7 +19,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            Apuestas
+            Usuarios
           </h1>
           <ol class="breadcrumb">
             <li><a href="index.php"><i class="fa fa-dashboard"></i> Tablero</a></li>
@@ -58,7 +58,11 @@
                             echo "<td>$row->usu_correo</td>";
                             echo "<td>$row->rol_nombre</td>";
                             echo "<form id='updateForm' role='form' method='POST' action='updates/update-" . basename($_SERVER['PHP_SELF']) . "'>";
-                            echo "<td><button name='update_id' value='$row->pkusu_id' type='submit' form='updateForm' class='btn btn-dropbox btn-flat btn-block'><i class='fa fa-edit'></i></button></td>";
+                            if (json_decode($db->getPrivilegiosByRol($_SESSION['rol']['pkrol_id'],1))->action != "success") {
+                              echo "<td><button name='update_id' value='$row->pkusu_id' type='submit' form='updateForm' class='btn btn-dropbox btn-flat btn-block' disabled><i class='fa fa-edit'></i></button></td>";
+                            } else {
+                              echo "<td><button name='update_id' value='$row->pkusu_id' type='submit' form='updateForm' class='btn btn-dropbox btn-flat btn-block'><i class='fa fa-edit'></i></button></td>";
+                            }
                             echo "</form>";
                             echo "<form id='deleteForm' role='form' method='POST' action='" . htmlentities($_SERVER['PHP_SELF']) . "'>";
                             if (json_decode($db->getPrivilegiosByRol($_SESSION['rol']['pkrol_id'],1))->action != "success") {
