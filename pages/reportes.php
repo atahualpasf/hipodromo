@@ -365,6 +365,20 @@
               </div>
             </div><!-- ./col -->
             
+            <div class="col-lg-12 col-xs-12">
+              <!-- small box -->
+              <div class="small-box bg-aqua">
+                <div class="inner">
+                  <h3>#26</h3>
+                  <p>Indicar el peso promedio de los jinetes para las 25 últimas carreras.</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-document-text"></i>
+                </div>
+                <a href="../reports/reports.php?report=R26IndicarElPesoPromedioDeLosJinetesParaLasUltimas25" class="small-box-footer">Ver reporte <i class="fa fa-arrow-circle-right"></i></a>
+              </div>
+            </div><!-- ./col -->
+            
           </div><!-- /.row -->
 
         </section><!-- /.content -->
