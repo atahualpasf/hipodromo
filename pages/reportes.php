@@ -407,6 +407,20 @@
               </div>
             </div><!-- ./col -->
             
+            <div class="col-lg-12 col-xs-12">
+              <!-- small box -->
+              <div class="small-box bg-aqua">
+                <div class="inner">
+                  <h3>#29</h3>
+                  <p>Se quiere conocer cuales son los mejores ejemplares rematadores de todas las carreras según su desempeño en los ultimos 400 mts. de cada carrera.</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-document-text"></i>
+                </div>
+                <a href="../reports/reports.php?report=R29SeQuiereConocerCualesSonLosMejoresEjemplaresRematadoresDeTodas" class="small-box-footer">Ver reporte <i class="fa fa-arrow-circle-right"></i></a>
+              </div>
+            </div><!-- ./col -->
+            
           </div><!-- /.row -->
 
         </section><!-- /.content -->
