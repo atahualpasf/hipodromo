@@ -163,9 +163,23 @@
               </div>
             </div><!-- ./col -->
             
+            <div class="col-lg-12 col-xs-12">
+              <!-- small box -->
+              <div class="small-box bg-aqua">
+                <div class="inner">
+                  <h3>#11</h3>
+                  <p>Historial de jinete, con que ejemplar a ganado y cual carrera.</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-document-text"></i>
+                </div>
+                <a href="../reports/reports.php?report=R11HistorialDeJineteConQueEjemplarGanadoCualCarrera" class="small-box-footer">Ver reporte <i class="fa fa-arrow-circle-right"></i></a>
+              </div>
+            </div><!-- ./col -->
+            
             
             <!--
-            REPORTES DE 11 AL 14
+            REPORTES DE 12 AL 14
             -->
             
             
