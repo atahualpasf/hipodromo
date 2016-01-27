@@ -266,6 +266,20 @@
               </div>
             </div><!-- ./col -->
             
+            <div class="col-lg-12 col-xs-12">
+              <!-- small box -->
+              <div class="small-box bg-aqua">
+                <div class="inner">
+                  <h3>#24</h3>
+                  <p>Indicar cuales son los implementos más utilizados en las carreras de mayor a menos según su porcentaje de uso.</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-document-text"></i>
+                </div>
+                <a href="../reports/reports.php?report=R24ImplementosMasUtilizadosEnCarrerasDeMayorMenoSegunPorcentaje" class="small-box-footer">Ver reporte <i class="fa fa-arrow-circle-right"></i></a>
+              </div>
+            </div><!-- ./col -->
+            
           </div><!-- /.row -->
 
         </section><!-- /.content -->
