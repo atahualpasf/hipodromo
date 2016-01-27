@@ -587,6 +587,23 @@
 		*					 FUNCIONES GENÉRICAS DE USUARIOS									*
 		*																														*
 		************************************************************/
+		function getUsuarios() {
+			$result = pg_query($this->dbConnection,
+			"SELECT u.pkusu_id, u.usu_nombre, u.usu_correo, r.pkrol_id, r.rol_nombre
+			FROM usuario u, rol r
+			WHERE fkusu_rol_id = pkrol_id");
+
+			if(pg_last_error()){
+				return $this->result_construct("error",pg_last_error());
+			}	else {
+				$respuesta = array();
+				while($row = pg_fetch_assoc($result)){
+					$respuesta[] = $row;
+				}
+				return json_encode($respuesta);
+			}
+		}
+		
 		function getUsuarioById($pkusu_id) {
 			$result = pg_query($this->dbConnection,
 			"SELECT u.pkusu_id,u.usu_nombre,encode(u.usu_imagen, 'base64') as usu_imagen,r.pkrol_id,r.rol_nombre
@@ -659,6 +676,16 @@
 					return $this->result_construct("error","No tiene asignado ningún privilegio");
 				}
 				return $this->result_construct("success", $respuesta);
+			}
+		}
+		
+		function deleteUsuario($id) {
+			$result = pg_query($this->dbConnection,
+				"DELETE FROM usuario WHERE pkusu_id='$id'");
+			if (pg_last_error()) {
+				return $this->result_construct("error",pg_last_error());
+			} else {
+				return $this->result_construct("success","Eliminado exitosamente");
 			}
 		}
 

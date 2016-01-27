@@ -241,6 +241,7 @@
                 </a>
                 <ul class="treeview-menu">
                   <li><a href="<?php echo $db->getRootUri() . 'pages/reportes.php'; ?>"><i class="fa fa-circle-o"></i> Reportes</a></li>
+                  <li><a href="<?php echo $db->getRootUri() . 'pages/usuarios.php'; ?>"><i class="fa fa-circle-o"></i> Usuarios</a></li>
                   <li><a href="<?php echo $db->getRootUri() . 'pages/apuestas.php'; ?>"><i class="fa fa-circle-o"></i> Apuestas</a></li>
                   <li><a href="<?php echo $db->getRootUri() . 'pages/ejemplares.php'; ?>"><i class="fa fa-circle-o"></i> Ejemplares</a></li>
                   <li><a href="<?php echo $db->getRootUri() . 'pages/entrenadores.php'; ?>"><i class="fa fa-circle-o"></i> Entrenadores</a></li>
