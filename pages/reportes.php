@@ -205,9 +205,19 @@
               </div>
             </div><!-- ./col -->
             
-            <!--
-            REPORTES DE 14 AL 14
-            -->
+            <div class="col-lg-12 col-xs-12">
+              <!-- small box -->
+              <div class="small-box bg-aqua">
+                <div class="inner">
+                  <h3>#14</h3>
+                  <p>Estadísticas de Ejemplar combinado Jinete y Entrenador.</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-document-text"></i>
+                </div>
+                <a href="../reports/reports.php?report=R14EstadisticasEjemplarCombinadoJineteEntrenador" class="small-box-footer">Ver reporte <i class="fa fa-arrow-circle-right"></i></a>
+              </div>
+            </div><!-- ./col -->
             
             <div class="col-lg-12 col-xs-12">
               <!-- small box -->
