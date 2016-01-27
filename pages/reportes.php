@@ -26,13 +26,13 @@
               <!-- small box -->
               <div class="small-box bg-aqua">
                 <div class="inner">
-                  <h3>Programación Oficial de Carreras</h3>
-                  <p>Reporte</p>
+                  <h3>#1</h3>
+                  <p>Listado de Usuarios con sus roles</p>
                 </div>
                 <div class="icon">
-                  <i class="ion ion-bag"></i>
+                  <i class="ion ion-document-text"></i>
                 </div>
-                <a href="../reports/reports.php?report=getProgramacionOficial" class="small-box-footer">Ver reporte <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="../reports/reports.php?report=R1ListadoDeUsuarios" class="small-box-footer">Ver reporte <i class="fa fa-arrow-circle-right"></i></a>
               </div>
             </div><!-- ./col -->
           </div><!-- /.row -->
