@@ -246,9 +246,19 @@
                 <a href="../reports/reports.php?report=R16ResultadosDeCarrerasCumpliendoConLasEspecificacionesIndicadas" class="small-box-footer">Ver reporte <i class="fa fa-arrow-circle-right"></i></a>
               </div>
             </div><!-- ./col -->
-            <!--
-            REPORTES DE 17 AL 17
-            -->
+            <div class="col-lg-12 col-xs-12">
+              <!-- small box -->
+              <div class="small-box bg-aqua">
+                <div class="inner">
+                  <h3>#17</h3>
+                  <p>Construcción de la gaceta hípica indicando los favoritos en cada carrera según su historial, además de las estadísticas de combinación ejemplar-jinete-entrenador.</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-document-text"></i>
+                </div>
+                <a href="../reports/reports.php?report=R17ProgramaOficialDeCarrera" class="small-box-footer">Ver reporte <i class="fa fa-arrow-circle-right"></i></a>
+              </div>
+            </div><!-- ./col -->
             
             <div class="col-lg-12 col-xs-12">
               <!-- small box -->
