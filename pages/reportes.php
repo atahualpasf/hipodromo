@@ -233,8 +233,21 @@
               </div>
             </div><!-- ./col -->
             
+            <div class="col-lg-12 col-xs-12">
+              <!-- small box -->
+              <div class="small-box bg-aqua">
+                <div class="inner">
+                  <h3>#16</h3>
+                  <p>Resultados de Carreras con las especificaciones indicadas.</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-document-text"></i>
+                </div>
+                <a href="../reports/reports.php?report=R16ResultadosDeCarrerasCumpliendoConLasEspecificacionesIndicadas" class="small-box-footer">Ver reporte <i class="fa fa-arrow-circle-right"></i></a>
+              </div>
+            </div><!-- ./col -->
             <!--
-            REPORTES DE 16 AL 17
+            REPORTES DE 17 AL 17
             -->
             
             <div class="col-lg-12 col-xs-12">
