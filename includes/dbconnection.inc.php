@@ -587,6 +587,23 @@
 		*					 FUNCIONES GENÉRICAS DE USUARIOS									*
 		*																														*
 		************************************************************/
+		function getUsuarios() {
+			$result = pg_query($this->dbConnection,
+			"SELECT u.*, r.pkrol_id, r.rol_nombre
+			FROM usuario u, rol r
+			WHERE u.fkusu_rol_id = r.pkrol_id");
+
+			if(pg_last_error()){
+				return $this->result_construct("error",pg_last_error());
+			}	else {
+				$respuesta = array();
+				while($row = pg_fetch_assoc($result)){
+					$respuesta[] = $row;
+				}
+				return json_encode($respuesta);
+			}
+		}
+		
 		function getUsuarioById($pkusu_id) {
 			$result = pg_query($this->dbConnection,
 			"SELECT u.pkusu_id,u.usu_nombre,encode(u.usu_imagen, 'base64') as usu_imagen,r.pkrol_id,r.rol_nombre
@@ -604,6 +621,22 @@
 			}
 		}
 
+		function getUsuarioPorId($id) {
+			$result = pg_query($this->dbConnection,
+			"SELECT u.*, r.pkrol_id, r.rol_nombre
+			FROM usuario u, rol r
+			WHERE u.pkusu_id = '$id' and u.fkusu_rol_id = r.pkrol_id");
+
+			if(pg_last_error()){
+				return $this->result_construct("error",pg_last_error());
+			}	else {
+				$respuesta = array();
+				while($row = pg_fetch_assoc($result)){
+					$respuesta[] = $row;
+				}
+				return json_encode($respuesta);
+			}
+		}
 
 		function registerUsuario($username,$email,$password,$rol,$foto) {
 			pg_set_error_verbosity($this->dbConnection,PGSQL_ERRORS_DEFAULT);
@@ -659,6 +692,50 @@
 					return $this->result_construct("error","No tiene asignado ningún privilegio");
 				}
 				return $this->result_construct("success", $respuesta);
+			}
+		}
+		
+		function updateUsuario($pkusu_id, $fkusu_rol_id, $usu_nombre, $usu_correo, $usu_clave, $usu_imagen){
+			if (!empty($usu_imagen)) {
+				$result = pg_query($this->dbConnection,
+				"UPDATE usuario
+				SET pkusu_id = '$pkusu_id', fkusu_rol_id = '$fkusu_rol_id', usu_nombre = '$usu_nombre', usu_correo = '$usu_correo', usu_clave = '$usu_clave', usu_imagen = '$usu_imagen'
+				WHERE pkusu_id='$pkusu_id'");
+			} else {
+				$result = pg_query($this->dbConnection,
+				"UPDATE usuario
+				SET pkusu_id = '$pkusu_id', fkusu_rol_id = '$fkusu_rol_id', usu_nombre = '$usu_nombre', usu_correo = '$usu_correo', usu_clave = '$usu_clave', usu_imagen = NULL
+				WHERE pkusu_id='$pkusu_id'");
+			}
+			if(pg_last_error()){
+				return $this->result_construct("error",pg_last_error());
+			}else{
+				return $this->result_construct("success","Actualizado exitosamente");
+			}
+		}
+		
+		function deleteUsuario($id) {
+			$result = pg_query($this->dbConnection,
+				"DELETE FROM usuario WHERE pkusu_id='$id'");
+			if (pg_last_error()) {
+				return $this->result_construct("error",pg_last_error());
+			} else {
+				return $this->result_construct("success","Eliminado exitosamente");
+			}
+		}
+		
+		function getRoles(){
+			$result = pg_query($this->dbConnection,
+			"SELECT * FROM rol");
+			if(pg_last_error()){
+				return $this->result_construct("error",pg_last_error());
+			}
+			else {
+				$respuesta = array();
+				while($row = pg_fetch_assoc($result)){
+					$respuesta[] = $row;
+				}
+				return json_encode($respuesta);
 			}
 		}
 
