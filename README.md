@@ -1,7 +1,11 @@
 Introducción
 ============
 
-**Hipódromo** -- es un sistema de administración de un hipódromo. Está basada su plantilla(template) en **[AdminLTE 2.3.0](https://github.com/almasaeed2010/AdminLTE)** que a su vez tiene como base  **[Bootstrap 3](https://github.com/twbs/bootstrap)** framework. Es altamente recomendable dicho template ya que es muy fácil de usar, es muy intuitivo y sobre todo que es altamente personalizable y adaptativo para todo tipo de pantallas (Responsive).
+**HipódromoASAC** -- nace como un sistema de gestión para el "Hipódromo La Rinconada", contemplando todo lo relacionado al mundo hípico. El sistema debe gestionar los ejemplares, entrenadores, studs, propietarios, apuestas, carreras, programa oficial, inscripciones, resultados, implementos de carreras, veterinarios de las cuadras, medicamentos aplicados antes de las carreras y con la capacidad de escalar e implementar más cosas no definidas hasta ahora. Con vista al futuro, pensamos que dicho sistema pueda ser consultado a través de la web por "nuestros aficionados", de esta manera ellos podrán ver el historial de cada ejemplar en específico, el programa oficial y los resultados de los programas anteriores. El sistema por lo tanto fué desarrollado contemplando el uso de usuarios y roles. 
+
+!["Hipódromo"] (https://github.com/atahualpasf/hipodromo/blob/master/dist/img/presentation/presentation-ejemplares-01.png "Hipódromo Presentación")
+
+**HipódromoASAC** está basado en la plantilla(template) **[AdminLTE 2.3.0](https://github.com/almasaeed2010/AdminLTE)** que a su vez tiene como base  **[Bootstrap 3](https://github.com/twbs/bootstrap)** framework. Es altamente recomendable dicho template ya que es muy fácil de usar, es muy intuitivo y sobre todo que es altamente personalizable y adaptativo para todo tipo de pantallas (Responsive).
 
 El **sistema de administración del Hipódromo** cuenta con varias funcionabilidades como:
 * Registro y manejo de usuarios con sus roles. (Próximamente CRUD de privilegios).
@@ -18,9 +22,12 @@ El **sistema de administración del Hipódromo** cuenta con varias funcionabilid
   * Usuario (Desarrollando).
   * Reportes (Desarrollando).
 
-!["Hipódromo"] (https://github.com/atahualpasf/hipodromo/blob/master/dist/img/presentation/presentation-ejemplares-01.png "Hipódromo Presentación")
+Este sistema de administración de hipódromo ha sido desarrollado como un proyecto en colaboración con: 
+* **[Andrea Contreras - @andrecontdi](https://github.com/andrecontdi)**. 
 
-**AdminLTE** has been carefully coded with clear comments in all of its JS, LESS and HTML files. LESS has been used to increase code customizability.
+También cuenta la participación menor de dos programadores en desarrollo:
+* Juan Silva.
+* Sabina Quiroga.
 
 Installation
 ------------
