@@ -1,16 +1,24 @@
-Introduction
+Introducción
 ============
 
-**AdminLTE** -- is a fully responsive admin template. Based on **[Bootstrap 3](https://github.com/twbs/bootstrap)** framework. Highly customizable and easy to use. Fits many screen resolutions from small mobile devices to large desktops. Check out the live preview now and see for yourself.
+**Hipódromo** -- es un sistema de administración de un hipódromo. Está basada su plantilla(template) en **[AdminLTE 2.3.0](https://github.com/almasaeed2010/AdminLTE)** que a su vez tiene como base  **[Bootstrap 3](https://github.com/twbs/bootstrap)** framework. Es altamente recomendable dicho template ya que es muy fácil de usar, es muy intuitivo y sobre todo que es altamente personalizable y adaptativo para todo tipo de pantallas (Responsive).
 
-**Download & Preview on [Almsaeed Studio](https://almsaeedstudio.com)**
+El **sistema de administración del Hipódromo** cuenta con varias funcionabilidades como:
+* Registro y manejo de usuarios con sus roles. (Próximamente CRUD de privilegios).
+* Validación de acceso a ciertos módulos de la aplicación según sus privilegios.
+* CRUDS:
+  * Caballerizas o cuadras (Desarrollando).
+  * Studs (Desarrollando).
+  * Propietarios (Desarrollando).
+  * Jinetes (Desarrollando).
+  * Inscripciones (Desarrollando).
+  * Entrenadores (Desarrollando).
+  * Ejemplares (Desarrollando).
+  * Apuestas (Desarrollando).
+  * Usuario (Desarrollando).
+  * Reportes (Desarrollando).
 
-Looking for Premium Templates?
-------------------------------
-**Almsaeed studio just opened a new premium templates page. Hand picked to insure the best quality and the most affordable prices. Visit https://almsaeedstudio.com/premium for more information.**
-
-
-!["AdminLTE Presentation"] (https://almsaeedstudio.com/AdminLTE2.png "AdminLTE Presentation")
+!["Hipódromo"] (https://github.com/atahualpasf/hipodromo/blob/master/dist/img/presentation/presentation-ejemplares-01.png "Hipódromo Presentación")
 
 **AdminLTE** has been carefully coded with clear comments in all of its JS, LESS and HTML files. LESS has been used to increase code customizability.
 
