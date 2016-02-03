@@ -64,13 +64,10 @@ Documentation
 Visit the [online documentation](https://almsaeedstudio.com/themes/AdminLTE/documentation/index.html) for the most
 updated guide. Information will be added on a weekly basis.
 
-Browser Support
+Compatibilidad con navegadores
 ---------------
-- IE 9+
-- Firefox (latest)
+- Edge
 - Chrome (latest)
-- Safari (latest)
-- Opera (latest)
 
 Contribution
 ------------
@@ -90,8 +87,7 @@ Contribution are always **welcome and recommended**! Here is how:
 
 License
 -------
-AdminLTE is an open source project by [Almsaeed Studio](https://almsaeedstudio.com) that is licensed under [MIT](http://opensource.org/licenses/MIT). Almsaeed Studio
-reserves the right to change the license of future releases.
+HipódromoASAC es un proyecto de código abierto realizado por [Atahualpa Silva F. - @atahualpasf](https://github.com/atahualpasf) y [Andrea Contreras - @andrecontdi](https://github.com/andrecontdi) el cuál esá licensiado bajo [MIT](http://opensource.org/licenses/MIT). atahualpasf reserva el derecho de cambiar la licencia en futuras versiones.
 
 Todo List
 ---------
@@ -100,10 +96,6 @@ Todo List
 - ~~Minified main-sidebar~~ (Done v2.1.0)
 - Right to left support
 - Custom pace style
-
-Legacy Realeases
-----------------
-AdminLTE 1.x can be easily upgraded to 2.x using [this guide](https://almsaeedstudio.com/themes/AdminLTE/documentation/index.html#upgrade), but if you intend to keep using AdminLTE 1.x, you can download the latest release from the [releases](https://github.com/almasaeed2010/AdminLTE/releases) section above.
 
 Change log
 ----------
